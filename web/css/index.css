@@ -1,0 +1,327 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Feb 19, 2022, 8:44:47 AM
+    Author     : Robydul 
+*/
+
+* {
+  box-sizing: border-box;
+
+
+}
+
+body {
+  margin: 0;
+  
+}
+
+
+.header {
+  background-color: #1a1a1a;
+  padding: 90px;
+  text-align: center;
+  text-color:white;
+}
+h1 {
+  color: White;
+}
+
+.responsive {
+  width: 200px;
+  height: auto;
+}
+
+
+.navbar {
+  overflow: hidden;
+  background-color: #2b2c2b;
+}
+
+.navbar a {
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 16px;  
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+  background-color: grey;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color:  #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+.icon-bar {
+  width: 90px;
+  background-color: #555;
+}
+
+.icon-bar a {
+  display: block;
+  text-align: center;
+  padding: 16px;
+  transition: all 0.3s ease;
+  color: white;
+  font-size: 36px;
+}
+
+.icon-bar a:hover {
+  background-color: #000;
+}
+
+.active {
+  background-color: #2b2c2b;
+}
+
+
+
+.w3-container{
+padding: 15px;
+    background-color:#168ac8;
+    
+}
+
+
+
+.Titre{
+    color: #f9f9f9;
+}
+
+.text{
+    
+}
+
+.Paragraphe{
+    text-justify: distribute;
+    color: #f9f9f9;
+}
+
+.grid-container {
+  display: grid;
+
+
+  /*padding: 40px;*/
+}
+.grid-item {
+  background-color: #eeeeee;
+
+
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
+}
+
+
+/*  Bouton Prendre un  rendez-vous*/
+.button2 {
+  background-color: #b72749;   /*#abc4ff; */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+
+  
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+}
+.button2:hover {
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+/*  Bouton Consulter un  rendez-vous*/
+.button1 {
+  background-color: #8d99ae;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+
+  
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+}
+.button1:hover {
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+
+/*  Bouton Savoir plus*/
+.button3 {
+  background-color: #184e77; 
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+
+  
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+}
+
+
+.button3:hover {
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+
+
+
+
+
+/*Image avec du texte*/
+
+.container {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+  padding-top: 20px;
+}
+
+.container img {vertical-align: middle;}
+
+.container .content {
+  position: absolute;
+  bottom: 0;
+  background: rgb(0, 0, 0); /* Fallback color */
+  background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
+  color: #f1f1f1;
+  width: 100%;
+  padding: 10px;
+}
+
+/*Container1*/
+.grid-container1 {
+  display: grid;
+  grid-template-columns: auto auto auto;
+
+  padding-top: 10px;
+}
+.grid-item1 {
+background-color: #eeeeee;
+  padding: 20px;
+  font-size: 25px;
+  text-align: center;
+}
+
+
+/*Container2*/
+
+
+.grid-container2 {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  gap: 10px;
+background-color: #eeeeee;
+  padding: 10px;
+}
+
+.grid-container2 > div {
+
+  text-align: center;
+  padding: 20px 0;
+  font-size: 25px;
+}
+
+.item2 {
+  grid-row-start: 1;
+  grid-row-end: 3;
+}
+
+
+
+/*center*/
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+ padding-top: 25px;
+ padding-bottom: 25px;
+  width: 50%;
+}
+
+
+
+
+/* Footer */
+.footer {
+  padding: 20px;
+  text-align: center;
+  background: #1a1a1a;
+  color: white;
+}
+
+/* Responsive layout */
+@media screen and (max-width: 700px) {
+  .row {   
+    flex-direction: column;
+  }
+}
+
+/* Responsive */
+@media screen and (max-width: 400px) {
+  .navbar a {
+    float: none;
+    width: 100%;
+  }
+
+}
