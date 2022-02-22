@@ -12,7 +12,7 @@ import java.sql.SQLException;
 
 /**
  *
- * @author dahamada
+ * @author Balasingam Shajaan, Bhuiyan Robydul et Ebrahim Samer Usama
  */
 public class ConnexionBD implements ConfigBD {
 
@@ -20,20 +20,11 @@ public class ConnexionBD implements ConfigBD {
 
     public static Connection getConnection() throws SQLException {
         try {
-            //chargement du driver
             Class.forName(ConfigBD.DRIVER);
-            //DriverManager est responsable de la sélection de la BD et
-            //la création de la connexion
-
             conn = DriverManager.getConnection(ConfigBD.URL, ConfigBD.USER, ConfigBD.PASSWORD);
-            // set auto commit false
-            // conn.setAutoCommit(false);
         } catch (ClassNotFoundException | SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        // TODO Auto-generated catch block
-        //   conn.commit();
         return conn;
     }
 
@@ -41,7 +32,6 @@ public class ConnexionBD implements ConfigBD {
         try {
             conn.close();
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
