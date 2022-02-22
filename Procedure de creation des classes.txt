@@ -1,0 +1,7 @@
+1. Création de la page jsp dans le folder WEB-INF/jsp
+
+2. Créer Servlet dans le package controller avec l'ajout dans le web.xml
+
+3. Ajout de cette ligne dans le servlet dans la methode processRequest:    request.getRequestDispatcher("WEB-INF/jsp/inscriptionPatient.jsp").forward(request, response);
+
+4. Implementation du Model et DAO dans le controlleur dans le doPost
