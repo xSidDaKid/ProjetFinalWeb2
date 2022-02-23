@@ -61,5 +61,6 @@
                 <button type="submit" class="btn btn-primary">Sign in</button>
             </form>
         </div>
+        <jsp:include page="footer.jsp"/>
     </body>
 </html>

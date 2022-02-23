@@ -13,6 +13,9 @@
     </head>
     <body>
         <jsp:include page="menu.jsp"/>
+        <div class="container">
         <h1>Hello World!</h1>
+        </div>
+        <jsp:include page="footer.jsp"/>
     </body>
 </html>
