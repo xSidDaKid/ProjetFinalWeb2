@@ -12,6 +12,7 @@
         <title>Inscription Patient</title>
     </head>
     <body>
+        <jsp:include page="menu.jsp"/>
         <div class="container pt-5 mt-5">
             <form>
                 <div class="form-row">
