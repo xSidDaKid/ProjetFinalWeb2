@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.appweb2projetsession.entities;
+package com.appweb2projetsession.mvc.model;
 
 import java.io.Serializable;
 
@@ -11,8 +11,8 @@ import java.io.Serializable;
  *
  * @author RbAwa
  */
-public class clinique implements Serializable{
-    
+public class clinique implements Serializable {
+
     private String nom;
     private String adresse;
     private String numeroDeTelephone;
@@ -56,28 +56,15 @@ public class clinique implements Serializable{
     public void setServices(String services) {
         this.services = services;
     }
-    
-    
-    
-    
-    
-    
-    public  String infoClinique(){
+
+    public String infoClinique() {
         return "clinique{" + "nom=" + nom + ", adresse=" + adresse + ", numeroDeTelephone=" + numeroDeTelephone + ", services=" + services + '}';
-    
-    
+
     }
 
     @Override
     public String toString() {
         return "clinique{" + "nom=" + nom + ", adresse=" + adresse + ", numeroDeTelephone=" + numeroDeTelephone + ", services=" + services + '}';
     }
-    
-    
-    
-    
+
 }
-
-
-
-
