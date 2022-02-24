@@ -16,21 +16,37 @@ public class Patient {
     private String prenom;
     private String nam; //numero d'assurance maladie
     private int nbSequentiel;
+    private String dateNaissance;
     private char sexe;
     private Clinique clinique_id;
     private Medecin medecin_id;
+    private int id_clinique;
+    private int id_medecin;
 
     public Patient() {
     }
 
-    public Patient(String nom, String prenom, String nam, int nbSequentiel, char sexe, Clinique clinique_id, Medecin medecin_id) {
+    public Patient(String nom, String prenom, String nam, int nbSequentiel, String dateNaissance, char sexe, Clinique clinique_id, Medecin medecin_id) {
         this.nom = nom;
         this.prenom = prenom;
         this.nam = nam;
         this.nbSequentiel = nbSequentiel;
+        this.dateNaissance = dateNaissance;
         this.sexe = sexe;
         this.clinique_id = clinique_id;
         this.medecin_id = medecin_id;
+    }
+
+    // Constructeur pour le INSERT
+    public Patient(String nom, String prenom, String nam, int nbSequentiel, String dateNaissance, char sexe, int id_clinique, int id_medecin) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.nam = nam;
+        this.nbSequentiel = nbSequentiel;
+        this.dateNaissance = dateNaissance;
+        this.sexe = sexe;
+        this.id_clinique = id_clinique;
+        this.id_medecin = id_medecin;
     }
 
 //    public Patient(String nom, String adresse, String numeroDeTelephone, String services) {
@@ -86,6 +102,14 @@ public class Patient {
         this.nbSequentiel = nbSequentiel;
     }
 
+    public String getDateNaissance() {
+        return dateNaissance;
+    }
+
+    public void setDateNaissance(String dateNaissance) {
+        this.dateNaissance = dateNaissance;
+    }
+
     public char getSexe() {
         return sexe;
     }
@@ -102,11 +126,25 @@ public class Patient {
         this.clinique_id = clinique_id;
     }
 
-    @Override
-    public String toString() {
-        return "Patient{" + "id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", nam=" + nam + ", nbSequentiel=" + nbSequentiel + ", sexe=" + sexe + ", clinique_id=" + clinique_id + ", medecin_id=" + medecin_id + '}';
+    public int getId_clinique() {
+        return id_clinique;
     }
 
+    public void setId_clinique(int id_clinique) {
+        this.id_clinique = id_clinique;
+    }
 
+    public int getId_medecin() {
+        return id_medecin;
+    }
+
+    public void setId_medecin(int id_medecin) {
+        this.id_medecin = id_medecin;
+    }
+
+    @Override
+    public String toString() {
+        return "Patient{" + "id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", nam=" + nam + ", nbSequentiel=" + nbSequentiel + ", dateNaissance=" + dateNaissance + ", sexe=" + sexe + ", clinique_id=" + clinique_id + ", medecin_id=" + medecin_id + '}';
+    }
 
 }
