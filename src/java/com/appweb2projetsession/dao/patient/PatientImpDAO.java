@@ -26,6 +26,7 @@ public class PatientImpDAO implements PatientDAO {
     private static final String SQL_SELECT_PAR_ID = "SELECT * FROM patient where id = ?";
     private static final String SQL_INSERT = "INSERT INTO patient (nom, prenom, nam, nbSequentiel, dateNaissance, sexe, clinique_id, medecin_id) value (?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String SQL_DELETE = "DELETE FROM patient WHERE id = ?";
+    private static final String SQL_UPDATE = "UPDATE patient SET nom = ?, prenom = ?, nam = ?, nbSequentiel = ?, dateNaissance = ?, sexe = ?, clinique_id = ?, medecin_id = ?  where id = ?";
 
     @Override
     public List<Patient> findAll() {
@@ -44,6 +45,10 @@ public class PatientImpDAO implements PatientDAO {
                 p1.setPrenom(result.getString("prenom"));
                 p1.setNam(result.getString("nam"));
                 p1.setNbSequentiel(result.getInt("nbSequentiel"));
+                p1.setDateNaissance(result.getString("dateNaissance"));
+                p1.setSexe(result.getString("sexe").charAt(0));
+                p1.setId_clinique(result.getInt("clinique_id"));
+                p1.setId_medecin(result.getInt("medecin_id"));
                 p1.setSexe(result.getString("sexe").charAt(0));
                 listePatient.add(p1);
             }
@@ -71,6 +76,10 @@ public class PatientImpDAO implements PatientDAO {
                 p1.setPrenom(result.getString("prenom"));
                 p1.setNam(result.getString("nam"));
                 p1.setNbSequentiel(result.getInt("nbSequentiel"));
+                p1.setDateNaissance(result.getString("dateNaissance"));
+                p1.setSexe(result.getString("sexe").charAt(0));
+                p1.setId_clinique(result.getInt("clinique_id"));
+                p1.setId_medecin(result.getInt("medecin_id"));
                 p1.setSexe(result.getString("sexe").charAt(0));
             }
 
@@ -133,7 +142,32 @@ public class PatientImpDAO implements PatientDAO {
 
     @Override
     public boolean update(Patient patient) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean retour = false;
+        int nbLigne = 0;
+        PreparedStatement ps;
+
+        try {
+            ps = ConnexionBD.getConnection().prepareStatement(SQL_UPDATE);
+            ps.setString(1, patient.getNom());
+            ps.setString(2, patient.getPrenom());
+            ps.setString(3, patient.getNam());
+            ps.setInt(4, patient.getNbSequentiel());
+            ps.setString(5, patient.getDateNaissance());
+            ps.setString(6, String.valueOf(patient.getSexe()));
+            ps.setInt(7, patient.getId_clinique());
+            ps.setInt(8, patient.getId_medecin());
+            ps.setInt(9, patient.getId());
+            nbLigne = ps.executeUpdate();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            Logger.getLogger(PatientImpDAO.class.getName()).log(Level.SEVERE, null, e);
+        }
+
+        if (nbLigne > 0) {
+            retour = true;
+        }
+        ConnexionBD.closeConnection();
+        return retour;
     }
 
     @Override

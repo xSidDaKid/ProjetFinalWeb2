@@ -40,13 +40,16 @@ public class PatientTestDAO {
                     deletePatient();
                     break;
                 case 5:
+                    updatePatient();
+                    break;
+                case 6:
                     System.out.println("TEST COMPLETED!");
                     System.exit(0);
                 default:
                     System.out.println("Cette option n'existe pas ");
             }
 
-        } while (choix != 5);
+        } while (choix != 6);
 
     }
 
@@ -55,8 +58,9 @@ public class PatientTestDAO {
         System.out.println("2. Chercher un étudiant par id");
         System.out.println("3. Creer un patient");
         System.out.println("4. Supprimer un patient");
+        System.out.println("5. Modifier un patient");
 
-        System.out.println("5. Pour quitter  ");
+        System.out.println("6. Pour quitter  ");
         System.out.println("Faire votre choix : ");
     }
 
@@ -117,6 +121,65 @@ public class PatientTestDAO {
         boolean isDeleted = dao.delete(indice);
 
         if (isDeleted) {
+            listePatient = dao.findAll();
+            for (Patient patient : listePatient) {
+                System.out.println(patient);
+            }
+        }
+        System.out.println("");
+    }
+
+    private static void updatePatient() {
+        Patient p1 = new Patient();
+        System.out.println("Entrez l'indice du patient ");
+        int indice = r.nextInt();
+        for (int i = 0; i < listePatient.size(); i++) {
+            if (listePatient.get(i).getId() == indice) {
+                p1 = new Patient(listePatient.get(i).getId(),
+                        listePatient.get(i).getNom(),
+                        listePatient.get(i).getPrenom(),
+                        listePatient.get(i).getNam(),
+                        listePatient.get(i).getNbSequentiel(),
+                        listePatient.get(i).getDateNaissance(),
+                        listePatient.get(i).getSexe(),
+                        listePatient.get(i).getId_clinique(),
+                        listePatient.get(i).getId_medecin());
+            }
+        }
+        System.out.println("Entrez le nom du patient");
+        String nom = r.next();
+        p1.setNom(nom);
+
+        System.out.println("Entrez le prenom du patient");
+        String prenom = r.next();
+        p1.setPrenom(prenom);
+
+        System.out.println("Entrez le numero d'assurance maladie");
+        String nam = r.next();
+        p1.setNam(nam);
+
+        System.out.println("Entrez le numero sequentiel");
+        int nbSequentiel = r.nextInt();
+        p1.setNbSequentiel(nbSequentiel);
+
+        System.out.println("Entrez la date naissance ");
+        String dateNaissance = r.nextLine();
+        p1.setDateNaissance(dateNaissance);
+
+        System.out.println("Entrez votre sexe: M ou F");
+        char sexe = r.next().charAt(0);
+        p1.setSexe(sexe);
+
+        System.out.println("Entrez le id du clinique");
+        int id_clinique = r.nextInt();
+        p1.setId_clinique(id_clinique);
+
+        System.out.println("Entrez le id du medecin");
+        int id_medecin = r.nextInt();
+        p1.setId_medecin(id_medecin);
+
+        boolean retour = dao.update(p1);
+        if (retour) {
             listePatient = dao.findAll();
             for (Patient patient : listePatient) {
                 System.out.println(patient);

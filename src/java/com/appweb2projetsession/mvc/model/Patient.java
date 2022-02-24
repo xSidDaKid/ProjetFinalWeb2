@@ -9,7 +9,7 @@ package com.appweb2projetsession.mvc.model;
  *
  * @author 1723144
  */
-public class Patient {
+public class Patient {//A AJOUTER LHERITAGE
 
     private int id;
     private String nom;
@@ -18,23 +18,12 @@ public class Patient {
     private int nbSequentiel;
     private String dateNaissance;
     private char sexe;
-    private Clinique clinique_id;
-    private Medecin medecin_id;
+//    private Clinique clinique_id;
+//    private Medecin medecin_id;
     private int id_clinique;
     private int id_medecin;
 
     public Patient() {
-    }
-
-    public Patient(String nom, String prenom, String nam, int nbSequentiel, String dateNaissance, char sexe, Clinique clinique_id, Medecin medecin_id) {
-        this.nom = nom;
-        this.prenom = prenom;
-        this.nam = nam;
-        this.nbSequentiel = nbSequentiel;
-        this.dateNaissance = dateNaissance;
-        this.sexe = sexe;
-        this.clinique_id = clinique_id;
-        this.medecin_id = medecin_id;
     }
 
     // Constructeur pour le INSERT
@@ -49,19 +38,20 @@ public class Patient {
         this.id_medecin = id_medecin;
     }
 
-//    public Patient(String nom, String adresse, String numeroDeTelephone, String services) {
-//        super(nom, adresse, numeroDeTelephone, services);
-//    }
-//    public Patient(String nom, String prenom, String nam, int nbSequentiel, char sexe, Clinique clinique_id, Medecin medecin_id, String nom, String adresse, String numeroDeTelephone, String services) {
-//        super(nom, adresse, numeroDeTelephone, services);
-//        this.nom = nom;
-//        this.prenom = prenom;
-//        this.nam = nam;
-//        this.nbSequentiel = nbSequentiel;
-//        this.sexe = sexe;
-//        this.clinique_id = clinique_id;
-//        //this.medecin_id = medecin_id;
-//    }
+    // Constructeur pour le MODIFIER
+    public Patient(int id, String nom, String prenom, String nam, int nbSequentiel, String dateNaissance, char sexe, int id_clinique, int id_medecin) {
+        this.id = id;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.nam = nam;
+        this.nbSequentiel = nbSequentiel;
+        this.dateNaissance = dateNaissance;
+        this.sexe = sexe;
+        this.id_clinique = id_clinique;
+        this.id_medecin = id_medecin;
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="GETTER & SETTER methods">
     public int getId() {
         return id;
     }
@@ -103,6 +93,7 @@ public class Patient {
     }
 
     public String getDateNaissance() {
+        System.out.println(dateNaissance);
         return dateNaissance;
     }
 
@@ -118,14 +109,13 @@ public class Patient {
         this.sexe = sexe;
     }
 
-    public Clinique getClinique_id() {
-        return clinique_id;
-    }
-
-    public void setClinique_id(Clinique clinique_id) {
-        this.clinique_id = clinique_id;
-    }
-
+//    public Clinique getClinique_id() {
+//        return clinique_id;
+//    }
+//
+//    public void setClinique_id(Clinique clinique_id) {
+//        this.clinique_id = clinique_id;
+//    }
     public int getId_clinique() {
         return id_clinique;
     }
@@ -141,10 +131,11 @@ public class Patient {
     public void setId_medecin(int id_medecin) {
         this.id_medecin = id_medecin;
     }
+// </editor-fold>
 
     @Override
     public String toString() {
-        return "Patient{" + "id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", nam=" + nam + ", nbSequentiel=" + nbSequentiel + ", dateNaissance=" + dateNaissance + ", sexe=" + sexe + ", clinique_id=" + clinique_id + ", medecin_id=" + medecin_id + '}';
+        return "Patient{" + "id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", nam=" + nam + ", nbSequentiel=" + nbSequentiel + ", dateNaissance=" + dateNaissance + ", sexe=" + sexe + ", clinique_id=" + id_clinique + ", medecin_id=" + id_medecin + '}';
     }
 
 }
