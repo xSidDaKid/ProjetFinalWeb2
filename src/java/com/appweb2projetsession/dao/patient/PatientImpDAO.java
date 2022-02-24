@@ -23,6 +23,7 @@ public class PatientImpDAO implements PatientDAO {
 
     //Liste des requetes
     private static final String SQL_SELECT = "SELECT * FROM patient";
+    private static final String SQL_SELECT_PAR_ID = "SELECT * FROM patient where id = ?";
 
     @Override
     public List<Patient> findAll() {
@@ -30,7 +31,7 @@ public class PatientImpDAO implements PatientDAO {
         try {
             PreparedStatement ps = ConnexionBD.getConnection().prepareStatement(SQL_SELECT);
             ResultSet result = ps.executeQuery();
-            
+
             listePatient = new ArrayList<>();
 
             while (result.next()) {
@@ -49,14 +50,34 @@ public class PatientImpDAO implements PatientDAO {
         } catch (SQLException ex) {
             Logger.getLogger(PatientImpDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //Fermp1re de toutes les ressources ouvertes
         ConnexionBD.closeConnection();
         return listePatient;
     }
 
     @Override
     public Patient findById(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Patient p1 = null;
+        try {
+            PreparedStatement ps = ConnexionBD.getConnection().prepareStatement(SQL_SELECT_PAR_ID);
+            ps.setInt(1, id);
+            ResultSet result = ps.executeQuery();
+
+            while (result.next()) {
+                p1 = new Patient();
+                p1.setId(result.getInt("id"));
+                p1.setNom(result.getString("nom"));
+                p1.setPrenom(result.getString("prenom"));
+                p1.setNam(result.getString("nam"));
+                p1.setNbSequentiel(result.getInt("nbSequentiel"));
+                p1.setSexe(result.getString("sexe").charAt(0));
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PatientImpDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //Fermp1re de toutes les ressources ouvertes
+        ConnexionBD.closeConnection();
+        return p1;
     }
 
     @Override

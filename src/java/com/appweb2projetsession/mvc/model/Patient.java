@@ -10,6 +10,7 @@ package com.appweb2projetsession.mvc.model;
  * @author 1723144
  */
 public class Patient {
+
     private int id;
     private String nom;
     private String prenom;
@@ -17,16 +18,24 @@ public class Patient {
     private int nbSequentiel;
     private char sexe;
     private Clinique clinique_id;
-    //private Medecin medecin_id;
+    private Medecin medecin_id;
 
     public Patient() {
     }
-    
+
+    public Patient(String nom, String prenom, String nam, int nbSequentiel, char sexe, Clinique clinique_id, Medecin medecin_id) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.nam = nam;
+        this.nbSequentiel = nbSequentiel;
+        this.sexe = sexe;
+        this.clinique_id = clinique_id;
+        this.medecin_id = medecin_id;
+    }
+
 //    public Patient(String nom, String adresse, String numeroDeTelephone, String services) {
 //        super(nom, adresse, numeroDeTelephone, services);
 //    }
-
-
 //    public Patient(String nom, String prenom, String nam, int nbSequentiel, char sexe, Clinique clinique_id, Medecin medecin_id, String nom, String adresse, String numeroDeTelephone, String services) {
 //        super(nom, adresse, numeroDeTelephone, services);
 //        this.nom = nom;
@@ -37,15 +46,14 @@ public class Patient {
 //        this.clinique_id = clinique_id;
 //        //this.medecin_id = medecin_id;
 //    }
-
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
-        this.id = id
-                ;
+        this.id = id;
     }
+
     public String getNom() {
         return nom;
     }
@@ -96,11 +104,9 @@ public class Patient {
 
     @Override
     public String toString() {
-        return "Patient{" + "nom=" + nom + ", prenom=" + prenom + ", nam=" + nam + ", nbSequentiel=" + nbSequentiel + ", sexe=" + sexe + ", clinique_id=" + clinique_id + '}';
+        return "Patient{" + "id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", nam=" + nam + ", nbSequentiel=" + nbSequentiel + ", sexe=" + sexe + ", clinique_id=" + clinique_id + ", medecin_id=" + medecin_id + '}';
     }
 
-    
 
 
-    
 }
