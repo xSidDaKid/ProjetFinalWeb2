@@ -11,14 +11,14 @@ import java.io.Serializable;
  *
  * @author RbAwa
  */
-public class clinique implements Serializable {
+public class Clinique implements Serializable {
 
     private String nom;
     private String adresse;
     private String numeroDeTelephone;
     private String services;
 
-    public clinique(String nom, String adresse, String numeroDeTelephone, String services) {
+    public Clinique(String nom, String adresse, String numeroDeTelephone, String services) {
         this.nom = nom;
         this.adresse = adresse;
         this.numeroDeTelephone = numeroDeTelephone;
