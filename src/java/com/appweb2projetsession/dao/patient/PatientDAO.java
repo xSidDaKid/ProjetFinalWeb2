@@ -18,8 +18,6 @@ public interface PatientDAO {
 
     Patient findById(int id);
 
-    List<Patient> findByAge(int age);
-
     boolean create(Patient patient);
 
     boolean delete(int id);

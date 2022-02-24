@@ -25,10 +25,12 @@ public class PatientImpDAO implements PatientDAO {
     private static final String SQL_SELECT = "SELECT * FROM patient";
     private static final String SQL_SELECT_PAR_ID = "SELECT * FROM patient where id = ?";
     private static final String SQL_INSERT = "INSERT INTO patient (nom, prenom, nam, nbSequentiel, dateNaissance, sexe, clinique_id, medecin_id) value (?, ?, ?, ?, ?, ?, ?, ?)";
+    private static final String SQL_DELETE = "DELETE FROM patient WHERE id = ?";
 
     @Override
     public List<Patient> findAll() {
         List<Patient> listePatient = null;
+
         try {
             PreparedStatement ps = ConnexionBD.getConnection().prepareStatement(SQL_SELECT);
             ResultSet result = ps.executeQuery();
@@ -37,14 +39,12 @@ public class PatientImpDAO implements PatientDAO {
 
             while (result.next()) {
                 Patient p1 = new Patient();
-
                 p1.setId(result.getInt("id"));
                 p1.setNom(result.getString("nom"));
                 p1.setPrenom(result.getString("prenom"));
                 p1.setNam(result.getString("nam"));
                 p1.setNbSequentiel(result.getInt("nbSequentiel"));
                 p1.setSexe(result.getString("sexe").charAt(0));
-
                 listePatient.add(p1);
             }
 
@@ -58,6 +58,7 @@ public class PatientImpDAO implements PatientDAO {
     @Override
     public Patient findById(int id) {
         Patient p1 = null;
+
         try {
             PreparedStatement ps = ConnexionBD.getConnection().prepareStatement(SQL_SELECT_PAR_ID);
             ps.setInt(1, id);
@@ -76,14 +77,8 @@ public class PatientImpDAO implements PatientDAO {
         } catch (SQLException ex) {
             Logger.getLogger(PatientImpDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //Fermp1re de toutes les ressources ouvertes
         ConnexionBD.closeConnection();
         return p1;
-    }
-
-    @Override
-    public List<Patient> findByAge(int age) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -91,9 +86,9 @@ public class PatientImpDAO implements PatientDAO {
         boolean retour = false;
         int nbLigne = 0;
         PreparedStatement ps;
+
         try {
             ps = ConnexionBD.getConnection().prepareStatement(SQL_INSERT);
-
             ps.setString(1, patient.getNom());
             ps.setString(2, patient.getPrenom());
             ps.setString(3, patient.getNam());
@@ -102,7 +97,6 @@ public class PatientImpDAO implements PatientDAO {
             ps.setString(6, String.valueOf(patient.getSexe()));
             ps.setInt(7, patient.getId_clinique());
             ps.setInt(8, patient.getId_medecin());
-
             nbLigne = ps.executeUpdate();
 
         } catch (SQLException e) {
@@ -118,7 +112,23 @@ public class PatientImpDAO implements PatientDAO {
 
     @Override
     public boolean delete(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean retour = false;
+        int nbLigne = 0;
+        PreparedStatement ps;
+
+        try {
+            ps = ConnexionBD.getConnection().prepareStatement(SQL_DELETE);
+            ps.setInt(1, id);
+            nbLigne = ps.executeUpdate();
+        } catch (SQLException e) {
+            Logger.getLogger(PatientImpDAO.class.getName()).log(Level.SEVERE, null, e);
+        }
+
+        if (nbLigne > 0) {
+            retour = true;
+        }
+        ConnexionBD.closeConnection();
+        return retour;
     }
 
     @Override
