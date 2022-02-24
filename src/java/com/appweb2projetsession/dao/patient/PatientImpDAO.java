@@ -26,7 +26,8 @@ public class PatientImpDAO implements PatientDAO {
     private static final String SQL_SELECT_PAR_ID = "SELECT * FROM patient where id = ?";
     private static final String SQL_INSERT = "INSERT INTO patient (nom, prenom, nam, nbSequentiel, dateNaissance, sexe, clinique_id, medecin_id) value (?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String SQL_DELETE = "DELETE FROM patient WHERE id = ?";
-    private static final String SQL_UPDATE = "UPDATE patient SET nom = ?, prenom = ?, nam = ?, nbSequentiel = ?, dateNaissance = ?, sexe = ?, clinique_id = ?, medecin_id = ?  where id = ?";
+    private static final String SQL_UPDATE = "UPDATE patient SET nom = ?, prenom = ?, nam = ?, nbSequentiel = ?, dateNaissance = ?, sexe = ?, clinique_id = ?, medecin_id = ?  WHERE id = ?";
+    private static final String SQL_CONNEXION = "SELECT nom, prenom FROM patient WHERE email=? and password=?";
 
     @Override
     public List<Patient> findAll() {
@@ -172,7 +173,26 @@ public class PatientImpDAO implements PatientDAO {
 
     @Override
     public Patient isExiste(String email, String motDePasse) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Patient p1 = null;
+
+        try {
+            PreparedStatement ps = ConnexionBD.getConnection().prepareStatement(SQL_CONNEXION);
+            ps.setString(1, email);
+            ps.setString(2, motDePasse);
+            ResultSet result = ps.executeQuery();
+            while (result.next()) {
+                p1 = new Patient();
+                p1.setNom(result.getString("nom"));
+                p1.setPrenom(result.getString("prenom"));
+
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PatientImpDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        ConnexionBD.closeConnection();
+        return p1;
     }
 
 }
