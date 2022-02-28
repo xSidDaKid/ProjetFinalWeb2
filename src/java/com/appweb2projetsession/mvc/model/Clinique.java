@@ -11,18 +11,38 @@ import java.io.Serializable;
  *
  * @author RbAwa
  */
-public class Clinique implements Serializable {
+public class Clinique {
 
+    private int id;
     private String nom;
     private String adresse;
-    private String numeroDeTelephone;
+    private String tel;
     private String services;
 
-    public Clinique(String nom, String adresse, String numeroDeTelephone, String services) {
+    public Clinique() {
+    }
+
+    public Clinique(String nom, String adresse, String tel, String services) {
         this.nom = nom;
         this.adresse = adresse;
-        this.numeroDeTelephone = numeroDeTelephone;
+        this.tel = tel;
         this.services = services;
+    }
+
+    public Clinique(int id, String nom, String adresse, String tel, String services) {
+        this.id = id;
+        this.nom = nom;
+        this.adresse = adresse;
+        this.tel = tel;
+        this.services = services;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNom() {
@@ -41,12 +61,12 @@ public class Clinique implements Serializable {
         this.adresse = adresse;
     }
 
-    public String getNumeroDeTelephone() {
-        return numeroDeTelephone;
+    public String getTel() {
+        return tel;
     }
 
-    public void setNumeroDeTelephone(String numeroDeTelephone) {
-        this.numeroDeTelephone = numeroDeTelephone;
+    public void setTel(String tel) {
+        this.tel = tel;
     }
 
     public String getServices() {
@@ -58,13 +78,13 @@ public class Clinique implements Serializable {
     }
 
     public String infoClinique() {
-        return "clinique{" + "nom=" + nom + ", adresse=" + adresse + ", numeroDeTelephone=" + numeroDeTelephone + ", services=" + services + '}';
+        return "clinique{" + "nom=" + nom + ", adresse=" + adresse + ", numeroDeTelephone=" + tel + ", services=" + services + '}';
 
     }
 
     @Override
     public String toString() {
-        return "clinique{" + "nom=" + nom + ", adresse=" + adresse + ", numeroDeTelephone=" + numeroDeTelephone + ", services=" + services + '}';
+        return "Clinique{" + "id=" + id + ", nom=" + nom + ", adresse=" + adresse + ", tel=" + tel + ", services=" + services + '}';
     }
 
 }
