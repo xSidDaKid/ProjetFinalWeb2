@@ -11,23 +11,23 @@ import java.io.Serializable;
  *
  * @author RbAwa
  */
-public class Clinique  {
+public class Clinique {
+
     private int id;
     private String nom;
     private String adresse;
     private String tel;
     private String services;
 
-       
-   public Clinique() {
-   }
+    public Clinique() {
+    }
 
     public Clinique(String nom, String adresse, String tel, String services) {
-      this.nom = nom;
-     this.adresse = adresse;
-      this.tel = tel;
-      this.services = services;
-   }
+        this.nom = nom;
+        this.adresse = adresse;
+        this.tel = tel;
+        this.services = services;
+    }
 
     public Clinique(int id, String nom, String adresse, String tel, String services) {
         this.id = id;
@@ -36,13 +36,6 @@ public class Clinique  {
         this.tel = tel;
         this.services = services;
     }
-
-
-
-  
-
-
-   
 
     public int getId() {
         return id;
@@ -83,14 +76,6 @@ public class Clinique  {
     public void setServices(String services) {
         this.services = services;
     }
-    
-    
-
-   
-    
-    
-    
-    
 
     public String infoClinique() {
         return "clinique{" + "nom=" + nom + ", adresse=" + adresse + ", numeroDeTelephone=" + tel + ", services=" + services + '}';
@@ -102,5 +87,4 @@ public class Clinique  {
         return "Clinique{" + "id=" + id + ", nom=" + nom + ", adresse=" + adresse + ", tel=" + tel + ", services=" + services + '}';
     }
 
- 
 }

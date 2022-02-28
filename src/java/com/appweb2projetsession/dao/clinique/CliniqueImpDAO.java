@@ -19,34 +19,27 @@ import java.util.logging.Logger;
  *
  * @author Robydul
  */
-public class CliniqueImpDAO  implements CliniqueDAO{
-    
+public class CliniqueImpDAO implements CliniqueDAO {
+
     //Liste des requetes
     private static final String SQL_SELECT = "SELECT * FROM clinique";
     private static final String SQL_SELECT_PAR_ID = "SELECT * FROM clinique where id = ?";
     private static final String SQL_INSERT = "INSERT INTO clinique (nom,adresse,tel,services) value (?, ?, ?, ?)";
     private static final String SQL_DELETE = "DELETE FROM clinique WHERE id = ?";
     private static final String SQL_UPDATE = "UPDATE clinique SET nom = ?, adresse = ?, tel = ?, services = ? WHERE id = ?";
-    private static final String SQL_CONNEXION = "SELECT nom FROM clinique WHERE adresse=? and tel=?";
-
-
-    
-    
+    //private static final String SQL_CONNEXION = "SELECT nom FROM clinique WHERE adresse=? and tel=?";
 
     @Override
     public List<Clinique> findAll() {
         List<Clinique> listeClinique = null;
 
-        try
-        {
+        try {
             PreparedStatement ps = ConnexionBD.getConnection().prepareStatement(SQL_SELECT);
             ResultSet result = ps.executeQuery();
-            
-            
+
             listeClinique = new ArrayList<>();
-            
-            
-            while (result.next()){                
+
+            while (result.next()) {
                 Clinique c1 = new Clinique();
                 c1.setId(result.getInt("id"));
                 c1.setNom(result.getString("nom"));
@@ -56,28 +49,23 @@ public class CliniqueImpDAO  implements CliniqueDAO{
                 listeClinique.add(c1);
             }
 
-         } catch (SQLException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(CliniqueImpDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         ConnexionBD.closeConnection();
         return listeClinique;
     }
 
-    
-    
-    
     @Override
     public Clinique findById(int id) {
         Clinique c1 = null;
 
-        try
-        {
+        try {
             PreparedStatement ps = ConnexionBD.getConnection().prepareStatement(SQL_SELECT_PAR_ID);
             ps.setInt(1, id);
             ResultSet result = ps.executeQuery();
 
-            while (result.next())
-            {
+            while (result.next()) {
                 c1 = new Clinique();
                 c1.setId(result.getInt("id"));
                 c1.setNom(result.getString("nom"));
@@ -100,16 +88,15 @@ public class CliniqueImpDAO  implements CliniqueDAO{
         int nbLigne = 0;
         PreparedStatement ps;
 
-        try
-        {
+        try {
             ps = ConnexionBD.getConnection().prepareStatement(SQL_INSERT);
             ps.setString(1, clinique.getNom());
             ps.setString(2, clinique.getAdresse());
             ps.setString(3, clinique.getTel());
             ps.setString(4, clinique.getServices());
-           nbLigne = ps.executeUpdate();
-            
-   } catch (SQLException e) {
+            nbLigne = ps.executeUpdate();
+
+        } catch (SQLException e) {
             Logger.getLogger(CliniqueImpDAO.class.getName()).log(Level.SEVERE, null, e);
         }
 
@@ -126,24 +113,20 @@ public class CliniqueImpDAO  implements CliniqueDAO{
         int nbLigne = 0;
         PreparedStatement ps;
 
-        try
-        {
+        try {
             ps = ConnexionBD.getConnection().prepareStatement(SQL_DELETE);
             ps.setInt(1, id);
             nbLigne = ps.executeUpdate();
-        } catch (SQLException e)
-        {
+        } catch (SQLException e) {
             Logger.getLogger(CliniqueImpDAO.class.getName()).log(Level.SEVERE, null, e);
         }
 
-        if (nbLigne > 0)
-        {
+        if (nbLigne > 0) {
             retour = true;
         }
         ConnexionBD.closeConnection();
         return retour;
     }
-
 
     @Override
     public boolean update(Clinique clinique) {
@@ -151,8 +134,7 @@ public class CliniqueImpDAO  implements CliniqueDAO{
         int nbLigne = 0;
         PreparedStatement ps;
 
-        try
-        {
+        try {
             ps = ConnexionBD.getConnection().prepareStatement(SQL_UPDATE);
             ps.setString(1, clinique.getNom());
             ps.setString(2, clinique.getAdresse());
@@ -161,51 +143,37 @@ public class CliniqueImpDAO  implements CliniqueDAO{
             ps.setInt(5, clinique.getId());
             nbLigne = ps.executeUpdate();
 
-        } catch (SQLException e)
-        {
+        } catch (SQLException e) {
             Logger.getLogger(CliniqueImpDAO.class.getName()).log(Level.SEVERE, null, e);
         }
 
-        if (nbLigne > 0)
-        {
+        if (nbLigne > 0) {
             retour = true;
         }
         ConnexionBD.closeConnection();
         return retour;
     }
-    
-    
+
     @Override
- public   Clinique isExiste(String adresse, String tel){
- Clinique c1 = null ;
-  try {
-            PreparedStatement ps = ConnexionBD.getConnection().prepareStatement(SQL_CONNEXION);
-            ps.setString(1, adresse);
-            ps.setString(2, tel);
-            ResultSet result = ps.executeQuery();
-            while (result.next()) {
-                c1 = new Clinique();
-                c1.setNom(result.getString("nom"));
-             
-
-            }
- 
-        } catch (SQLException ex) {
-            Logger.getLogger(CliniqueImpDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        ConnexionBD.closeConnection();
+    public Clinique isExiste(String adresse, String tel) {
+        Clinique c1 = null;
+//        try {
+//            PreparedStatement ps = ConnexionBD.getConnection().prepareStatement(SQL_CONNEXION);
+//            ps.setString(1, adresse);
+//            ps.setString(2, tel);
+//            ResultSet result = ps.executeQuery();
+//            while (result.next()) {
+//                c1 = new Clinique();
+//                c1.setNom(result.getString("nom"));
+//
+//            }
+//
+//        } catch (SQLException ex) {
+//            Logger.getLogger(CliniqueImpDAO.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//
+//        ConnexionBD.closeConnection();
         return c1;
     }
- 
- }
 
-
-
-   
-    
-    
-    
-    
-    
-
+}
