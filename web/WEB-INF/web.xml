@@ -4,6 +4,10 @@
         <welcome-file>/WEB-INF/jsp/home.jsp</welcome-file>
     </welcome-file-list>
     <servlet>
+        <servlet-name>InscriptionClinique</servlet-name>
+        <servlet-class>com.appweb2projetsession.mvc.controller.InscriptionCliniqueServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>InscriptionPatient</servlet-name>
         <servlet-class>com.appweb2projetsession.mvc.controller.InscriptionPatientServlet</servlet-class>
     </servlet>
@@ -11,6 +15,10 @@
         <servlet-name>HomeServlet</servlet-name>
         <servlet-class>com.appweb2projetsession.mvc.controller.HomeServlet</servlet-class>
     </servlet>
+    <servlet-mapping>
+        <servlet-name>InscriptionClinique</servlet-name>
+        <url-pattern>/inscriptionClinique</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>InscriptionPatient</servlet-name>
         <url-pattern>/inscriptionPatient</url-pattern>
