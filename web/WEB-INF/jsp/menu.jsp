@@ -17,12 +17,26 @@
             <li class="nav-item">
                 <a class="nav-link" href="inscriptionPatient">Inscription Patient</a>
             </li>
-<!--            <li class="nav-item">
-                <a class="nav-link" href="#">Pricing</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#">Disabled</a>
-            </li>-->
+            <!--            <li class="nav-item">
+                            <a class="nav-link" href="#">Pricing</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled" href="#">Disabled</a>
+                        </li>-->
         </ul>
+    </div>
+
+    <div class="dropdown mx-5">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            User 1
+        </button>
+        <ul class="mr-5 pr-5 dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li><a class="dropdown-item" href="#">Login</a></li>
+            <li><a class="dropdown-item" href="#">Register</a></li>
+        </ul>
+    </div>
+
+    <div class="mx-4">
+
     </div>
 </nav>
