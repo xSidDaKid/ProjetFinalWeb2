@@ -36,6 +36,7 @@ CREATE TABLE IF NOT EXISTS `projetWeb`.`utilisateur` (
   UNIQUE INDEX `email_UNIQUE` (`email` ASC))
 ENGINE = InnoDB;
 
+INSERT into utilisateur (id,username,password,email,role) values (0,'admin','admin','admin','admin') ;
 
 -- -----------------------------------------------------
 -- Table `projetWeb`.`clinique`
