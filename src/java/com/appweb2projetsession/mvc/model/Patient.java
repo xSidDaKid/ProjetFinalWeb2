@@ -5,11 +5,13 @@
  */
 package com.appweb2projetsession.mvc.model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author 1723144
  */
-public class Patient {//A AJOUTER LHERITAGE
+public class Patient implements Serializable {//A AJOUTER LHERITAGE
 
     private int id;
     private String nom;

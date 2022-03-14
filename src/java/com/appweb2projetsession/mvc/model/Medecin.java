@@ -5,11 +5,13 @@
  */
 package com.appweb2projetsession.mvc.model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author 1723144
  */
-public class Medecin {
+public class Medecin implements Serializable{
     private int id;
 
     public int getId() {

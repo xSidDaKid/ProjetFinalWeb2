@@ -11,7 +11,7 @@ import java.io.Serializable;
  *
  * @author RbAwa
  */
-public class Clinique {
+public class Clinique implements Serializable{
 
     private int id;
     private String nom;
