@@ -5,27 +5,19 @@
  */
 package com.appweb2projetsession.mvc.controller;
 
-import com.appweb2projetsession.action.CliniqueAction;
-import com.appweb2projetsession.dao.clinique.CliniqueDAO;
-import com.appweb2projetsession.dao.clinique.CliniqueImpDAO;
-import com.appweb2projetsession.mvc.model.Clinique;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Robydul
+ * @author Shajaan
  */
-@WebServlet(name = "inscriptionCliniqueServlet", urlPatterns =
-{
-    "/InscriptionCliniqueServlet"
-})
-public class InscriptionCliniqueServlet extends HttpServlet {
+public class Logout extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,27 +31,17 @@ public class InscriptionCliniqueServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String nom = request.getParameter("nom");
-        String adresse = request.getParameter("adresse");
-        String tel = request.getParameter("tel");
-        String services = request.getParameter("services");
-        
-         
-        Clinique c1 = new Clinique(nom, adresse, tel, services);
-        boolean retour = CliniqueAction.ajouterClinique(c1);
-        
-       //if(retour){
-            request.setAttribute("listeClinique",CliniqueAction.afficherTousClinique());
-             request.getRequestDispatcher("WEB-INF/jsp/inscriptionClinique.jsp").forward(request, response);
 
-//        }
+        HttpSession session = request.getSession(false);
 
+        if (session != null) {
+            String message = "Vous êtes déconnecté avec succès ";
+            session.invalidate();
+            request.setAttribute("message", message);
+            request.getRequestDispatcher("WEB-INF/jsp/home.jsp").include(request, response);
+        }
     }
 
-    
-    
-    
-    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

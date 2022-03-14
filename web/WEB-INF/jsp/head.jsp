@@ -15,3 +15,5 @@
 
 <link rel="stylesheet" href="css/style.css">
 <script src="js/script"></script>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %> 

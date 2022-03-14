@@ -15,6 +15,14 @@
         <servlet-name>HomeServlet</servlet-name>
         <servlet-class>com.appweb2projetsession.mvc.controller.HomeServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Login</servlet-name>
+        <servlet-class>com.appweb2projetsession.mvc.controller.Login</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Logout</servlet-name>
+        <servlet-class>com.appweb2projetsession.mvc.controller.Logout</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>InscriptionClinique</servlet-name>
         <url-pattern>/inscriptionClinique</url-pattern>
@@ -26,6 +34,14 @@
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/home</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Login</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Logout</servlet-name>
+        <url-pattern>/logout</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

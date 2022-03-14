@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.appweb2projetsession.action.clinique;
+package com.appweb2projetsession.action;
 
 import com.appweb2projetsession.dao.clinique.CliniqueImpDAO;
 import com.appweb2projetsession.mvc.model.Clinique;

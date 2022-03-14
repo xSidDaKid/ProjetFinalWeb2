@@ -5,27 +5,22 @@
  */
 package com.appweb2projetsession.mvc.controller;
 
-import com.appweb2projetsession.action.CliniqueAction;
-import com.appweb2projetsession.dao.clinique.CliniqueDAO;
-import com.appweb2projetsession.dao.clinique.CliniqueImpDAO;
-import com.appweb2projetsession.mvc.model.Clinique;
+import com.appweb2projetsession.action.UtilisateurAction;
+import com.appweb2projetsession.dao.utilisateur.UtilisateurImpDAO;
+import com.appweb2projetsession.mvc.model.Utilisateur;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Robydul
+ * @author Shajaan
  */
-@WebServlet(name = "inscriptionCliniqueServlet", urlPatterns =
-{
-    "/InscriptionCliniqueServlet"
-})
-public class InscriptionCliniqueServlet extends HttpServlet {
+public class Login extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,27 +34,21 @@ public class InscriptionCliniqueServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String nom = request.getParameter("nom");
-        String adresse = request.getParameter("adresse");
-        String tel = request.getParameter("tel");
-        String services = request.getParameter("services");
-        
-         
-        Clinique c1 = new Clinique(nom, adresse, tel, services);
-        boolean retour = CliniqueAction.ajouterClinique(c1);
-        
-       //if(retour){
-            request.setAttribute("listeClinique",CliniqueAction.afficherTousClinique());
-             request.getRequestDispatcher("WEB-INF/jsp/inscriptionClinique.jsp").forward(request, response);
 
-//        }
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        Utilisateur u = UtilisateurAction.connexion(email, password);
 
+        if (u != null) {
+            HttpSession session = request.getSession(true);
+            session.setAttribute("username", u.getUsername());
+            request.getRequestDispatcher("WEB-INF/jsp/home.jsp").forward(request, response);
+        } else {
+            request.getRequestDispatcher("WEB-INF/jsp/login.jsp").forward(request, response);
+
+        }
     }
 
-    
-    
-    
-    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

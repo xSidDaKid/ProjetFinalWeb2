@@ -4,6 +4,7 @@
     Author     : Shajaan
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="./">AppWeb2</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,11 +29,18 @@
 
     <div class="dropdown mx-5">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-            User 1
+            ${sessionScope.username}
         </button>
         <ul class="mr-5 pr-5 dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <li><a class="dropdown-item" href="#">Login</a></li>
-            <li><a class="dropdown-item" href="#">Register</a></li>
+            <c:choose>
+                <c:when test="${not empty sessionScope.username}">
+                    <li><a class="dropdown-item" href="logout">Logout</a></li>
+                </c:when>
+                <c:otherwise>
+                    <li><a class="dropdown-item" href="login">Login</a></li>
+                    <li><a class="dropdown-item" href="#">Register</a></li>
+                </c:otherwise>
+            </c:choose>
         </ul>
     </div>
 
