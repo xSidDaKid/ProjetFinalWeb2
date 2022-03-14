@@ -33,6 +33,7 @@ public class InscriptionUser extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
 
         String username = request.getParameter("username");
         String password = request.getParameter("password");
@@ -42,9 +43,17 @@ public class InscriptionUser extends HttpServlet {
         boolean verif = UtilisateurAction.create(new Utilisateur(username, password, email, role));
         if (verif) {
             HttpSession session = request.getSession(true);
-            session.setAttribute("username", username);       
-            request.getRequestDispatcher("WEB-INF/jsp/home.jsp").include(request, response);
+            session.setAttribute("username", username);
+            session.setAttribute("role", role);
+            if (role.equals("patient")) {
+                request.getRequestDispatcher("WEB-INF/jsp/inscriptionPatient.jsp").include(request, response);
+            } else if (role.equals("clinique")) {
+                request.getRequestDispatcher("WEB-INF/jsp/inscriptionClinique.jsp").include(request, response);
+            } else {
+                request.getRequestDispatcher("WEB-INF/jsp/home.jsp").include(request, response);
+            }
         } else {
+            out.println("<p>Cet utilisateur existe deja<p>");
             request.getRequestDispatcher("WEB-INF/jsp/inscriptionUser.jsp").include(request, response);
 
         }

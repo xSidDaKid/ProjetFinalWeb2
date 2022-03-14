@@ -14,7 +14,7 @@
     </head>
     <body>
         <jsp:include page="menu.jsp"/>
-        <div class="container pt-5 mt-5">
+        <div class="container pt-5 mt-5 card">
             <form id="signupForm" method="get" class="form-horizontal" action="InscriptionCliniqueServlet">
                 <div class="form-row">
                     <div class="form-group col-md-6">
