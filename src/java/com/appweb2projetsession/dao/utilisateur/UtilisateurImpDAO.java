@@ -20,6 +20,7 @@ import java.util.logging.Logger;
 public class UtilisateurImpDAO implements UtilisateurDAO {
 
     private static final String SQL_CONNEXION = "SELECT username FROM utilisateur WHERE email=? and password=?";
+    private static final String SQL_CREATE = "INSERT INTO utilisateur (username,password,email,role) VALUES(?,?,?,?)";
 
     @Override
     public Utilisateur isExiste(String email, String motDePasse) {
@@ -42,6 +43,33 @@ public class UtilisateurImpDAO implements UtilisateurDAO {
 
         ConnexionBD.closeConnection();
         return u;
+    }
+
+    @Override
+    public boolean create(Utilisateur utilisateur) {
+        boolean retour = false;
+        int nbLigne = 0;
+        PreparedStatement ps;
+        try {
+            ps = ConnexionBD.getConnection().prepareStatement(SQL_CREATE);
+
+            ps.setString(1, utilisateur.getUsername());
+            ps.setString(2, utilisateur.getPassword());
+            ps.setString(3, utilisateur.getEmail());
+            ps.setString(4, utilisateur.getRole());
+
+            nbLigne = ps.executeUpdate();
+
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            Logger.getLogger(UtilisateurImpDAO.class.getName()).log(Level.SEVERE, null, e);
+        }
+
+        if (nbLigne > 0) {
+            retour = true;
+        }
+        ConnexionBD.closeConnection();
+        return retour;
     }
 
 }

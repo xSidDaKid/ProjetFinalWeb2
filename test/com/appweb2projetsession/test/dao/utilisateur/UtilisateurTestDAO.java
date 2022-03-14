@@ -17,7 +17,10 @@ public class UtilisateurTestDAO {
 
     public static void main(String[] args) {
         UtilisateurImpDAO dao = new UtilisateurImpDAO();
+        
         Utilisateur u = dao.isExiste("c", "b");
         System.out.println(u);
+        
+        boolean verif = dao.create(new Utilisateur("b", "c", "d", "Patient"));
     }
 }

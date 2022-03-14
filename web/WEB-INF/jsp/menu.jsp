@@ -29,7 +29,14 @@
 
     <div class="dropdown mx-5">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-            ${sessionScope.username}
+            <c:choose>
+                <c:when test="${not empty sessionScope.username}">
+                    ${sessionScope.username}
+                </c:when>
+                <c:otherwise>
+                    Bonjour!
+                </c:otherwise>
+            </c:choose>
         </button>
         <ul class="mr-5 pr-5 dropdown-menu" aria-labelledby="dropdownMenuButton1">
             <c:choose>
@@ -38,7 +45,7 @@
                 </c:when>
                 <c:otherwise>
                     <li><a class="dropdown-item" href="login">Login</a></li>
-                    <li><a class="dropdown-item" href="#">Register</a></li>
+                    <li><a class="dropdown-item" href="inscriptionUser">Inscrire</a></li>
                 </c:otherwise>
             </c:choose>
         </ul>

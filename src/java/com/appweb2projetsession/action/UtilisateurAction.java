@@ -19,4 +19,14 @@ public class UtilisateurAction {
         Utilisateur u = dao.isExiste(email, motDePasse);
         return u;
     }
+
+    public static boolean create(Utilisateur u) {
+        boolean retour = false;
+        UtilisateurImpDAO dao = new UtilisateurImpDAO();
+
+        if (dao.create(u)) {
+            retour = true;
+        }
+        return retour;
+    }
 }

@@ -30,6 +30,14 @@ public class Utilisateur implements Serializable {
         this.role = role;
     }
 
+    //---CREATE---
+    public Utilisateur(String username, String password, String email, String role) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.role = role;
+    }
+
     public int getId() {
         return id;
     }

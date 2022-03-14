@@ -23,6 +23,10 @@
         <servlet-name>Logout</servlet-name>
         <servlet-class>com.appweb2projetsession.mvc.controller.Logout</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>InscriptionUser</servlet-name>
+        <servlet-class>com.appweb2projetsession.mvc.controller.InscriptionUser</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>InscriptionClinique</servlet-name>
         <url-pattern>/inscriptionClinique</url-pattern>
@@ -42,6 +46,10 @@
     <servlet-mapping>
         <servlet-name>Logout</servlet-name>
         <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InscriptionUser</servlet-name>
+        <url-pattern>/inscriptionUser</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
