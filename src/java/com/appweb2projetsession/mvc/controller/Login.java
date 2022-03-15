@@ -38,11 +38,12 @@ public class Login extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         HttpSession session = request.getSession(true);
-
+        
+        try {
         if (email.equals("admin") && password.equals("admin")) {
-            request.getRequestDispatcher("WEB-INF/jsp/admin.jsp").forward(request, response);
             session.setAttribute("username", "admin");
             session.setAttribute("role", "admin");
+            request.getRequestDispatcher("WEB-INF/jsp/admin.jsp").forward(request, response);
         } else {
             Utilisateur u = UtilisateurAction.connexion(email, password);
 
@@ -54,6 +55,10 @@ public class Login extends HttpServlet {
                 request.getRequestDispatcher("WEB-INF/jsp/login.jsp").forward(request, response);
 
             }
+        }
+            
+        } catch (NullPointerException e) {
+            request.getRequestDispatcher("WEB-INF/jsp/login.jsp").forward(request, response);
         }
     }
 

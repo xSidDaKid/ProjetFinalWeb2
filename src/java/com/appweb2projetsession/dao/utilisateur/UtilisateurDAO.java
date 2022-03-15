@@ -14,5 +14,8 @@ import com.appweb2projetsession.mvc.model.Utilisateur;
 public interface UtilisateurDAO {
 
     Utilisateur isExiste(String email, String motDePasse);
-    boolean create (Utilisateur utilisateur);
+
+    boolean create(Utilisateur utilisateur);
+    
+    boolean update(Utilisateur utilisateur);
 }

@@ -21,6 +21,7 @@ public class UtilisateurImpDAO implements UtilisateurDAO {
 
     private static final String SQL_CONNEXION = "SELECT username FROM utilisateur WHERE email=? and password=?";
     private static final String SQL_CREATE = "INSERT INTO utilisateur (username,password,email,role) VALUES(?,?,?,?)";
+    private static final String SQL_UPDATE = "UPDATE utilisateur SET username = ?, password = ?, email = ?, role = ? WHERE id = ?";
 
     @Override
     public Utilisateur isExiste(String email, String motDePasse) {
@@ -60,6 +61,32 @@ public class UtilisateurImpDAO implements UtilisateurDAO {
 
             nbLigne = ps.executeUpdate();
 
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            Logger.getLogger(UtilisateurImpDAO.class.getName()).log(Level.SEVERE, null, e);
+        }
+
+        if (nbLigne > 0) {
+            retour = true;
+        }
+        ConnexionBD.closeConnection();
+        return retour;
+    }
+
+    @Override
+    public boolean update(Utilisateur utilisateur) {
+        boolean retour = false;
+        int nbLigne = 0;
+        PreparedStatement ps;
+
+        try {
+            ps = ConnexionBD.getConnection().prepareStatement(SQL_UPDATE);
+            ps.setString(1, utilisateur.getUsername());
+            ps.setString(2, utilisateur.getPassword());
+            ps.setString(3, utilisateur.getEmail());
+            ps.setString(4, utilisateur.getRole());
+            ps.setInt(5, utilisateur.getId());
+            nbLigne = ps.executeUpdate();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             Logger.getLogger(UtilisateurImpDAO.class.getName()).log(Level.SEVERE, null, e);
