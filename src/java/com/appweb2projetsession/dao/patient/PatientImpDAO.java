@@ -24,9 +24,9 @@ public class PatientImpDAO implements PatientDAO {
     //Liste des requetes
     private static final String SQL_SELECT = "SELECT * FROM patient";
     private static final String SQL_SELECT_PAR_ID = "SELECT * FROM patient where id = ?";
-    private static final String SQL_INSERT = "INSERT INTO patient (nom, prenom, nam, nbSequentiel, dateNaissance, sexe, clinique_id, medecin_id) value (?, ?, ?, ?, ?, ?, ?, ?)";
+    private static final String SQL_INSERT = "INSERT INTO patient (nom, prenom, nam, nbSequentiel, dateNaissance, sexe, clinique_id, medecin_id, utilisateur_id) value (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String SQL_DELETE = "DELETE FROM patient WHERE id = ?";
-    private static final String SQL_UPDATE = "UPDATE patient SET nom = ?, prenom = ?, nam = ?, nbSequentiel = ?, dateNaissance = ?, sexe = ?, clinique_id = ?, medecin_id = ?  WHERE id = ?";
+    private static final String SQL_UPDATE = "UPDATE patient SET nom = ?, prenom = ?, nam = ?, nbSequentiel = ?, dateNaissance = ?, sexe = ?, clinique_id = ?, medecin_id = ?, utilisateur_id = ?  WHERE id = ?";
     private static final String SQL_CONNEXION = "SELECT nom, prenom FROM patient WHERE email=? and password=?";
 
     @Override
@@ -50,7 +50,7 @@ public class PatientImpDAO implements PatientDAO {
                 p1.setSexe(result.getString("sexe").charAt(0));
                 p1.setId_clinique(result.getInt("clinique_id"));
                 p1.setId_medecin(result.getInt("medecin_id"));
-                p1.setSexe(result.getString("sexe").charAt(0));
+                p1.setId_user(result.getInt("utilisateur_id"));
                 listePatient.add(p1);
             }
 
@@ -81,7 +81,7 @@ public class PatientImpDAO implements PatientDAO {
                 p1.setSexe(result.getString("sexe").charAt(0));
                 p1.setId_clinique(result.getInt("clinique_id"));
                 p1.setId_medecin(result.getInt("medecin_id"));
-                p1.setSexe(result.getString("sexe").charAt(0));
+                p1.setId_user(result.getInt("utilisateur_id"));
             }
 
         } catch (SQLException ex) {
@@ -107,6 +107,7 @@ public class PatientImpDAO implements PatientDAO {
             ps.setString(6, String.valueOf(patient.getSexe()));
             ps.setInt(7, patient.getId_clinique());
             ps.setInt(8, patient.getId_medecin());
+            ps.setInt(9, patient.getId_user());
             nbLigne = ps.executeUpdate();
 
         } catch (SQLException e) {
@@ -157,7 +158,8 @@ public class PatientImpDAO implements PatientDAO {
             ps.setString(6, String.valueOf(patient.getSexe()));
             ps.setInt(7, patient.getId_clinique());
             ps.setInt(8, patient.getId_medecin());
-            ps.setInt(9, patient.getId());
+            ps.setInt(9, patient.getId_user());
+            ps.setInt(10, patient.getId());
             nbLigne = ps.executeUpdate();
         } catch (SQLException e) {
             // TODO Auto-generated catch block

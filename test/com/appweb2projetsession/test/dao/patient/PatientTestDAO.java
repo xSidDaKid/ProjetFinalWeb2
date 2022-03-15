@@ -104,7 +104,10 @@ public class PatientTestDAO {
         System.out.println("Entrez le id du medecin");
         int id_medecin = r.nextInt();
 
-        Patient p1 = new Patient(nom, prenom, nam, nbSequentiel, dateNaissance, sexe, 1, 1);
+        System.out.println("Entrez le id de l'utilisateur");
+        int id_user = r.nextInt();
+
+        Patient p1 = new Patient(nom, prenom, nam, nbSequentiel, dateNaissance, sexe, 1, 1, 1);
         boolean retour = dao.create(p1);
         if (retour) {
             listePatient = dao.findAll();
@@ -143,7 +146,8 @@ public class PatientTestDAO {
                         listePatient.get(i).getDateNaissance(),
                         listePatient.get(i).getSexe(),
                         listePatient.get(i).getId_clinique(),
-                        listePatient.get(i).getId_medecin());
+                        listePatient.get(i).getId_medecin(),
+                        listePatient.get(i).getId_user());
             }
         }
         System.out.println("Entrez le nom du patient");

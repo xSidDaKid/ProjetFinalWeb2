@@ -24,12 +24,13 @@ public class Patient implements Serializable {//A AJOUTER LHERITAGE
 //    private Medecin medecin_id;
     private int id_clinique;
     private int id_medecin;
+    private int id_user;
 
     public Patient() {
     }
 
     // Constructeur pour le INSERT
-    public Patient(String nom, String prenom, String nam, int nbSequentiel, String dateNaissance, char sexe, int id_clinique, int id_medecin) {
+    public Patient(String nom, String prenom, String nam, int nbSequentiel, String dateNaissance, char sexe, int id_clinique, int id_medecin, int id_user) {
         this.nom = nom;
         this.prenom = prenom;
         this.nam = nam;
@@ -38,10 +39,11 @@ public class Patient implements Serializable {//A AJOUTER LHERITAGE
         this.sexe = sexe;
         this.id_clinique = id_clinique;
         this.id_medecin = id_medecin;
+        this.id_user = id_user;
     }
 
     // Constructeur pour le MODIFIER
-    public Patient(int id, String nom, String prenom, String nam, int nbSequentiel, String dateNaissance, char sexe, int id_clinique, int id_medecin) {
+    public Patient(int id, String nom, String prenom, String nam, int nbSequentiel, String dateNaissance, char sexe, int id_clinique, int id_medecin, int id_user) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
@@ -51,6 +53,7 @@ public class Patient implements Serializable {//A AJOUTER LHERITAGE
         this.sexe = sexe;
         this.id_clinique = id_clinique;
         this.id_medecin = id_medecin;
+        this.id_user = id_user;
     }
 
     // <editor-fold defaultstate="collapsed" desc="GETTER & SETTER methods">
@@ -133,11 +136,19 @@ public class Patient implements Serializable {//A AJOUTER LHERITAGE
     public void setId_medecin(int id_medecin) {
         this.id_medecin = id_medecin;
     }
-// </editor-fold>
 
+    public int getId_user() {
+        return id_user;
+    }
+
+    public void setId_user(int id_user) {
+        this.id_user = id_user;
+    }
+
+// </editor-fold>
     @Override
     public String toString() {
-        return "Patient{" + "id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", nam=" + nam + ", nbSequentiel=" + nbSequentiel + ", dateNaissance=" + dateNaissance + ", sexe=" + sexe + ", clinique_id=" + id_clinique + ", medecin_id=" + id_medecin + '}';
+        return "Patient{" + "id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", nam=" + nam + ", nbSequentiel=" + nbSequentiel + ", dateNaissance=" + dateNaissance + ", sexe=" + sexe + ", id_clinique=" + id_clinique + ", id_medecin=" + id_medecin + ", id_user=" + id_user + '}';
     }
 
 }

@@ -21,11 +21,11 @@
                             <form action="login" method="POST">
                                 <div class="form-group p-2">
                                     <label>Email</label>
-                                    <input  name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                                    <input  name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required>
                                 </div>
                                 <div class="form-group p-2">
                                     <label>Password</label>
-                                    <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                    <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required >
                                 </div>
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-primary p-2 align-content-center">Login</button>
