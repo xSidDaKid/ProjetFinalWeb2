@@ -16,7 +16,9 @@
                 <a class="nav-link" href="home">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="inscriptionPatient">Inscription Patient</a>
+                <c:if test="${sessionScope.username == 'admin'}">
+                    <a class="nav-link" href="admin">Admnistration</a>
+                </c:if>
             </li>
             <!--            <li class="nav-item">
                             <a class="nav-link" href="#">Pricing</a>
