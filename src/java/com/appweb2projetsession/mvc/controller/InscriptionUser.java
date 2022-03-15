@@ -53,7 +53,6 @@ public class InscriptionUser extends HttpServlet {
                 request.getRequestDispatcher("WEB-INF/jsp/home.jsp").include(request, response);
             }
         } else {
-            out.println("<p>Cet utilisateur existe deja<p>");
             request.getRequestDispatcher("WEB-INF/jsp/inscriptionUser.jsp").include(request, response);
 
         }

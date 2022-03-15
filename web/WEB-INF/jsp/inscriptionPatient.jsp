@@ -14,26 +14,26 @@
     <body>
         <jsp:include page="menu.jsp"/>
         <div class="container pt-5 mt-5">
-            <div class="card p-3">
+            <div class="card p-3 col-sm-7">
                 <form action="inscriptionPatient" method="GET" class="p-2">
                     <div class="form-row">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-sm-7">
                             <label for="inputEmail4">Nom</label>
                             <input type="text" class="form-control" placeholder="nom" name="nom">
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-sm-7">
                             <label for="inputPassword4">Prenom</label>
                             <input type="text" class="form-control" placeholder="Prenom" name="prenom">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group col-sm-7">
                             <label for="inputAddress">Numero d'assurance maladie</label>
                             <input type="text" class="form-control" placeholder="ABCD 1234 5678" name="nam">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group col-sm-7">
                             <label for="inputAddress2">Numero Sequentiel</label>
                             <input type="number" class="form-control" placeholder="123" name="nbSequentiel">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group col-sm-7">
                             <label for="inputCity">Date de naissance</label>
                             <input type="date" class="form-control" placeholder="JJ-MM-AAAA" name="dateNaissance">
                         </div>

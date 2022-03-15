@@ -40,7 +40,6 @@ public class InscriptionPatientServlet extends HttpServlet {
         String sexe = request.getParameter("sexe");
 
         boolean verif = PatientAction.create(new Patient(nom, prenom, nam, Integer.parseInt(nbSequentiel), dateNaissance, sexe.charAt(0), 1, 1, 1));
-        System.out.println(verif);
         if (verif) {
             request.getRequestDispatcher("WEB-INF/jsp/home.jsp").forward(request, response);
 
