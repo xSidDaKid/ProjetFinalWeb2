@@ -38,26 +38,28 @@ public class Login extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         HttpSession session = request.getSession(true);
-        
+
         try {
-        if (email.equals("admin") && password.equals("admin")) {
-            session.setAttribute("username", "admin");
-            session.setAttribute("role", "admin");
-            response.sendRedirect("admin");
-        } else {
-            Utilisateur u = UtilisateurAction.connexion(email, password);
-
-            if (u != null) {
-                session.setAttribute("username", u.getUsername());
-                session.setAttribute("role", u.getRole());
-                session.setAttribute("id", u.getId());
-                request.getRequestDispatcher("WEB-INF/jsp/home.jsp").forward(request, response);
+            if (email.equals("admin") && password.equals("admin")) {
+                session.setAttribute("username", "admin");
+                session.setAttribute("role", "admin");
+                response.sendRedirect("admin");
             } else {
-                request.getRequestDispatcher("WEB-INF/jsp/login.jsp").forward(request, response);
+                Utilisateur u = UtilisateurAction.connexion(email, password);
 
+                if (u != null) {
+                    session.setAttribute("username", u.getUsername());
+                    session.setAttribute("role", u.getRole());
+                    session.setAttribute("id", u.getId());
+                    request.getRequestDispatcher("WEB-INF/jsp/home.jsp").forward(request, response);
+                } else {
+                    request.setAttribute("erreur", "Le email ou le mot de passe est invalide");
+                    System.out.println(request.getAttribute("erreur"));
+                    request.getRequestDispatcher("WEB-INF/jsp/login.jsp").forward(request, response);
+
+                }
             }
-        }
-            
+
         } catch (NullPointerException e) {
             request.getRequestDispatcher("WEB-INF/jsp/login.jsp").forward(request, response);
         }

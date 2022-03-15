@@ -4,6 +4,7 @@
     Author     : Shajaan
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -17,6 +18,11 @@
             <div class="row justify-content-center">
                 <div class="col-md-6 col-lg-5">
                     <div class="login-wrap p-4 p-md-5">
+                        <c:if test="${not empty requestScope.erreur}">
+                            <div class="alert alert-danger text-center" role="alert">
+                                <h4>${requestScope.erreur}</h4>
+                            </div>
+                        </c:if>
                         <div class="card p-3">
                             <form action="login" method="POST">
                                 <div class="form-group p-2">
