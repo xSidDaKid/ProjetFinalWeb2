@@ -96,7 +96,7 @@ public class CliniqueTestDAO {
         System.out.println("Entrez le service  de la clinique");
         String services = r.next();
 
-        Clinique c1 = new Clinique(nom, adresse, tel, services);
+        Clinique c1 = new Clinique(nom, adresse, tel, services, 1);
         boolean retour = dao.create(c1);
 
         if (retour)
@@ -140,7 +140,8 @@ public class CliniqueTestDAO {
                         listeClinique.get(i).getNom(),
                         listeClinique.get(i).getAdresse(),
                         listeClinique.get(i).getTel(),
-                        listeClinique.get(i).getServices());
+                        listeClinique.get(i).getServices(),
+                        listeClinique.get(i).getId_user());
 
             }
         }

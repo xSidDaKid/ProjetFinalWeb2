@@ -11,30 +11,33 @@ import java.io.Serializable;
  *
  * @author RbAwa
  */
-public class Clinique implements Serializable{
+public class Clinique implements Serializable {
 
     private int id;
     private String nom;
     private String adresse;
     private String tel;
     private String services;
+    private int id_user;
 
     public Clinique() {
     }
 
-    public Clinique(String nom, String adresse, String tel, String services) {
+    public Clinique(String nom, String adresse, String tel, String services, int id_user) {
         this.nom = nom;
         this.adresse = adresse;
         this.tel = tel;
         this.services = services;
+        this.id_user = id_user;
     }
 
-    public Clinique(int id, String nom, String adresse, String tel, String services) {
+    public Clinique(int id, String nom, String adresse, String tel, String services, int id_user) {
         this.id = id;
         this.nom = nom;
         this.adresse = adresse;
         this.tel = tel;
         this.services = services;
+        this.id_user = id_user;
     }
 
     public int getId() {
@@ -82,9 +85,17 @@ public class Clinique implements Serializable{
 
     }
 
+    public int getId_user() {
+        return id_user;
+    }
+
+    public void setId_user(int id_user) {
+        this.id_user = id_user;
+    }
+
     @Override
     public String toString() {
-        return "Clinique{" + "id=" + id + ", nom=" + nom + ", adresse=" + adresse + ", tel=" + tel + ", services=" + services + '}';
+        return "Clinique{" + "id=" + id + ", nom=" + nom + ", adresse=" + adresse + ", tel=" + tel + ", services=" + services + ", id_user=" + id_user + '}';
     }
 
 }

@@ -5,7 +5,9 @@
  */
 package com.appweb2projetsession.mvc.controller;
 
+import com.appweb2projetsession.action.CliniqueAction;
 import com.appweb2projetsession.action.PatientAction;
+import com.appweb2projetsession.mvc.model.Clinique;
 import com.appweb2projetsession.mvc.model.Patient;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -38,17 +40,24 @@ public class Admin extends HttpServlet {
 
         String supprimer = request.getParameter("deletedId");
         String modifier = request.getParameter("modifId");
-        
+
         List<Patient> listePatient = PatientAction.afficherTous();
-        
+        List<Clinique> listeClinique = CliniqueAction.afficherTousClinique();
+
         request.setAttribute("listePatient", listePatient);
-        
+        request.setAttribute("listeClinique", listeClinique);
+
         if (supprimer != null) {
-            boolean v = PatientAction.delete(Integer.parseInt(supprimer));
+            boolean v = false;
+            v = PatientAction.delete(Integer.parseInt(supprimer));
+            v = CliniqueAction.supprimerClinique(Integer.parseInt(supprimer));
+            
             listePatient = PatientAction.afficherTous();
+            listeClinique = CliniqueAction.afficherTousClinique();
+
             request.setAttribute("listePatient", listePatient);
+            request.setAttribute("listeClinique", listeClinique);
             request.getRequestDispatcher("WEB-INF/jsp/admin.jsp").forward(request, response);
-            System.out.println(v);
         }
         if (modifier != null) {
             Patient patient = PatientAction.findById(Integer.parseInt(modifier));

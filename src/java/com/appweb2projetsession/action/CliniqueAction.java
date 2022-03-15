@@ -40,10 +40,10 @@ public class CliniqueAction {
 
     }
 
-    public static boolean supprimerClinique(int etudiant) {
+    public static boolean supprimerClinique(int id) {
         boolean retour = false;
         CliniqueImpDAO dao = new CliniqueImpDAO();
-        if (dao.delete(etudiant))
+        if (dao.delete(id))
         {
             retour = true;
         }
