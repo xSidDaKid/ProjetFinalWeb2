@@ -4,6 +4,7 @@
     Author     : Shajaan
 --%>
 
+<%@page import="com.appweb2projetsession.mvc.model.Utilisateur"%>
 <%@page import="com.appweb2projetsession.mvc.model.Clinique"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="java.util.ArrayList"%>
@@ -14,6 +15,7 @@
 <%
     ArrayList<Patient> listePatient = (ArrayList) request.getAttribute("listePatient");
     ArrayList<Clinique> listeClinique = (ArrayList) request.getAttribute("listeClinique");
+    ArrayList<Utilisateur> listeUtilisateur = (ArrayList) request.getAttribute("listeUtilisateur");
     Patient patientModif = (Patient) request.getAttribute("patient");
 %>
 <!DOCTYPE html>
@@ -35,6 +37,9 @@
                     </li>
                     <li class="nav-item" role="presentation">
                         <button class="nav-link" id="Clinique-tab" data-bs-toggle="tab" data-bs-target="#Clinique" type="button" >Clinique</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="User-tab" data-bs-toggle="tab" data-bs-target="#User" type="button" >Utilisateur</button>
                     </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
@@ -97,6 +102,33 @@
                                     <td>${clinique.tel}</td>
                                     <td>${clinique.services}</td>
                                     <td>${clinique.id_user}</td>
+                                    <td>
+                                        <a data-toggle="modal" data-target="#exampleModal" href="<c:url value='?modifId=${clinique.id}'/>"/>Modification</a>
+                                    </td>
+                                    <td><a href="<c:url value='?deletedId=${clinique.id}'/>"/>Delete</td>
+                                </tr>
+                            </c:forEach>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="User" role="tabpanel" aria-labelledby="User-tab">
+                        <table class="table table-bordered">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Username</th>
+                                    <th>Password</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                    <th colspan="2">Actions</th>
+                                </tr>
+                            </thead>
+                            <c:forEach items="${listeUtilisateur}" var="user">
+                                <tr>
+                                    <td>${user.id}</td>
+                                    <td>${user.username}</td>
+                                    <td>${user.password}</td>
+                                    <td>${user.email}</td>
+                                    <td>${user.role}</td>
                                     <td>
                                         <a data-toggle="modal" data-target="#exampleModal" href="<c:url value='?modifId=${clinique.id}'/>"/>Modification</a>
                                     </td>

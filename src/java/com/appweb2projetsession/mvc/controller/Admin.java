@@ -7,8 +7,10 @@ package com.appweb2projetsession.mvc.controller;
 
 import com.appweb2projetsession.action.CliniqueAction;
 import com.appweb2projetsession.action.PatientAction;
+import com.appweb2projetsession.action.UtilisateurAction;
 import com.appweb2projetsession.mvc.model.Clinique;
 import com.appweb2projetsession.mvc.model.Patient;
+import com.appweb2projetsession.mvc.model.Utilisateur;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -45,9 +47,11 @@ public class Admin extends HttpServlet {
 
         List<Patient> listePatient = PatientAction.afficherTous();
         List<Clinique> listeClinique = CliniqueAction.afficherTousClinique();
+        List<Utilisateur> listeUtilisateur = UtilisateurAction.findAll();
 
         request.setAttribute("listePatient", listePatient);
         request.setAttribute("listeClinique", listeClinique);
+        request.setAttribute("listeUtilisateur", listeUtilisateur);
 
         if (supprimer != null) {
             boolean v = false;

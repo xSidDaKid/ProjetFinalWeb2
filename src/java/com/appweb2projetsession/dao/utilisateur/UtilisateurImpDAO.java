@@ -10,6 +10,8 @@ import com.appweb2projetsession.mvc.model.Utilisateur;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,6 +24,7 @@ public class UtilisateurImpDAO implements UtilisateurDAO {
     private static final String SQL_CONNEXION = "SELECT username FROM utilisateur WHERE email=? and password=?";
     private static final String SQL_CREATE = "INSERT INTO utilisateur (username,password,email,role) VALUES(?,?,?,?)";
     private static final String SQL_UPDATE = "UPDATE utilisateur SET username = ?, password = ?, email = ?, role = ? WHERE id = ?";
+    private static final String SQL_SELECT = "SELECT * FROM utilisateur";
 
     @Override
     public Utilisateur isExiste(String email, String motDePasse) {
@@ -99,4 +102,30 @@ public class UtilisateurImpDAO implements UtilisateurDAO {
         return retour;
     }
 
+    @Override
+    public List<Utilisateur> findAll() {
+        List<Utilisateur> listeUtilisateur = null;
+
+        try {
+            PreparedStatement ps = ConnexionBD.getConnection().prepareStatement(SQL_SELECT);
+            ResultSet result = ps.executeQuery();
+
+            listeUtilisateur = new ArrayList<>();
+
+            while (result.next()) {
+                Utilisateur p1 = new Utilisateur();
+                p1.setId(result.getInt("id"));
+                p1.setUsername(result.getString("username"));
+                p1.setPassword(result.getString("password"));
+                p1.setEmail(result.getString("email"));
+                p1.setRole(result.getString("role"));
+                listeUtilisateur.add(p1);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UtilisateurImpDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ConnexionBD.closeConnection();
+        return listeUtilisateur;
+    }
 }

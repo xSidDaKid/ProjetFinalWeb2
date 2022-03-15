@@ -6,6 +6,7 @@
 package com.appweb2projetsession.dao.utilisateur;
 
 import com.appweb2projetsession.mvc.model.Utilisateur;
+import java.util.List;
 
 /**
  *
@@ -18,4 +19,6 @@ public interface UtilisateurDAO {
     boolean create(Utilisateur utilisateur);
     
     boolean update(Utilisateur utilisateur);
+    
+    List<Utilisateur> findAll();
 }

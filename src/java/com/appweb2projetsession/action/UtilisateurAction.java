@@ -7,6 +7,7 @@ package com.appweb2projetsession.action;
 
 import com.appweb2projetsession.dao.utilisateur.UtilisateurImpDAO;
 import com.appweb2projetsession.mvc.model.Utilisateur;
+import java.util.List;
 
 /**
  *
@@ -29,4 +30,11 @@ public class UtilisateurAction {
         }
         return retour;
     }
+
+    public static List<Utilisateur> findAll() {
+        UtilisateurImpDAO dao = new UtilisateurImpDAO();
+        List<Utilisateur> listeUtilisateur = dao.findAll();
+        return listeUtilisateur;
+    }
+
 }
