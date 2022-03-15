@@ -49,8 +49,16 @@ public class Admin extends HttpServlet {
         List<Clinique> listeClinique = CliniqueAction.afficherTousClinique();
         List<Utilisateur> listeUtilisateur = UtilisateurAction.findAll();
 
-        request.setAttribute("listePatient", listePatient);
-        request.setAttribute("listeClinique", listeClinique);
+        if (listePatient.isEmpty()) {
+            request.setAttribute("erreur", "La liste est vide");
+        } else {
+            request.setAttribute("listePatient", listePatient);
+        }
+        if (listeClinique.isEmpty()) {
+            request.setAttribute("erreur", "La liste est vide");
+        } else {
+            request.setAttribute("listeClinique", listeClinique);
+        }
         request.setAttribute("listeUtilisateur", listeUtilisateur);
 
         if (supprimer != null) {

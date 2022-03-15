@@ -45,6 +45,7 @@
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="Patient" role="tabpanel" aria-labelledby="Patient-tab">
                         <table class="table table-bordered">
+
                             <thead class="thead-dark">
                                 <tr>
                                     <th>Id</th>
@@ -78,7 +79,11 @@
                                 </tr>
                             </c:forEach>
                         </table>
-
+                        <c:if test="${not empty requestScope.erreur}">
+                            <div class="alert alert-danger text-center" role="alert">
+                                <h4>${requestScope.erreur}</h4>
+                            </div>
+                        </c:if> 
                     </div>
                     <div class="tab-pane fade" id="Medecin" role="tabpanel" aria-labelledby="Medecin-tab">...</div>
                     <div class="tab-pane fade" id="Clinique" role="tabpanel" aria-labelledby="Clinique-tab">
@@ -109,6 +114,11 @@
                                 </tr>
                             </c:forEach>
                         </table>
+                        <c:if test="${not empty requestScope.erreur}">
+                            <div class="alert alert-danger text-center" role="alert">
+                                <h4>${requestScope.erreur}</h4>
+                            </div>
+                        </c:if>
                     </div>
                     <div class="tab-pane fade" id="User" role="tabpanel" aria-labelledby="User-tab">
                         <table class="table table-bordered">
@@ -136,6 +146,11 @@
                                 </tr>
                             </c:forEach>
                         </table>
+                        <c:if test="${not empty requestScope.erreur}">
+                            <div class="alert alert-danger text-center" role="alert">
+                                <h4>${requestScope.erreur}</h4>
+                            </div>
+                        </c:if> 
                     </div>
                 </div>
             </div>

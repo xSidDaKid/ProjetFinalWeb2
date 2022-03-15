@@ -54,7 +54,6 @@ public class Login extends HttpServlet {
                     request.getRequestDispatcher("WEB-INF/jsp/home.jsp").forward(request, response);
                 } else {
                     request.setAttribute("erreur", "Le email ou le mot de passe est invalide");
-                    System.out.println(request.getAttribute("erreur"));
                     request.getRequestDispatcher("WEB-INF/jsp/login.jsp").forward(request, response);
 
                 }
