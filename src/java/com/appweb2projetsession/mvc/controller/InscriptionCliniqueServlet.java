@@ -45,8 +45,8 @@ public class InscriptionCliniqueServlet extends HttpServlet {
         String services = request.getParameter("services");
         
          
-        Clinique c1 = new Clinique(nom, adresse, tel, services);
-        boolean retour = CliniqueAction.ajouterClinique(c1);
+       // Clinique c1 = new Clinique(nom, adresse, tel, services);
+       // boolean retour = CliniqueAction.ajouterClinique(c1);
         
        //if(retour){
             request.setAttribute("listeClinique",CliniqueAction.afficherTousClinique());
