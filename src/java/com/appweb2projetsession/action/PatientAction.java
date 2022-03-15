@@ -35,7 +35,13 @@ public class PatientAction {
 
     public static boolean update(Patient patient) {
         PatientImpDAO dao = new PatientImpDAO();
-        boolean verif = dao.equals(patient);
+        boolean verif = dao.update(patient);
+        return verif;
+    }
+
+    public static boolean create(Patient patient) {
+        PatientImpDAO dao = new PatientImpDAO();
+        boolean verif = dao.create(patient);
         return verif;
     }
 }

@@ -5,6 +5,8 @@
  */
 package com.appweb2projetsession.mvc.controller;
 
+import com.appweb2projetsession.action.PatientAction;
+import com.appweb2projetsession.mvc.model.Patient;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -30,6 +32,19 @@ public class InscriptionPatientServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        String nom = request.getParameter("nom");
+        String prenom = request.getParameter("prenom");
+        String nam = request.getParameter("nam");
+        String nbSequentiel = request.getParameter("nbSequentiel");
+        String dateNaissance = request.getParameter("dateNaissance");
+        String sexe = request.getParameter("sexe");
+
+        boolean verif = PatientAction.create(new Patient(nom, prenom, nam, Integer.parseInt(nbSequentiel), dateNaissance, sexe.charAt(0), 1, 1, 1));
+        System.out.println(verif);
+        if (verif) {
+            request.getRequestDispatcher("WEB-INF/jsp/home.jsp").forward(request, response);
+
+        }
         request.getRequestDispatcher("WEB-INF/jsp/inscriptionPatient.jsp").forward(request, response);
 
     }

@@ -15,53 +15,49 @@
         <jsp:include page="menu.jsp"/>
         <div class="container pt-5 mt-5">
             <div class="card p-3">
-            <form>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="inputEmail4">Email</label>
-                        <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="inputPassword4">Password</label>
-                        <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="inputAddress">Address</label>
-                        <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-                    </div>
-                    <div class="form-group">
-                        <label for="inputAddress2">Address 2</label>
-                        <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-                    </div>
-
-                    <div class="form-group col-md-6">
-                        <label for="inputCity">City</label>
-                        <input type="text" class="form-control" id="inputCity">
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="inputState">State</label>
-                        <select id="inputState" class="form-control">
-                            <option selected>Choose...</option>
-                            <option>...</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-2">
-                        <label for="inputZip">Zip</label>
-                        <input type="text" class="form-control" id="inputZip">
-                    </div>
-                    <div class="form-group">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="gridCheck">
-                            <label class="form-check-label" for="gridCheck">
-                                Check me out
-                            </label>
+                <form action="inscriptionPatient" method="GET" class="p-2">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputEmail4">Nom</label>
+                            <input type="text" class="form-control" placeholder="nom" name="nom">
                         </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputPassword4">Prenom</label>
+                            <input type="text" class="form-control" placeholder="Prenom" name="prenom">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputAddress">Numero d'assurance maladie</label>
+                            <input type="text" class="form-control" placeholder="ABCD 1234 5678" name="nam">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputAddress2">Numero Sequentiel</label>
+                            <input type="number" class="form-control" placeholder="123" name="nbSequentiel">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputCity">Date de naissance</label>
+                            <input type="date" class="form-control" placeholder="JJ-MM-AAAA" name="dateNaissance">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputZip">Sexe</label>
+                            <select name="sexe" required>
+                                <option value="f">F</option>
+                                <option value="m">M</option>
+                                <option value="o">O</option>
+                            </select>
+                        </div>
+                      <!--  <div class="form-group">
+                            <label for="inputCity">Clinique ID</label>
+                            <input type="text" class="form-control" name="dateNaissance">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputCity">Medecin ID</label>
+                            <input type="text" class="form-control" name="dateNaissance">
+                        </div>-->
+                        
+                        <button type="submit" class="btn btn-primary">Inscrire</button>
                     </div>
-                    <button type="submit" class="btn btn-primary">Sign in</button>
-                </div>
-            </form>
-                </div>
+                </form>
+            </div>
         </div>
         <jsp:include page="footer.jsp"/>
     </body>

@@ -43,13 +43,14 @@ public class Login extends HttpServlet {
         if (email.equals("admin") && password.equals("admin")) {
             session.setAttribute("username", "admin");
             session.setAttribute("role", "admin");
-            request.getRequestDispatcher("WEB-INF/jsp/admin.jsp").forward(request, response);
+            response.sendRedirect("admin");
         } else {
             Utilisateur u = UtilisateurAction.connexion(email, password);
 
             if (u != null) {
                 session.setAttribute("username", u.getUsername());
                 session.setAttribute("role", u.getRole());
+                session.setAttribute("id", u.getId());
                 request.getRequestDispatcher("WEB-INF/jsp/home.jsp").forward(request, response);
             } else {
                 request.getRequestDispatcher("WEB-INF/jsp/login.jsp").forward(request, response);
