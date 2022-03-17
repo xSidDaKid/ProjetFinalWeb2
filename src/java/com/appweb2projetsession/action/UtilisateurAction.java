@@ -5,6 +5,7 @@
  */
 package com.appweb2projetsession.action;
 
+import com.appweb2projetsession.dao.utilisateur.UtilisateurDAO;
 import com.appweb2projetsession.dao.utilisateur.UtilisateurImpDAO;
 import com.appweb2projetsession.mvc.model.Utilisateur;
 import java.util.List;
@@ -41,5 +42,11 @@ public class UtilisateurAction {
         UtilisateurImpDAO dao = new UtilisateurImpDAO();
         Utilisateur user = dao.findByEmail(email);
         return user;
+    }
+
+    public static boolean delete(int id) {
+        UtilisateurImpDAO dao = new UtilisateurImpDAO();
+        boolean verif = dao.delete(id);
+        return verif;
     }
 }

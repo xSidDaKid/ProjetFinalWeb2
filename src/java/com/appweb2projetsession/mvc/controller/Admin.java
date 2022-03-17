@@ -45,10 +45,12 @@ public class Admin extends HttpServlet {
         String supprimer = request.getParameter("deletedId");
         String modifier = request.getParameter("modifId");
 
+        //Liste des tables SQL TODO:MEDECIN
         List<Patient> listePatient = PatientAction.afficherTous();
         List<Clinique> listeClinique = CliniqueAction.afficherTousClinique();
         List<Utilisateur> listeUtilisateur = UtilisateurAction.findAll();
 
+        //Messages d'erreurs---
         if (listePatient.isEmpty()) {
             request.setAttribute("erreur", "La liste est vide");
         } else {
@@ -59,18 +61,26 @@ public class Admin extends HttpServlet {
         } else {
             request.setAttribute("listeClinique", listeClinique);
         }
-        request.setAttribute("listeUtilisateur", listeUtilisateur);
+        if (listeUtilisateur.isEmpty()) {
+            request.setAttribute("erreur", "La liste est vide");
+        } else {
+            request.setAttribute("listeUtilisateur", listeUtilisateur);
+        }
 
+        //FONCTION: DELETE---
         if (supprimer != null) {
             boolean v = false;
             v = PatientAction.delete(Integer.parseInt(supprimer));
             v = CliniqueAction.supprimerClinique(Integer.parseInt(supprimer));
+            v = UtilisateurAction.delete(Integer.parseInt(supprimer));
 
             listePatient = PatientAction.afficherTous();
             listeClinique = CliniqueAction.afficherTousClinique();
+            listeUtilisateur = UtilisateurAction.findAll();
 
             request.setAttribute("listePatient", listePatient);
             request.setAttribute("listeClinique", listeClinique);
+            request.setAttribute("listeUtilisateur", listeUtilisateur);
             request.getRequestDispatcher("WEB-INF/jsp/admin.jsp").forward(request, response);
         }
         if (modifier != null) {

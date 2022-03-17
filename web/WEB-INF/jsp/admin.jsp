@@ -28,6 +28,7 @@
         <jsp:include page="menu.jsp"/>
         <div class="container mt-3 p-2">
             <div class="card p-3">
+                <!-- LISTE DES TABS -->
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
                         <button class="nav-link active" id="Patient-tab" data-bs-toggle="tab" data-bs-target="#Patient" type="button" >Patient</button>
@@ -43,6 +44,7 @@
                     </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
+                    <!-- TAB PATIENT -->
                     <div class="tab-pane fade show active" id="Patient" role="tabpanel" aria-labelledby="Patient-tab">
                         <table class="table table-bordered">
 
@@ -85,7 +87,9 @@
                             </div>
                         </c:if> 
                     </div>
+                    <!-- TAB MEDECIN -->
                     <div class="tab-pane fade" id="Medecin" role="tabpanel" aria-labelledby="Medecin-tab">...</div>
+                    <!-- TAB CLINIQUE -->
                     <div class="tab-pane fade" id="Clinique" role="tabpanel" aria-labelledby="Clinique-tab">
                         <table class="table table-bordered">
                             <thead class="thead-dark">
@@ -120,6 +124,7 @@
                             </div>
                         </c:if>
                     </div>
+                    <!-- TAB USER -->
                     <div class="tab-pane fade" id="User" role="tabpanel" aria-labelledby="User-tab">
                         <table class="table table-bordered">
                             <thead class="thead-dark">
@@ -142,7 +147,7 @@
                                     <td>
                                         <a data-toggle="modal" data-target="#exampleModal" href="<c:url value='?modifId=${clinique.id}'/>"/>Modification</a>
                                     </td>
-                                    <td><a href="<c:url value='?deletedId=${clinique.id}'/>"/>Delete</td>
+                                    <td><a href="<c:url value='?deletedId=${user.id}'/>"/>Delete</td>
                                 </tr>
                             </c:forEach>
                         </table>

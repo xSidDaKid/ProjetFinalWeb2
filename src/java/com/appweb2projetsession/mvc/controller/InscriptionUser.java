@@ -9,6 +9,7 @@ import com.appweb2projetsession.action.UtilisateurAction;
 import com.appweb2projetsession.mvc.model.Utilisateur;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLIntegrityConstraintViolationException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -51,7 +52,6 @@ public class InscriptionUser extends HttpServlet {
                 session.setAttribute("username", username);
                 session.setAttribute("role", role);
                 session.setAttribute("id", nouveau.getId());
-                System.out.println(session.getAttribute("id"));
                 if (role.equals("patient")) {
                     request.getRequestDispatcher("WEB-INF/jsp/inscriptionPatient.jsp").include(request, response);
                 } else if (role.equals("clinique")) {

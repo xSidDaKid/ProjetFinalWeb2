@@ -98,7 +98,6 @@ public class Patient implements Serializable {//A AJOUTER LHERITAGE
     }
 
     public String getDateNaissance() {
-        System.out.println(dateNaissance);
         return dateNaissance;
     }
 

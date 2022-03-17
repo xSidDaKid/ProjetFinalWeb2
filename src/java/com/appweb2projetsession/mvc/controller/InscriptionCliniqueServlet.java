@@ -46,14 +46,10 @@ public class InscriptionCliniqueServlet extends HttpServlet {
         String services = request.getParameter("services");
         HttpSession session = request.getSession(true);
         int userID = (Integer) session.getAttribute("id");
-        System.out.println(userID);
-        System.out.println(session.getAttribute("id"));
         try {
-
             Clinique c1 = new Clinique(nom, adresse, tel, services, userID);
             boolean retour = CliniqueAction.ajouterClinique(c1);
             if (retour) {
-                System.out.println("adsasdasdas");
                 request.setAttribute("listeClinique", CliniqueAction.afficherTousClinique());
                 request.getRequestDispatcher("WEB-INF/jsp/home.jsp").forward(request, response);
 
