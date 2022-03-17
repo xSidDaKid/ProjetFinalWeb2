@@ -24,9 +24,9 @@ public class CliniqueImpDAO implements CliniqueDAO {
     //Liste des requetes
     private static final String SQL_SELECT = "SELECT * FROM clinique";
     private static final String SQL_SELECT_PAR_ID = "SELECT * FROM clinique where id = ?";
-    private static final String SQL_INSERT = "INSERT INTO clinique (nom,adresse,tel,services) value (?, ?, ?, ?)";
+    private static final String SQL_INSERT = "INSERT INTO clinique (nom,adresse,tel,services,utilisateur_id) value (?, ?, ?, ?,?)";
     private static final String SQL_DELETE = "DELETE FROM clinique WHERE id = ?";
-    private static final String SQL_UPDATE = "UPDATE clinique SET nom = ?, adresse = ?, tel = ?, services = ? WHERE id = ?";
+    private static final String SQL_UPDATE = "UPDATE clinique SET nom = ?, adresse = ?, tel = ?, services = ? utilisateur_id = ? WHERE id = ?";
     //private static final String SQL_CONNEXION = "SELECT nom FROM clinique WHERE adresse=? and tel=?";
 
     @Override
@@ -46,6 +46,7 @@ public class CliniqueImpDAO implements CliniqueDAO {
                 c1.setAdresse(result.getString("adresse"));
                 c1.setTel(result.getString("tel"));
                 c1.setServices(result.getString("services"));
+                c1.setId_user(result.getInt("utilisateur_id"));
                 listeClinique.add(c1);
             }
 
@@ -72,6 +73,7 @@ public class CliniqueImpDAO implements CliniqueDAO {
                 c1.setAdresse(result.getString("adresse"));
                 c1.setTel(result.getString("tel"));
                 c1.setServices(result.getString("services"));
+                c1.setId_user(result.getInt("utilisateur_id"));
 
             }
 
@@ -94,6 +96,7 @@ public class CliniqueImpDAO implements CliniqueDAO {
             ps.setString(2, clinique.getAdresse());
             ps.setString(3, clinique.getTel());
             ps.setString(4, clinique.getServices());
+            ps.setInt(5, clinique.getId_user());
             nbLigne = ps.executeUpdate();
 
         } catch (SQLException e) {
@@ -140,7 +143,8 @@ public class CliniqueImpDAO implements CliniqueDAO {
             ps.setString(2, clinique.getAdresse());
             ps.setString(3, clinique.getTel());
             ps.setString(4, clinique.getServices());
-            ps.setInt(5, clinique.getId());
+            ps.setInt(5, clinique.getId_user());
+            ps.setInt(6, clinique.getId());
             nbLigne = ps.executeUpdate();
 
         } catch (SQLException e) {

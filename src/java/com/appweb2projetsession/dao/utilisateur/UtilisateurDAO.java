@@ -17,8 +17,10 @@ public interface UtilisateurDAO {
     Utilisateur isExiste(String email, String motDePasse);
 
     boolean create(Utilisateur utilisateur);
-    
+
     boolean update(Utilisateur utilisateur);
-    
+
     List<Utilisateur> findAll();
+
+    Utilisateur findByEmail(String email);
 }

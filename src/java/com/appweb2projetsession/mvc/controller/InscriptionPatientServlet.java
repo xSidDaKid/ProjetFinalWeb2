@@ -38,13 +38,15 @@ public class InscriptionPatientServlet extends HttpServlet {
         String nbSequentiel = request.getParameter("nbSequentiel");
         String dateNaissance = request.getParameter("dateNaissance");
         String sexe = request.getParameter("sexe");
+        try {
+            boolean verif = PatientAction.create(new Patient(nom, prenom, nam, Integer.parseInt(nbSequentiel), dateNaissance, sexe.charAt(0), 1, 1, 1));
+            if (verif) {
+                request.getRequestDispatcher("WEB-INF/jsp/home.jsp").forward(request, response);
 
-        boolean verif = PatientAction.create(new Patient(nom, prenom, nam, Integer.parseInt(nbSequentiel), dateNaissance, sexe.charAt(0), 1, 1, 1));
-        if (verif) {
-            request.getRequestDispatcher("WEB-INF/jsp/home.jsp").forward(request, response);
-
+            }
+        } catch (NullPointerException e) {
+            request.getRequestDispatcher("WEB-INF/jsp/inscriptionPatient.jsp").forward(request, response);
         }
-        request.getRequestDispatcher("WEB-INF/jsp/inscriptionPatient.jsp").forward(request, response);
 
     }
 

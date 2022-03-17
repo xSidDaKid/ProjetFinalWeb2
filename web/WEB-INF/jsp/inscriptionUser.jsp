@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -17,6 +19,13 @@
             <div class="row justify-content-center">
                 <div class="col-md-6 col-lg-5">
                     <div class="card mt-3">
+                        <div>
+                            <c:if test="${not empty requestScope.existe}">
+                                <div class="alert alert-danger text-center" role="alert">
+                                    <h4>${requestScope.existe}</h4>
+                                </div>
+                            </c:if> 
+                        </div>
                         <form action="inscriptionUser" method="GET">
                             <div class="form-group p-2">
                                 <label>Nom d'utilisateur</label>

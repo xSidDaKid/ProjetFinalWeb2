@@ -40,19 +40,30 @@ public class InscriptionUser extends HttpServlet {
         String email = request.getParameter("email");
         String role = request.getParameter("role");
 
-        boolean verif = UtilisateurAction.create(new Utilisateur(username, password, email, role));
-        if (verif) {
-            HttpSession session = request.getSession(true);
-            session.setAttribute("username", username);
-            session.setAttribute("role", role);
-            if (role.equals("patient")) {
-                request.getRequestDispatcher("WEB-INF/jsp/inscriptionPatient.jsp").include(request, response);
-            } else if (role.equals("clinique")) {
-                request.getRequestDispatcher("WEB-INF/jsp/inscriptionClinique.jsp").include(request, response);
-            } else {
-                request.getRequestDispatcher("WEB-INF/jsp/home.jsp").include(request, response);
+        try {
+            if (UtilisateurAction.findByEmail(email) != null) {
+                request.setAttribute("existe", "Un utilisateur avec ce email existe deja.");
             }
-        } else {
+            boolean verif = UtilisateurAction.create(new Utilisateur(username, password, email, role));
+            Utilisateur nouveau = UtilisateurAction.findByEmail(email);
+            if (verif) {
+                HttpSession session = request.getSession(true);
+                session.setAttribute("username", username);
+                session.setAttribute("role", role);
+                session.setAttribute("id", nouveau.getId());
+                System.out.println(session.getAttribute("id"));
+                if (role.equals("patient")) {
+                    request.getRequestDispatcher("WEB-INF/jsp/inscriptionPatient.jsp").include(request, response);
+                } else if (role.equals("clinique")) {
+                    request.getRequestDispatcher("WEB-INF/jsp/inscriptionClinique.jsp").include(request, response);
+                } else {
+                    request.getRequestDispatcher("WEB-INF/jsp/home.jsp").include(request, response);
+                }
+            } else {
+                request.getRequestDispatcher("WEB-INF/jsp/inscriptionUser.jsp").include(request, response);
+
+            }
+        } catch (NullPointerException e) {
             request.getRequestDispatcher("WEB-INF/jsp/inscriptionUser.jsp").include(request, response);
 
         }

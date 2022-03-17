@@ -25,6 +25,7 @@ public class UtilisateurImpDAO implements UtilisateurDAO {
     private static final String SQL_CREATE = "INSERT INTO utilisateur (username,password,email,role) VALUES(?,?,?,?)";
     private static final String SQL_UPDATE = "UPDATE utilisateur SET username = ?, password = ?, email = ?, role = ? WHERE id = ?";
     private static final String SQL_SELECT = "SELECT * FROM utilisateur";
+    private static final String SQL_SELECT_PAR_EMAIL = "SELECT * FROM utilisateur where email = ?";
 
     @Override
     public Utilisateur isExiste(String email, String motDePasse) {
@@ -127,5 +128,29 @@ public class UtilisateurImpDAO implements UtilisateurDAO {
         }
         ConnexionBD.closeConnection();
         return listeUtilisateur;
+    }
+
+    @Override
+    public Utilisateur findByEmail(String email) {
+        Utilisateur u = null;
+
+        try {
+            PreparedStatement ps = ConnexionBD.getConnection().prepareStatement(SQL_SELECT_PAR_EMAIL);
+            ps.setString(1, email);
+            ResultSet result = ps.executeQuery();
+
+            while (result.next()) {
+                u = new Utilisateur();
+                u.setId(result.getInt("id"));
+                u.setUsername(result.getString("username"));
+                u.setPassword(result.getString("password"));
+                u.setEmail(result.getString("email"));
+                u.setRole(result.getString("role"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UtilisateurImpDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ConnexionBD.closeConnection();
+        return u;
     }
 }

@@ -16,15 +16,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Robydul
  */
-@WebServlet(name = "inscriptionCliniqueServlet", urlPatterns =
-{
-    "/InscriptionCliniqueServlet"
-})
+@WebServlet(name = "inscriptionCliniqueServlet", urlPatterns
+        = {
+            "/InscriptionCliniqueServlet"
+        })
 public class InscriptionCliniqueServlet extends HttpServlet {
 
     /**
@@ -43,23 +44,25 @@ public class InscriptionCliniqueServlet extends HttpServlet {
         String adresse = request.getParameter("adresse");
         String tel = request.getParameter("tel");
         String services = request.getParameter("services");
-        
-         
-       // Clinique c1 = new Clinique(nom, adresse, tel, services);
-       // boolean retour = CliniqueAction.ajouterClinique(c1);
-        
-       //if(retour){
-            request.setAttribute("listeClinique",CliniqueAction.afficherTousClinique());
-             request.getRequestDispatcher("WEB-INF/jsp/inscriptionClinique.jsp").forward(request, response);
+        HttpSession session = request.getSession(true);
+        int userID = (Integer) session.getAttribute("id");
+        System.out.println(userID);
+        System.out.println(session.getAttribute("id"));
+        try {
 
-//        }
+            Clinique c1 = new Clinique(nom, adresse, tel, services, userID);
+            boolean retour = CliniqueAction.ajouterClinique(c1);
+            if (retour) {
+                System.out.println("adsasdasdas");
+                request.setAttribute("listeClinique", CliniqueAction.afficherTousClinique());
+                request.getRequestDispatcher("WEB-INF/jsp/home.jsp").forward(request, response);
 
+            }
+        } catch (NullPointerException e) {
+            request.getRequestDispatcher("WEB-INF/jsp/inscriptionClinique.jsp").forward(request, response);
+        }
     }
 
-    
-    
-    
-    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

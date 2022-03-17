@@ -37,4 +37,9 @@ public class UtilisateurAction {
         return listeUtilisateur;
     }
 
+    public static Utilisateur findByEmail(String email) {
+        UtilisateurImpDAO dao = new UtilisateurImpDAO();
+        Utilisateur user = dao.findByEmail(email);
+        return user;
+    }
 }
