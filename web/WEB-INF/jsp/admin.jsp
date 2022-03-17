@@ -158,6 +158,7 @@
                         </c:if> 
                     </div>
                 </div>
+                <button class="btn-primary"><a class="text-white" href="inscriptionUser"><strong>Ajouter un utilisateur</strong></a></button>
             </div>
         </div>
         <!-- Button trigger modal -->
