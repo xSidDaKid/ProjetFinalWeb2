@@ -26,6 +26,16 @@ public class PatientAction {
         Patient patient = dao.findById(id);
         return patient;
     }
+    public static Patient findByIdUser(int id) {
+        PatientImpDAO dao = new PatientImpDAO();
+        Patient patient = dao.findByUserId(id);
+        return patient;
+    }
+    public static Patient findByIdMedecin(int id) {
+        PatientImpDAO dao = new PatientImpDAO();
+        Patient patient = dao.findByMedecinId(id);
+        return patient;
+    }
 
     public static boolean delete(int id) {
         PatientImpDAO dao = new PatientImpDAO();

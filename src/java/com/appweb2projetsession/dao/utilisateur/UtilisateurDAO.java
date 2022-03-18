@@ -25,4 +25,5 @@ public interface UtilisateurDAO {
     Utilisateur findByEmail(String email);
     
     boolean delete(int id);
+    
 }

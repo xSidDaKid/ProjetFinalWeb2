@@ -12,19 +12,20 @@ import java.util.List;
  *
  * @author Robydul
  */
-public interface  CliniqueDAO {
-    
- List<Clinique> findAll();
-    
- Clinique  findById(int id);
-    
- boolean create(Clinique clinique);
+public interface CliniqueDAO {
 
-boolean delete(int id);
+    List<Clinique> findAll();
 
-boolean update(Clinique  clinique);
+    Clinique findById(int id);
 
-Clinique isExiste(String adresse, String tel);
+    Clinique findByIdUser(int id);
 
+    boolean create(Clinique clinique);
+
+    boolean delete(int id);
+
+    boolean update(Clinique clinique);
+
+    Clinique isExiste(String adresse, String tel);
 
 }

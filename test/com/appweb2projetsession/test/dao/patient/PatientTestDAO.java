@@ -74,7 +74,7 @@ public class PatientTestDAO {
     private static void afficherParID() {
         System.out.println("Entrez l'id de l'étudiant ");
         int id = r.nextInt();
-        Patient patient = dao.findById(id);
+        Patient patient = dao.findByUserId(id);
         System.out.println(patient + "\n");
     }
 

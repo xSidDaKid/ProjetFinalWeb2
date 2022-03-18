@@ -5,8 +5,10 @@
  */
 package com.appweb2projetsession.mvc.controller;
 
+import com.appweb2projetsession.action.PatientAction;
 import com.appweb2projetsession.action.UtilisateurAction;
 import com.appweb2projetsession.dao.utilisateur.UtilisateurImpDAO;
+import com.appweb2projetsession.mvc.model.Patient;
 import com.appweb2projetsession.mvc.model.Utilisateur;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -46,11 +48,11 @@ public class Login extends HttpServlet {
                 response.sendRedirect("admin");
             } else {
                 Utilisateur u = UtilisateurAction.connexion(email, password);
+                Patient p = PatientAction.findByIdUser(u.getId());
 
                 if (u != null) {
-                    session.setAttribute("username", u.getUsername());
-                    session.setAttribute("role", u.getRole());
-                    session.setAttribute("id", u.getId());
+                    session.setAttribute("User", u);
+                    session.setAttribute("Patient", p);
                     request.getRequestDispatcher("WEB-INF/jsp/home.jsp").forward(request, response);
                 } else {
                     request.setAttribute("erreur", "Le email ou le mot de passe est invalide");

@@ -5,15 +5,16 @@
  */
 package com.appweb2projetsession.mvc.controller;
 
-import com.appweb2projetsession.action.CliniqueAction;
-import com.appweb2projetsession.dao.clinique.CliniqueDAO;
-import com.appweb2projetsession.dao.clinique.CliniqueImpDAO;
-import com.appweb2projetsession.mvc.model.Clinique;
+import com.appweb2projetsession.action.PatientAction;
+import com.appweb2projetsession.action.UtilisateurAction;
 import com.appweb2projetsession.mvc.model.Patient;
+import com.appweb2projetsession.mvc.model.Utilisateur;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,13 +22,9 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Robydul
+ * @author Shajaan
  */
-@WebServlet(name = "inscriptionCliniqueServlet", urlPatterns
-        = {
-            "/InscriptionCliniqueServlet"
-        })
-public class InscriptionCliniqueServlet extends HttpServlet {
+public class Profile extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,23 +38,34 @@ public class InscriptionCliniqueServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String nom = request.getParameter("nom");
-        String adresse = request.getParameter("adresse");
-        String tel = request.getParameter("tel");
-        String services = request.getParameter("services");
-        HttpSession session = request.getSession(true);
-        int userID = (Integer) session.getAttribute("id");
-        try {
-            Clinique c1 = new Clinique(nom, adresse, tel, services, userID);
-            boolean retour = CliniqueAction.ajouterClinique(c1);
-            if (retour) {
-                request.setAttribute("listeClinique", CliniqueAction.afficherTousClinique());
-                session.setAttribute("Clinique", c1);
-                request.getRequestDispatcher("WEB-INF/jsp/home.jsp").forward(request, response);
+        HttpSession session = request.getSession(false);
 
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        String email = request.getParameter("email");
+        String role = request.getParameter("role");
+
+        String nom = request.getParameter("nom");
+        String prenom = request.getParameter("prenom");
+        String nam = request.getParameter("nam");
+        String nbSequentiel = request.getParameter("nbSequentiel");
+        String dateNaissance = request.getParameter("dateNaissance");
+        String sexe = request.getParameter("sexe");
+        try {
+
+            if (session != null) {
+                Utilisateur user = (Utilisateur) session.getAttribute("User");
+                Patient patient = (Patient) session.getAttribute("Patient");
+
+                boolean verifU = UtilisateurAction.update(user = new Utilisateur(user.getId(), username, password, email, user.getRole()));
+                boolean verifP = PatientAction.update(patient = new Patient(patient.getId(),nom, prenom, nam, Integer.parseInt(nbSequentiel), dateNaissance, sexe.charAt(0), 1, 1, user.getId()));
+                session.setAttribute("User", user);
+                session.setAttribute("Patient", patient);
+                request.getRequestDispatcher("WEB-INF/jsp/profile.jsp").include(request, response);
             }
-        } catch (NullPointerException e) {
-            request.getRequestDispatcher("WEB-INF/jsp/inscriptionClinique.jsp").forward(request, response);
+        } catch (NumberFormatException e) {
+            request.getRequestDispatcher("WEB-INF/jsp/profile.jsp").include(request, response);
+
         }
     }
 

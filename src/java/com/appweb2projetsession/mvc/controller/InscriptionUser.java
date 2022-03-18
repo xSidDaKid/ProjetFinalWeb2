@@ -49,9 +49,8 @@ public class InscriptionUser extends HttpServlet {
             Utilisateur nouveau = UtilisateurAction.findByEmail(email);
             if (verif) {
                 HttpSession session = request.getSession(true);
-                session.setAttribute("username", username);
-                session.setAttribute("role", role);
-                session.setAttribute("id", nouveau.getId());
+                session.setAttribute("User", nouveau);
+
                 if (role.equals("patient")) {
                     request.getRequestDispatcher("WEB-INF/jsp/inscriptionPatient.jsp").include(request, response);
                 } else if (role.equals("clinique")) {

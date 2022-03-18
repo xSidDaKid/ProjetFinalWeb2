@@ -43,7 +43,7 @@
                                 <label>Role</label>
                                 <select id="cars" name="role" required>
                                     <option value="patient">Patient</option>
-                                    <option value="docteur">Docteur</option>
+                                    <option value="medecin">Medecin</option>
                                     <option value="clinique">Clinique</option>
                                 </select>
                             </div>

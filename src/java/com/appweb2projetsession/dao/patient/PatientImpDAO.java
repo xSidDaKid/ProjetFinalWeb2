@@ -24,6 +24,8 @@ public class PatientImpDAO implements PatientDAO {
     //Liste des requetes
     private static final String SQL_SELECT = "SELECT * FROM patient";
     private static final String SQL_SELECT_PAR_ID = "SELECT * FROM patient where id = ?";
+    private static final String SQL_SELECT_PAR_USERID = "SELECT * FROM patient where utilisateur_id = ?";
+    private static final String SQL_SELECT_PAR_MEDECINID = "SELECT * FROM patient where medecin_id = ?";
     private static final String SQL_INSERT = "INSERT INTO patient (nom, prenom, nam, nbSequentiel, dateNaissance, sexe, clinique_id, medecin_id, utilisateur_id) value (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String SQL_DELETE = "DELETE FROM patient WHERE id = ?";
     private static final String SQL_UPDATE = "UPDATE patient SET nom = ?, prenom = ?, nam = ?, nbSequentiel = ?, dateNaissance = ?, sexe = ?, clinique_id = ?, medecin_id = ?, utilisateur_id = ?  WHERE id = ?";
@@ -193,6 +195,66 @@ public class PatientImpDAO implements PatientDAO {
             Logger.getLogger(PatientImpDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+        ConnexionBD.closeConnection();
+        return p1;
+    }
+
+    @Override
+    public Patient findByUserId(int id) {
+        Patient p1 = null;
+
+        try {
+            PreparedStatement ps = ConnexionBD.getConnection().prepareStatement(SQL_SELECT_PAR_USERID);
+            ps.setInt(1, id);
+            ResultSet result = ps.executeQuery();
+
+            while (result.next()) {
+                p1 = new Patient();
+                p1.setId(result.getInt("id"));
+                p1.setNom(result.getString("nom"));
+                p1.setPrenom(result.getString("prenom"));
+                p1.setNam(result.getString("nam"));
+                p1.setNbSequentiel(result.getInt("nbSequentiel"));
+                p1.setDateNaissance(result.getString("dateNaissance"));
+                p1.setSexe(result.getString("sexe").charAt(0));
+                p1.setId_clinique(result.getInt("clinique_id"));
+                p1.setId_medecin(result.getInt("medecin_id"));
+                p1.setId_user(result.getInt("utilisateur_id"));
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PatientImpDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ConnexionBD.closeConnection();
+        return p1;
+    }
+
+    @Override
+    public Patient findByMedecinId(int id) {
+        Patient p1 = null;
+
+        try {
+            PreparedStatement ps = ConnexionBD.getConnection().prepareStatement(SQL_SELECT_PAR_MEDECINID);
+            ps.setInt(1, id);
+            ResultSet result = ps.executeQuery();
+
+            while (result.next()) {
+                p1 = new Patient();
+                p1.setId(result.getInt("id"));
+                p1.setNom(result.getString("nom"));
+                p1.setPrenom(result.getString("prenom"));
+                p1.setNam(result.getString("nam"));
+                p1.setNbSequentiel(result.getInt("nbSequentiel"));
+                p1.setDateNaissance(result.getString("dateNaissance"));
+                p1.setSexe(result.getString("sexe").charAt(0));
+                p1.setId_clinique(result.getInt("clinique_id"));
+                p1.setId_medecin(result.getInt("medecin_id"));
+                p1.setId_user(result.getInt("utilisateur_id"));
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PatientImpDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
         ConnexionBD.closeConnection();
         return p1;
     }

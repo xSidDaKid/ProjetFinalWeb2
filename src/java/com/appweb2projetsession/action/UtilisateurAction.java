@@ -49,4 +49,10 @@ public class UtilisateurAction {
         boolean verif = dao.delete(id);
         return verif;
     }
+    
+    public static boolean update(Utilisateur utilisateur){
+        UtilisateurImpDAO dao = new UtilisateurImpDAO();
+        boolean verif = dao.update(utilisateur);
+        return verif;
+    }
 }

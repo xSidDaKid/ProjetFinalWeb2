@@ -44,7 +44,6 @@ public class Admin extends HttpServlet {
 
         String supprimer = request.getParameter("deletedId");
         String modifier = request.getParameter("modifId");
-        System.out.println(request.getParameter("test"));
         //Liste des tables SQL TODO:MEDECIN
         List<Patient> listePatient = PatientAction.afficherTous();
         List<Clinique> listeClinique = CliniqueAction.afficherTousClinique();

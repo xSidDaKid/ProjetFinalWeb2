@@ -21,9 +21,9 @@ import java.util.logging.Logger;
  */
 public class UtilisateurImpDAO implements UtilisateurDAO {
 
-    private static final String SQL_CONNEXION = "SELECT username FROM utilisateur WHERE email=? and password=?";
+    private static final String SQL_CONNEXION = "SELECT * FROM utilisateur WHERE email=? and password=?";
     private static final String SQL_CREATE = "INSERT INTO utilisateur (username,password,email,role) VALUES(?,?,?,?)";
-    private static final String SQL_UPDATE = "UPDATE utilisateur SET username = ?, password = ?, email = ?, role = ? WHERE id = ?";
+    private static final String SQL_UPDATE = "UPDATE utilisateur SET username = ?, password = ?, email = ? WHERE id = ?";
     private static final String SQL_SELECT = "SELECT * FROM utilisateur";
     private static final String SQL_SELECT_PAR_EMAIL = "SELECT * FROM utilisateur where email = ?";
     private static final String SQL_DELETE = "DELETE FROM utilisateur WHERE id = ?";
@@ -40,7 +40,11 @@ public class UtilisateurImpDAO implements UtilisateurDAO {
             ResultSet result = ps.executeQuery();
             while (result.next()) {
                 u = new Utilisateur();
+                u.setId(result.getInt("id"));
                 u.setUsername(result.getString("username"));
+                u.setPassword(result.getString("password"));
+                u.setEmail(result.getString("email"));
+                u.setRole(result.getString("role"));
             }
 
         } catch (SQLException ex) {
@@ -89,8 +93,7 @@ public class UtilisateurImpDAO implements UtilisateurDAO {
             ps.setString(1, utilisateur.getUsername());
             ps.setString(2, utilisateur.getPassword());
             ps.setString(3, utilisateur.getEmail());
-            ps.setString(4, utilisateur.getRole());
-            ps.setInt(5, utilisateur.getId());
+            ps.setInt(4, utilisateur.getId());
             nbLigne = ps.executeUpdate();
         } catch (SQLException e) {
             // TODO Auto-generated catch block

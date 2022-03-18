@@ -7,12 +7,14 @@ package com.appweb2projetsession.mvc.controller;
 
 import com.appweb2projetsession.action.PatientAction;
 import com.appweb2projetsession.mvc.model.Patient;
+import com.appweb2projetsession.mvc.model.Utilisateur;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -32,15 +34,22 @@ public class InscriptionPatientServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+
+        HttpSession session = request.getSession(true);
+
         String nom = request.getParameter("nom");
         String prenom = request.getParameter("prenom");
         String nam = request.getParameter("nam");
         String nbSequentiel = request.getParameter("nbSequentiel");
         String dateNaissance = request.getParameter("dateNaissance");
         String sexe = request.getParameter("sexe");
+        Utilisateur u1 = (Utilisateur)session.getAttribute("User");
         try {
-            boolean verif = PatientAction.create(new Patient(nom, prenom, nam, Integer.parseInt(nbSequentiel), dateNaissance, sexe.charAt(0), 1, 1, 1));
+            Patient p1 = new Patient(nom, prenom, nam, Integer.parseInt(nbSequentiel), dateNaissance, sexe.charAt(0), 1, 1, u1.getId());
+            boolean verif = PatientAction.create(p1);
+            Patient patient = PatientAction.findByIdUser(u1.getId());
             if (verif) {
+                session.setAttribute("Patient", patient);
                 request.getRequestDispatcher("WEB-INF/jsp/home.jsp").forward(request, response);
 
             }

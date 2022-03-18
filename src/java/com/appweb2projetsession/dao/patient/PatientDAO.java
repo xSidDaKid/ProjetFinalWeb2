@@ -18,6 +18,10 @@ public interface PatientDAO {
 
     Patient findById(int id);
 
+    Patient findByUserId(int id);
+
+    Patient findByMedecinId(int id);
+
     boolean create(Patient patient);
 
     boolean delete(int id);

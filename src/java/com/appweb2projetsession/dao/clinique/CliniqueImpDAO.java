@@ -24,6 +24,7 @@ public class CliniqueImpDAO implements CliniqueDAO {
     //Liste des requetes
     private static final String SQL_SELECT = "SELECT * FROM clinique";
     private static final String SQL_SELECT_PAR_ID = "SELECT * FROM clinique where id = ?";
+    private static final String SQL_SELECT_PAR_IDUSER = "SELECT * FROM clinique where id = utilisateur_id?";
     private static final String SQL_INSERT = "INSERT INTO clinique (nom,adresse,tel,services,utilisateur_id) value (?, ?, ?, ?,?)";
     private static final String SQL_DELETE = "DELETE FROM clinique WHERE id = ?";
     private static final String SQL_UPDATE = "UPDATE clinique SET nom = ?, adresse = ?, tel = ?, services = ? utilisateur_id = ? WHERE id = ?";
@@ -177,6 +178,33 @@ public class CliniqueImpDAO implements CliniqueDAO {
 //        }
 //
 //        ConnexionBD.closeConnection();
+        return c1;
+    }
+
+    @Override
+    public Clinique findByIdUser(int id) {
+        Clinique c1 = null;
+
+        try {
+            PreparedStatement ps = ConnexionBD.getConnection().prepareStatement(SQL_SELECT_PAR_IDUSER);
+            ps.setInt(1, id);
+            ResultSet result = ps.executeQuery();
+
+            while (result.next()) {
+                c1 = new Clinique();
+                c1.setId(result.getInt("id"));
+                c1.setNom(result.getString("nom"));
+                c1.setAdresse(result.getString("adresse"));
+                c1.setTel(result.getString("tel"));
+                c1.setServices(result.getString("services"));
+                c1.setId_user(result.getInt("utilisateur_id"));
+
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CliniqueImpDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ConnexionBD.closeConnection();
         return c1;
     }
 

@@ -13,8 +13,6 @@ import java.util.List;
  *
  * @author Robydul
  */
-
-
 public class CliniqueAction {
 
     public static List<Clinique> afficherTousClinique() {
@@ -29,11 +27,16 @@ public class CliniqueAction {
         return c1;
     }
 
+    public static Clinique rechercherCliniqueParUserId(int id) {
+        CliniqueImpDAO dao = new CliniqueImpDAO();
+        Clinique c1 = dao.findByIdUser(id);
+        return c1;
+    }
+
     public static boolean miseajourEtudiant(Clinique clinique) {
         boolean retour = false;
         CliniqueImpDAO dao = new CliniqueImpDAO();
-        if (dao.update(clinique))
-        {
+        if (dao.update(clinique)) {
             retour = true;
         }
         return retour;
@@ -43,8 +46,7 @@ public class CliniqueAction {
     public static boolean supprimerClinique(int id) {
         boolean retour = false;
         CliniqueImpDAO dao = new CliniqueImpDAO();
-        if (dao.delete(id))
-        {
+        if (dao.delete(id)) {
             retour = true;
         }
         return retour;
@@ -53,8 +55,7 @@ public class CliniqueAction {
     public static boolean ajouterClinique(Clinique clinique) {
         boolean retour = false;
         CliniqueImpDAO dao = new CliniqueImpDAO();
-        if (dao.create(clinique))
-        {
+        if (dao.create(clinique)) {
             retour = true;
         }
         return retour;

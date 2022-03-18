@@ -31,6 +31,10 @@
         <servlet-name>InscriptionUser</servlet-name>
         <servlet-class>com.appweb2projetsession.mvc.controller.InscriptionUser</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Profile</servlet-name>
+        <servlet-class>com.appweb2projetsession.mvc.controller.Profile</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>InscriptionClinique</servlet-name>
         <url-pattern>/inscriptionClinique</url-pattern>
@@ -54,6 +58,10 @@
     <servlet-mapping>
         <servlet-name>InscriptionUser</servlet-name>
         <url-pattern>/inscriptionUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Profile</servlet-name>
+        <url-pattern>/profile</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
