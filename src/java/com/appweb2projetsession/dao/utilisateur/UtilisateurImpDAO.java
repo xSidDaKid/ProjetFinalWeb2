@@ -26,6 +26,7 @@ public class UtilisateurImpDAO implements UtilisateurDAO {
     private static final String SQL_UPDATE = "UPDATE utilisateur SET username = ?, password = ?, email = ? WHERE id = ?";
     private static final String SQL_SELECT = "SELECT * FROM utilisateur";
     private static final String SQL_SELECT_PAR_EMAIL = "SELECT * FROM utilisateur where email = ?";
+    private static final String SQL_SELECT_PAR_ID = "SELECT * FROM utilisateur where id = ?";
     private static final String SQL_DELETE = "DELETE FROM utilisateur WHERE id = ?";
 
     @Override
@@ -177,5 +178,29 @@ public class UtilisateurImpDAO implements UtilisateurDAO {
         }
         ConnexionBD.closeConnection();
         return retour;
+    }
+
+    @Override
+    public Utilisateur findByID(int id) {
+        Utilisateur u = null;
+
+        try {
+            PreparedStatement ps = ConnexionBD.getConnection().prepareStatement(SQL_SELECT_PAR_ID);
+            ps.setInt(1, id);
+            ResultSet result = ps.executeQuery();
+
+            while (result.next()) {
+                u = new Utilisateur();
+                u.setId(result.getInt("id"));
+                u.setUsername(result.getString("username"));
+                u.setPassword(result.getString("password"));
+                u.setEmail(result.getString("email"));
+                u.setRole(result.getString("role"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UtilisateurImpDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ConnexionBD.closeConnection();
+        return u;
     }
 }

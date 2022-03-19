@@ -5,8 +5,10 @@
  */
 package com.appweb2projetsession.mvc.controller;
 
+import com.appweb2projetsession.action.CliniqueAction;
 import com.appweb2projetsession.action.PatientAction;
 import com.appweb2projetsession.action.UtilisateurAction;
+import com.appweb2projetsession.mvc.model.Clinique;
 import com.appweb2projetsession.mvc.model.Patient;
 import com.appweb2projetsession.mvc.model.Utilisateur;
 import com.google.gson.Gson;
@@ -14,6 +16,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -51,17 +54,40 @@ public class Profile extends HttpServlet {
         String nbSequentiel = request.getParameter("nbSequentiel");
         String dateNaissance = request.getParameter("dateNaissance");
         String sexe = request.getParameter("sexe");
+        List<Patient> listePatient = PatientAction.afficherTous();
+        List<Clinique> listeClinique = CliniqueAction.afficherTousClinique();
+        List<Utilisateur> listeUtilisateur = UtilisateurAction.findAll();
+
         try {
 
             if (session != null) {
-                Utilisateur user = (Utilisateur) session.getAttribute("User");
-                Patient patient = (Patient) session.getAttribute("Patient");
+                if (session.getAttribute("username").equals("admin")) {
+                    Utilisateur userModier = (Utilisateur) session.getAttribute("userModif");
+                    Patient patientModier = (Patient) session.getAttribute("patientModif");
+                    System.out.println("b" + session.getAttribute("patientModif"));
+                    System.out.println("user" + userModier);
+                    System.out.println("nom: " + nom);
+                    UtilisateurAction.update(userModier = new Utilisateur(userModier.getId(), username, password, email, userModier.getRole()));
+                    PatientAction.update(patientModier = new Patient(patientModier.getId(), nom, prenom, nam, Integer.parseInt(nbSequentiel), dateNaissance, sexe.charAt(0), 1, 1, userModier.getId()));
+                    listePatient = PatientAction.afficherTous();
+                    listeClinique = CliniqueAction.afficherTousClinique();
+                    listeUtilisateur = UtilisateurAction.findAll();
 
-                boolean verifU = UtilisateurAction.update(user = new Utilisateur(user.getId(), username, password, email, user.getRole()));
-                boolean verifP = PatientAction.update(patient = new Patient(patient.getId(),nom, prenom, nam, Integer.parseInt(nbSequentiel), dateNaissance, sexe.charAt(0), 1, 1, user.getId()));
-                session.setAttribute("User", user);
-                session.setAttribute("Patient", patient);
-                request.getRequestDispatcher("WEB-INF/jsp/profile.jsp").include(request, response);
+                    request.setAttribute("listePatient", listePatient);
+                    request.setAttribute("listeClinique", listeClinique);
+                    request.setAttribute("listeUtilisateur", listeUtilisateur);
+                    request.getRequestDispatcher("WEB-INF/jsp/admin.jsp").forward(request, response);
+
+                } else {
+                    Utilisateur user = (Utilisateur) session.getAttribute("User");
+                    Patient patient = (Patient) session.getAttribute("Patient");
+
+                    boolean verifU = UtilisateurAction.update(user = new Utilisateur(user.getId(), username, password, email, user.getRole()));
+                    boolean verifP = PatientAction.update(patient = new Patient(patient.getId(), nom, prenom, nam, Integer.parseInt(nbSequentiel), dateNaissance, sexe.charAt(0), 1, 1, user.getId()));
+                    session.setAttribute("User", user);
+                    session.setAttribute("Patient", patient);
+                    request.getRequestDispatcher("WEB-INF/jsp/profile.jsp").include(request, response);
+                }
             }
         } catch (NumberFormatException e) {
             request.getRequestDispatcher("WEB-INF/jsp/profile.jsp").include(request, response);

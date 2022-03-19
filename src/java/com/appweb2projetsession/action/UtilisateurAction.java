@@ -43,6 +43,12 @@ public class UtilisateurAction {
         Utilisateur user = dao.findByEmail(email);
         return user;
     }
+   
+    public static Utilisateur findByID (int id) {
+        UtilisateurImpDAO dao = new UtilisateurImpDAO();
+        Utilisateur user = dao.findByID(id);
+        return user;
+    }
 
     public static boolean delete(int id) {
         UtilisateurImpDAO dao = new UtilisateurImpDAO();

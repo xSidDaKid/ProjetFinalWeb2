@@ -80,18 +80,51 @@ public class Admin extends HttpServlet {
             request.setAttribute("listePatient", listePatient);
             request.setAttribute("listeClinique", listeClinique);
             request.setAttribute("listeUtilisateur", listeUtilisateur);
-            request.getRequestDispatcher("WEB-INF/jsp/admin.jsp").forward(request, response);
-        }
-        if (modifier != null) {
-            Patient patient = PatientAction.findById(Integer.parseInt(modifier));
-            request.setAttribute("patient", patient);
-            PatientAction.update(patient);
-            listePatient = PatientAction.afficherTous();
-            request.setAttribute("listePatient", listePatient);
-            request.getRequestDispatcher("WEB-INF/jsp/admin.jsp").forward(request, response);
-        }
 
-        if (session.getAttribute("username") == ("admin")) {
+            request.getRequestDispatcher("WEB-INF/jsp/admin.jsp").forward(request, response);
+
+        } else if (modifier != null) {
+            try {
+
+                Patient patient = PatientAction.findById(Integer.parseInt(modifier));
+                Utilisateur user = UtilisateurAction.findByID(patient.getId_user());
+                // session.setAttribute("patientModif", patient);
+//                request.setAttribute("patientModif", patient);
+System.out.println("user: " + user);
+                session.setAttribute("patientModif", patient);
+                session.setAttribute("userModif", user);
+                //request.setAttribute("userModif", user);
+
+                request.getRequestDispatcher("WEB-INF/jsp/profile.jsp").include(request, response);
+
+//                String username = user.getUsername();
+//                String password = user.getPassword();
+//                String email = user.getEmail();
+//                String role = user.getRole();;
+//
+//                String nom = patient.getNom();
+//                String prenom = patient.getPrenom();
+//                String nam = patient.getNam();
+//                int nbSequentiel = patient.getNbSequentiel();
+//                String dateNaissance = patient.getDateNaissance();
+//                char sexe = patient.getSexe();
+//
+//                System.out.println(patient);
+//                System.out.println(user);
+
+//            boolean verif2 =PatientAction.update(patient = new Patient(patient.getId(), nom, prenom, nam, Integer.parseInt(nbSequentiel), dateNaissance, sexe.charAt(0), 1, 1, user.getId()));
+//            System.out.println(verif);
+//            System.out.println(verif2);
+//            listePatient = PatientAction.afficherTous();
+//            listeUtilisateur = UtilisateurAction.findAll();
+//
+//            request.setAttribute("listePatient", listePatient);
+//            request.setAttribute("listeUtilisateur", listeUtilisateur);
+//
+//            request.getRequestDispatcher("WEB-INF/jsp/admin.jsp").include(request, response);
+            } catch (NullPointerException e) {
+            }
+        } else if (session.getAttribute("username") == ("admin")) {
             request.getRequestDispatcher("WEB-INF/jsp/admin.jsp").forward(request, response);
         } else {
             request.getRequestDispatcher("WEB-INF/jsp/login.jsp").forward(request, response);

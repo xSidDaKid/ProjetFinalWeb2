@@ -24,6 +24,8 @@ public interface UtilisateurDAO {
 
     Utilisateur findByEmail(String email);
     
+    Utilisateur findByID(int id);
+    
     boolean delete(int id);
     
 }

@@ -16,33 +16,36 @@
         <div class="container-xl px-4 mt-4">
             <div class="row">
                 <div class="col-xl-2">
-
                 </div>
                 <div class="col-xl-8">
                     <!-- Account details card-->
                     <div class="card mb-4">
-                        <div class="card-header text-center">Bonjour ${sessionScope.Patient.nom} ${sessionScope.Patient.prenom}!!</div>
+                        <div class="card-header text-center">Bonjour ${sessionScope.Patient.nom} ${sessionScope.Patient.prenom} ${sessionScope.username}!!</div>
                         <div class="card-body">
                             <form action="profile" method="GET">
                                 <!-- Form User -->
                                 <div>
+                                    <div class="mb-3" hidden>
+                                        <label class="small mb-1">Id</label>
+                                        <input class="form-control" type="text" value="${UserID}" name="id" disabled>
+                                    </div>
                                     <div class="mb-3">
                                         <label class="small mb-1">Role</label>
-                                        <input class="form-control" type="text" value="${sessionScope.User.role}" name="role" disabled>
+                                        <input class="form-control" type="text" value="${sessionScope.User.role}${userModif.role}" name="role" disabled>
                                     </div>
                                     <hr>
                                     <div class="mb-3">
                                         <label class="small mb-1">Username</label>
-                                        <input class="form-control" type="text" value="${sessionScope.User.username}" name="username">
+                                        <input class="form-control" type="text" value="${sessionScope.User.username}${userModif.username}" name="username">
                                     </div>
                                     <div class="row gx-3 mb-3">
                                         <div class="col-md-6">
                                             <label class="small mb-1">Email</label>
-                                            <input class="form-control" type="text" value="${sessionScope.User.email}" name="email">
+                                            <input class="form-control" type="text" value="${sessionScope.User.email}${userModif.email}" name="email">
                                         </div>
                                         <div class="col-md-6">
                                             <label class="small mb-1">Password</label>
-                                            <input class="form-control" id="pwd" type="password" value="${sessionScope.User.password}" name="password">
+                                            <input class="form-control" id="pwd" type="password" value="${sessionScope.User.password}${userModif.password}" name="password">
                                             <input type="checkbox" onclick="myFunction()"> Show Password
                                         </div>
                                     </div>
@@ -52,31 +55,33 @@
                                     <div class="row gx-3 mb-3">
                                         <div class="col-md-6">
                                             <label class="small mb-1">Nom</label>
-                                            <input class="form-control" type="text" value="${sessionScope.Patient.nom}" name="nom">
+                                            <input class="form-control" type="text" value="${sessionScope.Patient.nom} ${patientModif.nom}" name="nom">
                                         </div>
                                         <div class="col-md-6">
                                             <label class="small mb-1">Prenom</label>
-                                            <input class="form-control" type="text" value="${sessionScope.Patient.prenom}" name="prenom">
+                                            <input class="form-control" type="text" value="${sessionScope.Patient.prenom}${patientModif.prenom}" name="prenom">
                                         </div>
                                     </div>
                                     <div class="row gx-3 mb-3">
                                         <div class="col-md-6">
                                             <label class="small mb-1">Numero d'assurance maladie</label>
-                                            <input class="form-control" type="text" value="${sessionScope.Patient.nam}" name="nam">
+                                            <input class="form-control" type="text" value="${sessionScope.Patient.nam}${patientModif.nam}" name="nam">
                                         </div>
                                         <div class="col-md-6">
                                             <label class="small mb-1">Numero sequentiel</label>
-                                            <input class="form-control" type="number" value="${sessionScope.Patient.nbSequentiel}" name="nbSequentiel">
+                                            <input class="form-control" type="number" value="${sessionScope.Patient.nbSequentiel}${patientModif.nbSequentiel}" name="nbSequentiel">
                                         </div>
                                     </div>
                                     <div class="row gx-3 mb-3">
                                         <div class="col-md-6">
                                             <label class="small mb-1">Date de naissance</label>
-                                            <input class="form-control" type="date" value="${sessionScope.Patient.dateNaissance}" name="dateNaissance">
+                                            <input class="form-control" type="text" value="${sessionScope.Patient.dateNaissance}${patientModif.dateNaissance}" name="dateNaissance">
                                         </div>
-                                        <div class="col-md-6 mt-4">
+                                        <div class="col-md-6 mt-2">
                                             <label class="small mb-1">Sexe</label>
+                                            <br>
                                             <select name="sexe" required>
+                                                <option>${patientModif.sexe}${patientModif.sexe}</option>
                                                 <option value="f">F</option>
                                                 <option value="m">M</option>
                                                 <option value="o">O</option>

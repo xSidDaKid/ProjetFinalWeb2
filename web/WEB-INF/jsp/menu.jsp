@@ -32,8 +32,9 @@
     <div class="dropdown mx-5">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
             <c:choose>
-                <c:when test="${not empty sessionScope.User}">
+                <c:when test="${not empty sessionScope.User || not empty sessionScope.username}">
                     ${sessionScope.User.username}
+                    ${sessionScope.username }
                 </c:when>
                 <c:otherwise>
                     Bonjour!
@@ -42,7 +43,7 @@
         </button>
         <ul class="mr-5 pr-5 dropdown-menu" aria-labelledby="dropdownMenuButton1">
             <c:choose>
-                <c:when test="${not empty sessionScope.User}">
+                <c:when test="${not empty sessionScope.User || not empty sessionScope.username}">
                     <li><a class="dropdown-item" href="profile">Profile</a></li>
                     <li><a class="dropdown-item" href="logout">Logout</a></li>
                 </c:when>
