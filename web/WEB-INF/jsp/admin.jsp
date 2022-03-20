@@ -46,6 +46,11 @@
                 <div class="tab-content" id="myTabContent">
                     <!-- TAB PATIENT -->
                     <div class="tab-pane fade show active" id="Patient" role="tabpanel" aria-labelledby="Patient-tab">
+                        <c:if test="${not empty requestScope.erreurDelete}">
+                            <div class="alert alert-danger text-center" role="alert">
+                                <h4>${requestScope.erreurDelete}</h4>
+                            </div>
+                        </c:if> 
                         <table class="table table-bordered">
 
                             <thead class="thead-dark">

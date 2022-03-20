@@ -91,7 +91,8 @@ public class Profile extends HttpServlet {
             }
         } catch (NumberFormatException e) {
             request.getRequestDispatcher("WEB-INF/jsp/profile.jsp").include(request, response);
-
+        } catch (NullPointerException e) {
+            request.getRequestDispatcher("WEB-INF/jsp/profile.jsp").include(request, response);
         }
     }
 

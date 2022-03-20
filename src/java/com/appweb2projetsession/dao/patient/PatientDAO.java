@@ -22,6 +22,10 @@ public interface PatientDAO {
 
     Patient findByMedecinId(int id);
 
+    Patient findByNAM(String nam);
+
+    Patient findByNbSequentiel(int nb);
+
     boolean create(Patient patient);
 
     boolean delete(int id);

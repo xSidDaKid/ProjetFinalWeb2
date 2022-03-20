@@ -68,11 +68,16 @@ public class Admin extends HttpServlet {
 
         //FONCTION: DELETE---
         if (supprimer != null) {
-            boolean v = false;
+            boolean v;
             v = PatientAction.delete(Integer.parseInt(supprimer));
             v = CliniqueAction.supprimerClinique(Integer.parseInt(supprimer));
             v = UtilisateurAction.delete(Integer.parseInt(supprimer));
-
+            
+            //VERIFICATION DE LA FONCTION DELETE
+            if (v == false) {
+                request.setAttribute("erreurDelete", "Cet element ne peut pas etre supprimer");
+            }
+            System.out.println(v);
             listePatient = PatientAction.afficherTous();
             listeClinique = CliniqueAction.afficherTousClinique();
             listeUtilisateur = UtilisateurAction.findAll();
@@ -83,6 +88,7 @@ public class Admin extends HttpServlet {
 
             request.getRequestDispatcher("WEB-INF/jsp/admin.jsp").forward(request, response);
 
+            //FONCTION: MODIFIER---
         } else if (modifier != null) {
             try {
 
@@ -90,7 +96,7 @@ public class Admin extends HttpServlet {
                 Utilisateur user = UtilisateurAction.findByID(patient.getId_user());
                 // session.setAttribute("patientModif", patient);
 //                request.setAttribute("patientModif", patient);
-System.out.println("user: " + user);
+                System.out.println("user: " + user);
                 session.setAttribute("patientModif", patient);
                 session.setAttribute("userModif", user);
                 //request.setAttribute("userModif", user);
@@ -111,7 +117,6 @@ System.out.println("user: " + user);
 //
 //                System.out.println(patient);
 //                System.out.println(user);
-
 //            boolean verif2 =PatientAction.update(patient = new Patient(patient.getId(), nom, prenom, nam, Integer.parseInt(nbSequentiel), dateNaissance, sexe.charAt(0), 1, 1, user.getId()));
 //            System.out.println(verif);
 //            System.out.println(verif2);

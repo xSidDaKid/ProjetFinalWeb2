@@ -37,21 +37,40 @@ public class InscriptionPatientServlet extends HttpServlet {
 
         HttpSession session = request.getSession(true);
 
+        //INFO FORMULAIRE
         String nom = request.getParameter("nom");
         String prenom = request.getParameter("prenom");
         String nam = request.getParameter("nam");
         String nbSequentiel = request.getParameter("nbSequentiel");
         String dateNaissance = request.getParameter("dateNaissance");
         String sexe = request.getParameter("sexe");
-        Utilisateur u1 = (Utilisateur)session.getAttribute("User");
+
+        //SAUVEGARDE SESSION
+        Utilisateur u1 = (Utilisateur) session.getAttribute("User");
+
         try {
             Patient p1 = new Patient(nom, prenom, nam, Integer.parseInt(nbSequentiel), dateNaissance, sexe.charAt(0), 1, 1, u1.getId());
+
+            //VERIF NAM
+            if (PatientAction.findByNAM(nam) != null) {
+                request.setAttribute("existeNAM", "Un utilisateur avec ce numero d'assurance maladie existe deja.");
+                request.getRequestDispatcher("WEB-INF/jsp/inscriptionPatient.jsp").forward(request, response);
+
+            }
+            //VERIF NB SEQUENTIEL
+            if (PatientAction.findByNB(Integer.parseInt(nbSequentiel)) != null) {
+                request.setAttribute("existeNB", "Un utilisateur avec ce numero sequentiel existe deja.");
+                request.getRequestDispatcher("WEB-INF/jsp/inscriptionPatient.jsp").forward(request, response);
+
+            }
+
             boolean verif = PatientAction.create(p1);
+
             Patient patient = PatientAction.findByIdUser(u1.getId());
+
             if (verif) {
                 session.setAttribute("Patient", patient);
                 request.getRequestDispatcher("WEB-INF/jsp/home.jsp").forward(request, response);
-
             }
         } catch (NullPointerException e) {
             request.getRequestDispatcher("WEB-INF/jsp/inscriptionPatient.jsp").forward(request, response);

@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -18,7 +19,6 @@
                 <div class="col-xl-2">
                 </div>
                 <div class="col-xl-8">
-                    <!-- Account details card-->
                     <div class="card mb-4">
                         <div class="card-header text-center">Bonjour ${sessionScope.Patient.nom} ${sessionScope.Patient.prenom} ${sessionScope.username}!!</div>
                         <div class="card-body">
@@ -75,7 +75,7 @@
                                     <div class="row gx-3 mb-3">
                                         <div class="col-md-6">
                                             <label class="small mb-1">Date de naissance</label>
-                                            <input class="form-control" type="text" value="${sessionScope.Patient.dateNaissance}${patientModif.dateNaissance}" name="dateNaissance">
+                                            <input class="form-control" type="date" placeholder="JJ-MM-AAAA" value="${sessionScope.Patient.dateNaissance}${patientModif.dateNaissance}" name="dateNaissance">
                                         </div>
                                         <div class="col-md-6 mt-2">
                                             <label class="small mb-1">Sexe</label>

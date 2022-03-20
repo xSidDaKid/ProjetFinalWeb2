@@ -36,6 +36,16 @@ public class PatientAction {
         Patient patient = dao.findByMedecinId(id);
         return patient;
     }
+    public static Patient findByNAM(String nam) {
+        PatientImpDAO dao = new PatientImpDAO();
+        Patient patient = dao.findByNAM(nam);
+        return patient;
+    }
+    public static Patient findByNB(int nb) {
+        PatientImpDAO dao = new PatientImpDAO();
+        Patient patient = dao.findByNbSequentiel(nb);
+        return patient;
+    }
 
     public static boolean delete(int id) {
         PatientImpDAO dao = new PatientImpDAO();
