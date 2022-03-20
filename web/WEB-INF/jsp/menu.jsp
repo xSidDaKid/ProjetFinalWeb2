@@ -19,6 +19,9 @@
                 <c:if test="${sessionScope.username == 'admin'}">
                     <a class="nav-link" href="admin">Admnistration</a>
                 </c:if>
+                <c:if test="${sessionScope.User.role == 'patient'}">
+                    <a class="nav-link" href="priseDeRendezVous">priseDeRendezVous</a>
+                </c:if>
             </li>
             <!--            <li class="nav-item">
                             <a class="nav-link" href="#">Pricing</a>
