@@ -4,6 +4,7 @@
     Author     : Shajaan
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -20,7 +21,7 @@
                 </div>
                 <div class="col-xl-8">
                     <div class="card mb-4">
-                        <div class="card-header text-center">Bonjour ${sessionScope.Patient.nom} ${sessionScope.Patient.prenom} ${sessionScope.username}!!</div>
+                        <div class="card-header text-center">Bonjour ${sessionScope.Clinique.nom} ${sessionScope.Patient.nom} ${sessionScope.Patient.prenom} ${sessionScope.username}!!</div>
                         <div class="card-body">
                             <form action="profile" method="GET">
                                 <!-- Form User -->
@@ -51,45 +52,112 @@
                                     </div>
                                 </div>
                                 <hr>
-                                <div>
-                                    <div class="row gx-3 mb-3">
-                                        <div class="col-md-6">
-                                            <label class="small mb-1">Nom</label>
-                                            <input class="form-control" type="text" value="${sessionScope.Patient.nom} ${patientModif.nom}" name="nom">
+                                <!-- Form Patient/Medecin/Clinique -->
+                                <c:choose>
+                                    <c:when test="${sessionScope.User.role == 'patient'}">
+                                        <div>
+                                            <div class="row gx-3 mb-3">
+                                                <div class="col-md-6">
+                                                    <label class="small mb-1">Nom</label>
+                                                    <input class="form-control" type="text" value="${sessionScope.Patient.nom} ${patientModif.nom}" name="nom">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="small mb-1">Prenom</label>
+                                                    <input class="form-control" type="text" value="${sessionScope.Patient.prenom}${patientModif.prenom}" name="prenom">
+                                                </div>
+                                            </div>
+                                            <div class="row gx-3 mb-3">
+                                                <div class="col-md-6">
+                                                    <label class="small mb-1">Numero d'assurance maladie</label>
+                                                    <input class="form-control" type="text" value="${sessionScope.Patient.nam}${patientModif.nam}" name="nam">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="small mb-1">Numero sequentiel</label>
+                                                    <input class="form-control" type="number" value="${sessionScope.Patient.nbSequentiel}${patientModif.nbSequentiel}" name="nbSequentiel">
+                                                </div>
+                                            </div>
+                                            <div class="row gx-3 mb-3">
+                                                <div class="col-md-6">
+                                                    <label class="small mb-1">Date de naissance</label>
+                                                    <input class="form-control" type="date" placeholder="JJ-MM-AAAA" value="${sessionScope.Patient.dateNaissance}${patientModif.dateNaissance}" name="dateNaissance">
+                                                </div>
+                                                <div class="col-md-6 mt-2">
+                                                    <label class="small mb-1">Sexe</label>
+                                                    <br>
+                                                    <select name="sexe" required>
+                                                        <option>${patientModif.sexe}${patientModif.sexe}</option>
+                                                        <option value="f">F</option>
+                                                        <option value="m">M</option>
+                                                        <option value="o">O</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <button class="btn btn-primary" type="submit">Save changes</button>
                                         </div>
-                                        <div class="col-md-6">
-                                            <label class="small mb-1">Prenom</label>
-                                            <input class="form-control" type="text" value="${sessionScope.Patient.prenom}${patientModif.prenom}" name="prenom">
+                                    </c:when>
+                                    <c:when test="${sessionScope.User.role == 'medecin'}">
+                                        <div>
+                                            <div class="row gx-3 mb-3">
+                                                <div class="col-md-6">
+                                                    <label class="small mb-1">Nom</label>
+                                                    <input class="form-control" type="text" value="${sessionScope.Medecin.nom} ${medecinModif.nom}" name="nom">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="small mb-1">Prenom</label>
+                                                    <input class="form-control" type="text" value="${sessionScope.Medecin.prenom}${medecinModif.prenom}" name="prenom">
+                                                </div>
+                                            </div>
+                                            <div class="row gx-3 mb-3">
+                                                <div class="col-md-6">
+                                                    <label class="small mb-1">Profession</label>
+                                                    <input class="form-control" type="text" value="${sessionScope.Medecin.profession} ${medecinModif.nom}" name="profession">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="small mb-1">Numero Professionnel</label>
+                                                    <input class="form-control" type="text" value="${sessionScope.Medecin.nbProfessionnel}${medecinModif.prenom}" name="nbProfessionnel">
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="small mb-1">Ententes</label>
+                                                <input class="form-control" type="text" value="${sessionScope.Medecin.ententes}${medecinModif.username}" name="ententes">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="small mb-1">Adresse</label>
+                                                <input class="form-control" type="text" value="${sessionScope.Medecin.adresse}${medecinModif.adresse}" name="adresse">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="small mb-1">Lieu de profession</label>
+                                                <input class="form-control" type="text" value="${sessionScope.Medecin.lieuProfession}${medecinModif.username}" name="lieuProfession">
+                                            </div>
+                                            <button class="btn btn-primary" type="submit">Save changes</button>
                                         </div>
-                                    </div>
-                                    <div class="row gx-3 mb-3">
-                                        <div class="col-md-6">
-                                            <label class="small mb-1">Numero d'assurance maladie</label>
-                                            <input class="form-control" type="text" value="${sessionScope.Patient.nam}${patientModif.nam}" name="nam">
+                                    </c:when>
+                                    <c:when test="${sessionScope.User.role == 'clinique'}">
+                                        <div>
+                                            <div class="row gx-3 mb-3">
+                                                <div class="col-md-6">
+                                                    <label class="small mb-1">Nom</label>
+                                                    <input class="form-control" type="text" value="${sessionScope.Clinique.nom} ${cliniqueModif.nom}" name="nom">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="small mb-1">Adresse</label>
+                                                    <input class="form-control" type="text" value="${sessionScope.Clinique.adresse}${cliniqueModif.adresse}" name="adresse">
+                                                </div>
+                                            </div>
+                                            <div class="row gx-3 mb-3">
+                                                <div class="col-md-6">
+                                                    <label class="small mb-1">Telephone</label>
+                                                    <input class="form-control" type="text" value="${sessionScope.Clinique.tel} ${cliniqueModif.tel}" name="telephone">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="small mb-1">Services</label>
+                                                    <input class="form-control" type="text" value="${sessionScope.Clinique.services}${cliniqueModif.services}" name="services">
+                                                </div>
+                                            </div>
+                                            <button class="btn btn-primary" type="submit">Save changes</button>
                                         </div>
-                                        <div class="col-md-6">
-                                            <label class="small mb-1">Numero sequentiel</label>
-                                            <input class="form-control" type="number" value="${sessionScope.Patient.nbSequentiel}${patientModif.nbSequentiel}" name="nbSequentiel">
-                                        </div>
-                                    </div>
-                                    <div class="row gx-3 mb-3">
-                                        <div class="col-md-6">
-                                            <label class="small mb-1">Date de naissance</label>
-                                            <input class="form-control" type="date" placeholder="JJ-MM-AAAA" value="${sessionScope.Patient.dateNaissance}${patientModif.dateNaissance}" name="dateNaissance">
-                                        </div>
-                                        <div class="col-md-6 mt-2">
-                                            <label class="small mb-1">Sexe</label>
-                                            <br>
-                                            <select name="sexe" required>
-                                                <option>${patientModif.sexe}${patientModif.sexe}</option>
-                                                <option value="f">F</option>
-                                                <option value="m">M</option>
-                                                <option value="o">O</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <button class="btn btn-primary" type="submit">Save changes</button>
-                                </div>
+                                    </c:when>
+                                </c:choose>
                             </form>
                         </div>
                     </div>
