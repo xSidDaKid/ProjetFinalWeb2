@@ -21,7 +21,7 @@
                 </div>
                 <div class="col-xl-8">
                     <div class="card mb-4">
-                        <div class="card-header text-center">Bonjour ${sessionScope.Clinique.nom} ${sessionScope.Patient.nom} ${sessionScope.Patient.prenom} ${sessionScope.username}!!</div>
+                        <div class="card-header text-center">Bonjour ${sessionScope.Medecin.nom} ${sessionScope.Medecin.prenom} ${sessionScope.Clinique.nom} ${sessionScope.Patient.nom} ${sessionScope.Patient.prenom} ${sessionScope.username}!!</div>
                         <div class="card-body">
                             <form action="profile" method="GET">
                                 <!-- Form User -->

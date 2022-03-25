@@ -8,6 +8,10 @@
         <servlet-class>com.appweb2projetsession.mvc.controller.Admin</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>InscriptionMedecin</servlet-name>
+        <servlet-class>com.appweb2projetsession.mvc.controller.InscriptionMedecin</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>InscriptionClinique</servlet-name>
         <servlet-class>com.appweb2projetsession.mvc.controller.InscriptionCliniqueServlet</servlet-class>
     </servlet>
@@ -39,6 +43,10 @@
         <servlet-name>PriseDeRendezVous</servlet-name>
         <servlet-class>com.appweb2projetsession.mvc.controller.PriseDeRendezVous</servlet-class>
     </servlet>
+    <servlet-mapping>
+        <servlet-name>InscriptionMedecin</servlet-name>
+        <url-pattern>/inscriptionMedecin</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>InscriptionClinique</servlet-name>
         <url-pattern>/inscriptionClinique</url-pattern>

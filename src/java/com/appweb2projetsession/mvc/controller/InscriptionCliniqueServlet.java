@@ -10,6 +10,7 @@ import com.appweb2projetsession.dao.clinique.CliniqueDAO;
 import com.appweb2projetsession.dao.clinique.CliniqueImpDAO;
 import com.appweb2projetsession.mvc.model.Clinique;
 import com.appweb2projetsession.mvc.model.Patient;
+import com.appweb2projetsession.mvc.model.Utilisateur;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -41,14 +42,18 @@ public class InscriptionCliniqueServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        HttpSession session = request.getSession(true);
+
         String nom = request.getParameter("nom");
         String adresse = request.getParameter("adresse");
         String tel = request.getParameter("tel");
         String services = request.getParameter("services");
-        HttpSession session = request.getSession(true);
-        int userID = (Integer) session.getAttribute("id");
+
+        //SAUVEGARDE SESSION
+        Utilisateur u1 = (Utilisateur) session.getAttribute("User");
+
         try {
-            Clinique c1 = new Clinique(nom, adresse, tel, services, userID);
+            Clinique c1 = new Clinique(nom, adresse, tel, services, u1.getId());
             boolean retour = CliniqueAction.ajouterClinique(c1);
             if (retour) {
                 request.setAttribute("listeClinique", CliniqueAction.afficherTousClinique());

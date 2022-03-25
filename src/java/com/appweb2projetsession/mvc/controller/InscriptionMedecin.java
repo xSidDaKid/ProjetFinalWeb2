@@ -5,11 +5,11 @@
  */
 package com.appweb2projetsession.mvc.controller;
 
-import com.appweb2projetsession.action.UtilisateurAction;
+import com.appweb2projetsession.action.MedecinAction;
+import com.appweb2projetsession.mvc.model.Medecin;
 import com.appweb2projetsession.mvc.model.Utilisateur;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLIntegrityConstraintViolationException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +20,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Shajaan
  */
-public class InscriptionUser extends HttpServlet {
+public class InscriptionMedecin extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,39 +34,30 @@ public class InscriptionUser extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
+        HttpSession session = request.getSession(true);
 
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        String email = request.getParameter("email");
-        String role = request.getParameter("role");
+        //INFO FORMULAIRE
+        String nom = request.getParameter("nom");
+        String prenom = request.getParameter("prenom");
+        String profession = request.getParameter("profession");
+        String nbProfessionnel = request.getParameter("nbProfessionnel");
+        String ententes = request.getParameter("ententes");
+        String adresse = request.getParameter("adresse");
+        String lieuProfession = request.getParameter("lieuProfession");
 
+        //SAUVEGARDE SESSION
+        Utilisateur u1 = (Utilisateur) session.getAttribute("User");
         try {
-            if (UtilisateurAction.findByEmail(email) != null) {
-                request.setAttribute("existe", "Un utilisateur avec ce email existe deja.");
-            }
-            boolean verif = UtilisateurAction.create(new Utilisateur(username, password, email, role));
-            Utilisateur nouveau = UtilisateurAction.findByEmail(email);
+            Medecin m1 = new Medecin(nom, prenom, profession, nbProfessionnel, ententes, adresse, lieuProfession, 1, u1.getId());
+            boolean verif = MedecinAction.create(m1);
+            Medecin medecin = MedecinAction.findByIdUser(u1.getId());
+            System.out.println(medecin);
             if (verif) {
-                HttpSession session = request.getSession(true);
-                session.setAttribute("User", nouveau);
-
-                if (role.equals("patient")) {
-                    request.getRequestDispatcher("WEB-INF/jsp/inscriptionPatient.jsp").include(request, response);
-                } else if (role.equals("clinique")) {
-                    request.getRequestDispatcher("WEB-INF/jsp/inscriptionClinique.jsp").include(request, response);
-                } else if (role.equals("medecin")) {
-                    request.getRequestDispatcher("WEB-INF/jsp/inscriptionMedecin.jsp").include(request, response);
-                } else {
-                    request.getRequestDispatcher("WEB-INF/jsp/home.jsp").include(request, response);
-                }
-            } else {
-                request.getRequestDispatcher("WEB-INF/jsp/inscriptionUser.jsp").include(request, response);
-
+                session.setAttribute("Medecin", medecin);
+                request.getRequestDispatcher("WEB-INF/jsp/home.jsp").forward(request, response);
             }
         } catch (NullPointerException e) {
-            request.getRequestDispatcher("WEB-INF/jsp/inscriptionUser.jsp").include(request, response);
-
+            request.getRequestDispatcher("WEB-INF/jsp/inscriptionMedecin.jsp").forward(request, response);
         }
 
     }
