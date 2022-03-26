@@ -55,9 +55,11 @@ public class InscriptionCliniqueServlet extends HttpServlet {
         try {
             Clinique c1 = new Clinique(nom, adresse, tel, services, u1.getId());
             boolean retour = CliniqueAction.ajouterClinique(c1);
+            Clinique clinique = CliniqueAction.rechercherCliniqueParUserId(u1.getId());
+            System.out.println(clinique);
             if (retour) {
                 request.setAttribute("listeClinique", CliniqueAction.afficherTousClinique());
-                session.setAttribute("Clinique", c1);
+                session.setAttribute("Clinique", clinique);
                 request.getRequestDispatcher("WEB-INF/jsp/home.jsp").forward(request, response);
 
             }

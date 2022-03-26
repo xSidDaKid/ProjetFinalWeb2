@@ -5,11 +5,16 @@
  */
 package com.appweb2projetsession.mvc.controller;
 
+import com.appweb2projetsession.action.CliniqueAction;
+import com.appweb2projetsession.action.MedecinAction;
 import com.appweb2projetsession.action.UtilisateurAction;
+import com.appweb2projetsession.mvc.model.Clinique;
+import com.appweb2projetsession.mvc.model.Medecin;
 import com.appweb2projetsession.mvc.model.Utilisateur;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -40,7 +45,15 @@ public class InscriptionUser extends HttpServlet {
         String password = request.getParameter("password");
         String email = request.getParameter("email");
         String role = request.getParameter("role");
-
+        
+        //LISTE DES CLINIQUES
+        List<Clinique> listeClinique = CliniqueAction.afficherTousClinique();
+        request.setAttribute("listeClinique", listeClinique);
+        
+        //LISTE DES MEDECINS
+        List<Medecin> listeMedecin = MedecinAction.afficherTous();
+        request.setAttribute("listeMedecin", listeMedecin);
+        
         try {
             if (UtilisateurAction.findByEmail(email) != null) {
                 request.setAttribute("existe", "Un utilisateur avec ce email existe deja.");

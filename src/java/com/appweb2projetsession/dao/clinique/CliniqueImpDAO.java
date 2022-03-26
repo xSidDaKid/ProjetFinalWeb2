@@ -24,7 +24,7 @@ public class CliniqueImpDAO implements CliniqueDAO {
     //Liste des requetes
     private static final String SQL_SELECT = "SELECT * FROM clinique";
     private static final String SQL_SELECT_PAR_ID = "SELECT * FROM clinique where id = ?";
-    private static final String SQL_SELECT_PAR_IDUSER = "SELECT * FROM clinique where id = utilisateur_id?";
+    private static final String SQL_SELECT_PAR_IDUSER = "SELECT * FROM clinique where utilisateur_id = ?";
     private static final String SQL_INSERT = "INSERT INTO clinique (nom,adresse,tel,services,utilisateur_id) value (?, ?, ?, ?,?)";
     private static final String SQL_DELETE = "DELETE FROM clinique WHERE id = ?";
     private static final String SQL_UPDATE = "UPDATE clinique SET nom = ?, adresse = ?, tel = ?, services = ? utilisateur_id = ? WHERE id = ?";

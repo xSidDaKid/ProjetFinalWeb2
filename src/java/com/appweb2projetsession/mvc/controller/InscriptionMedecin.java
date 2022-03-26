@@ -5,11 +5,14 @@
  */
 package com.appweb2projetsession.mvc.controller;
 
+import com.appweb2projetsession.action.CliniqueAction;
 import com.appweb2projetsession.action.MedecinAction;
+import com.appweb2projetsession.mvc.model.Clinique;
 import com.appweb2projetsession.mvc.model.Medecin;
 import com.appweb2projetsession.mvc.model.Utilisateur;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -44,11 +47,11 @@ public class InscriptionMedecin extends HttpServlet {
         String ententes = request.getParameter("ententes");
         String adresse = request.getParameter("adresse");
         String lieuProfession = request.getParameter("lieuProfession");
-
+        String clinique_id = request.getParameter("clinique_id");
         //SAUVEGARDE SESSION
         Utilisateur u1 = (Utilisateur) session.getAttribute("User");
         try {
-            Medecin m1 = new Medecin(nom, prenom, profession, nbProfessionnel, ententes, adresse, lieuProfession, 1, u1.getId());
+            Medecin m1 = new Medecin(nom, prenom, profession, nbProfessionnel, ententes, adresse, lieuProfession, Integer.parseInt(clinique_id), u1.getId());
             boolean verif = MedecinAction.create(m1);
             Medecin medecin = MedecinAction.findByIdUser(u1.getId());
             System.out.println(medecin);

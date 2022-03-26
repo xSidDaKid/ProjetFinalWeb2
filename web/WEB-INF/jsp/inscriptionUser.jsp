@@ -28,7 +28,7 @@
                                     </div>
                                 </c:if> 
                             </div>
-                            <form action="inscriptionUser" method="GET">
+                            <form action="inscriptionUser" method="POST">
                                 <div class="form-group p-2">
                                     <label>Nom d'utilisateur</label>
                                     <input  type="text" name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nom d'utilisateur" required>

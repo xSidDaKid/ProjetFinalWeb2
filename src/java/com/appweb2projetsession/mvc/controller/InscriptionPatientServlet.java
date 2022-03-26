@@ -44,12 +44,14 @@ public class InscriptionPatientServlet extends HttpServlet {
         String nbSequentiel = request.getParameter("nbSequentiel");
         String dateNaissance = request.getParameter("dateNaissance");
         String sexe = request.getParameter("sexe");
+        String clinique_id = request.getParameter("clinique_id");
+        String medecin_id = request.getParameter("medecin_id");
 
         //SAUVEGARDE SESSION
         Utilisateur u1 = (Utilisateur) session.getAttribute("User");
 
         try {
-            Patient p1 = new Patient(nom, prenom, nam, Integer.parseInt(nbSequentiel), dateNaissance, sexe.charAt(0), 1, 1, u1.getId());
+            Patient p1 = new Patient(nom, prenom, nam, Integer.parseInt(nbSequentiel), dateNaissance, sexe.charAt(0), Integer.parseInt(clinique_id), Integer.parseInt(medecin_id), u1.getId());
 
             //VERIF NAM
             if (PatientAction.findByNAM(nam) != null) {
