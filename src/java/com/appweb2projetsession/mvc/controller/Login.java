@@ -5,9 +5,13 @@
  */
 package com.appweb2projetsession.mvc.controller;
 
+import com.appweb2projetsession.action.CliniqueAction;
+import com.appweb2projetsession.action.MedecinAction;
 import com.appweb2projetsession.action.PatientAction;
 import com.appweb2projetsession.action.UtilisateurAction;
 import com.appweb2projetsession.dao.utilisateur.UtilisateurImpDAO;
+import com.appweb2projetsession.mvc.model.Clinique;
+import com.appweb2projetsession.mvc.model.Medecin;
 import com.appweb2projetsession.mvc.model.Patient;
 import com.appweb2projetsession.mvc.model.Utilisateur;
 import java.io.IOException;
@@ -49,10 +53,14 @@ public class Login extends HttpServlet {
             } else {
                 Utilisateur u = UtilisateurAction.connexion(email, password);
                 Patient p = PatientAction.findByIdUser(u.getId());
+                Medecin m = MedecinAction.findByIdUser(u.getId());
+                Clinique c = CliniqueAction.rechercherCliniqueParUserId(u.getId());
 
                 if (u != null) {
                     session.setAttribute("User", u);
                     session.setAttribute("Patient", p);
+                    session.setAttribute("Medecin", m);
+                    session.setAttribute("Clinique", c);
                     request.getRequestDispatcher("WEB-INF/jsp/home.jsp").forward(request, response);
                 } else {
                     request.setAttribute("erreur", "Le email ou le mot de passe est invalide");

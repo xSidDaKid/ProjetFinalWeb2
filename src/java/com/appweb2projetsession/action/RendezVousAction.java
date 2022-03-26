@@ -28,16 +28,16 @@ public class RendezVousAction {
         return rV;
     }
 
-    public static RendezVous findByDate(Date date) {
+    public static RendezVous findByDate(String date) {
         RendezVousImpDAO dao = new RendezVousImpDAO();
         RendezVous rV = dao.findByDate(date);
         return rV;
     }
 
-    public static RendezVous findByAvaiableDate(int id) {
+    public static List<RendezVous> findByAvaiableDate() {
         RendezVousImpDAO dao = new RendezVousImpDAO();
-        RendezVous rV = dao.findByAvaiableDate(id);
-        return rV;
+        List<RendezVous> listeRendezVous = dao.findByAvaiableDate();
+        return listeRendezVous;
     }
 
     public static boolean create(RendezVous rV) {

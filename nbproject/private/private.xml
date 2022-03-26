@@ -3,17 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/X:/Desktop/Applications%20Web%202/ProjetFinSession/appweb2projetsession/appweb2projetsession/web/WEB-INF/jsp/profile.jsp</file>
-            <file>file:/X:/Desktop/Applications%20Web%202/ProjetFinSession/appweb2projetsession/appweb2projetsession/src/java/com/appweb2projetsession/mvc/controller/InscriptionUser.java</file>
-            <file>file:/X:/Desktop/Applications%20Web%202/ProjetFinSession/appweb2projetsession/appweb2projetsession/src/java/com/appweb2projetsession/mvc/model/Clinique.java</file>
-            <file>file:/X:/Desktop/Applications%20Web%202/ProjetFinSession/appweb2projetsession/appweb2projetsession/src/java/com/appweb2projetsession/mvc/controller/Profile.java</file>
-            <file>file:/X:/Desktop/Applications%20Web%202/ProjetFinSession/appweb2projetsession/appweb2projetsession/web/WEB-INF/web.xml</file>
-            <file>file:/X:/Desktop/Applications%20Web%202/ProjetFinSession/appweb2projetsession/appweb2projetsession/src/java/com/appweb2projetsession/mvc/controller/Admin.java</file>
-            <file>file:/X:/Desktop/Applications%20Web%202/ProjetFinSession/appweb2projetsession/appweb2projetsession/src/java/com/appweb2projetsession/mvc/controller/InscriptionCliniqueServlet.java</file>
-            <file>file:/X:/Desktop/Applications%20Web%202/ProjetFinSession/appweb2projetsession/appweb2projetsession/src/java/com/appweb2projetsession/mvc/model/Medecin.java</file>
-            <file>file:/X:/Desktop/Applications%20Web%202/ProjetFinSession/appweb2projetsession/appweb2projetsession/src/java/com/appweb2projetsession/dao/medecin/MedecinImpDAO.java</file>
-            <file>file:/X:/Desktop/Applications%20Web%202/ProjetFinSession/appweb2projetsession/appweb2projetsession/src/java/com/appweb2projetsession/mvc/controller/InscriptionMedecin.java</file>
-            <file>file:/X:/Desktop/Applications%20Web%202/ProjetFinSession/appweb2projetsession/appweb2projetsession/src/java/com/appweb2projetsession/mvc/controller/Login.java</file>
+            <file>file:/X:/Desktop/Applications%20Web%202/ProjetFinSession/appweb2projetsession/appweb2projetsession/web/WEB-INF/jsp/disponibilite.jsp</file>
+            <file>file:/X:/Desktop/Applications%20Web%202/ProjetFinSession/appweb2projetsession/appweb2projetsession/src/java/com/appweb2projetsession/mvc/controller/Disponibilite.java</file>
+            <file>file:/X:/Desktop/Applications%20Web%202/ProjetFinSession/appweb2projetsession/appweb2projetsession/web/WEB-INF/jsp/inscriptionClinique.jsp</file>
         </group>
     </open-files>
 </project-private>

@@ -15,7 +15,7 @@ import java.sql.Date;
 public class RendezVous implements Serializable{
 
     private int id;
-    private Date date;
+    private String date;
     private int medecin_id;
     private int patient_id;
     private String raison;
@@ -24,7 +24,7 @@ public class RendezVous implements Serializable{
     public RendezVous() {
     }
 
-    public RendezVous(int id, Date date, int medecin_id, int patient_id, String raison, String description) {
+    public RendezVous(int id, String date, int medecin_id, int patient_id, String raison, String description) {
         this.id = id;
         this.date = date;
         this.medecin_id = medecin_id;
@@ -33,7 +33,7 @@ public class RendezVous implements Serializable{
         this.description = description;
     }
 
-    public RendezVous(Date date, int medecin_id) {
+    public RendezVous(String date, int medecin_id) {
         this.date = date;
         this.medecin_id = medecin_id;
     }
@@ -47,11 +47,11 @@ public class RendezVous implements Serializable{
         this.id = id;
     }
     
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
     
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
     

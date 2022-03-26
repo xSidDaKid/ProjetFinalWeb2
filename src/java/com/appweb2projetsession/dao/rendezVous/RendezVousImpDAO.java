@@ -26,7 +26,7 @@ public class RendezVousImpDAO implements RendezVousDAO {
     private static final String SQL_SELECT = "SELECT * FROM rendezvous";
     private static final String SQL_SELECT_ID = "SELECT * FROM rendezvous WHERE id=?";
     private static final String SQL_SELECT_DATE = "SELECT * FROM rendezvous WHERE date=?";
-    private static final String SQL_SELECT_PATIENT = "SELECT * FROM rendezvous WHERE patient_id=?";
+    private static final String SQL_SELECT_PATIENT = "SELECT * FROM rendezvous WHERE patient_id IS NULL";
     private static final String SQL_INSERT = "INSERT INTO rendezvous (date, medecin_id) value (?, ?)";
     //Insert into rendezvous (id,date, medecin_id) value (1,"2020-04-04 10:00",1)
     private static final String SQL_UPDATE = "UPDATE rendezvous SET date = ?, medecin_id = ?, patient_id = ?, raison = ?, description = ?  WHERE id = ?";
@@ -45,7 +45,7 @@ public class RendezVousImpDAO implements RendezVousDAO {
             while (result.next()) {
                 RendezVous rV = new RendezVous();
                 rV.setId(result.getInt("id"));
-                rV.setDate(result.getDate("date"));
+                rV.setDate(result.getString("date"));
                 rV.setMedecin_id(result.getInt("medecin_id"));
                 rV.setPatient_id(result.getInt("patient_id"));
                 rV.setRaison(result.getString("raison"));
@@ -72,7 +72,7 @@ public class RendezVousImpDAO implements RendezVousDAO {
             while (result.next()) {
                 rV = new RendezVous();
                 rV.setId(result.getInt("id"));
-                rV.setDate(result.getDate("date"));
+                rV.setDate(result.getString("date"));
                 rV.setMedecin_id(result.getInt("medecin_id"));
                 rV.setPatient_id(result.getInt("patient_id"));
                 rV.setRaison(result.getString("raison"));
@@ -87,18 +87,18 @@ public class RendezVousImpDAO implements RendezVousDAO {
     }
 
     @Override
-    public RendezVous findByDate(Date date) {
+    public RendezVous findByDate(String date) {
         RendezVous rV = null;
 
         try {
             PreparedStatement ps = ConnexionBD.getConnection().prepareStatement(SQL_SELECT_DATE);
-            ps.setDate(1, date);
+            ps.setString(1, date);
             ResultSet result = ps.executeQuery();
 
             while (result.next()) {
                 rV = new RendezVous();
                 rV.setId(result.getInt("id"));
-                rV.setDate(result.getDate("date"));
+                rV.setDate(result.getString("date"));
                 rV.setMedecin_id(result.getInt("medecin_id"));
                 rV.setPatient_id(result.getInt("patient_id"));
                 rV.setRaison(result.getString("raison"));
@@ -113,29 +113,31 @@ public class RendezVousImpDAO implements RendezVousDAO {
     }
 
     @Override
-    public RendezVous findByAvaiableDate(int id) {
-        RendezVous rV = null;
+    public List<RendezVous> findByAvaiableDate() {
+        List<RendezVous> listeRendezVous = null;
 
         try {
             PreparedStatement ps = ConnexionBD.getConnection().prepareStatement(SQL_SELECT_PATIENT);
-            ps.setInt(1, id);
             ResultSet result = ps.executeQuery();
-
+            listeRendezVous = new ArrayList<>();
+            
             while (result.next()) {
+                RendezVous rV = new RendezVous();
                 rV = new RendezVous();
                 rV.setId(result.getInt("id"));
-                rV.setDate(result.getDate("date"));
+                rV.setDate(result.getString("date"));
                 rV.setMedecin_id(result.getInt("medecin_id"));
                 rV.setPatient_id(result.getInt("patient_id"));
                 rV.setRaison(result.getString("raison"));
                 rV.setDescription(result.getString("description"));
+                listeRendezVous.add(rV);
             }
 
         } catch (SQLException ex) {
             Logger.getLogger(RendezVousImpDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         ConnexionBD.closeConnection();
-        return rV;
+        return listeRendezVous;
     }
 
     @Override
@@ -146,9 +148,9 @@ public class RendezVousImpDAO implements RendezVousDAO {
 
         try {
             ps = ConnexionBD.getConnection().prepareStatement(SQL_INSERT);
-            ps.setDate(1, rV.getDate());
+            ps.setString(1, rV.getDate());
             ps.setInt(2, rV.getMedecin_id());
-
+            nbLigne = ps.executeUpdate();
         } catch (SQLException e) {
             Logger.getLogger(RendezVousImpDAO.class.getName()).log(Level.SEVERE, null, e);
         }
@@ -168,7 +170,7 @@ public class RendezVousImpDAO implements RendezVousDAO {
 
         try {
             ps = ConnexionBD.getConnection().prepareStatement(SQL_UPDATE);
-            ps.setDate(1, rV.getDate());
+            ps.setString(1, rV.getDate());
             ps.setInt(2, rV.getMedecin_id());
             ps.setInt(3, rV.getPatient_id());
             ps.setString(4, rV.getRaison());
