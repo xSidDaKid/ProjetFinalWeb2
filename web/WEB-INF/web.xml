@@ -43,6 +43,10 @@
         <servlet-name>PriseDeRendezVous</servlet-name>
         <servlet-class>com.appweb2projetsession.mvc.controller.PriseDeRendezVous</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Disponibilite</servlet-name>
+        <servlet-class>com.appweb2projetsession.mvc.controller.Disponibilite</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>InscriptionMedecin</servlet-name>
         <url-pattern>/inscriptionMedecin</url-pattern>
@@ -78,6 +82,10 @@
     <servlet-mapping>
         <servlet-name>PriseDeRendezVous</servlet-name>
         <url-pattern>/priseDeRendezVous</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Disponibilite</servlet-name>
+        <url-pattern>/disponibilite</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

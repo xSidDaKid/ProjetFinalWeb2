@@ -20,7 +20,10 @@
                     <a class="nav-link" href="admin">Admnistration</a>
                 </c:if>
                 <c:if test="${sessionScope.User.role == 'patient'}">
-                    <a class="nav-link" href="priseDeRendezVous">priseDeRendezVous</a>
+                    <a class="nav-link" href="priseDeRendezVous">Prendre un rendez-vous</a>
+                </c:if>
+                <c:if test="${sessionScope.User.role == 'medecin'}">
+                    <a class="nav-link" href="disponibilite">Disponibilite</a>
                 </c:if>
             </li>
             <!--            <li class="nav-item">
