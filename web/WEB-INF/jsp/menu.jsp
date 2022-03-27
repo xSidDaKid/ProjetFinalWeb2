@@ -23,7 +23,7 @@
                     <a class="nav-link" href="priseDeRendezVous">Prendre un rendez-vous</a>
                 </c:if>
                 <c:if test="${sessionScope.User.role == 'medecin'}">
-                    <a class="nav-link" href="disponibilite">Disponibilite</a>
+                    <a class="nav-link" href="disponibilite">Disponibilité</a>
                 </c:if>
             </li>
             <!--            <li class="nav-item">

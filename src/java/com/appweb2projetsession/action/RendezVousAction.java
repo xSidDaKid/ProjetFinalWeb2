@@ -40,6 +40,12 @@ public class RendezVousAction {
         return listeRendezVous;
     }
 
+    public static List<RendezVous> findByMedecinId(int id) {
+        RendezVousImpDAO dao = new RendezVousImpDAO();
+        List<RendezVous> listeRendezVous = dao.findByIdMedecin(id);
+        return listeRendezVous;
+    }
+
     public static boolean create(RendezVous rV) {
         RendezVousImpDAO dao = new RendezVousImpDAO();
         boolean verif = dao.create(rV);

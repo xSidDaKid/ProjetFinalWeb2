@@ -13,6 +13,7 @@ import java.io.PrintWriter;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -42,15 +43,25 @@ public class Disponibilite extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession(true);
         Medecin m = (Medecin) session.getAttribute("Medecin");
-        
+
         String date = request.getParameter("date");
         String time = request.getParameter("time");
         String s1 = date + " " + time;
-
+        boolean create = false;
+        
         if (date != null && time != null) {
-            boolean create = RendezVousAction.create(new RendezVous(s1, m.getId()));
+            create = RendezVousAction.create(new RendezVous(s1, m.getId()));
         }
-
+        List<RendezVous> listeRendezVousMedecin = RendezVousAction.findByMedecinId(m.getId());
+        if (create) {
+            request.setAttribute("DispoCreer", "Votre disponibilité a été ajoutée avec succès");
+        }
+        //Messages d'erreurs---
+        if (listeRendezVousMedecin.isEmpty()) {
+            request.setAttribute("erreurDispo", "Aucune disponibilité a été définie");
+        } else {
+            request.setAttribute("listeRendezVousMedecin", listeRendezVousMedecin);
+        }
         request.getRequestDispatcher("WEB-INF/jsp/disponibilite.jsp").forward(request, response);
 
     }

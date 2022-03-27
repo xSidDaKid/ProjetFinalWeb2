@@ -4,7 +4,14 @@
     Author     : Shajaan
 --%>
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.appweb2projetsession.mvc.model.RendezVous"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%
+    ArrayList<RendezVous> listeRendezVousMedecin = (ArrayList) request.getAttribute("listeRendezVousMedecin");
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -19,19 +26,21 @@
                 <!-- LISTE DES TABS -->
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link active" id="Definir-tab" data-bs-toggle="tab" data-bs-target="#Definir" type="button" >Definir mes disponibilites</button>
+                        <button class="nav-link active" id="Definir-tab" data-bs-toggle="tab" data-bs-target="#Definir" type="button" >Définir mes disponibilités</button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="Modifier-tab" data-bs-toggle="tab" data-bs-target="#Modifier" type="button" >Modifier mes disponibilites</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="Voir-tab" data-bs-toggle="tab" data-bs-target="#Voir" type="button" >Voir mes disponibilites</button>
+                        <button class="nav-link" id="Voir-tab" data-bs-toggle="tab" data-bs-target="#Voir" type="button" >Voir mes disponibilités</button>
                     </li>
                 </ul>
 
                 <div class="tab-content" id="myTabContent">
                     <!-- TAB Definir -->
                     <div class="tab-pane fade show active" id="Definir" role="tabpanel" aria-labelledby="Definir-tab">
+                        <c:if test="${not empty requestScope.DispoCreer}">
+                            <div class="mt-3 alert alert-success text-center" role="alert">
+                                <h4>${requestScope.DispoCreer}</h4>
+                            </div>
+                        </c:if> 
                         <form class="p-2" action="disponibilite" method="GET">
                             <label  class="p-1">Date</label>
                             <input class="form-control" type="date" name="date" name="id" placeholder="YYYY-MM-DD hh:mm:ss">
@@ -91,13 +100,40 @@
                             <button type="submit" class="btn btn-primary">Ajouter</button>
                         </form>
                     </div>
-                    <!-- TAB Modifier -->
-                    <div class="tab-pane fade" id="Modifier" role="tabpanel" aria-labelledby="Modifier-tab">
-                        ...
-                    </div>
                     <!-- TAB Voir -->
                     <div class="tab-pane fade" id="Voir" role="tabpanel" aria-labelledby="Voir-tab">
-                        ...
+                        <table class="table table-bordered">
+
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Date</th>
+                                    <th>Medecin ID</th>
+                                    <th>Patient ID</th>
+                                    <th>Raison</th>
+                                    <th>Description</th>
+                                    <th colspan="2">Actions</th>
+                                </tr>
+                            </thead>
+                            <c:forEach items="${listeRendezVousMedecin}" var="rV">
+                                <tr>
+                                    <td>${rV.id}</td>
+                                    <td>${rV.date}</td>
+                                    <td>${rV.medecin_id}</td>
+                                    <td>${rV.patient_id}</td>
+                                    <td>${rV.raison}</td>
+                                    <td>${rV.description}</td>
+                                    <td><a data-toggle="modal" data-target="#exampleModal" href="<c:url value='?modifId=${patient.id}'/>"/>Modification</a>
+                                    </td>
+                                    <td><a href="<c:url value='?deletedId=${patient.id}'/>"/>Delete</td>
+                                </tr>
+                            </c:forEach>
+                        </table>
+                        <c:if test="${not empty requestScope.erreurDispo}">
+                            <div class="alert alert-danger text-center" role="alert">
+                                <h4>${requestScope.erreurDispo}</h4>
+                            </div>
+                        </c:if> 
                     </div>
                 </div>
             </div>

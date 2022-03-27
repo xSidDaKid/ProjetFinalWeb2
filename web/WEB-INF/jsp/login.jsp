@@ -23,20 +23,23 @@
                                 <h4>${requestScope.erreur}</h4>
                             </div>
                         </c:if>
-                        <div class="card p-3">
-                            <form action="login" method="POST">
-                                <div class="form-group p-2">
-                                    <label>Email</label>
-                                    <input  name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required>
-                                </div>
-                                <div class="form-group p-2">
-                                    <label>Password</label>
-                                    <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required >
-                                </div>
-                                <div class="text-center">
-                                    <button type="submit" class="btn btn-primary p-2 align-content-center">Login</button>
-                                </div>
-                            </form>
+                        <div class="card">
+                            <div class="card-header text-center"><strong>Login</strong></div>
+                            <div class="card-body">
+                                <form action="login" method="POST">
+                                    <div class="form-group p-2">
+                                        <label>Email</label>
+                                        <input  name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required>
+                                    </div>
+                                    <div class="form-group p-2">
+                                        <label>Password</label>
+                                        <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required >
+                                    </div>
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-primary p-2 align-content-center">Login</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div> 
