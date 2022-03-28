@@ -5,8 +5,17 @@
  */
 package com.appweb2projetsession.mvc.controller;
 
+import com.appweb2projetsession.action.CliniqueAction;
+import com.appweb2projetsession.action.MedecinAction;
+import com.appweb2projetsession.action.PatientAction;
+import com.appweb2projetsession.action.UtilisateurAction;
+import com.appweb2projetsession.mvc.model.Clinique;
+import com.appweb2projetsession.mvc.model.Medecin;
+import com.appweb2projetsession.mvc.model.Patient;
+import com.appweb2projetsession.mvc.model.Utilisateur;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -30,6 +39,32 @@ public class HomeServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        
+        List<Clinique> listeClinique = CliniqueAction.afficherTousClinique();
+        List<Medecin> listeMedecin = MedecinAction.afficherTous();
+        List<Patient> listePatient = PatientAction.afficherTous();
+        
+        if (listeClinique.isEmpty()) {
+            request.setAttribute("erreur", "La liste est vide");
+        } else {
+            int nbClinique = listeClinique.size();
+            request.setAttribute("nbClinique", nbClinique);
+        }
+
+        if (listeMedecin.isEmpty()) {
+            request.setAttribute("erreur", "La liste est vide");
+        } else {
+            int nbMedecin = listeMedecin.size();
+            request.setAttribute("nbMedecin", nbMedecin);
+        }
+        
+        if (listePatient.isEmpty()) {
+            request.setAttribute("erreur", "La liste est vide");
+        } else {
+            int nbPatient = listePatient.size();
+            request.setAttribute("nbPatient", nbPatient);
+        }
+
         request.getRequestDispatcher("WEB-INF/jsp/home.jsp").forward(request, response);
 
     }
