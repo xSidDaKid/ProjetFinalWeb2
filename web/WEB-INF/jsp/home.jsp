@@ -11,11 +11,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%
-    int nbClinique = (int) request.getAttribute("nbClinique");
-    int nbMedecin = (int) request.getAttribute("nbMedecin");
-    int nbPatient = (int) request.getAttribute("nbPatient");
-%>
 <html>
     <head>
         <jsp:include page="head.jsp"/>
@@ -46,7 +41,6 @@
                 </div>
             </div>
         </div>
-
         <jsp:include page="footer.jsp"/>
     </body>
 </html>

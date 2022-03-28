@@ -48,6 +48,7 @@ public class HomeServlet extends HttpServlet {
             request.setAttribute("erreur", "La liste est vide");
         } else {
             int nbClinique = listeClinique.size();
+            System.out.println(nbClinique);
             request.setAttribute("nbClinique", nbClinique);
         }
 
@@ -65,7 +66,7 @@ public class HomeServlet extends HttpServlet {
             request.setAttribute("nbPatient", nbPatient);
         }
 
-        request.getRequestDispatcher("WEB-INF/jsp/home.jsp").forward(request, response);
+        request.getRequestDispatcher("WEB-INF/jsp/home.jsp").include(request, response);
 
     }
 
