@@ -12,6 +12,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+    <%
+        if (request.getAttribute("nbPatient") == null) {
+            getServletContext().getRequestDispatcher("/home").forward(request, response);
+        }
+    %>
     <head>
         <jsp:include page="head.jsp"/>
         <title>Home</title>

@@ -66,7 +66,7 @@ public class HomeServlet extends HttpServlet {
             request.setAttribute("nbPatient", nbPatient);
         }
 
-        request.getRequestDispatcher("WEB-INF/jsp/home.jsp").include(request, response);
+        request.getRequestDispatcher("WEB-INF/jsp/home.jsp").forward(request, response);
 
     }
 
