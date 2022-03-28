@@ -23,7 +23,30 @@
     </head>
     <body>
         <jsp:include page="menu.jsp"/>
-        <div class="row  p-2" style="background-color:#1f4071;">
+        <div class="container">
+            <div class="row">
+                <br>
+            </div>
+        </div>
+        <div class="container text-center mt-2">
+            <div class="row" style="background-color:#1f4071;">
+                <h1 class="text-center text-white">Bienvenue à __!</h1>
+                <h3 class="text-center text-white">Des cliniques, des médecins et des patients peuvent s'inscrire pour pouvoir faire des rendez-vous très rapide et simple.</h3>
+            </div>
+        </div>
+        <div class="container text-center my-3">
+            <div class="row">
+                <div class="col-6">
+                    <button class="p-3 btn-primary"><a class="text-white" href="inscriptionUser">Inscrire</a></button>
+                </div>
+                <div class="col-6">
+                    <button class="p-3 btn-primary"><a class="text-white" href="login">Login</a></button>
+                </div>
+            </div>
+        </div>
+        <div class="row m-1 p-2" style="background-color:#1f4071;">
+            <h2 class="text-center text-white p-2">Déjà ${nbUtilisateur} utilisateurs!</h2> 
+            <br>
             <!-- Clinique -->
             <div class="col" align="center">
                 <div class="col-3 text-center">
@@ -46,6 +69,7 @@
                 </div>
             </div>
         </div>
+
         <jsp:include page="footer.jsp"/>
     </body>
 </html>

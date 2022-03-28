@@ -6,5 +6,5 @@
 
 <footer class="border-top footer text-white bg-secondary fixed-bottom p-3 text-center">
     <div class="container">
-        &copy; 2021 - ProjetSessionAppWeb2 - Par B. Shajaan, B. Robydul et E. Samer Usama</div>
+        &copy; 2022 - ProjetSessionAppWeb2 - Par B. Shajaan, B. Robydul et E. Samer Usama</div>
 </footer>

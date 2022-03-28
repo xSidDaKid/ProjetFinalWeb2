@@ -43,6 +43,7 @@ public class HomeServlet extends HttpServlet {
         List<Clinique> listeClinique = CliniqueAction.afficherTousClinique();
         List<Medecin> listeMedecin = MedecinAction.afficherTous();
         List<Patient> listePatient = PatientAction.afficherTous();
+        List<Utilisateur> listeUtilisateur = UtilisateurAction.findAll();
         
         if (listeClinique.isEmpty()) {
             request.setAttribute("erreur", "La liste est vide");
@@ -65,7 +66,13 @@ public class HomeServlet extends HttpServlet {
             int nbPatient = listePatient.size();
             request.setAttribute("nbPatient", nbPatient);
         }
-
+        
+        if (listeUtilisateur.isEmpty()) {
+            request.setAttribute("erreur", "La liste est vide");
+        } else {
+            int nbUtilisateur = listeUtilisateur.size();
+            request.setAttribute("nbUtilisateur", nbUtilisateur);
+        }
         request.getRequestDispatcher("WEB-INF/jsp/home.jsp").forward(request, response);
 
     }
