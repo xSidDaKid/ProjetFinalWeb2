@@ -39,6 +39,11 @@
                                         <button type="submit" class="btn btn-primary p-2 align-content-center">Login</button>
                                     </div>
                                 </form>
+                                <hr>
+                                <div class="text-center">
+                                <p class="text-center">Pas de compte? Inscrivez-vous dès maintenant!</p>
+                                <a class="link-primary" href="<c:url value="/inscriptionUser"/>">Inscrire</a>
+                                </div>
                             </div>
                         </div>
                     </div>

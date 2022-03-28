@@ -45,20 +45,22 @@ public class InscriptionUser extends HttpServlet {
         String password = request.getParameter("password");
         String email = request.getParameter("email");
         String role = request.getParameter("role");
-        
+        boolean verif = false;
         //LISTE DES CLINIQUES
         List<Clinique> listeClinique = CliniqueAction.afficherTousClinique();
         request.setAttribute("listeClinique", listeClinique);
-        
+
         //LISTE DES MEDECINS
         List<Medecin> listeMedecin = MedecinAction.afficherTous();
         request.setAttribute("listeMedecin", listeMedecin);
-        
+
         try {
             if (UtilisateurAction.findByEmail(email) != null) {
                 request.setAttribute("existe", "Un utilisateur avec ce email existe deja.");
             }
-            boolean verif = UtilisateurAction.create(new Utilisateur(username, password, email, role));
+            if (username != null && password != null && email != null && role != null) {
+                verif = UtilisateurAction.create(new Utilisateur(username, password, email, role));
+            }
             Utilisateur nouveau = UtilisateurAction.findByEmail(email);
             if (verif) {
                 HttpSession session = request.getSession(true);
