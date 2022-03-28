@@ -25,6 +25,13 @@
                 <c:if test="${sessionScope.User.role == 'medecin'}">
                     <a class="nav-link" href="disponibilite">Disponibilité</a>
                 </c:if>
+
+                <c:if test="${sessionScope.User.role == 'clinique'}">
+                    <a class="nav-link" href="afficherClinique">Clinique</a> 
+                </c:if>
+            
+       
+                    
             </li>
             <!--            <li class="nav-item">
                             <a class="nav-link" href="#">Pricing</a>
@@ -50,7 +57,7 @@
         <ul class="mr-5 pr-5 dropdown-menu" aria-labelledby="dropdownMenuButton1">
             <c:choose>
                 <c:when test="${not empty sessionScope.User || not empty sessionScope.username}">
-                    <li><a class="dropdown-item" href="profile">Profile</a></li>
+                  <li><a class="dropdown-item" href="profile">Profile</a></li>
                     <li><a class="dropdown-item" href="logout">Logout</a></li>
                 </c:when>
                 <c:otherwise>

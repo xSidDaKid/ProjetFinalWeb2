@@ -33,7 +33,7 @@ public class CliniqueAction {
         return c1;
     }
 
-    public static boolean miseajourEtudiant(Clinique clinique) {
+    public static boolean miseajourClinique(Clinique clinique) {
         boolean retour = false;
         CliniqueImpDAO dao = new CliniqueImpDAO();
         if (dao.update(clinique)) {

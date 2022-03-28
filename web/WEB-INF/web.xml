@@ -47,6 +47,10 @@
         <servlet-name>Disponibilite</servlet-name>
         <servlet-class>com.appweb2projetsession.mvc.controller.Disponibilite</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ProfileClinique</servlet-name>
+        <servlet-class>com.appweb2projetsession.mvc.controller.ProfileClinique</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>InscriptionMedecin</servlet-name>
         <url-pattern>/inscriptionMedecin</url-pattern>
@@ -86,6 +90,10 @@
     <servlet-mapping>
         <servlet-name>Disponibilite</servlet-name>
         <url-pattern>/disponibilite</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProfileClinique</servlet-name>
+        <url-pattern>/profileClinique</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
