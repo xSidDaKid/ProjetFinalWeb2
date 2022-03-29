@@ -13,9 +13,9 @@
 <!DOCTYPE html>
 <html>
     <%
-        if (request.getAttribute("nbPatient") == null) {
+        /*if (request.getAttribute("nbPatient") == null) {
             getServletContext().getRequestDispatcher("/home").forward(request, response);
-        }
+        }*/
     %>
     <head>
         <jsp:include page="head.jsp"/>
