@@ -5,27 +5,19 @@
  */
 package com.appweb2projetsession.mvc.controller;
 
-import com.appweb2projetsession.action.CliniqueAction;
-import com.appweb2projetsession.mvc.model.Clinique;
-import com.appweb2projetsession.mvc.model.Utilisateur;
+import com.appweb2projetsession.action.PatientAction;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Robydul
+ * @author Shajaan
  */
-@WebServlet(name = "inscriptionCliniqueServlet", urlPatterns
-        = {
-            "/InscriptionCliniqueServlet"
-        })
-public class InscriptionCliniqueServlet extends HttpServlet {
+public class Patient extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,29 +31,11 @@ public class InscriptionCliniqueServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        HttpSession session = request.getSession(true);
-
-        //INFO FORMULAIRE
-        String nom = request.getParameter("nom");
-        String adresse = request.getParameter("adresse");
-        String tel = request.getParameter("tel");
-        String services = request.getParameter("services");
-
-        //SAUVEGARDE SESSION
-        Utilisateur u1 = (Utilisateur) session.getAttribute("User");
-
-        try {
-            Clinique c1 = new Clinique(nom, adresse, tel, services, u1.getId());
-            boolean retour = CliniqueAction.ajouterClinique(c1);
-            Clinique clinique = CliniqueAction.rechercherCliniqueParUserId(u1.getId());
-            if (retour) {
-                request.setAttribute("listeClinique", CliniqueAction.afficherTousClinique());
-                session.setAttribute("Clinique", clinique);
-                request.getRequestDispatcher("WEB-INF/jsp/home.jsp").forward(request, response);
-            }
-        } catch (NullPointerException e) {
-            request.getRequestDispatcher("WEB-INF/jsp/inscriptionClinique.jsp").forward(request, response);
-        }
+        PrintWriter out = response.getWriter();
+        out.print(PatientAction.afficherTous().size());
+        out.flush();
+        out.close();
+        request.getRequestDispatcher("WEB-INF/jsp/home.jsp").include(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -40,7 +40,7 @@
         <div class="container text-center my-3">
             <div class="row">
                 <div class="col-6">
-                    <button class="p-3 btn-primary"><a class="text-white" href="inscriptionUser">Inscrire</a></button>
+                    <button class="p-3 bg-black"><a class="text-white" href="inscriptionUser">Inscrire</a></button>
                 </div>
                 <div class="col-6">
                     <button class="p-3 btn-primary"><a class="text-white" href="login">Login</a></button>
@@ -79,28 +79,28 @@
             $(document).ready(function () {
                 $.ajax({
                     type: 'GET',
-                    url: 'inscriptionClinique',
+                    url: 'clinique',
                     success: function (nbClinique) {
                         $('#clinique').html(nbClinique);
                     }
                 });
                 $.ajax({
                     type: 'GET',
-                    url: 'inscriptionMedecin',
+                    url: 'medecin',
                     success: function (nbMedecin) {
                         $('#medecin').html(nbMedecin);
                     }
                 });
                 $.ajax({
                     type: 'GET',
-                    url: 'inscriptionPatient',
+                    url: 'patient',
                     success: function (nbPatient) {
                         $('#patient').html(nbPatient);
                     }
                 });
                 $.ajax({
                     type: 'GET',
-                    url: 'inscriptionUser',
+                    url: 'user',
                     success: function (nbUser) {
                         $('#user').html(nbUser);
                     }

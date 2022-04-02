@@ -50,12 +50,6 @@ public class InscriptionPatientServlet extends HttpServlet {
         //SAUVEGARDE SESSION
         Utilisateur u1 = (Utilisateur) session.getAttribute("User");
 
-        //NOMBRE DE PATIENT
-        PrintWriter out = response.getWriter();
-        out.print(PatientAction.afficherTous().size());
-        out.flush();
-        out.close();
-
         try {
             Patient p1 = new Patient(nom, prenom, nam, Integer.parseInt(nbSequentiel), dateNaissance, sexe.charAt(0), Integer.parseInt(clinique_id), Integer.parseInt(medecin_id), u1.getId());
 

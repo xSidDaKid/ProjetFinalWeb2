@@ -45,13 +45,7 @@ public class InscriptionMedecin extends HttpServlet {
         String adresse = request.getParameter("adresse");
         String lieuProfession = request.getParameter("lieuProfession");
         String clinique_id = request.getParameter("clinique_id");
-        
-        //NOMBRE DE MEDECIN
-        PrintWriter out = response.getWriter();
-        out.print(MedecinAction.afficherTous().size());
-        out.flush();
-        out.close();
-        
+                
         //SAUVEGARDE SESSION
         Utilisateur u1 = (Utilisateur) session.getAttribute("User");
         try {

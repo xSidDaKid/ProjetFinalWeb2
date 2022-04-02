@@ -56,11 +56,6 @@ public class InscriptionUser extends HttpServlet {
         List<Medecin> listeMedecin = MedecinAction.afficherTous();
         request.setAttribute("listeMedecin", listeMedecin);
 
-        //NOMBRE DE UTILISATEUR
-        out.print(UtilisateurAction.findAll().size());
-        out.flush();
-        out.close();
-        
         try {
             if (UtilisateurAction.findByEmail(email) != null) {
                 request.setAttribute("existe", "Un utilisateur avec ce email existe deja.");
