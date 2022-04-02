@@ -9,13 +9,11 @@ import com.appweb2projetsession.action.CliniqueAction;
 import com.appweb2projetsession.action.MedecinAction;
 import com.appweb2projetsession.action.PatientAction;
 import com.appweb2projetsession.action.UtilisateurAction;
-import com.appweb2projetsession.dao.utilisateur.UtilisateurImpDAO;
 import com.appweb2projetsession.mvc.model.Clinique;
 import com.appweb2projetsession.mvc.model.Medecin;
 import com.appweb2projetsession.mvc.model.Patient;
 import com.appweb2projetsession.mvc.model.Utilisateur;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -41,6 +39,7 @@ public class Login extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
+        //INFO FORMULAIRE
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         HttpSession session = request.getSession(true);
@@ -57,15 +56,16 @@ public class Login extends HttpServlet {
                 Clinique c = CliniqueAction.rechercherCliniqueParUserId(u.getId());
 
                 if (u != null) {
+                    //CREATION DES SESSIONS
                     session.setAttribute("User", u);
                     session.setAttribute("Patient", p);
                     session.setAttribute("Medecin", m);
                     session.setAttribute("Clinique", c);
+                    
                     request.getRequestDispatcher("WEB-INF/jsp/home.jsp").forward(request, response);
                 } else {
                     request.setAttribute("erreur", "Le email ou le mot de passe est invalide");
                     request.getRequestDispatcher("WEB-INF/jsp/login.jsp").forward(request, response);
-
                 }
             }
 

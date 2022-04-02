@@ -6,10 +6,7 @@
 package com.appweb2projetsession.mvc.controller;
 
 import com.appweb2projetsession.action.CliniqueAction;
-import com.appweb2projetsession.dao.clinique.CliniqueDAO;
-import com.appweb2projetsession.dao.clinique.CliniqueImpDAO;
 import com.appweb2projetsession.mvc.model.Clinique;
-import com.appweb2projetsession.mvc.model.Patient;
 import com.appweb2projetsession.mvc.model.Utilisateur;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -44,10 +41,17 @@ public class InscriptionCliniqueServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession(true);
 
+        //INFO FORMULAIRE
         String nom = request.getParameter("nom");
         String adresse = request.getParameter("adresse");
         String tel = request.getParameter("tel");
         String services = request.getParameter("services");
+
+        //NOMBRE DE CLINIQUE
+        PrintWriter out = response.getWriter();
+        out.print(CliniqueAction.afficherTousClinique().size());
+        out.flush();
+        out.close();
 
         //SAUVEGARDE SESSION
         Utilisateur u1 = (Utilisateur) session.getAttribute("User");
@@ -56,12 +60,10 @@ public class InscriptionCliniqueServlet extends HttpServlet {
             Clinique c1 = new Clinique(nom, adresse, tel, services, u1.getId());
             boolean retour = CliniqueAction.ajouterClinique(c1);
             Clinique clinique = CliniqueAction.rechercherCliniqueParUserId(u1.getId());
-            System.out.println(clinique);
             if (retour) {
                 request.setAttribute("listeClinique", CliniqueAction.afficherTousClinique());
                 session.setAttribute("Clinique", clinique);
                 request.getRequestDispatcher("WEB-INF/jsp/home.jsp").forward(request, response);
-
             }
         } catch (NullPointerException e) {
             request.getRequestDispatcher("WEB-INF/jsp/inscriptionClinique.jsp").forward(request, response);

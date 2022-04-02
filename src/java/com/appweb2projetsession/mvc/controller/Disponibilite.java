@@ -9,10 +9,7 @@ import com.appweb2projetsession.action.RendezVousAction;
 import com.appweb2projetsession.mvc.model.Medecin;
 import com.appweb2projetsession.mvc.model.RendezVous;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Date;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -41,18 +38,22 @@ public class Disponibilite extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
+        
         HttpSession session = request.getSession(true);
         Medecin m = (Medecin) session.getAttribute("Medecin");
 
         String date = request.getParameter("date");
         String time = request.getParameter("time");
         String s1 = date + " " + time;
+        
         boolean create = false;
         
         if (date != null && time != null) {
             create = RendezVousAction.create(new RendezVous(s1, m.getId()));
         }
+        
         List<RendezVous> listeRendezVousMedecin = RendezVousAction.findByMedecinId(m.getId());
+        
         if (create) {
             request.setAttribute("DispoCreer", "Votre disponibilité a été ajoutée avec succès");
         }
@@ -63,7 +64,6 @@ public class Disponibilite extends HttpServlet {
             request.setAttribute("listeRendezVousMedecin", listeRendezVousMedecin);
         }
         request.getRequestDispatcher("WEB-INF/jsp/disponibilite.jsp").forward(request, response);
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

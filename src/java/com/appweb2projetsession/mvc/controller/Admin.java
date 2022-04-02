@@ -12,7 +12,6 @@ import com.appweb2projetsession.mvc.model.Clinique;
 import com.appweb2projetsession.mvc.model.Patient;
 import com.appweb2projetsession.mvc.model.Utilisateur;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -40,10 +39,12 @@ public class Admin extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+
         HttpSession session = request.getSession(true);
 
         String supprimer = request.getParameter("deletedId");
         String modifier = request.getParameter("modifId");
+
         //Liste des tables SQL TODO:MEDECIN
         List<Patient> listePatient = PatientAction.afficherTous();
         List<Clinique> listeClinique = CliniqueAction.afficherTousClinique();
@@ -72,12 +73,13 @@ public class Admin extends HttpServlet {
             v = PatientAction.delete(Integer.parseInt(supprimer));
             v = CliniqueAction.supprimerClinique(Integer.parseInt(supprimer));
             v = UtilisateurAction.delete(Integer.parseInt(supprimer));
-            
+
             //VERIFICATION DE LA FONCTION DELETE
             if (v == false) {
                 request.setAttribute("erreurDelete", "Cet element ne peut pas etre supprimer");
             }
-            System.out.println(v);
+
+            //AFFICHER APRES SUPPRESSION
             listePatient = PatientAction.afficherTous();
             listeClinique = CliniqueAction.afficherTousClinique();
             listeUtilisateur = UtilisateurAction.findAll();
@@ -89,6 +91,7 @@ public class Admin extends HttpServlet {
             request.getRequestDispatcher("WEB-INF/jsp/admin.jsp").forward(request, response);
 
             //FONCTION: MODIFIER---
+            //TODO: FINIR LA METHODE OU VERIFIER SI CA MARCHE
         } else if (modifier != null) {
             try {
 

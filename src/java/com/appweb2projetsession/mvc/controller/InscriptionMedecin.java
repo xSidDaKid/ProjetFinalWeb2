@@ -5,14 +5,11 @@
  */
 package com.appweb2projetsession.mvc.controller;
 
-import com.appweb2projetsession.action.CliniqueAction;
 import com.appweb2projetsession.action.MedecinAction;
-import com.appweb2projetsession.mvc.model.Clinique;
 import com.appweb2projetsession.mvc.model.Medecin;
 import com.appweb2projetsession.mvc.model.Utilisateur;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -48,6 +45,13 @@ public class InscriptionMedecin extends HttpServlet {
         String adresse = request.getParameter("adresse");
         String lieuProfession = request.getParameter("lieuProfession");
         String clinique_id = request.getParameter("clinique_id");
+        
+        //NOMBRE DE MEDECIN
+        PrintWriter out = response.getWriter();
+        out.print(MedecinAction.afficherTous().size());
+        out.flush();
+        out.close();
+        
         //SAUVEGARDE SESSION
         Utilisateur u1 = (Utilisateur) session.getAttribute("User");
         try {

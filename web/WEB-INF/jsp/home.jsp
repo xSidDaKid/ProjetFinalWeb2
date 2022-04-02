@@ -22,18 +22,21 @@
         <title>Home</title>
     </head>
     <body>
+
         <jsp:include page="menu.jsp"/>
         <div class="container">
             <div class="row">
                 <br>
             </div>
         </div>
+        <!-- BIENVENUE -->
         <div class="container text-center mt-2">
             <div class="row" style="background-color:#1f4071;">
                 <h1 class="text-center text-white">Bienvenue à __!</h1>
                 <h3 class="text-center text-white">Des cliniques, des médecins et des patients peuvent s'inscrire pour pouvoir faire des rendez-vous très rapide et simple.</h3>
             </div>
         </div>
+        <!-- LOGIN/INSCRIPTION -->
         <div class="container text-center my-3">
             <div class="row">
                 <div class="col-6">
@@ -44,32 +47,66 @@
                 </div>
             </div>
         </div>
+        <!-- NOMBRE DE UTILISATEUR/CLINIQUE/MEDECIN/PATIENT -->
         <div class="row m-1 p-2" style="background-color:#1f4071;">
-            <h2 class="text-center text-white p-2">Déjà ${nbUtilisateur} utilisateurs!</h2> 
+            <h2 class="text-center text-white p-2">Déjà <span id="user"></span> utilisateurs!</h2> 
             <br>
             <!-- Clinique -->
             <div class="col" align="center">
                 <div class="col-3 text-center">
                     <img src="<c:url value="images/Clinique.png"/>" style="width: 100px;">
-                    <h2 class="text-white text-center"><c:out value="${nbClinique}"/> CLINIQUES</h2>
+                    <h2 class="text-white text-center"><span id="clinique"></span><br>CLINIQUES</h2>
                 </div>
             </div>
             <!-- Medecin -->
             <div class="col " align="center">
                 <div class="col-3 text-center align-content-center" align="center">
                     <img src="<c:url value="images/Medecin.png"/>" style="width: 100px;">
-                    <h2 class="text-white"><c:out value="${nbMedecin}"/> MÉDECINS</h2>
+                    <h2 class="text-white"><span id="medecin"></span><br>MÉDECINS</h2>
                 </div>
             </div>
             <!-- Patient -->
             <div class="col" align="center">
                 <div class="col-3 text-center">
                     <img src="<c:url value="images/Patient.png"/>" style="width: 100px;">
-                    <h2 class="text-white"><c:out value="${nbPatient}"/> PATIENTS</h2>
+                    <h2 class="text-white"><span id="patient"></span><br>PATIENTS</h2>
                 </div>
             </div>
         </div>
 
         <jsp:include page="footer.jsp"/>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $.ajax({
+                    type: 'GET',
+                    url: 'inscriptionClinique',
+                    success: function (nbClinique) {
+                        $('#clinique').html(nbClinique);
+                    }
+                });
+                $.ajax({
+                    type: 'GET',
+                    url: 'inscriptionMedecin',
+                    success: function (nbMedecin) {
+                        $('#medecin').html(nbMedecin);
+                    }
+                });
+                $.ajax({
+                    type: 'GET',
+                    url: 'inscriptionPatient',
+                    success: function (nbPatient) {
+                        $('#patient').html(nbPatient);
+                    }
+                });
+                $.ajax({
+                    type: 'GET',
+                    url: 'inscriptionUser',
+                    success: function (nbUser) {
+                        $('#user').html(nbUser);
+                    }
+                });
+            });
+
+        </script>
     </body>
 </html>

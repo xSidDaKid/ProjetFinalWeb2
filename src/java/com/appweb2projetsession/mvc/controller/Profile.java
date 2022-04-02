@@ -11,11 +11,7 @@ import com.appweb2projetsession.action.UtilisateurAction;
 import com.appweb2projetsession.mvc.model.Clinique;
 import com.appweb2projetsession.mvc.model.Patient;
 import com.appweb2projetsession.mvc.model.Utilisateur;
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -42,7 +38,8 @@ public class Profile extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession(false);
-
+        
+        //INFO FORMULAIRE
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String email = request.getParameter("email");
@@ -54,6 +51,7 @@ public class Profile extends HttpServlet {
         String nbSequentiel = request.getParameter("nbSequentiel");
         String dateNaissance = request.getParameter("dateNaissance");
         String sexe = request.getParameter("sexe");
+        
         List<Patient> listePatient = PatientAction.afficherTous();
         List<Clinique> listeClinique = CliniqueAction.afficherTousClinique();
         List<Utilisateur> listeUtilisateur = UtilisateurAction.findAll();

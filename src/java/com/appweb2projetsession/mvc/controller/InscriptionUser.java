@@ -13,7 +13,6 @@ import com.appweb2projetsession.mvc.model.Medecin;
 import com.appweb2projetsession.mvc.model.Utilisateur;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -41,11 +40,14 @@ public class InscriptionUser extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
 
+        //INFO FORMULAIRE
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String email = request.getParameter("email");
         String role = request.getParameter("role");
+        
         boolean verif = false;
+        
         //LISTE DES CLINIQUES
         List<Clinique> listeClinique = CliniqueAction.afficherTousClinique();
         request.setAttribute("listeClinique", listeClinique);
@@ -54,6 +56,11 @@ public class InscriptionUser extends HttpServlet {
         List<Medecin> listeMedecin = MedecinAction.afficherTous();
         request.setAttribute("listeMedecin", listeMedecin);
 
+        //NOMBRE DE UTILISATEUR
+        out.print(UtilisateurAction.findAll().size());
+        out.flush();
+        out.close();
+        
         try {
             if (UtilisateurAction.findByEmail(email) != null) {
                 request.setAttribute("existe", "Un utilisateur avec ce email existe deja.");

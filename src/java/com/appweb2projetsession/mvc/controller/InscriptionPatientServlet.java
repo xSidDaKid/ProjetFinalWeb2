@@ -50,6 +50,12 @@ public class InscriptionPatientServlet extends HttpServlet {
         //SAUVEGARDE SESSION
         Utilisateur u1 = (Utilisateur) session.getAttribute("User");
 
+        //NOMBRE DE PATIENT
+        PrintWriter out = response.getWriter();
+        out.print(PatientAction.afficherTous().size());
+        out.flush();
+        out.close();
+
         try {
             Patient p1 = new Patient(nom, prenom, nam, Integer.parseInt(nbSequentiel), dateNaissance, sexe.charAt(0), Integer.parseInt(clinique_id), Integer.parseInt(medecin_id), u1.getId());
 
@@ -57,13 +63,12 @@ public class InscriptionPatientServlet extends HttpServlet {
             if (PatientAction.findByNAM(nam) != null) {
                 request.setAttribute("existeNAM", "Un utilisateur avec ce numero d'assurance maladie existe deja.");
                 request.getRequestDispatcher("WEB-INF/jsp/inscriptionPatient.jsp").forward(request, response);
-
             }
+            
             //VERIF NB SEQUENTIEL
             if (PatientAction.findByNB(Integer.parseInt(nbSequentiel)) != null) {
                 request.setAttribute("existeNB", "Un utilisateur avec ce numero sequentiel existe deja.");
                 request.getRequestDispatcher("WEB-INF/jsp/inscriptionPatient.jsp").forward(request, response);
-
             }
 
             boolean verif = PatientAction.create(p1);
