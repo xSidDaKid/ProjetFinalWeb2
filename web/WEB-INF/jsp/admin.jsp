@@ -25,6 +25,17 @@
         <title>Admin</title>
     </head>
     <body>
+        <script>
+            $(document).ready(function () {
+                $('#patientTable').DataTable();
+            });
+            $(document).ready(function () {
+                $('#cliniqueTable').DataTable();
+            });
+            $(document).ready(function () {
+                $('#userTable').DataTable();
+            });
+        </script>
         <jsp:include page="menu.jsp"/>
         <div class="container mt-3 p-2">
             <div class="card p-3">
@@ -51,9 +62,9 @@
                                 <h4>${requestScope.erreurDelete}</h4>
                             </div>
                         </c:if> 
-                        <table class="table table-bordered">
+                        <table id="patientTable" class="mt-2 table">
 
-                            <thead class="thead-dark">
+                            <thead class="thead-dark mt-2">
                                 <tr>
                                     <th>Id</th>
                                     <th>Nom</th>
@@ -65,26 +76,29 @@
                                     <th>Clinique ID</th>
                                     <th>Medecin ID</th>
                                     <th>User ID</th>
-                                    <th colspan="2">Actions</th>
+                                    <th>Modifier</th>
+                                    <th>Delete</th>
                                 </tr>
                             </thead>
-                            <c:forEach items="${listePatient}" var="patient">
-                                <tr>
-                                    <td>${patient.id}</td>
-                                    <td>${patient.nom}</td>
-                                    <td>${patient.prenom}</td>
-                                    <td>${patient.nam}</td>
-                                    <td>${patient.nbSequentiel}</td>
-                                    <td>${patient.dateNaissance}</td>
-                                    <td>${patient.sexe}</td>
-                                    <td>${patient.id_clinique}</td>
-                                    <td>${patient.id_medecin}</td>
-                                    <td>${patient.id_user}</td>
-                                    <td><a data-toggle="modal" data-target="#exampleModal" href="<c:url value='?modifId=${patient.id}'/>"/>Modification</a>
-                                    </td>
-                                    <td><a href="<c:url value='?deletedId=${patient.id}'/>"/>Delete</td>
-                                </tr>
-                            </c:forEach>
+                            <tbody>
+                                <c:forEach items="${listePatient}" var="patient">
+                                    <tr>
+                                        <td>${patient.id}</td>
+                                        <td>${patient.nom}</td>
+                                        <td>${patient.prenom}</td>
+                                        <td>${patient.nam}</td>
+                                        <td>${patient.nbSequentiel}</td>
+                                        <td>${patient.dateNaissance}</td>
+                                        <td>${patient.sexe}</td>
+                                        <td>${patient.id_clinique}</td>
+                                        <td>${patient.id_medecin}</td>
+                                        <td>${patient.id_user}</td>
+                                        <td><a data-toggle="modal" data-target="#exampleModal" href="<c:url value='?modifId=${patient.id}'/>"/>Modification</a>
+                                        </td>
+                                        <td><a href="<c:url value='?deletedId=${patient.id}'/>"/>Delete</td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
                         </table>
                         <c:if test="${not empty requestScope.erreur}">
                             <div class="alert alert-danger text-center" role="alert">
@@ -96,7 +110,7 @@
                     <div class="tab-pane fade" id="Medecin" role="tabpanel" aria-labelledby="Medecin-tab">...</div>
                     <!-- TAB CLINIQUE -->
                     <div class="tab-pane fade" id="Clinique" role="tabpanel" aria-labelledby="Clinique-tab">
-                        <table class="table table-bordered">
+                        <table id="cliniqueTable" class="table">
                             <thead class="thead-dark">
                                 <tr>
                                     <th>Id</th>
@@ -105,23 +119,26 @@
                                     <th>Numero de Telephone</th>
                                     <th>Services</th>
                                     <th>User ID</th>
-                                    <th colspan="2">Actions</th>
+                                    <th>Modifier</th>
+                                    <th>Delete</th>
                                 </tr>
                             </thead>
-                            <c:forEach items="${listeClinique}" var="clinique">
-                                <tr>
-                                    <td>${clinique.id}</td>
-                                    <td>${clinique.nom}</td>
-                                    <td>${clinique.adresse}</td>
-                                    <td>${clinique.tel}</td>
-                                    <td>${clinique.services}</td>
-                                    <td>${clinique.id_user}</td>
-                                    <td>
-                                        <a data-toggle="modal" data-target="#exampleModal" href="<c:url value='?modifId=${clinique.id}'/>"/>Modification</a>
-                                    </td>
-                                    <td><a href="<c:url value='?deletedId=${clinique.id}'/>"/>Delete</td>
-                                </tr>
-                            </c:forEach>
+                            <tbody>
+                                <c:forEach items="${listeClinique}" var="clinique">
+                                    <tr>
+                                        <td>${clinique.id}</td>
+                                        <td>${clinique.nom}</td>
+                                        <td>${clinique.adresse}</td>
+                                        <td>${clinique.tel}</td>
+                                        <td>${clinique.services}</td>
+                                        <td>${clinique.id_user}</td>
+                                        <td>
+                                            <a data-toggle="modal" data-target="#exampleModal" href="<c:url value='?modifId=${clinique.id}'/>"/>Modification</a>
+                                        </td>
+                                        <td><a href="<c:url value='?deletedId=${clinique.id}'/>"/>Delete</td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
                         </table>
                         <c:if test="${not empty requestScope.erreur}">
                             <div class="alert alert-danger text-center" role="alert">
@@ -131,7 +148,7 @@
                     </div>
                     <!-- TAB USER -->
                     <div class="tab-pane fade" id="User" role="tabpanel" aria-labelledby="User-tab">
-                        <table class="table table-bordered">
+                        <table id="userTable" class="table">
                             <thead class="thead-dark">
                                 <tr>
                                     <th>Id</th>
@@ -139,22 +156,25 @@
                                     <th>Password</th>
                                     <th>Email</th>
                                     <th>Role</th>
-                                    <th colspan="2">Actions</th>
+                                    <th>Modifier</th>
+                                    <th>Delete</th>
                                 </tr>
                             </thead>
-                            <c:forEach items="${listeUtilisateur}" var="user">
-                                <tr>
-                                    <td>${user.id}</td>
-                                    <td>${user.username}</td>
-                                    <td>${user.password}</td>
-                                    <td>${user.email}</td>
-                                    <td>${user.role}</td>
-                                    <td>
-                                        <a data-toggle="modal" data-target="#exampleModal" href="<c:url value='?modifId=${clinique.id}'/>"/>Modification</a>
-                                    </td>
-                                    <td><a href="<c:url value='?deletedId=${user.id}'/>"/>Delete</td>
-                                </tr>
-                            </c:forEach>
+                            <tbody>
+                                <c:forEach items="${listeUtilisateur}" var="user">
+                                    <tr>
+                                        <td>${user.id}</td>
+                                        <td>${user.username}</td>
+                                        <td>${user.password}</td>
+                                        <td>${user.email}</td>
+                                        <td>${user.role}</td>
+                                        <td>
+                                            <a data-toggle="modal" data-target="#exampleModal" href="<c:url value='?modifId=${clinique.id}'/>"/>Modification</a>
+                                        </td>
+                                        <td><a href="<c:url value='?deletedId=${user.id}'/>"/>Delete</td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
                         </table>
                         <c:if test="${not empty requestScope.erreur}">
                             <div class="alert alert-danger text-center" role="alert">

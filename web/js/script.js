@@ -9,8 +9,8 @@ console.log(dropdownButton);
 
 if (dropdownButton) {
     console.log("asd");
-  dropdownButton.addEventListener("click", () => {
-    dropdownMenu.classList.toggle("show");
-  });
+    dropdownButton.addEventListener("click", () => {
+        dropdownMenu.classList.toggle("show");
+    });
 }
 
