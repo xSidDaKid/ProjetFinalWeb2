@@ -51,32 +51,38 @@ public class PriseDeRendezVous extends HttpServlet {
         //LE MEDECIN DU PATIENT
         int idMedecin = patient.getId_medecin();
         Medecin medecin = MedecinAction.findById(idMedecin);
+        request.setAttribute("medecinPatient", medecin);
 
         //LES DISPONIBILITES DU MEDECIN DU PATIENT
         List<RendezVous> rV = RendezVousAction.findByAvaiableDate(idMedecin);
-
-        //LE RENDEZ-VOUS CHOISI PAR LE PATIENT
-        RendezVous rVChoisi = RendezVousAction.findByDate(date);
-        int idRvChoisi = rVChoisi.getId();
-        RendezVous nouveau = new RendezVous(idRvChoisi, date, idMedecin, idPatient, raison, description);
-        boolean rvCreer = RendezVousAction.update(nouveau);
-
-        if (rvCreer) {
-            request.setAttribute("rvCreer", "Votre rendez-vous a été ajoutée avec succès!");
-        }
-
-        //LISTE DES RENDEZ-VOUS DU PATIENT
-        List<RendezVous> mesRV = RendezVousAction.findByPatientId(idPatient);
-        if (mesRV.isEmpty()) {
-            request.setAttribute("erreurRV", "Aucun rendez-vous a été pris");
-        } else {
-            request.setAttribute("mesRV", mesRV);
-        }
-
-        request.setAttribute("medecinPatient", medecin);
         request.setAttribute("listeRendezVous", rV);
 
-        request.getRequestDispatcher("WEB-INF/jsp/priseDeRendezVous.jsp").include(request, response);
+        //LE RENDEZ-VOUS CHOISI PAR LE PATIENT
+        try {
+
+            RendezVous rVChoisi = RendezVousAction.findByDate(date);
+            int idRvChoisi = rVChoisi.getId();
+            RendezVous nouveau = new RendezVous(idRvChoisi, date, idMedecin, idPatient, raison, description);
+            boolean rvCreer = RendezVousAction.update(nouveau);
+
+            if (rvCreer) {
+                request.setAttribute("rvCreer", "Votre rendez-vous a été ajoutée avec succès!");
+                
+                //LISTE DES RENDEZ-VOUS DU PATIENT
+                List<RendezVous> mesRV = RendezVousAction.findByPatientId(idPatient);
+                if (mesRV.isEmpty()) {
+                    request.setAttribute("erreurRV", "Aucun rendez-vous a été pris");
+                } else {
+                    request.setAttribute("mesRV", mesRV);
+                }
+                request.getRequestDispatcher("WEB-INF/jsp/priseDeRendezVous.jsp").include(request, response);
+
+            }
+
+        } catch (NullPointerException e) {
+            request.getRequestDispatcher("WEB-INF/jsp/priseDeRendezVous.jsp").include(request, response);
+
+        }
 
     }
 
