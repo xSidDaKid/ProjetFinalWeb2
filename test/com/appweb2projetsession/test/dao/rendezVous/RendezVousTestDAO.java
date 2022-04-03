@@ -22,7 +22,7 @@ public class RendezVousTestDAO {
         boolean verif = dao.create(rV);
         System.out.println(verif);
         
-        List<RendezVous>listeRendezVous = dao.findByAvaiableDate();
+        List<RendezVous>listeRendezVous = dao.findByAvaiableDate(1);
         for (RendezVous rv : listeRendezVous) {
             System.out.println(rv);
         }

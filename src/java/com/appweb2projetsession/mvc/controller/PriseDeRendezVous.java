@@ -46,22 +46,31 @@ public class PriseDeRendezVous extends HttpServlet {
 
         //LE PATIENT QUI VEUT UN RENDEZ-VOUS :)
         Patient patient = (Patient) session.getAttribute("Patient");
+        int idPatient = patient.getId();
 
         //LE MEDECIN DU PATIENT
         int idMedecin = patient.getId_medecin();
         Medecin medecin = MedecinAction.findById(idMedecin);
 
         //LES DISPONIBILITES DU MEDECIN DU PATIENT
-        List<RendezVous> rV = RendezVousAction.findByMedecinId(idMedecin);
+        List<RendezVous> rV = RendezVousAction.findByAvaiableDate(idMedecin);
 
         //LE RENDEZ-VOUS CHOISI PAR LE PATIENT
         RendezVous rVChoisi = RendezVousAction.findByDate(date);
         int idRvChoisi = rVChoisi.getId();
-        RendezVous nouveau = new RendezVous(idRvChoisi, date, idMedecin, patient.getId(), raison, description);
+        RendezVous nouveau = new RendezVous(idRvChoisi, date, idMedecin, idPatient, raison, description);
         boolean rvCreer = RendezVousAction.update(nouveau);
 
         if (rvCreer) {
             request.setAttribute("rvCreer", "Votre rendez-vous a été ajoutée avec succès!");
+        }
+
+        //LISTE DES RENDEZ-VOUS DU PATIENT
+        List<RendezVous> mesRV = RendezVousAction.findByPatientId(idPatient);
+        if (mesRV.isEmpty()) {
+            request.setAttribute("erreurRV", "Aucun rendez-vous a été pris");
+        } else {
+            request.setAttribute("mesRV", mesRV);
         }
 
         request.setAttribute("medecinPatient", medecin);

@@ -23,7 +23,7 @@
                         <button class="nav-link active" id="Definir-tab" data-bs-toggle="tab" data-bs-target="#Definir" type="button" >Prendre un rendez-vous</button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="Voir-tab" data-bs-toggle="tab" data-bs-target="#Voir" type="button" >Voir mes disponibilités</button>
+                        <button class="nav-link" id="Voir-tab" data-bs-toggle="tab" data-bs-target="#Voir" type="button" >Voir mes rendez-vous</button>
                     </li>
                 </ul>
 
@@ -66,8 +66,7 @@
                     </div>
                     <!-- TAB Voir -->
                     <div class="tab-pane fade" id="Voir" role="tabpanel" aria-labelledby="Voir-tab">
-                        <table class="table table-bordered">
-
+                        <table id="rVPatient" class="table">
                             <thead class="thead-dark">
                                 <tr>
                                     <th>Id</th>
@@ -76,22 +75,25 @@
                                     <th>Patient ID</th>
                                     <th>Raison</th>
                                     <th>Description</th>
-                                    <th colspan="2">Actions</th>
+                                    <th>Modifier</th>
+                                    <th>Supprimer</th>
                                 </tr>
                             </thead>
-                            <c:forEach items="${listeRendezVousMedecin}" var="rV">
-                                <tr>
-                                    <td>${rV.id}</td>
-                                    <td>${rV.date}</td>
-                                    <td>${rV.medecin_id}</td>
-                                    <td>${rV.patient_id}</td>
-                                    <td>${rV.raison}</td>
-                                    <td>${rV.description}</td>
-                                    <td><a data-toggle="modal" data-target="#exampleModal" href="<c:url value='?modifId=${patient.id}'/>"/>Modification</a>
-                                    </td>
-                                    <td><a href="<c:url value='?deletedId=${patient.id}'/>"/>Delete</td>
-                                </tr>
-                            </c:forEach>
+                            <tbody>
+                                <c:forEach items="${mesRV}" var="rV">
+                                    <tr>
+                                        <td>${rV.id}</td>
+                                        <td>${rV.date}</td>
+                                        <td>${rV.medecin_id}</td>
+                                        <td>${rV.patient_id}</td>
+                                        <td>${rV.raison}</td>
+                                        <td>${rV.description}</td>
+                                        <td><a data-toggle="modal" data-target="#exampleModal" href="<c:url value='?modifId=${patient.id}'/>"/>Modification</a>
+                                        </td>
+                                        <td><a href="<c:url value='?deletedId=${patient.id}'/>"/>Delete</td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
                         </table>
                         <c:if test="${not empty requestScope.erreurDispo}">
                             <div class="alert alert-danger text-center" role="alert">
@@ -103,5 +105,10 @@
             </div>
         </div>
         <jsp:include page="footer.jsp"/>
+        <script>
+            $(document).ready(function () {
+                $('#rVPatient').DataTable();
+            });
+        </script>
     </body>
 </html>

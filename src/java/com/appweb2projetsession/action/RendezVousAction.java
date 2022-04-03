@@ -34,15 +34,21 @@ public class RendezVousAction {
         return rV;
     }
 
-    public static List<RendezVous> findByAvaiableDate() {
+    public static List<RendezVous> findByAvaiableDate(int id) {
         RendezVousImpDAO dao = new RendezVousImpDAO();
-        List<RendezVous> listeRendezVous = dao.findByAvaiableDate();
+        List<RendezVous> listeRendezVous = dao.findByAvaiableDate(id);
         return listeRendezVous;
     }
 
     public static List<RendezVous> findByMedecinId(int id) {
         RendezVousImpDAO dao = new RendezVousImpDAO();
         List<RendezVous> listeRendezVous = dao.findByIdMedecin(id);
+        return listeRendezVous;
+    }
+
+    public static List<RendezVous> findByPatientId(int id) {
+        RendezVousImpDAO dao = new RendezVousImpDAO();
+        List<RendezVous> listeRendezVous = dao.findByPatientID(id);
         return listeRendezVous;
     }
 

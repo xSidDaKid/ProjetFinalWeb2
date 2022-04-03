@@ -23,7 +23,9 @@ public interface RendezVousDAO {
 
     RendezVous findByDate(String date);
 
-    List<RendezVous> findByAvaiableDate();
+    List<RendezVous> findByAvaiableDate(int idMedecin);
+    
+    List<RendezVous> findByPatientID(int idPatient);
 
     boolean create(RendezVous rV);
 

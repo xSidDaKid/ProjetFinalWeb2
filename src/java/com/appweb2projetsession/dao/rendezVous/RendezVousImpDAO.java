@@ -26,10 +26,10 @@ public class RendezVousImpDAO implements RendezVousDAO {
     private static final String SQL_SELECT = "SELECT * FROM rendezvous";
     private static final String SQL_SELECT_ID = "SELECT * FROM rendezvous WHERE id=?";
     private static final String SQL_SELECT_DATE = "SELECT * FROM rendezvous WHERE date=?";
-    private static final String SQL_SELECT_PATIENT = "SELECT * FROM rendezvous WHERE patient_id IS NULL";
+    private static final String SQL_SELECT_PATIENT = "SELECT * FROM rendezvous WHERE patient_id IS NULL AND medecin_id=?";
     private static final String SQL_SELECT_MEDECIN = "SELECT * FROM rendezvous WHERE medecin_id=?";
+    private static final String SQL_SELECT_PATIENTRV = "SELECT * FROM rendezvous WHERE patient_id=?";
     private static final String SQL_INSERT = "INSERT INTO rendezvous (date, medecin_id) value (?, ?)";
-    //Insert into rendezvous (id,date, medecin_id) value (1,"2020-04-04 10:00",1)
     private static final String SQL_UPDATE = "UPDATE rendezvous SET date = ?, medecin_id = ?, patient_id = ?, raison = ?, description = ?  WHERE id = ?";
     private static final String SQL_DELETE = "DELETE FROM rendezvous WHERE id = ?";
 
@@ -114,11 +114,12 @@ public class RendezVousImpDAO implements RendezVousDAO {
     }
 
     @Override
-    public List<RendezVous> findByAvaiableDate() {
+    public List<RendezVous> findByAvaiableDate(int idMedecin) {
         List<RendezVous> listeRendezVous = null;
 
         try {
             PreparedStatement ps = ConnexionBD.getConnection().prepareStatement(SQL_SELECT_PATIENT);
+            ps.setInt(1, idMedecin);
             ResultSet result = ps.executeQuery();
             listeRendezVous = new ArrayList<>();
 
@@ -148,6 +149,35 @@ public class RendezVousImpDAO implements RendezVousDAO {
         try {
             PreparedStatement ps = ConnexionBD.getConnection().prepareStatement(SQL_SELECT_MEDECIN);
             ps.setInt(1, idMedecin);
+            ResultSet result = ps.executeQuery();
+            listeRendezVous = new ArrayList<>();
+
+            while (result.next()) {
+                RendezVous rV = new RendezVous();
+                rV = new RendezVous();
+                rV.setId(result.getInt("id"));
+                rV.setDate(result.getString("date"));
+                rV.setMedecin_id(result.getInt("medecin_id"));
+                rV.setPatient_id(result.getInt("patient_id"));
+                rV.setRaison(result.getString("raison"));
+                rV.setDescription(result.getString("description"));
+                listeRendezVous.add(rV);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(RendezVousImpDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ConnexionBD.closeConnection();
+        return listeRendezVous;
+    }
+
+    @Override
+    public List<RendezVous> findByPatientID(int idPatient) {
+        List<RendezVous> listeRendezVous = null;
+
+        try {
+            PreparedStatement ps = ConnexionBD.getConnection().prepareStatement(SQL_SELECT_PATIENTRV);
+            ps.setInt(1, idPatient);
             ResultSet result = ps.executeQuery();
             listeRendezVous = new ArrayList<>();
 
