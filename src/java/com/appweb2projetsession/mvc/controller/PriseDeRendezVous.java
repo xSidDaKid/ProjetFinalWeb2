@@ -5,12 +5,19 @@
  */
 package com.appweb2projetsession.mvc.controller;
 
+import com.appweb2projetsession.action.MedecinAction;
+import com.appweb2projetsession.action.RendezVousAction;
+import com.appweb2projetsession.mvc.model.Patient;
+import com.appweb2projetsession.mvc.model.Medecin;
+import com.appweb2projetsession.mvc.model.RendezVous;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -30,6 +37,36 @@ public class PriseDeRendezVous extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        HttpSession session = request.getSession(false);
+
+        //INFO FORMULAIRE
+        String raison = request.getParameter("raison");
+        String description = request.getParameter("description");
+        String date = request.getParameter("date");
+
+        //LE PATIENT QUI VEUT UN RENDEZ-VOUS :)
+        Patient patient = (Patient) session.getAttribute("Patient");
+
+        //LE MEDECIN DU PATIENT
+        int idMedecin = patient.getId_medecin();
+        Medecin medecin = MedecinAction.findById(idMedecin);
+
+        //LES DISPONIBILITES DU MEDECIN DU PATIENT
+        List<RendezVous> rV = RendezVousAction.findByMedecinId(idMedecin);
+
+        //LE RENDEZ-VOUS CHOISI PAR LE PATIENT
+        RendezVous rVChoisi = RendezVousAction.findByDate(date);
+        int idRvChoisi = rVChoisi.getId();
+        RendezVous nouveau = new RendezVous(idRvChoisi, date, idMedecin, patient.getId(), raison, description);
+        boolean rvCreer = RendezVousAction.update(nouveau);
+
+        if (rvCreer) {
+            request.setAttribute("rvCreer", "Votre rendez-vous a été ajoutée avec succès!");
+        }
+
+        request.setAttribute("medecinPatient", medecin);
+        request.setAttribute("listeRendezVous", rV);
+
         request.getRequestDispatcher("WEB-INF/jsp/priseDeRendezVous.jsp").include(request, response);
 
     }

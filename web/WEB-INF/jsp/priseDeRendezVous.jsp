@@ -4,6 +4,7 @@
     Author     : Shajaan
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,94 +14,93 @@
     </head>
     <body>
         <jsp:include page="menu.jsp"/>
-        <div class="content-body m-5"><!-- Book Appointment -->
-            <section id="book-appointment">
-                <div class="card">
-                    <div class="card-header">
-                        <h2 class="card-title">Prendre un rendez-vous</h2>
-                    </div>
-                    <div class="card-body">
-                        <form>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="firstname">First Name: <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" placeholder="First Name" required="" id="firstname">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="lastname">Last Name: <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" placeholder="Last Name" id="lastname" required="">
-                                    </div>
-                                </div>
+        <div class="container mt-3 p-2">
+            <div class="card p-3">
+
+                <!-- LISTE DES TABS -->
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="Definir-tab" data-bs-toggle="tab" data-bs-target="#Definir" type="button" >Prendre un rendez-vous</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="Voir-tab" data-bs-toggle="tab" data-bs-target="#Voir" type="button" >Voir mes disponibilités</button>
+                    </li>
+                </ul>
+
+                <div class="tab-content" id="myTabContent">
+                    <!-- TAB Definir -->
+                    <div class="tab-pane fade show active" id="Definir" role="tabpanel" aria-labelledby="Definir-tab">
+                        <c:if test="${not empty requestScope.rvCreer}">
+                            <div class="mt-3 alert alert-success text-center" role="alert">
+                                <h4>${requestScope.rvCreer}</h4>
                             </div>
-                            <div class="row">
-                                <div class="col-lg-3 col-md-6">
-                                    <div class="form-group">
-                                        <label for="dob">Date Of Birth: <span class="text-danger">*</span></label>
-                                        <input type="date" class="form-control" id="dob" name="dob" required="">
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-6">
-                                    <div class="form-group">
-                                        <label for="gender">Gender:</label>
-                                        <select name="gender" id="gender" class="form-control">
-                                            <option value="gender">Gender</option>
-                                            <option value="male">Male</option>
-                                            <option value="female">Female</option>
-                                            <option value="notsay">Rather not Say</option>
-                                        </select></div>
-                                </div>
-                                <div class="col-lg-3 col-md-6">
-                                    <div class="form-group">
-                                        <label for="service">Service <span class="text-danger">*</span></label>
-                                        <select name="Service" class="form-control" id="service" required="">
-                                            <option value="">Service</option>
-                                            <option value="dental">Dental Checkup</option>
-                                            <option value="body">Full Body Checkup</option>
-                                            <option value="heart">Heart Checkup</option>
-                                            <option value="ent">ENT Checkup</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-6">
-                                    <div class="form-group">
-                                        <label for="date">Appointment Date <span class="text-danger">*</span></label>
-                                        <input type="date" class="form-control" id="date" name="date" required="">
-                                        <input type="time" class="form-control" id="date" name="date" required="">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="email">Email: <span class="text-danger">*</span></label>
-                                        <input type="email" class="form-control" name="email" id="email" placeholder="Enter Email" required="">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="phone">Contact Number:</label>
-                                        <input type="number" class="form-control" id="phone" name="phone" placeholder="Enter Contact Number" required="">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="symptoms">Tell Us About Your Problems:</label>
-                                        <textarea cols="3" rows="3" id="symptoms" class="form-control" placeholder="Tell us about problems you are facing"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-footer ml-auto">
-                                <button type="submit" class="btn btn-outline-success mr-1">Submit</button> <button type="submit" class="btn btn-outline-danger">Cancel</button>
-                            </div>
+                        </c:if> 
+                        <form class="p-2" action="priseDeRendezVous" method="GET">
+                            <label  class="p-1">Raison</label>
+                            <select class="form-select" name="raison" required>
+                                <option>Urgence mineure</option>
+                                <option>Consultation prioritaire</option>
+                                <option>Suivi périodique ou préventif</option>
+                                <option>Suivi régulier</option>
+                                <option>Suivi de grossesse</option>
+                                <option>Suivi d’un enfant de 0 à 5 ans</option>
+                                <option>Autre</option>
+                            </select>
+
+                            <br>
+
+                            <label  class="p-1">Description</label>
+                            <textarea cols="3" rows="3" name="description" class="form-control" placeholder="Donnez nous une courte description de votre condition" required></textarea>
+
+                            <br>
+
+                            <label class="mb-1">Voici les disponiblité de ${medecinPatient.nom} ${medecinPatient.prenom}</label>
+                            <select class="form-select" name="date" required>
+                                <c:forEach items="${listeRendezVous}" var="rV">
+                                    <option>${rV.date}</option>
+                                </c:forEach>
+                            </select>
+                            <br>
+                            <button type="submit" class="btn btn-primary">Ajouter</button>
                         </form>
                     </div>
+                    <!-- TAB Voir -->
+                    <div class="tab-pane fade" id="Voir" role="tabpanel" aria-labelledby="Voir-tab">
+                        <table class="table table-bordered">
+
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Date</th>
+                                    <th>Medecin ID</th>
+                                    <th>Patient ID</th>
+                                    <th>Raison</th>
+                                    <th>Description</th>
+                                    <th colspan="2">Actions</th>
+                                </tr>
+                            </thead>
+                            <c:forEach items="${listeRendezVousMedecin}" var="rV">
+                                <tr>
+                                    <td>${rV.id}</td>
+                                    <td>${rV.date}</td>
+                                    <td>${rV.medecin_id}</td>
+                                    <td>${rV.patient_id}</td>
+                                    <td>${rV.raison}</td>
+                                    <td>${rV.description}</td>
+                                    <td><a data-toggle="modal" data-target="#exampleModal" href="<c:url value='?modifId=${patient.id}'/>"/>Modification</a>
+                                    </td>
+                                    <td><a href="<c:url value='?deletedId=${patient.id}'/>"/>Delete</td>
+                                </tr>
+                            </c:forEach>
+                        </table>
+                        <c:if test="${not empty requestScope.erreurDispo}">
+                            <div class="alert alert-danger text-center" role="alert">
+                                <h4>${requestScope.erreurDispo}</h4>
+                            </div>
+                        </c:if> 
+                    </div>
                 </div>
-            </section>
+            </div>
         </div>
         <jsp:include page="footer.jsp"/>
     </body>

@@ -205,7 +205,7 @@ public class RendezVousImpDAO implements RendezVousDAO {
             ps.setInt(3, rV.getPatient_id());
             ps.setString(4, rV.getRaison());
             ps.setString(5, rV.getDescription());
-            ps.setInt(10, rV.getId());
+            ps.setInt(6, rV.getId());
             nbLigne = ps.executeUpdate();
         } catch (SQLException e) {
             Logger.getLogger(RendezVousImpDAO.class.getName()).log(Level.SEVERE, null, e);
