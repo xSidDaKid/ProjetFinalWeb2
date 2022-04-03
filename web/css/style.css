@@ -10,6 +10,7 @@ and open the template in the editor.
 body{
     color: black;
     background-color: #707070;
+    background-image: url("../images/cool-background.png");
 }
 .header__user {
     display: flex;

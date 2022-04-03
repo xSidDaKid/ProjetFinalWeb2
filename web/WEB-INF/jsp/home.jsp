@@ -37,16 +37,18 @@
             </div>
         </div>
         <!-- LOGIN/INSCRIPTION -->
-        <div class="container text-center my-3">
-            <div class="row">
-                <div class="col-6">
-                    <button class="p-3 bg-black"><a class="text-white" href="inscriptionUser">Inscrire</a></button>
-                </div>
-                <div class="col-6">
-                    <button class="p-3 btn-primary"><a class="text-white" href="login">Login</a></button>
+        <c:if test="${empty sessionScope.User}">
+            <div class="container text-center my-3">
+                <div class="row">
+                    <div class="col-6">
+                        <button class="p-3 bg-black"><a class="text-white" href="inscriptionUser">Inscrire</a></button>
+                    </div>
+                    <div class="col-6">
+                        <button class="p-3 btn-primary"><a class="text-white" href="login">Login</a></button>
+                    </div>
                 </div>
             </div>
-        </div>
+        </c:if>
         <!-- NOMBRE DE UTILISATEUR/CLINIQUE/MEDECIN/PATIENT -->
         <div class="row m-1 p-2" style="background-color:#1f4071;">
             <h2 class="text-center text-white p-2">Déjà <span id="user"></span> utilisateurs!</h2> 
@@ -74,39 +76,39 @@
             </div>
         </div>
 
-        <jsp:include page="footer.jsp"/>
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $.ajax({
-                    type: 'GET',
-                    url: 'clinique',
-                    success: function (nbClinique) {
-                        $('#clinique').html(nbClinique);
-                    }
-                });
-                $.ajax({
-                    type: 'GET',
-                    url: 'medecin',
-                    success: function (nbMedecin) {
-                        $('#medecin').html(nbMedecin);
-                    }
-                });
-                $.ajax({
-                    type: 'GET',
-                    url: 'patient',
-                    success: function (nbPatient) {
-                        $('#patient').html(nbPatient);
-                    }
-                });
-                $.ajax({
-                    type: 'GET',
-                    url: 'user',
-                    success: function (nbUser) {
-                        $('#user').html(nbUser);
-                    }
-                });
+    <jsp:include page="footer.jsp"/>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $.ajax({
+                type: 'GET',
+                url: 'clinique',
+                success: function (nbClinique) {
+                    $('#clinique').html(nbClinique);
+                }
             });
+            $.ajax({
+                type: 'GET',
+                url: 'medecin',
+                success: function (nbMedecin) {
+                    $('#medecin').html(nbMedecin);
+                }
+            });
+            $.ajax({
+                type: 'GET',
+                url: 'patient',
+                success: function (nbPatient) {
+                    $('#patient').html(nbPatient);
+                }
+            });
+            $.ajax({
+                type: 'GET',
+                url: 'user',
+                success: function (nbUser) {
+                    $('#user').html(nbUser);
+                }
+            });
+        });
 
-        </script>
-    </body>
+    </script>
+</body>
 </html>
