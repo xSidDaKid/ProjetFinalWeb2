@@ -101,9 +101,8 @@
                         </form>
                     </div>
                     <!-- TAB Voir -->
-                    <div class="tab-pane fade" id="Voir" role="tabpanel" aria-labelledby="Voir-tab">
-                        <table class="table table-bordered">
-
+                    <div class="tab-pane fade m-3" id="Voir" role="tabpanel" aria-labelledby="Voir-tab">
+                        <table id="dispoMedecin" class="table">
                             <thead class="thead-dark">
                                 <tr>
                                     <th>Id</th>
@@ -112,7 +111,8 @@
                                     <th>Patient ID</th>
                                     <th>Raison</th>
                                     <th>Description</th>
-                                    <th colspan="2">Actions</th>
+                                    <th>Modifier</th>
+                                    <th>Supprimer</th>
                                 </tr>
                             </thead>
                             <c:forEach items="${listeRendezVousMedecin}" var="rV">
@@ -137,8 +137,14 @@
                     </div>
                 </div>
             </div>
+            <br><br>
         </div>
         <jsp:include page="footer.jsp"/>
+        <script>
+            $(document).ready(function () {
+                $('#dispoMedecin').DataTable();
+            });
+        </script>
     </body>
 </html>
 
