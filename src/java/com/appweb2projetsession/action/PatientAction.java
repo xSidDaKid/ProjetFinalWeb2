@@ -31,9 +31,9 @@ public class PatientAction {
         Patient patient = dao.findByUserId(id);
         return patient;
     }
-    public static Patient findByIdMedecin(int id) {
+    public static List<Patient> findByIdMedecin(int id) {
         PatientImpDAO dao = new PatientImpDAO();
-        Patient patient = dao.findByMedecinId(id);
+        List<Patient> patient = dao.findByMedecinId(id);
         return patient;
     }
     public static Patient findByNAM(String nam) {

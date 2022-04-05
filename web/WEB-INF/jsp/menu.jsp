@@ -12,29 +12,46 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
+
+            <!-- Pages Common A Tous -->
             <li class="nav-item active">
                 <a class="nav-link" href="home">Home</a>
             </li>
-            <li class="nav-item">
-                <c:if test="${sessionScope.username == 'admin'}">
+
+            <!-- Pages Admin -->
+            <c:if test="${sessionScope.username == 'admin'}">
+                <li class="nav-item">
                     <a class="nav-link" href="admin">Admnistration</a>
-                </c:if>
-                <c:if test="${sessionScope.User.role == 'patient'}">
+                </li>
+            </c:if>
+
+            <!-- Pages Patient -->
+            <c:if test="${sessionScope.User.role == 'patient'}">
+                <li class="nav-item">
                     <a class="nav-link" href="priseDeRendezVous">Prendre un rendez-vous</a>
-                </c:if>
-                <c:if test="${sessionScope.User.role == 'medecin'}">
+                </li>
+            </c:if>
+
+            <!-- Pages Medecin -->
+            <c:if test="${sessionScope.User.role == 'medecin'}">
+                <li class="nav-item">
                     <a class="nav-link" href="disponibilite">Disponibilité</a>
-                </c:if>
-            </li>
-            <!--            <li class="nav-item">
-                            <a class="nav-link" href="#">Pricing</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled" href="#">Disabled</a>
-                        </li>-->
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="espacePatient">Espace Médecin-Patient</a>
+                </li>
+            </c:if>
+
+            <!-- Pages Clinique -->
+            <c:if test="${sessionScope.User.role == 'clinique'}">
+                <li class="nav-item">
+                    <a class="nav-link" href=""></a>
+                </li>
+            </c:if>
         </ul>
     </div>
 
+    <!-- INSCRIPTION LOGIN  -->
     <div class="dropdown mx-5">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
             <c:choose>
@@ -52,16 +69,14 @@
                 <c:when test="${not empty sessionScope.User || not empty sessionScope.username}">
                     <li><a class="dropdown-item" href="profile">Profile</a></li>
                     <li><a class="dropdown-item" href="logout">Logout</a></li>
-                </c:when>
-                <c:otherwise>
+                    </c:when>
+                    <c:otherwise>
                     <li><a class="dropdown-item" href="login">Login</a></li>
                     <li><a class="dropdown-item" href="inscriptionUser">Inscrire</a></li>
-                </c:otherwise>
-            </c:choose>
+                    </c:otherwise>
+                </c:choose>
         </ul>
     </div>
 
-    <div class="mx-4">
-
-    </div>
+    <div class="mx-4"></div>
 </nav>

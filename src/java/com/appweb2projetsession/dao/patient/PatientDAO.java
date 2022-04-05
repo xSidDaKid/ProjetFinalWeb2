@@ -20,7 +20,7 @@ public interface PatientDAO {
 
     Patient findByUserId(int id);
 
-    Patient findByMedecinId(int id);
+    List<Patient> findByMedecinId(int id);
 
     Patient findByNAM(String nam);
 

@@ -57,11 +57,15 @@
     </servlet>
     <servlet>
         <servlet-name>Patient</servlet-name>
-        <servlet-class>com.appweb2projetsession.mvc.controller.Patient</servlet-class>
+        <servlet-class>com.appweb2projetsession.mvc.controller.PatientNombre</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Medecin</servlet-name>
         <servlet-class>com.appweb2projetsession.mvc.controller.Medecin</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EspacePatient</servlet-name>
+        <servlet-class>com.appweb2projetsession.mvc.controller.EspacePatient</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>InscriptionMedecin</servlet-name>
@@ -118,6 +122,10 @@
     <servlet-mapping>
         <servlet-name>Medecin</servlet-name>
         <url-pattern>/medecin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EspacePatient</servlet-name>
+        <url-pattern>/espacePatient</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

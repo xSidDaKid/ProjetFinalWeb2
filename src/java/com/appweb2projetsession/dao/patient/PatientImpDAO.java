@@ -232,16 +232,18 @@ public class PatientImpDAO implements PatientDAO {
     }
 
     @Override
-    public Patient findByMedecinId(int id) {
-        Patient p1 = null;
+    public List<Patient> findByMedecinId(int id) {
+        List<Patient> listePatient = null;
 
         try {
             PreparedStatement ps = ConnexionBD.getConnection().prepareStatement(SQL_SELECT_PAR_MEDECINID);
             ps.setInt(1, id);
             ResultSet result = ps.executeQuery();
 
+            listePatient = new ArrayList<>();
+
             while (result.next()) {
-                p1 = new Patient();
+                Patient p1 = new Patient();
                 p1.setId(result.getInt("id"));
                 p1.setNom(result.getString("nom"));
                 p1.setPrenom(result.getString("prenom"));
@@ -252,13 +254,14 @@ public class PatientImpDAO implements PatientDAO {
                 p1.setId_clinique(result.getInt("clinique_id"));
                 p1.setId_medecin(result.getInt("medecin_id"));
                 p1.setId_user(result.getInt("utilisateur_id"));
+                listePatient.add(p1);
             }
 
         } catch (SQLException ex) {
             Logger.getLogger(PatientImpDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         ConnexionBD.closeConnection();
-        return p1;
+        return listePatient;
     }
 
     @Override
