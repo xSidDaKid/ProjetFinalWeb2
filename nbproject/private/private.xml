@@ -3,17 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/X:/Desktop/Applications%20Web%202/ProjetFinSession/appweb2projetsession/appweb2projetsession/src/java/com/appweb2projetsession/dao/rendezVous/RendezVousImpDAO.java</file>
-            <file>file:/X:/Desktop/Applications%20Web%202/ProjetFinSession/appweb2projetsession/appweb2projetsession/web/WEB-INF/jsp/priseDeRendezVous.jsp</file>
-            <file>file:/X:/Desktop/Applications%20Web%202/ProjetFinSession/appweb2projetsession/appweb2projetsession/web/WEB-INF/jsp/profile.jsp</file>
+            <file>file:/X:/Desktop/Applications%20Web%202/ProjetFinSession/appweb2projetsession/appweb2projetsession/web/WEB-INF/jsp/footer.jsp</file>
+            <file>file:/X:/Desktop/Applications%20Web%202/ProjetFinSession/appweb2projetsession/appweb2projetsession/src/java/com/appweb2projetsession/mvc/controller/HomeServlet.java</file>
             <file>file:/X:/Desktop/Applications%20Web%202/ProjetFinSession/appweb2projetsession/appweb2projetsession/web/WEB-INF/jsp/disponibilite.jsp</file>
-            <file>file:/X:/Desktop/Applications%20Web%202/ProjetFinSession/appweb2projetsession/appweb2projetsession/src/java/com/appweb2projetsession/mvc/controller/Profile.java</file>
-            <file>file:/X:/Desktop/Applications%20Web%202/ProjetFinSession/appweb2projetsession/appweb2projetsession/test/com/appweb2projetsession/test/dao/rendezVous/RendezVousTestDAO.java</file>
-            <file>file:/X:/Desktop/Applications%20Web%202/ProjetFinSession/appweb2projetsession/appweb2projetsession/src/java/com/appweb2projetsession/action/MedecinAction.java</file>
             <file>file:/X:/Desktop/Applications%20Web%202/ProjetFinSession/appweb2projetsession/appweb2projetsession/src/java/com/appweb2projetsession/mvc/controller/Disponibilite.java</file>
-            <file>file:/X:/Desktop/Applications%20Web%202/ProjetFinSession/appweb2projetsession/appweb2projetsession/src/java/com/appweb2projetsession/action/RendezVousAction.java</file>
-            <file>file:/X:/Desktop/Applications%20Web%202/ProjetFinSession/appweb2projetsession/appweb2projetsession/src/java/com/appweb2projetsession/mvc/controller/PriseDeRendezVous.java</file>
-            <file>file:/X:/Desktop/Applications%20Web%202/ProjetFinSession/appweb2projetsession/appweb2projetsession/web/WEB-INF/jsp/admin.jsp</file>
         </group>
     </open-files>
 </project-private>

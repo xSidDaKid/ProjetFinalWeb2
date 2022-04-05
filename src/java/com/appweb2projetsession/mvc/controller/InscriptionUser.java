@@ -43,11 +43,12 @@ public class InscriptionUser extends HttpServlet {
         //INFO FORMULAIRE
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        String password2 = request.getParameter("password2");
         String email = request.getParameter("email");
         String role = request.getParameter("role");
-        
+
         boolean verif = false;
-        
+
         //LISTE DES CLINIQUES
         List<Clinique> listeClinique = CliniqueAction.afficherTousClinique();
         request.setAttribute("listeClinique", listeClinique);
@@ -61,7 +62,11 @@ public class InscriptionUser extends HttpServlet {
                 request.setAttribute("existe", "Un utilisateur avec ce email existe deja.");
             }
             if (username != null && password != null && email != null && role != null) {
-                verif = UtilisateurAction.create(new Utilisateur(username, password, email, role));
+                if (!(password.equals(password2))) {
+                    request.setAttribute("motDePasse", "Les deux mots de passe ne sont pas identiques!");
+                } else {
+                    verif = UtilisateurAction.create(new Utilisateur(username, password, email, role));
+                }
             }
             Utilisateur nouveau = UtilisateurAction.findByEmail(email);
             if (verif) {
