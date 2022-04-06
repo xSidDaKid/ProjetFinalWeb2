@@ -30,6 +30,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="priseDeRendezVous">Prendre un rendez-vous</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="envoieInfo">Envoyer des informations à votre médecin</a>
+                </li>
             </c:if>
 
             <!-- Pages Medecin -->

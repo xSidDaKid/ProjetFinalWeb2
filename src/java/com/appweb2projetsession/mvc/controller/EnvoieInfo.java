@@ -5,23 +5,31 @@
  */
 package com.appweb2projetsession.mvc.controller;
 
-import com.appweb2projetsession.action.PatientAction;
-import com.appweb2projetsession.mvc.model.Medecin;
+import com.appweb2projetsession.action.ProfilAction;
 import com.appweb2projetsession.mvc.model.Patient;
+import com.appweb2projetsession.mvc.model.Profil;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 /**
  *
  * @author Shajaan
  */
-public class EspacePatient extends HttpServlet {
+@MultipartConfig(maxFileSize = 16177215)
+public class EnvoieInfo extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,44 +44,41 @@ public class EspacePatient extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        boolean verif = false;
-        request.setAttribute("verif", verif);
+        //INFO FORMULAIRE
+        String info = request.getParameter("info");
+        String fichier = request.getParameter("fichier");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
+        LocalDateTime now = LocalDateTime.now();
+        String date = dtf.format(now);
 
-        String idPatient = request.getParameter("idPatient");
-
+        //SESSION
         HttpSession session = request.getSession(true);
-        Medecin medecin = (Medecin) session.getAttribute("Medecin");
+        Patient patient = (Patient) session.getAttribute("Patient");
+        int id_Patient = patient.getId();
+        int id_Medecin = patient.getId_medecin();
 
-        List<com.appweb2projetsession.mvc.model.Patient> listePatient = PatientAction.findByIdMedecin(medecin.getId());
-        request.setAttribute("listePatient", listePatient);
+        //CREER UN INPUTSTREAM DU FICHIER ENVOYER
+        InputStream inputStream = null;
+        String nomFichier = "";
+        try {
 
-        if (idPatient != null) {
-            verif = true;
-            request.setAttribute("verif", verif);
-
-            Patient infoPatient = PatientAction.findById(Integer.parseInt(idPatient));
-            request.setAttribute("infoPatient", infoPatient);
-
-        }
-        
-        /*
-        //LIRE LE FICHIER ENVOYER
-        List<Profil> lst = ProfilAction.afficherTous();
-        File file = new File(nomFichier);
-        FileOutputStream output = new FileOutputStream(file);
-        System.out.println("Writing to file " + file.getAbsolutePath());
-        byte[] buffer = new byte[1024];
-        
-        for (Profil profil : lst) {
-            while (profil.getContenuFichier().read(buffer) > 0) {
-                output.write(buffer);
+            Part filePart = request.getPart("fichier");
+            if (filePart != null) {
+                nomFichier = filePart.getSubmittedFileName();
+                inputStream = filePart.getInputStream();
             }
+        } catch (Exception e) {
+            request.getRequestDispatcher("WEB-INF/jsp/envoieInfo.jsp").forward(request, response);
         }
-        Runtime.getRuntime().exec("explorer.exe /select," + "fichiers\\"+file.getAbsolutePath());
+        
+        //CREER PROFIL
+        if (info != null) {
+            Profil profil = new Profil(nomFichier, inputStream, info, date, id_Patient, id_Medecin);
+            boolean verif = ProfilAction.create(profil);
+        }
 
-        */
+        request.getRequestDispatcher("WEB-INF/jsp/envoieInfo.jsp").forward(request, response);
 
-        request.getRequestDispatcher("WEB-INF/jsp/espacePatient.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

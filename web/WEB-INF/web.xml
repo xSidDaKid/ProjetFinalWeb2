@@ -67,6 +67,10 @@
         <servlet-name>EspacePatient</servlet-name>
         <servlet-class>com.appweb2projetsession.mvc.controller.EspacePatient</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EnvoieInfo</servlet-name>
+        <servlet-class>com.appweb2projetsession.mvc.controller.EnvoieInfo</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>InscriptionMedecin</servlet-name>
         <url-pattern>/inscriptionMedecin</url-pattern>
@@ -126,6 +130,10 @@
     <servlet-mapping>
         <servlet-name>EspacePatient</servlet-name>
         <url-pattern>/espacePatient</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EnvoieInfo</servlet-name>
+        <url-pattern>/envoieInfo</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
