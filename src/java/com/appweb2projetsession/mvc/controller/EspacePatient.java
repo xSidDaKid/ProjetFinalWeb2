@@ -6,8 +6,13 @@
 package com.appweb2projetsession.mvc.controller;
 
 import com.appweb2projetsession.action.PatientAction;
+import com.appweb2projetsession.action.ProfilAction;
 import com.appweb2projetsession.mvc.model.Medecin;
 import com.appweb2projetsession.mvc.model.Patient;
+import com.appweb2projetsession.mvc.model.Profil;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -38,41 +43,42 @@ public class EspacePatient extends HttpServlet {
 
         boolean verif = false;
         request.setAttribute("verif", verif);
+        String patient = request.getParameter("patient");
 
-        String idPatient = request.getParameter("idPatient");
-
+        //SESSION
         HttpSession session = request.getSession(true);
         Medecin medecin = (Medecin) session.getAttribute("Medecin");
 
+        //PATIENTS DU MEDECIN
         List<com.appweb2projetsession.mvc.model.Patient> listePatient = PatientAction.findByIdMedecin(medecin.getId());
         request.setAttribute("listePatient", listePatient);
 
-        if (idPatient != null) {
+        if (patient != null) {
+
+            int id_Patient = Integer.parseInt(patient);
             verif = true;
             request.setAttribute("verif", verif);
 
-            Patient infoPatient = PatientAction.findById(Integer.parseInt(idPatient));
+            Patient infoPatient = PatientAction.findById(id_Patient);
             request.setAttribute("infoPatient", infoPatient);
 
-        }
-        
-        /*
-        //LIRE LE FICHIER ENVOYER
-        List<Profil> lst = ProfilAction.afficherTous();
-        File file = new File(nomFichier);
-        FileOutputStream output = new FileOutputStream(file);
-        System.out.println("Writing to file " + file.getAbsolutePath());
-        byte[] buffer = new byte[1024];
-        
-        for (Profil profil : lst) {
-            while (profil.getContenuFichier().read(buffer) > 0) {
-                output.write(buffer);
+            //LIRE LE FICHIER ENVOYER
+            List<Profil> lstProfil = ProfilAction.afficherPatientMedecin(Integer.parseInt(patient), medecin.getId());
+            request.setAttribute("lstProfil", lstProfil);
+            
+            for (Profil profil : lstProfil) {
+
+                File file = new File(profil.getNomFichier());
+                FileOutputStream output = new FileOutputStream(file);
+                System.out.println("Writing to file " + file.getAbsolutePath());
+                byte[] buffer = new byte[1024];
+
+                while (profil.getContenuFichier().read(buffer) > 0) {
+                    output.write(buffer);
+                }
+                Desktop.getDesktop().open(new File(file.getAbsolutePath()));
             }
         }
-        Runtime.getRuntime().exec("explorer.exe /select," + "fichiers\\"+file.getAbsolutePath());
-
-        */
-
         request.getRequestDispatcher("WEB-INF/jsp/espacePatient.jsp").forward(request, response);
     }
 

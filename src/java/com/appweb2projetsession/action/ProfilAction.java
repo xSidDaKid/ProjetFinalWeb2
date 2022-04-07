@@ -21,6 +21,12 @@ public class ProfilAction {
         return listeProfil;
     }
 
+    public static List<Profil> afficherPatientMedecin(int patient_id, int medecin_id) {
+        ProfilImpDAO dao = new ProfilImpDAO();
+        List<Profil> lstProfil = dao.findByPatientMedecinId(patient_id, medecin_id);
+        return lstProfil;
+    }
+
     public static boolean create(Profil profil) {
         ProfilImpDAO dao = new ProfilImpDAO();
         boolean verif = dao.create(profil);

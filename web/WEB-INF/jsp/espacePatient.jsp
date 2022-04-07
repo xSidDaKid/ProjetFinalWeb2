@@ -21,13 +21,18 @@
                     <c:choose>
                         <c:when test="${verif == false}">
                             <!--CHOIX DU PATIENT-->
-                            <ul>
-                                <c:forEach items="${listePatient}" var="patient">
-                                    <li>
-                                        <a href="<c:url value='?idPatient=${patient.id}'/>">${patient.id}</a>
-                                    </li>
-                                </c:forEach>
-                            </ul>
+                            <div class="card">
+                                <div class="card-header">Liste de mes patients</div>
+                                <div class="card-body">
+                                    <ul>
+                                        <c:forEach items="${listePatient}" var="patient">
+                                            <li>
+                                                <a href="<c:url value='?patient=${patient.id}'/>">${patient.id} - ${patient.nom} ${patient.prenom}</a>
+                                            </li>
+                                        </c:forEach>
+                                    </ul>
+                                </div>
+                            </div>
                         </c:when>
                         <c:otherwise>
                             <!-- INFO PATIENT -->
@@ -53,8 +58,33 @@
                                                 <td>${infoPatient.dateNaissance}</td>
                                             </tr>
                                         </tbody>
-
                                     </table>
+                                    <hr>
+                                    <form method="GET" action="espacePatient">
+                                        <table id="profil" class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>Fichier</th>
+                                                    <th>Information</th>
+                                                    <th>Date</th>
+                                                    <!--<th></th>-->
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <c:forEach items="${lstProfil}" var="profilPatient">
+                                                    <tr>
+                                                        <td>${profilPatient.nomFichier}</td>
+                                                        <td>${profilPatient.info}</td>
+                                                        <td>${profilPatient.date}</td>
+                                                        <!--<td>
+                                                            <input name="telecharger" value="true" placeholder="true">
+                                                            <button type="submit" class="btn btn-primary p-2 align-content-center" >Suivant</button>
+                                                        </td>-->
+                                                    </tr>
+                                                </c:forEach>
+                                            </tbody>
+                                        </table>
+                                    </form>
                                 </div>
                             </div>
                         </c:otherwise>
@@ -64,6 +94,11 @@
             </div>
         </div>
         <jsp:include page="footer.jsp"/>
+        <script>
+            $(document).ready(function () {
+                $('#profil').DataTable();
+            });
+        </script>
     </body>
 
 </html>

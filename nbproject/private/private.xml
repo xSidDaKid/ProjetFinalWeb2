@@ -5,13 +5,8 @@
         <group>
             <file>file:/X:/Desktop/Applications%20Web%202/ProjetFinSession/appweb2projetsession/appweb2projetsession/web/WEB-INF/jsp/espacePatient.jsp</file>
             <file>file:/X:/Desktop/Applications%20Web%202/ProjetFinSession/appweb2projetsession/appweb2projetsession/src/java/com/appweb2projetsession/mvc/controller/EspacePatient.java</file>
-            <file>file:/X:/Desktop/Applications%20Web%202/ProjetFinSession/appweb2projetsession/appweb2projetsession/web/WEB-INF/jsp/disponibilite.jsp</file>
-            <file>file:/X:/Desktop/Applications%20Web%202/ProjetFinSession/appweb2projetsession/appweb2projetsession/src/java/com/appweb2projetsession/mvc/controller/InscriptionUser.java</file>
-            <file>file:/X:/Desktop/Applications%20Web%202/ProjetFinSession/appweb2projetsession/appweb2projetsession/src/java/com/appweb2projetsession/mvc/controller/Admin.java</file>
-            <file>file:/X:/Desktop/Applications%20Web%202/ProjetFinSession/appweb2projetsession/appweb2projetsession/src/java/com/appweb2projetsession/mvc/controller/Disponibilite.java</file>
-            <file>file:/X:/Desktop/Applications%20Web%202/ProjetFinSession/appweb2projetsession/appweb2projetsession/src/java/com/appweb2projetsession/mvc/controller/PriseDeRendezVous.java</file>
-            <file>file:/X:/Desktop/Applications%20Web%202/ProjetFinSession/appweb2projetsession/appweb2projetsession/web/WEB-INF/jsp/inscriptionUser.jsp</file>
-            <file>file:/X:/Desktop/Applications%20Web%202/ProjetFinSession/appweb2projetsession/appweb2projetsession/web/WEB-INF/jsp/admin.jsp</file>
+            <file>file:/X:/Desktop/Applications%20Web%202/ProjetFinSession/appweb2projetsession/appweb2projetsession/src/java/com/appweb2projetsession/dao/profil/ProfilImpDAO.java</file>
+            <file>file:/X:/Desktop/Applications%20Web%202/ProjetFinSession/appweb2projetsession/appweb2projetsession/src/java/com/appweb2projetsession/action/ProfilAction.java</file>
         </group>
     </open-files>
 </project-private>

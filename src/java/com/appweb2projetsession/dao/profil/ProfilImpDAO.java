@@ -7,9 +7,7 @@ package com.appweb2projetsession.dao.profil;
 
 import com.appweb2projetsession.dao.patient.PatientImpDAO;
 import com.appweb2projetsession.db.singleton.ConnexionBD;
-import com.appweb2projetsession.mvc.controller.Profile;
 import com.appweb2projetsession.mvc.model.Profil;
-import java.io.InputStream;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,6 +24,7 @@ public class ProfilImpDAO implements ProfilDAO {
 
     //Liste des requetes
     private static final String SQL_SELECT = "SELECT * FROM profil";
+    private static final String SQL_SELECT_MEDECIN_PATIENT = "SELECT * FROM profil WHERE patient_id=? AND medecin_id=?";
     private static final String SQL_INSERT = "INSERT INTO profil (nomFichier, contenuFichier, information, date, patient_id, medecin_id) value (?, ?, ?, ?, ?, ?)";
     private static final String SQL_DELETE = "DELETE FROM profil WHERE id = ?";
 
@@ -59,8 +58,34 @@ public class ProfilImpDAO implements ProfilDAO {
     }
 
     @Override
-    public Profil findByPatientMedecinId(int medecin_id, int patient_id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Profil> findByPatientMedecinId(int patient_id, int medecin_id) {
+        List<Profil> listeProfil = null;
+
+        try {
+            PreparedStatement ps = ConnexionBD.getConnection().prepareStatement(SQL_SELECT_MEDECIN_PATIENT);
+            ps.setInt(1, patient_id);
+            ps.setInt(2, medecin_id);
+            ResultSet result = ps.executeQuery();
+
+            listeProfil = new ArrayList<>();
+            
+            while (result.next()) {
+                Profil p1 = new Profil();
+                p1.setId(result.getInt("id"));
+                p1.setNomFichier(result.getString("nomFichier"));
+                p1.setContenuFichier(result.getBinaryStream("contenuFichier"));
+                p1.setInfo(result.getString("information"));
+                p1.setDate(result.getString("date"));
+                p1.setPatient_id(result.getInt("patient_id"));
+                p1.setMedecin_id(result.getInt("medecin_id"));
+                listeProfil.add(p1);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PatientImpDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ConnexionBD.closeConnection();
+        return listeProfil;
     }
 
     @Override

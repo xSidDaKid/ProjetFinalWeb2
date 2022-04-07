@@ -34,5 +34,8 @@ public class ProfilTestDAO {
 //                }
 //            }
 //        }
+
+//Profil profil = dao.findByPatientMedecinId(1,1);
+//        System.out.println(profil);
     }
 }

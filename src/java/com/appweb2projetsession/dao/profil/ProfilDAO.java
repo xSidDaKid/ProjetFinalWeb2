@@ -16,7 +16,7 @@ public interface ProfilDAO {
 
     List<Profil> findAll();
 
-    Profil findByPatientMedecinId(int medecin_id, int patient_id);
+    List<Profil> findByPatientMedecinId(int medecin_id, int patient_id);
 
     boolean create(Profil profil);
 
