@@ -4,16 +4,18 @@
     Author     : Shajaan
 --%>
 
+<%@page import="com.appweb2projetsession.mvc.model.Patient"%>
+<%@page import="com.appweb2projetsession.mvc.model.Medecin"%>
 <%@page import="com.appweb2projetsession.mvc.model.Utilisateur"%>
 <%@page import="com.appweb2projetsession.mvc.model.Clinique"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.appweb2projetsession.mvc.model.Patient"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <c:set var="view" value="/admin" scope="session" />
 
 <%
     ArrayList<Patient> listePatient = (ArrayList) request.getAttribute("listePatient");
+    ArrayList<Medecin> listeMedecin = (ArrayList) request.getAttribute("listeMedecin");
     ArrayList<Clinique> listeClinique = (ArrayList) request.getAttribute("listeClinique");
     ArrayList<Utilisateur> listeUtilisateur = (ArrayList) request.getAttribute("listeUtilisateur");
     Patient patientModif = (Patient) request.getAttribute("patient");
@@ -28,6 +30,9 @@
         <script>
             $(document).ready(function () {
                 $('#patientTable').DataTable();
+            });
+            $(document).ready(function () {
+                $('#medecinTable').DataTable();
             });
             $(document).ready(function () {
                 $('#cliniqueTable').DataTable();
@@ -112,7 +117,51 @@
                         </c:if> 
                     </div>
                     <!-- TAB MEDECIN -->
-                    <div class="tab-pane fade" id="Medecin" role="tabpanel" aria-labelledby="Medecin-tab">...</div>
+                    <div class="tab-pane fade" id="Medecin" role="tabpanel" aria-labelledby="Medecin-tab">
+                        <table id="medecinTable" class="table">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Nom</th>
+                                    <th>Prenom</th>
+                                    <th>Profession</th>
+                                    <th>Numero professionnel</th>
+                                    <th>Ententes</th>
+                                    <th>Adresse</th>
+                                    <th>Lieu de profession</th>
+                                    <th>ID clinique</th>
+                                    <th>ID user</th>
+                                    <th>Modifier</th>
+                                    <th>Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:forEach items="${listeMedecin}" var="medecin">
+                                    <tr>
+                                        <td>${medecin.id}</td>
+                                        <td>${medecin.nom}</td>
+                                        <td>${medecin.prenom}</td>
+                                        <td>${medecin.profession}</td>
+                                        <td>${medecin.nbProfessionnel}</td>
+                                        <td>${medecin.ententes}</td>
+                                        <td>${medecin.adresse}</td>
+                                        <td>${medecin.lieuProfession}</td>
+                                        <td>${medecin.id_clinique}</td>
+                                        <td>${medecin.id_user}</td>
+                                        <td>
+                                            <a data-toggle="modal" data-target="#exampleModal" href="<c:url value='?modifId=${medecin.id}'/>"/>Modification</a>
+                                        </td>
+                                        <td><a href="<c:url value='?deletedId=${medecin.id}'/>"/>Delete</td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
+                        <c:if test="${not empty requestScope.erreur}">
+                            <div class="alert alert-danger text-center" role="alert">
+                                <h4>${requestScope.erreurM}</h4>
+                            </div>
+                        </c:if>
+                    </div>
                     <!-- TAB CLINIQUE -->
                     <div class="tab-pane fade" id="Clinique" role="tabpanel" aria-labelledby="Clinique-tab">
                         <table id="cliniqueTable" class="table">

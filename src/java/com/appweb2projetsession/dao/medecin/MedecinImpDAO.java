@@ -49,7 +49,7 @@ public class MedecinImpDAO implements MedecinDAO {
                 m1.setEntentes(result.getString("ententes"));
                 m1.setAdresse(result.getString("adresse"));
                 m1.setLieuProfession(result.getString("lieuProfession"));
-                m1.setId_user(result.getInt("clinique_id"));
+                m1.setId_clinique(result.getInt("clinique_id"));
                 m1.setId_user(result.getInt("utilisateur_id"));
                 listeMedecin.add(m1);
             }

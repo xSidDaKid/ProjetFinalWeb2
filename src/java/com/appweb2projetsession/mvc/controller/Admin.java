@@ -6,9 +6,11 @@
 package com.appweb2projetsession.mvc.controller;
 
 import com.appweb2projetsession.action.CliniqueAction;
+import com.appweb2projetsession.action.MedecinAction;
 import com.appweb2projetsession.action.PatientAction;
 import com.appweb2projetsession.action.UtilisateurAction;
 import com.appweb2projetsession.mvc.model.Clinique;
+import com.appweb2projetsession.mvc.model.Medecin;
 import com.appweb2projetsession.mvc.model.Patient;
 import com.appweb2projetsession.mvc.model.Utilisateur;
 import java.io.IOException;
@@ -45,8 +47,9 @@ public class Admin extends HttpServlet {
         String supprimer = request.getParameter("deletedId");
         String modifier = request.getParameter("modifId");
 
-        //Liste des tables SQL TODO:MEDECIN
+        //Liste des tables SQL
         List<Patient> listePatient = PatientAction.afficherTous();
+        List<Medecin> listeMedecin = MedecinAction.afficherTous();
         List<Clinique> listeClinique = CliniqueAction.afficherTousClinique();
         List<Utilisateur> listeUtilisateur = UtilisateurAction.findAll();
 
@@ -55,6 +58,11 @@ public class Admin extends HttpServlet {
             request.setAttribute("erreurP", "La liste est vide");
         } else {
             request.setAttribute("listePatient", listePatient);
+        }
+        if (listeMedecin.isEmpty()) {
+            request.setAttribute("erreurM", "La liste est vide");
+        } else {
+            request.setAttribute("listeMedecin", listeMedecin);
         }
         if (listeClinique.isEmpty()) {
             request.setAttribute("erreurC", "La liste est vide");
@@ -71,6 +79,7 @@ public class Admin extends HttpServlet {
         if (supprimer != null) {
             boolean v;
             v = PatientAction.delete(Integer.parseInt(supprimer));
+            v = MedecinAction.delete(Integer.parseInt(supprimer));
             v = CliniqueAction.supprimerClinique(Integer.parseInt(supprimer));
             v = UtilisateurAction.delete(Integer.parseInt(supprimer));
             System.out.println(v);

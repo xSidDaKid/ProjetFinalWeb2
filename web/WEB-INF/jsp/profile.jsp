@@ -36,7 +36,7 @@
                                     </div>
                                     <hr>
                                     <div class="mb-3">
-                                        <label class="small mb-1">Username${sessionScope.userModif.username}</label>
+                                        <label class="small mb-1">Username</label>
                                         <input class="form-control" type="text" value="${sessionScope.User.username}${sessionScope.userModif.username}" name="username">
                                     </div>
                                     <div class="row gx-3 mb-3">
