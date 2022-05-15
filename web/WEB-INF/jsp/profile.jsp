@@ -32,21 +32,21 @@
                                     </div>
                                     <div class="mb-3">
                                         <label class="small mb-1">Role</label>
-                                        <input class="form-control" type="text" value="${sessionScope.User.role}${userModif.role}" name="role" disabled>
+                                        <input class="form-control" type="text" value="${sessionScope.User.role}${sessionScope.userModif.role}" name="role" disabled>
                                     </div>
                                     <hr>
                                     <div class="mb-3">
-                                        <label class="small mb-1">Username</label>
-                                        <input class="form-control" type="text" value="${sessionScope.User.username}${userModif.username}" name="username">
+                                        <label class="small mb-1">Username${sessionScope.userModif.username}</label>
+                                        <input class="form-control" type="text" value="${sessionScope.User.username}${sessionScope.userModif.username}" name="username">
                                     </div>
                                     <div class="row gx-3 mb-3">
                                         <div class="col-md-6">
                                             <label class="small mb-1">Email</label>
-                                            <input class="form-control" type="text" value="${sessionScope.User.email}${userModif.email}" name="email">
+                                            <input class="form-control" type="text" value="${sessionScope.User.email}${sessionScope.userModif.email}" name="email">
                                         </div>
                                         <div class="col-md-6">
                                             <label class="small mb-1">Password</label>
-                                            <input class="form-control" id="pwd" type="password" value="${sessionScope.User.password}${userModif.password}" name="password">
+                                            <input class="form-control" id="pwd" type="password" value="${sessionScope.User.password}${sessionScope.userModif.password}" name="password">
                                             <input type="checkbox" onclick="myFunction()"> Show Password
                                         </div>
                                     </div>
@@ -54,7 +54,7 @@
                                 <hr>
                                 <!-- Form Patient/Medecin/Clinique -->
                                 <c:choose>
-                                    <c:when test="${sessionScope.User.role == 'patient'}">
+                                    <c:when test="${sessionScope.User.role == 'patient' || sessionScope.patientModif != null }">
                                         <div>
                                             <div class="row gx-3 mb-3">
                                                 <div class="col-md-6">
@@ -79,18 +79,24 @@
                                             <div class="row gx-3 mb-3">
                                                 <div class="col-md-6">
                                                     <label class="small mb-1">Date de naissance</label>
-                                                    <input class="form-control" type="date" placeholder="JJ-MM-AAAA" value="${sessionScope.Patient.dateNaissance}${patientModif.dateNaissance}" name="dateNaissance">
+                                                    <input class="form-control" type="date" placeholder="JJ-MM-AAAA" value="${sessionScope.Patient.dateNaissance}${sessionScope.patientModif.dateNaissance}" name="dateNaissance">
                                                 </div>
                                                 <div class="col-md-6 mt-2">
                                                     <label class="small mb-1">Sexe</label>
                                                     <br>
                                                     <select name="sexe" required>
-                                                        <option>${patientModif.sexe}${patientModif.sexe}</option>
+                                                        <option>${sessionScope.Patient.sexe}${sessionScope.patientModif.sexe}</option>
                                                         <option value="f">F</option>
                                                         <option value="m">M</option>
                                                         <option value="o">O</option>
                                                     </select>
                                                 </div>
+                                            </div>
+                                            <div class="mb-3" hidden>
+                                                <label class="small mb-1">Id Clinique</label>
+                                                <input class="form-control" type="text" value="${sessionScope.patientModif.id_clinique}" name="id_clinique" disabled>
+                                                <label class="small mb-1">Id Medecin</label>
+                                                <input class="form-control" type="text" value="${sessionScope.patientModif.id_medecin}" name="id_medecin" disabled>
                                             </div>
                                             <button class="btn btn-primary" type="submit">Save changes</button>
                                         </div>
@@ -119,7 +125,7 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label class="small mb-1">Ententes</label>
-                                                <input class="form-control" type="text" value="${sessionScope.Medecin.ententes}${medecinModif.username}" name="ententes">
+                                                <input class="form-control" type="text" value="${sessionScope.Medecin.ententes}${medecinModif.ententes}" name="ententes">
                                             </div>
                                             <div class="mb-3">
                                                 <label class="small mb-1">Adresse</label>
@@ -127,7 +133,7 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label class="small mb-1">Lieu de profession</label>
-                                                <input class="form-control" type="text" value="${sessionScope.Medecin.lieuProfession}${medecinModif.username}" name="lieuProfession">
+                                                <input class="form-control" type="text" value="${sessionScope.Medecin.lieuProfession}${medecinModif.lieuProfession}" name="lieuProfession">
                                             </div>
                                             <button class="btn btn-primary" type="submit">Save changes</button>
                                         </div>

@@ -62,6 +62,11 @@
                                 <h4>${requestScope.erreurDelete}</h4>
                             </div>
                         </c:if> 
+                        <c:if test="${not empty requestScope.erreurDeleteSucces}">
+                            <div class="alert alert-success text-center" role="alert">
+                                <h4>${requestScope.erreurDeleteSucces}</h4>
+                            </div>
+                        </c:if> 
                         <table id="patientTable" class="mt-2 table">
 
                             <thead class="thead-dark mt-2">
@@ -102,7 +107,7 @@
                         </table>
                         <c:if test="${not empty requestScope.erreur}">
                             <div class="alert alert-danger text-center" role="alert">
-                                <h4>${requestScope.erreur}</h4>
+                                <h4>${requestScope.erreurP}</h4>
                             </div>
                         </c:if> 
                     </div>
@@ -142,7 +147,7 @@
                         </table>
                         <c:if test="${not empty requestScope.erreur}">
                             <div class="alert alert-danger text-center" role="alert">
-                                <h4>${requestScope.erreur}</h4>
+                                <h4>${requestScope.erreurC}</h4>
                             </div>
                         </c:if>
                     </div>
@@ -178,7 +183,7 @@
                         </table>
                         <c:if test="${not empty requestScope.erreur}">
                             <div class="alert alert-danger text-center" role="alert">
-                                <h4>${requestScope.erreur}</h4>
+                                <h4>${requestScope.erreurU}</h4>
                             </div>
                         </c:if> 
                     </div>

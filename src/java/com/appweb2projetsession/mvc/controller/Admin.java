@@ -52,17 +52,17 @@ public class Admin extends HttpServlet {
 
         //Messages d'erreurs---
         if (listePatient.isEmpty()) {
-            request.setAttribute("erreur", "La liste est vide");
+            request.setAttribute("erreurP", "La liste est vide");
         } else {
             request.setAttribute("listePatient", listePatient);
         }
         if (listeClinique.isEmpty()) {
-            request.setAttribute("erreur", "La liste est vide");
+            request.setAttribute("erreurC", "La liste est vide");
         } else {
             request.setAttribute("listeClinique", listeClinique);
         }
         if (listeUtilisateur.isEmpty()) {
-            request.setAttribute("erreur", "La liste est vide");
+            request.setAttribute("erreurU", "La liste est vide");
         } else {
             request.setAttribute("listeUtilisateur", listeUtilisateur);
         }
@@ -73,10 +73,13 @@ public class Admin extends HttpServlet {
             v = PatientAction.delete(Integer.parseInt(supprimer));
             v = CliniqueAction.supprimerClinique(Integer.parseInt(supprimer));
             v = UtilisateurAction.delete(Integer.parseInt(supprimer));
-
+            System.out.println(v);
             //VERIFICATION DE LA FONCTION DELETE
             if (v == false) {
                 request.setAttribute("erreurDelete", "Cet element ne peut pas etre supprimer");
+            } else {
+                request.setAttribute("erreurDeleteSucces", "Cet element a ete supprime avec succes");
+
             }
 
             //AFFICHER APRES SUPPRESSION
@@ -94,12 +97,11 @@ public class Admin extends HttpServlet {
             //TODO: FINIR LA METHODE OU VERIFIER SI CA MARCHE
         } else if (modifier != null) {
             try {
-
                 Patient patient = PatientAction.findById(Integer.parseInt(modifier));
                 Utilisateur user = UtilisateurAction.findByID(patient.getId_user());
                 // session.setAttribute("patientModif", patient);
 //                request.setAttribute("patientModif", patient);
-                System.out.println("user: " + user);
+
                 session.setAttribute("patientModif", patient);
                 session.setAttribute("userModif", user);
                 //request.setAttribute("userModif", user);
@@ -131,6 +133,7 @@ public class Admin extends HttpServlet {
 //
 //            request.getRequestDispatcher("WEB-INF/jsp/admin.jsp").include(request, response);
             } catch (NullPointerException e) {
+            } catch (NumberFormatException e) {
             }
         } else if (session.getAttribute("username") == ("admin")) {
             request.getRequestDispatcher("WEB-INF/jsp/admin.jsp").forward(request, response);
