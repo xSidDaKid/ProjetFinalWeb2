@@ -12,6 +12,7 @@ import com.appweb2projetsession.mvc.model.Clinique;
 import com.appweb2projetsession.mvc.model.Patient;
 import com.appweb2projetsession.mvc.model.Utilisateur;
 import java.io.IOException;
+import java.util.Enumeration;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -55,36 +56,23 @@ public class Profile extends HttpServlet {
         String id_clinique = request.getParameter("id_clinique");
         String id_medecin = request.getParameter("id_medecin");
 
-        List<Patient> listePatient = PatientAction.afficherTous();
-        List<Clinique> listeClinique = CliniqueAction.afficherTousClinique();
-        List<Utilisateur> listeUtilisateur = UtilisateurAction.findAll();
-        System.out.println(session.getAttribute("username"));
         try {
 
             if (session != null) {
                 if (session.getAttribute("username").equals("admin")) {
-                    System.out.println("ifx2");
                     Utilisateur userModier = (Utilisateur) session.getAttribute("userModif");
                     Patient patientModier = (Patient) session.getAttribute("patientModif");
-                                        
+
                     userModier = new Utilisateur(userModier.getId(), username, password, email, userModier.getRole());
                     UtilisateurAction.update(userModier);
 
-                    patientModier = new Patient(patientModier.getId(), nom, prenom, nam, Integer.parseInt(nbSequentiel), dateNaissance, sexe.charAt(0), Integer.parseInt(id_clinique), Integer.parseInt(id_medecin), userModier.getId());
-                    System.out.println(patientModier);
+                    patientModier = new Patient(patientModier.getId(), nom, prenom, nam, Integer.parseInt(nbSequentiel), dateNaissance, sexe.charAt(0), patientModier.getId_clinique(), patientModier.getId_medecin(), userModier.getId());
                     PatientAction.update(patientModier);
-                    
-                    listePatient = PatientAction.afficherTous();
-                    listeClinique = CliniqueAction.afficherTousClinique();
-                    listeUtilisateur = UtilisateurAction.findAll();
-                    System.out.println("asdadsadsdasdasdasdasasd: "+userModier);
+
                     session.setAttribute("patientModif", patientModier);
                     session.setAttribute("userModif", userModier);
-                    
-                    request.setAttribute("listePatient", listePatient);
-                    request.setAttribute("listeClinique", listeClinique);
-                    request.setAttribute("listeUtilisateur", listeUtilisateur);
-                    request.getRequestDispatcher("WEB-INF/jsp/admin.jsp").forward(request, response);
+
+                    request.getRequestDispatcher("WEB-INF/jsp/home.jsp").forward(request, response);
 
                 } else {
                     Utilisateur user = (Utilisateur) session.getAttribute("User");

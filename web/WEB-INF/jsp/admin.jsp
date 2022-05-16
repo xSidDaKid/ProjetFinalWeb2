@@ -105,7 +105,7 @@
                                         <td>${patient.id_user}</td>
                                         <td><a data-toggle="modal" data-target="#exampleModal" href="<c:url value='?modifId=${patient.id}'/>"/>Modification</a>
                                         </td>
-                                        <td><a href="<c:url value='?deletedId=${patient.id}'/>"/>Delete</td>
+                                        <td><a href="<c:url value='?deletePatientId=${patient.id}'/>"/>Delete</td>
                                     </tr>
                                 </c:forEach>
                             </tbody>
@@ -151,7 +151,7 @@
                                         <td>
                                             <a data-toggle="modal" data-target="#exampleModal" href="<c:url value='?modifId=${medecin.id}'/>"/>Modification</a>
                                         </td>
-                                        <td><a href="<c:url value='?deletedId=${medecin.id}'/>"/>Delete</td>
+                                        <td><a href="<c:url value='?deleteMedecinId=${medecin.id}'/>"/>Delete</td>
                                     </tr>
                                 </c:forEach>
                             </tbody>
@@ -189,7 +189,7 @@
                                         <td>
                                             <a data-toggle="modal" data-target="#exampleModal" href="<c:url value='?modifId=${clinique.id}'/>"/>Modification</a>
                                         </td>
-                                        <td><a href="<c:url value='?deletedId=${clinique.id}'/>"/>Delete</td>
+                                        <td><a href="<c:url value='?deleteCliniqueId=${clinique.id}'/>"/>Delete</td>
                                     </tr>
                                 </c:forEach>
                             </tbody>
@@ -225,7 +225,7 @@
                                         <td>
                                             <a data-toggle="modal" data-target="#exampleModal" href="<c:url value='?modifId=${clinique.id}'/>"/>Modification</a>
                                         </td>
-                                        <td><a href="<c:url value='?deletedId=${user.id}'/>"/>Delete</td>
+                                        <td><a href="<c:url value='?deleteUserId=${user.id}'/>"/>Delete</td>
                                     </tr>
                                 </c:forEach>
                             </tbody>

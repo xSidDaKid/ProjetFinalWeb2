@@ -51,7 +51,7 @@ public class Login extends HttpServlet {
                 response.sendRedirect("admin");
             } else {
                 Utilisateur u = UtilisateurAction.connexion(email, password);
-                System.out.println(u);
+                System.out.println("LoginServlet: "+u);
                 Patient p = PatientAction.findByIdUser(u.getId());
                 Medecin m = MedecinAction.findByIdUser(u.getId());
                 Clinique c = CliniqueAction.rechercherCliniqueParUserId(u.getId());

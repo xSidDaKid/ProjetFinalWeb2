@@ -45,14 +45,12 @@ public class InscriptionMedecin extends HttpServlet {
         String adresse = request.getParameter("adresse");
         String lieuProfession = request.getParameter("lieuProfession");
         String clinique_id = request.getParameter("clinique_id");
-                
         //SAUVEGARDE SESSION
         Utilisateur u1 = (Utilisateur) session.getAttribute("User");
         try {
             Medecin m1 = new Medecin(nom, prenom, profession, nbProfessionnel, ententes, adresse, lieuProfession, Integer.parseInt(clinique_id), u1.getId());
             boolean verif = MedecinAction.create(m1);
             Medecin medecin = MedecinAction.findByIdUser(u1.getId());
-            System.out.println(medecin);
             if (verif) {
                 session.setAttribute("Medecin", medecin);
                 request.getRequestDispatcher("WEB-INF/jsp/home.jsp").forward(request, response);

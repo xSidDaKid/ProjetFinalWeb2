@@ -59,7 +59,7 @@
                                             <div class="row gx-3 mb-3">
                                                 <div class="col-md-6">
                                                     <label class="small mb-1">Nom</label>
-                                                    <input class="form-control" type="text" value="${sessionScope.Patient.nom} ${patientModif.nom}" name="nom">
+                                                    <input class="form-control" type="text" value="${sessionScope.Patient.nom}${patientModif.nom}" name="nom">
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label class="small mb-1">Prenom</label>
