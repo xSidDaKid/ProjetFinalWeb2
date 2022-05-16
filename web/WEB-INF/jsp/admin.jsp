@@ -43,6 +43,16 @@
         </script>
         <jsp:include page="menu.jsp"/>
         <div class="container mt-3 p-2">
+            <c:if test="${not empty requestScope.erreurDeleteSucces}">
+                <div class="alert alert-success text-center" role="alert">
+                    <h4>${requestScope.erreurDeleteSucces}</h4>
+                </div>
+            </c:if> 
+            <c:if test="${not empty requestScope.erreurDelete}">
+                <div class="alert alert-danger text-center" role="alert">
+                    <h4>${requestScope.erreurDelete}</h4>
+                </div>
+            </c:if> 
             <div class="card p-3">
                 <!-- LISTE DES TABS -->
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -62,16 +72,7 @@
                 <div class="tab-content" id="myTabContent">
                     <!-- TAB PATIENT -->
                     <div class="tab-pane fade show active" id="Patient" role="tabpanel" aria-labelledby="Patient-tab">
-                        <c:if test="${not empty requestScope.erreurDelete}">
-                            <div class="alert alert-danger text-center" role="alert">
-                                <h4>${requestScope.erreurDelete}</h4>
-                            </div>
-                        </c:if> 
-                        <c:if test="${not empty requestScope.erreurDeleteSucces}">
-                            <div class="alert alert-success text-center" role="alert">
-                                <h4>${requestScope.erreurDeleteSucces}</h4>
-                            </div>
-                        </c:if> 
+
                         <table id="patientTable" class="mt-2 table">
 
                             <thead class="thead-dark mt-2">
@@ -103,7 +104,7 @@
                                         <td>${patient.id_clinique}</td>
                                         <td>${patient.id_medecin}</td>
                                         <td>${patient.id_user}</td>
-                                        <td><a data-toggle="modal" data-target="#exampleModal" href="<c:url value='?modifId=${patient.id}'/>"/>Modification</a>
+                                        <td><a data-toggle="modal" data-target="#exampleModal" href="<c:url value='?modifPatientId=${patient.id}'/>"/>Modification</a>
                                         </td>
                                         <td><a href="<c:url value='?deletePatientId=${patient.id}'/>"/>Delete</td>
                                     </tr>
@@ -149,7 +150,7 @@
                                         <td>${medecin.id_clinique}</td>
                                         <td>${medecin.id_user}</td>
                                         <td>
-                                            <a data-toggle="modal" data-target="#exampleModal" href="<c:url value='?modifId=${medecin.id}'/>"/>Modification</a>
+                                            <a data-toggle="modal" data-target="#exampleModal" href="<c:url value='?modifMedecinId=${medecin.id}'/>"/>Modification</a>
                                         </td>
                                         <td><a href="<c:url value='?deleteMedecinId=${medecin.id}'/>"/>Delete</td>
                                     </tr>
@@ -187,7 +188,7 @@
                                         <td>${clinique.services}</td>
                                         <td>${clinique.id_user}</td>
                                         <td>
-                                            <a data-toggle="modal" data-target="#exampleModal" href="<c:url value='?modifId=${clinique.id}'/>"/>Modification</a>
+                                            <a data-toggle="modal" data-target="#exampleModal" href="<c:url value='?modifCliniqueId=${clinique.id}'/>"/>Modification</a>
                                         </td>
                                         <td><a href="<c:url value='?deleteCliniqueId=${clinique.id}'/>"/>Delete</td>
                                     </tr>
@@ -223,7 +224,7 @@
                                         <td>${user.email}</td>
                                         <td>${user.role}</td>
                                         <td>
-                                            <a data-toggle="modal" data-target="#exampleModal" href="<c:url value='?modifId=${clinique.id}'/>"/>Modification</a>
+                                            <a data-toggle="modal" data-target="#exampleModal" href="<c:url value='?modifUserId=${user.id}'/>"/>Modification</a>
                                         </td>
                                         <td><a href="<c:url value='?deleteUserId=${user.id}'/>"/>Delete</td>
                                     </tr>

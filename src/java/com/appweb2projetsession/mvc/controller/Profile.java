@@ -6,9 +6,11 @@
 package com.appweb2projetsession.mvc.controller;
 
 import com.appweb2projetsession.action.CliniqueAction;
+import com.appweb2projetsession.action.MedecinAction;
 import com.appweb2projetsession.action.PatientAction;
 import com.appweb2projetsession.action.UtilisateurAction;
 import com.appweb2projetsession.mvc.model.Clinique;
+import com.appweb2projetsession.mvc.model.Medecin;
 import com.appweb2projetsession.mvc.model.Patient;
 import com.appweb2projetsession.mvc.model.Utilisateur;
 import java.io.IOException;
@@ -41,14 +43,15 @@ public class Profile extends HttpServlet {
         HttpSession session = request.getSession(false);
 
         //INFO FORMULAIRE
+        //USER
         String username = request.getParameter("username");
-        System.out.println("usernameProfil: " + username);
         String password = request.getParameter("password");
         String email = request.getParameter("email");
         String role = request.getParameter("role");
 
-        String nom = request.getParameter("nom");
-        String prenom = request.getParameter("prenom");
+        //PATIENT
+        String nomPatient = request.getParameter("nomPatient");
+        String prenomPatient = request.getParameter("prenomPatient");
         String nam = request.getParameter("nam");
         String nbSequentiel = request.getParameter("nbSequentiel");
         String dateNaissance = request.getParameter("dateNaissance");
@@ -56,22 +59,51 @@ public class Profile extends HttpServlet {
         String id_clinique = request.getParameter("id_clinique");
         String id_medecin = request.getParameter("id_medecin");
 
+        //MEDECIN
+        String nomMedecin = request.getParameter("nomMedecin");
+        String prenomMedecin = request.getParameter("prenomMedecin");
+        String profession = request.getParameter("profession");
+        String nbProfessionnel = request.getParameter("nbProfessionnel");
+        String ententes = request.getParameter("ententes");
+        String adresse = request.getParameter("adresse");
+        String lieuProfession = request.getParameter("lieuProfession");
+        String id_clinique_medecin = request.getParameter("id_clinique_medecin");
+        
+        //CLINIQUE
+        String nomClinique = request.getParameter("nomClinique");
+        String adresseClinique = request.getParameter("adresseClinique");
+        String telephone = request.getParameter("telephone");
+        String services = request.getParameter("services");
+        
         try {
 
             if (session != null) {
                 if (session.getAttribute("username").equals("admin")) {
-                    Utilisateur userModier = (Utilisateur) session.getAttribute("userModif");
                     Patient patientModier = (Patient) session.getAttribute("patientModif");
-
+                    Medecin medecinModif = (Medecin) session.getAttribute("medecinModif");
+                    Clinique cliniqueModif = (Clinique) session.getAttribute("cliniqueModif");
+                    
+                    Utilisateur userModier = (Utilisateur) session.getAttribute("userModif");
                     userModier = new Utilisateur(userModier.getId(), username, password, email, userModier.getRole());
                     UtilisateurAction.update(userModier);
-
-                    patientModier = new Patient(patientModier.getId(), nom, prenom, nam, Integer.parseInt(nbSequentiel), dateNaissance, sexe.charAt(0), patientModier.getId_clinique(), patientModier.getId_medecin(), userModier.getId());
-                    PatientAction.update(patientModier);
-
-                    session.setAttribute("patientModif", patientModier);
+                    
+                    if (patientModier != null) {
+                        patientModier = new Patient(patientModier.getId(), nomPatient, prenomPatient, nam, Integer.parseInt(nbSequentiel), dateNaissance, sexe.charAt(0), patientModier.getId_clinique(), patientModier.getId_medecin(), userModier.getId());
+                        PatientAction.update(patientModier);
+                        session.setAttribute("patientModif", patientModier);
+                    }
+                    if (medecinModif != null) {
+                        medecinModif = new Medecin(medecinModif.getId(), nomMedecin, prenomMedecin, profession, nbProfessionnel, ententes, adresse, lieuProfession, medecinModif.getId_clinique(), userModier.getId());
+                        MedecinAction.update(medecinModif);
+                        session.setAttribute("medecinModif", medecinModif);
+                    }
+                    if (cliniqueModif != null) {
+                        cliniqueModif = new Clinique(cliniqueModif.getId(),nomClinique, adresseClinique, telephone, services, userModier.getId());
+                        CliniqueAction.miseajour(cliniqueModif);
+                        session.setAttribute("cliniqueModif", cliniqueModif);
+                    }
+                    
                     session.setAttribute("userModif", userModier);
-
                     request.getRequestDispatcher("WEB-INF/jsp/home.jsp").forward(request, response);
 
                 } else {
@@ -79,7 +111,7 @@ public class Profile extends HttpServlet {
                     Patient patient = (Patient) session.getAttribute("Patient");
 
                     boolean verifU = UtilisateurAction.update(user = new Utilisateur(user.getId(), username, password, email, user.getRole()));
-                    boolean verifP = PatientAction.update(patient = new Patient(patient.getId(), nom, prenom, nam, Integer.parseInt(nbSequentiel), dateNaissance, sexe.charAt(0), 1, 1, user.getId()));
+                    boolean verifP = PatientAction.update(patient = new Patient(patient.getId(), nomPatient, prenomMedecin, nam, Integer.parseInt(nbSequentiel), dateNaissance, sexe.charAt(0), 1, 1, user.getId()));
                     session.setAttribute("User", user);
                     session.setAttribute("Patient", patient);
                     request.getRequestDispatcher("WEB-INF/jsp/profile.jsp").include(request, response);

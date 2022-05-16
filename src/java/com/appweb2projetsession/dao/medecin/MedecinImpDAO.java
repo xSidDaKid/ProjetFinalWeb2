@@ -191,6 +191,7 @@ public class MedecinImpDAO implements MedecinDAO {
             ps.setString(7, medecin.getLieuProfession());
             ps.setInt(8, medecin.getId_clinique());
             ps.setInt(9, medecin.getId_user());
+            ps.setInt(10, medecin.getId());
             nbLigne = ps.executeUpdate();
 
         } catch (SQLException e) {

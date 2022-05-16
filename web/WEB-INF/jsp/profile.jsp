@@ -59,11 +59,11 @@
                                             <div class="row gx-3 mb-3">
                                                 <div class="col-md-6">
                                                     <label class="small mb-1">Nom</label>
-                                                    <input class="form-control" type="text" value="${sessionScope.Patient.nom}${patientModif.nom}" name="nom">
+                                                    <input class="form-control" type="text" value="${sessionScope.Patient.nom}${patientModif.nom}" name="nomPatient">
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label class="small mb-1">Prenom</label>
-                                                    <input class="form-control" type="text" value="${sessionScope.Patient.prenom}${patientModif.prenom}" name="prenom">
+                                                    <input class="form-control" type="text" value="${sessionScope.Patient.prenom}${patientModif.prenom}" name="prenomPatient">
                                                 </div>
                                             </div>
                                             <div class="row gx-3 mb-3">
@@ -98,19 +98,18 @@
                                                 <label class="small mb-1">Id Medecin</label>
                                                 <input class="form-control" type="text" value="${sessionScope.patientModif.id_medecin}" name="id_medecin" disabled>
                                             </div>
-                                            <button class="btn btn-primary" type="submit">Save changes</button>
                                         </div>
                                     </c:when>
-                                    <c:when test="${sessionScope.User.role == 'medecin'}">
+                                    <c:when test="${sessionScope.User.role == 'medecin' || sessionScope.medecinModif != null }">
                                         <div>
                                             <div class="row gx-3 mb-3">
                                                 <div class="col-md-6">
                                                     <label class="small mb-1">Nom</label>
-                                                    <input class="form-control" type="text" value="${sessionScope.Medecin.nom} ${medecinModif.nom}" name="nom">
+                                                    <input class="form-control" type="text" value="${sessionScope.Medecin.nom} ${medecinModif.nom}" name="nomMedecin">
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label class="small mb-1">Prenom</label>
-                                                    <input class="form-control" type="text" value="${sessionScope.Medecin.prenom}${medecinModif.prenom}" name="prenom">
+                                                    <input class="form-control" type="text" value="${sessionScope.Medecin.prenom}${medecinModif.prenom}" name="prenomMedecin">
                                                 </div>
                                             </div>
                                             <div class="row gx-3 mb-3">
@@ -135,19 +134,22 @@
                                                 <label class="small mb-1">Lieu de profession</label>
                                                 <input class="form-control" type="text" value="${sessionScope.Medecin.lieuProfession}${medecinModif.lieuProfession}" name="lieuProfession">
                                             </div>
-                                            <button class="btn btn-primary" type="submit">Save changes</button>
+                                             <div class="mb-3" hidden>
+                                                <label class="small mb-1">Id Clinique</label>
+                                                <input class="form-control" type="text" value="${sessionScope.medecinModif.id_clinique}" name="id_clinique_medecin" disabled>
+                                            </div>
                                         </div>
                                     </c:when>
-                                    <c:when test="${sessionScope.User.role == 'clinique'}">
+                                    <c:when test="${sessionScope.User.role == 'clinique' || sessionScope.cliniqueModif != null }">
                                         <div>
                                             <div class="row gx-3 mb-3">
                                                 <div class="col-md-6">
                                                     <label class="small mb-1">Nom</label>
-                                                    <input class="form-control" type="text" value="${sessionScope.Clinique.nom} ${cliniqueModif.nom}" name="nom">
+                                                    <input class="form-control" type="text" value="${sessionScope.Clinique.nom} ${cliniqueModif.nom}" name="nomClinique">
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label class="small mb-1">Adresse</label>
-                                                    <input class="form-control" type="text" value="${sessionScope.Clinique.adresse}${cliniqueModif.adresse}" name="adresse">
+                                                    <input class="form-control" type="text" value="${sessionScope.Clinique.adresse}${cliniqueModif.adresse}" name="adresseClinique">
                                                 </div>
                                             </div>
                                             <div class="row gx-3 mb-3">
@@ -160,10 +162,10 @@
                                                     <input class="form-control" type="text" value="${sessionScope.Clinique.services}${cliniqueModif.services}" name="services">
                                                 </div>
                                             </div>
-                                            <button class="btn btn-primary" type="submit">Save changes</button>
                                         </div>
                                     </c:when>
                                 </c:choose>
+                                            <button class="btn btn-primary" type="submit">Save changes</button>
                             </form>
                         </div>
                     </div>

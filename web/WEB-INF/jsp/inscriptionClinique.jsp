@@ -29,7 +29,7 @@
                                     </div>
                                 </c:if> 
                             </div>
-                            <form id="signupForm" method="get" class="form-horizontal" action="inscriptionClinique">
+                            <form id="signupForm" method="get" class="form-horizontal p-2" action="inscriptionClinique">
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="nom">Nom:</label>
@@ -47,7 +47,7 @@
                                         <label for="services">Services:</label>
                                         <input type="text" class="form-control" name="services" placeholder="Tests diagnostiques" required>
                                     </div>
-                                    <button type="submit" class="btn btn-primary">Sign in</button>
+                                    <button type="submit" class="btn btn-primary">Inscrire</button>
                                 </div>
                             </form>
                         </div>

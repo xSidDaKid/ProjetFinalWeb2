@@ -48,8 +48,11 @@ public class Admin extends HttpServlet {
         String deleteMedecinId = request.getParameter("deleteMedecinId");
         String deleteCliniqueId = request.getParameter("deleteCliniqueId");
         String deleteUserId = request.getParameter("deleteUserId");
-
-        String modifier = request.getParameter("modifId");
+        
+        String modifPatientId = request.getParameter("modifPatientId");
+        String modifMedecinId = request.getParameter("modifMedecinId");
+        String modifCliniqueId = request.getParameter("modifCliniqueId");
+        String modifUserId = request.getParameter("modifUserId");
 
         //Liste des tables SQL
         List<Patient> listePatient = PatientAction.afficherTous();
@@ -131,7 +134,7 @@ public class Admin extends HttpServlet {
             request.setAttribute("listeUtilisateur", listeUtilisateur);
 
             request.getRequestDispatcher("WEB-INF/jsp/admin.jsp").forward(request, response);
-        } 
+        }
         //CLINIQUE---
         if (deleteCliniqueId != null) {
             Clinique foundClinique = CliniqueAction.rechercherCliniqueParId(Integer.parseInt(deleteCliniqueId));
@@ -157,10 +160,10 @@ public class Admin extends HttpServlet {
             request.setAttribute("listeUtilisateur", listeUtilisateur);
 
             request.getRequestDispatcher("WEB-INF/jsp/admin.jsp").forward(request, response);
-        } 
+        }
         //USER---
         if (deleteUserId != null) {
-            boolean verifUser= UtilisateurAction.delete(Integer.parseInt(deleteUserId));
+            boolean verifUser = UtilisateurAction.delete(Integer.parseInt(deleteUserId));
 
             //VERIFICATION DE LA FONCTION DELETE
             if (verifUser) {
@@ -181,53 +184,38 @@ public class Admin extends HttpServlet {
             request.setAttribute("listeUtilisateur", listeUtilisateur);
 
             request.getRequestDispatcher("WEB-INF/jsp/admin.jsp").forward(request, response);
-        } 
-        
-        else if (modifier != null) {
-            try {
-                Patient patient = PatientAction.findById(Integer.parseInt(modifier));
-                Utilisateur user = UtilisateurAction.findByID(patient.getId_user());
-                // session.setAttribute("patientModif", patient);
-//                request.setAttribute("patientModif", patient);
-
-                session.setAttribute("patientModif", patient);
-                session.setAttribute("userModif", user);
-                //request.setAttribute("userModif", user);
-
-                request.getRequestDispatcher("WEB-INF/jsp/profile.jsp").include(request, response);
-
-//                String username = user.getUsername();
-//                String password = user.getPassword();
-//                String email = user.getEmail();
-//                String role = user.getRole();;
-//
-//                String nom = patient.getNom();
-//                String prenom = patient.getPrenom();
-//                String nam = patient.getNam();
-//                int nbSequentiel = patient.getNbSequentiel();
-//                String dateNaissance = patient.getDateNaissance();
-//                char sexe = patient.getSexe();
-//
-//                System.out.println(patient);
-//                System.out.println(user);
-//            boolean verif2 =PatientAction.update(patient = new Patient(patient.getId(), nom, prenom, nam, Integer.parseInt(nbSequentiel), dateNaissance, sexe.charAt(0), 1, 1, user.getId()));
-//            System.out.println(verif);
-//            System.out.println(verif2);
-//            listePatient = PatientAction.afficherTous();
-//            listeUtilisateur = UtilisateurAction.findAll();
-//
-//            request.setAttribute("listePatient", listePatient);
-//            request.setAttribute("listeUtilisateur", listeUtilisateur);
-//
-//            request.getRequestDispatcher("WEB-INF/jsp/admin.jsp").include(request, response);
-            } catch (NullPointerException e) {
-            } catch (NumberFormatException e) {
-            }
-        } else if (session.getAttribute("username") == ("admin")) {
-            request.getRequestDispatcher("WEB-INF/jsp/admin.jsp").forward(request, response);
-        } else {
-            request.getRequestDispatcher("WEB-INF/jsp/login.jsp").forward(request, response);
         }
+        //PATIENT---
+        if (modifPatientId != null) {
+            Patient patientModif = PatientAction.findById(Integer.parseInt(modifPatientId));
+            Utilisateur user = UtilisateurAction.findByID(patientModif.getId_user());
+            session.setAttribute("patientModif", patientModif);
+            session.setAttribute("userModif", user);
+            request.getRequestDispatcher("WEB-INF/jsp/profile.jsp").forward(request, response);
+        }
+        //MEDECIN---
+        if (modifMedecinId != null) {
+            Medecin medecinModif = MedecinAction.findById(Integer.parseInt(modifMedecinId));
+            Utilisateur user = UtilisateurAction.findByID(medecinModif.getId_user());
+            session.setAttribute("medecinModif", medecinModif);
+            session.setAttribute("userModif", user);
+            request.getRequestDispatcher("WEB-INF/jsp/profile.jsp").forward(request, response);
+        }
+        //CLINIQUE---
+        if (modifCliniqueId != null) {
+            Clinique cliniqueModif = CliniqueAction.rechercherCliniqueParId(Integer.parseInt(modifCliniqueId));
+            Utilisateur user = UtilisateurAction.findByID(cliniqueModif.getId_user());
+            session.setAttribute("cliniqueModif", cliniqueModif);
+            session.setAttribute("userModif", user);
+            request.getRequestDispatcher("WEB-INF/jsp/profile.jsp").forward(request, response);
+        }
+        //USER---
+        if (modifUserId != null) {
+            Utilisateur user = UtilisateurAction.findByID(Integer.parseInt(modifUserId));
+            session.setAttribute("userModif", user);
+            request.getRequestDispatcher("WEB-INF/jsp/profile.jsp").forward(request, response);
+        }
+        request.getRequestDispatcher("WEB-INF/jsp/admin.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
