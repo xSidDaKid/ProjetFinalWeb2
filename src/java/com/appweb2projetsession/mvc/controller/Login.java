@@ -51,6 +51,7 @@ public class Login extends HttpServlet {
                 response.sendRedirect("admin");
             } else {
                 Utilisateur u = UtilisateurAction.connexion(email, password);
+                System.out.println(u);
                 Patient p = PatientAction.findByIdUser(u.getId());
                 Medecin m = MedecinAction.findByIdUser(u.getId());
                 Clinique c = CliniqueAction.rechercherCliniqueParUserId(u.getId());
@@ -61,15 +62,13 @@ public class Login extends HttpServlet {
                     session.setAttribute("Patient", p);
                     session.setAttribute("Medecin", m);
                     session.setAttribute("Clinique", c);
-                    
+
                     request.getRequestDispatcher("WEB-INF/jsp/home.jsp").forward(request, response);
-                } else {
-                    request.setAttribute("erreur", "Le email ou le mot de passe est invalide");
-                    request.getRequestDispatcher("WEB-INF/jsp/login.jsp").forward(request, response);
                 }
             }
 
         } catch (NullPointerException e) {
+            request.setAttribute("erreur", "Le email ou le mot de passe est invalide");
             request.getRequestDispatcher("WEB-INF/jsp/login.jsp").forward(request, response);
         }
     }
