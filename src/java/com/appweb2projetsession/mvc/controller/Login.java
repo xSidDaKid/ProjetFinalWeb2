@@ -53,7 +53,9 @@ public class Login extends HttpServlet {
                 Utilisateur u = UtilisateurAction.connexion(email, password);
                 System.out.println("LoginServlet: "+u);
                 Patient p = PatientAction.findByIdUser(u.getId());
+                System.out.println("Login: "+p);
                 Medecin m = MedecinAction.findByIdUser(u.getId());
+                System.out.println("Login Medecin: "+m);
                 Clinique c = CliniqueAction.rechercherCliniqueParUserId(u.getId());
 
                 if (u != null) {

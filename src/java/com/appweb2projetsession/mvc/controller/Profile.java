@@ -68,25 +68,70 @@ public class Profile extends HttpServlet {
         String adresse = request.getParameter("adresse");
         String lieuProfession = request.getParameter("lieuProfession");
         String id_clinique_medecin = request.getParameter("id_clinique_medecin");
-        
+
         //CLINIQUE
         String nomClinique = request.getParameter("nomClinique");
         String adresseClinique = request.getParameter("adresseClinique");
         String telephone = request.getParameter("telephone");
         String services = request.getParameter("services");
-        
+
+        Enumeration<String> attributes = request.getSession().getAttributeNames();
+        while (attributes.hasMoreElements()) {
+            String attribute = (String) attributes.nextElement();
+            System.out.println("Profile Attributes List: " + attribute + " : " + request.getSession().getAttribute(attribute));
+        }
         try {
 
             if (session != null) {
-                if (session.getAttribute("username").equals("admin")) {
+                //MODIF-DELETE USER
+                if (session.getAttribute("User") != null) {
+                    Utilisateur user = (Utilisateur) session.getAttribute("User");
+                    Patient patient = (Patient) session.getAttribute("Patient");
+                    Medecin medecin = (Medecin) session.getAttribute("Medecin");
+                    Clinique clinique = (Clinique) session.getAttribute("Clinique");
+
+                    if (user != null) {
+                        boolean verifU = UtilisateurAction.update(user = new Utilisateur(user.getId(), username, password, email, user.getRole()));
+                        if (verifU) {
+                            session.setAttribute("User", user);
+                            // request.getRequestDispatcher("WEB-INF/jsp/home.jsp").include(request, response);
+                        }
+                    }
+                    if (patient != null) {
+                        boolean verifP = PatientAction.update(patient = new Patient(patient.getId(), nomPatient, prenomPatient, nam, Integer.parseInt(nbSequentiel), dateNaissance, sexe.charAt(0), patient.getId_clinique(), patient.getId_medecin(), user.getId()));
+                        if (verifP) {
+                            session.setAttribute("Patient", patient);
+                            request.getRequestDispatcher("WEB-INF/jsp/home.jsp").include(request, response);
+                        }
+
+                    } else if (medecin != null) {
+                        boolean verifM = MedecinAction.update(medecin = new Medecin(medecin.getId(), nomMedecin, prenomMedecin, profession, nbProfessionnel, ententes, adresse, lieuProfession, medecin.getId_clinique(), user.getId()));
+                        if (verifM) {
+                            session.setAttribute("Medecin", medecin);
+                            request.getRequestDispatcher("WEB-INF/jsp/home.jsp").include(request, response);
+                        }
+
+                    } else if (clinique != null) {
+                        boolean verifC = CliniqueAction.miseajour(clinique = new Clinique(clinique.getId(), nomClinique, adresseClinique, telephone, services, user.getId()));
+                        System.out.println(verifC);
+                        if (verifC) {
+                            session.setAttribute("Clinique", clinique);
+                            request.getRequestDispatcher("WEB-INF/jsp/home.jsp").include(request, response);
+                        }
+                    }
+                    request.getRequestDispatcher("WEB-INF/jsp/profile.jsp").forward(request, response);
+
+                } //MODIF-DELETE ADMIN
+                else if (session.getAttribute("username").equals("admin")) {
+                    System.out.println("Test admibn");
                     Patient patientModier = (Patient) session.getAttribute("patientModif");
                     Medecin medecinModif = (Medecin) session.getAttribute("medecinModif");
                     Clinique cliniqueModif = (Clinique) session.getAttribute("cliniqueModif");
-                    
+
                     Utilisateur userModier = (Utilisateur) session.getAttribute("userModif");
                     userModier = new Utilisateur(userModier.getId(), username, password, email, userModier.getRole());
                     UtilisateurAction.update(userModier);
-                    
+
                     if (patientModier != null) {
                         patientModier = new Patient(patientModier.getId(), nomPatient, prenomPatient, nam, Integer.parseInt(nbSequentiel), dateNaissance, sexe.charAt(0), patientModier.getId_clinique(), patientModier.getId_medecin(), userModier.getId());
                         PatientAction.update(patientModier);
@@ -98,28 +143,18 @@ public class Profile extends HttpServlet {
                         session.setAttribute("medecinModif", medecinModif);
                     }
                     if (cliniqueModif != null) {
-                        cliniqueModif = new Clinique(cliniqueModif.getId(),nomClinique, adresseClinique, telephone, services, userModier.getId());
+                        cliniqueModif = new Clinique(cliniqueModif.getId(), nomClinique, adresseClinique, telephone, services, userModier.getId());
                         CliniqueAction.miseajour(cliniqueModif);
                         session.setAttribute("cliniqueModif", cliniqueModif);
                     }
-                    
+
                     session.setAttribute("userModif", userModier);
                     request.getRequestDispatcher("WEB-INF/jsp/home.jsp").forward(request, response);
 
-                } else {
-                    Utilisateur user = (Utilisateur) session.getAttribute("User");
-                    Patient patient = (Patient) session.getAttribute("Patient");
-
-                    boolean verifU = UtilisateurAction.update(user = new Utilisateur(user.getId(), username, password, email, user.getRole()));
-                    boolean verifP = PatientAction.update(patient = new Patient(patient.getId(), nomPatient, prenomMedecin, nam, Integer.parseInt(nbSequentiel), dateNaissance, sexe.charAt(0), 1, 1, user.getId()));
-                    session.setAttribute("User", user);
-                    session.setAttribute("Patient", patient);
-                    request.getRequestDispatcher("WEB-INF/jsp/profile.jsp").include(request, response);
                 }
+
             }
-        } catch (NumberFormatException e) {
-            request.getRequestDispatcher("WEB-INF/jsp/profile.jsp").include(request, response);
-        } catch (NullPointerException e) {
+        } catch (NumberFormatException | NullPointerException e) {
             request.getRequestDispatcher("WEB-INF/jsp/profile.jsp").include(request, response);
         }
     }

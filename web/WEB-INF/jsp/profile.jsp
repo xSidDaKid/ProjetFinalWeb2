@@ -105,7 +105,7 @@
                                             <div class="row gx-3 mb-3">
                                                 <div class="col-md-6">
                                                     <label class="small mb-1">Nom</label>
-                                                    <input class="form-control" type="text" value="${sessionScope.Medecin.nom} ${medecinModif.nom}" name="nomMedecin">
+                                                    <input class="form-control" type="text" value="${sessionScope.Medecin.nom}${medecinModif.nom}" name="nomMedecin">
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label class="small mb-1">Prenom</label>
@@ -115,7 +115,7 @@
                                             <div class="row gx-3 mb-3">
                                                 <div class="col-md-6">
                                                     <label class="small mb-1">Profession</label>
-                                                    <input class="form-control" type="text" value="${sessionScope.Medecin.profession} ${medecinModif.nom}" name="profession">
+                                                    <input class="form-control" type="text" value="${sessionScope.Medecin.profession}${medecinModif.nom}" name="profession">
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label class="small mb-1">Numero Professionnel</label>
@@ -145,7 +145,7 @@
                                             <div class="row gx-3 mb-3">
                                                 <div class="col-md-6">
                                                     <label class="small mb-1">Nom</label>
-                                                    <input class="form-control" type="text" value="${sessionScope.Clinique.nom} ${cliniqueModif.nom}" name="nomClinique">
+                                                    <input class="form-control" type="text" value="${sessionScope.Clinique.nom}${cliniqueModif.nom}" name="nomClinique">
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label class="small mb-1">Adresse</label>
@@ -155,7 +155,7 @@
                                             <div class="row gx-3 mb-3">
                                                 <div class="col-md-6">
                                                     <label class="small mb-1">Telephone</label>
-                                                    <input class="form-control" type="text" value="${sessionScope.Clinique.tel} ${cliniqueModif.tel}" name="telephone">
+                                                    <input class="form-control" type="text" value="${sessionScope.Clinique.tel}${cliniqueModif.tel}" name="telephone">
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label class="small mb-1">Services</label>

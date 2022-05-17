@@ -14,6 +14,7 @@ import com.appweb2projetsession.mvc.model.Medecin;
 import com.appweb2projetsession.mvc.model.Patient;
 import com.appweb2projetsession.mvc.model.Utilisateur;
 import java.io.IOException;
+import java.util.Enumeration;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -38,12 +39,16 @@ public class HomeServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+        Enumeration<String> attributes = request.getSession().getAttributeNames();
+        while (attributes.hasMoreElements()) {
+            String attribute = (String) attributes.nextElement();
+            System.out.println("Home Attributes List: " + attribute + " : " + request.getSession().getAttribute(attribute));
+        }
         List<Clinique> listeClinique = CliniqueAction.afficherTousClinique();
         List<Medecin> listeMedecin = MedecinAction.afficherTous();
         List<Patient> listePatient = PatientAction.afficherTous();
         List<Utilisateur> listeUtilisateur = UtilisateurAction.findAll();
-        
+
         if (listeClinique.isEmpty()) {
             request.setAttribute("erreur", "La liste est vide");
         } else {
@@ -58,14 +63,14 @@ public class HomeServlet extends HttpServlet {
             int nbMedecin = listeMedecin.size();
             request.setAttribute("nbMedecin", nbMedecin);
         }
-        
+
         if (listePatient.isEmpty()) {
             request.setAttribute("erreur", "La liste est vide");
         } else {
             int nbPatient = listePatient.size();
             request.setAttribute("nbPatient", nbPatient);
         }
-        
+
         if (listeUtilisateur.isEmpty()) {
             request.setAttribute("erreur", "La liste est vide");
         } else {
