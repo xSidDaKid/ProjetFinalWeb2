@@ -5,14 +5,11 @@
  */
 package com.appweb2projetsession.mvc.controller;
 
-import com.appweb2projetsession.action.PatientAction;
-import com.appweb2projetsession.action.ProfilAction;
-import com.appweb2projetsession.mvc.model.Medecin;
+import com.appweb2projetsession.action.RendezVousAction;
+import com.appweb2projetsession.action.UtilisateurAction;
 import com.appweb2projetsession.mvc.model.Patient;
-import com.appweb2projetsession.mvc.model.Profil;
-import java.awt.Desktop;
-import java.io.File;
-import java.io.FileOutputStream;
+import com.appweb2projetsession.mvc.model.RendezVous;
+import com.appweb2projetsession.mvc.model.Utilisateur;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -26,7 +23,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Shajaan
  */
-public class EspacePatient extends HttpServlet {
+public class AfficherPageEmail extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,46 +37,17 @@ public class EspacePatient extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
-        boolean verif = false;
-        request.setAttribute("verif", verif);
-        String patient = request.getParameter("patient");
-
+        
         //SESSION
         HttpSession session = request.getSession(true);
-        Medecin medecin = (Medecin) session.getAttribute("Medecin");
-
-        //PATIENTS DU MEDECIN
-        List<com.appweb2projetsession.mvc.model.Patient> listePatient = PatientAction.findByIdMedecin(medecin.getId());
-        request.setAttribute("listePatient", listePatient);
-
-        if (patient != null) {
-
-            int id_Patient = Integer.parseInt(patient);
-            verif = true;
-            request.setAttribute("verif", verif);
-
-            Patient infoPatient = PatientAction.findById(id_Patient);
-            session.setAttribute("infoPatient", infoPatient);
-
-            //LIRE LE FICHIER ENVOYER
-            List<Profil> lstProfil = ProfilAction.afficherPatientMedecin(Integer.parseInt(patient), medecin.getId());
-            request.setAttribute("lstProfil", lstProfil);
-            
-            for (Profil profil : lstProfil) {
-
-                File file = new File(profil.getNomFichier());
-                FileOutputStream output = new FileOutputStream(file);
-                System.out.println("Writing to file " + file.getAbsolutePath());
-                byte[] buffer = new byte[1024];
-
-                while (profil.getContenuFichier().read(buffer) > 0) {
-                    output.write(buffer);
-                }
-                Desktop.getDesktop().open(new File(file.getAbsolutePath()));
-            }
-        }
-        request.getRequestDispatcher("WEB-INF/jsp/espacePatient.jsp").forward(request, response);
+        Patient patient = (Patient) session.getAttribute("infoPatient");
+        Utilisateur user = UtilisateurAction.findByID(patient.getId_user());
+        List<RendezVous> lstRV = RendezVousAction.findByPatientId(patient.getId());
+        
+        request.setAttribute("user", user);
+        request.setAttribute("lstRV", lstRV);
+        
+        request.getRequestDispatcher("WEB-INF/jsp/emailForm.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

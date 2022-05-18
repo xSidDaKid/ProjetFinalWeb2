@@ -71,6 +71,14 @@
         <servlet-name>EnvoieInfo</servlet-name>
         <servlet-class>com.appweb2projetsession.mvc.controller.EnvoieInfo</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EnvoyerEmail</servlet-name>
+        <servlet-class>com.appweb2projetsession.mvc.controller.EnvoyerEmail</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AfficherPageEmail</servlet-name>
+        <servlet-class>com.appweb2projetsession.mvc.controller.AfficherPageEmail</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>InscriptionMedecin</servlet-name>
         <url-pattern>/inscriptionMedecin</url-pattern>
@@ -135,9 +143,34 @@
         <servlet-name>EnvoieInfo</servlet-name>
         <url-pattern>/envoieInfo</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EnvoyerEmail</servlet-name>
+        <url-pattern>/envoyerEmail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AfficherPageEmail</servlet-name>
+        <url-pattern>/afficherPageEmail</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             3000
         </session-timeout>
     </session-config>
+    <!-- paramètres SMTP  -->
+    <context-param>
+        <param-name>host</param-name>
+        <param-value>smtp.gmail.com</param-value>
+    </context-param>
+    <context-param>
+        <param-name>port</param-name>
+        <param-value>587</param-value>
+    </context-param>
+    <context-param>
+        <param-name>user</param-name>
+        <param-value>xsiddakid@gmail.com</param-value>
+    </context-param>
+    <context-param>
+        <param-name>pass</param-name>
+        <param-value>caswmjeeyerezvoq</param-value>
+    </context-param>
 </web-app>

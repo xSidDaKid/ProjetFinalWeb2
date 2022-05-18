@@ -59,6 +59,7 @@
                                             </tr>
                                         </tbody>
                                     </table>
+                                            <button class="btn btn-primary "><a class="text-white" href="afficherPageEmail">Envoyer un email</a></button>
                                     <hr>
                                     <form method="GET" action="espacePatient">
                                         <table id="profil" class="table table-bordered">

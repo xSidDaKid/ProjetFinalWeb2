@@ -90,7 +90,7 @@ public class RendezVous implements Serializable{
 
     @Override
     public String toString() {
-        return "RendezVous{" + "id=" + id + ", date=" + date + ", medecin_id=" + medecin_id + ", patient_id=" + patient_id + ", raison=" + raison + ", description=" + description + '}';
+        return "\nDate: " + date + ", raison=" + raison + ", description=" + description + '\n';
     }
     
     
