@@ -51,14 +51,12 @@ public class Login extends HttpServlet {
                 response.sendRedirect("admin");
             } else {
                 Utilisateur u = UtilisateurAction.connexion(email, password);
-                System.out.println("LoginServlet: "+u);
-                Patient p = PatientAction.findByIdUser(u.getId());
-                System.out.println("Login: "+p);
-                Medecin m = MedecinAction.findByIdUser(u.getId());
-                System.out.println("Login Medecin: "+m);
-                Clinique c = CliniqueAction.rechercherCliniqueParUserId(u.getId());
 
                 if (u != null) {
+                    Patient p = PatientAction.findByIdUser(u.getId());
+                    Medecin m = MedecinAction.findByIdUser(u.getId());
+                    Clinique c = CliniqueAction.rechercherCliniqueParUserId(u.getId());
+
                     //CREATION DES SESSIONS
                     session.setAttribute("User", u);
                     session.setAttribute("Patient", p);
@@ -66,11 +64,15 @@ public class Login extends HttpServlet {
                     session.setAttribute("Clinique", c);
 
                     request.getRequestDispatcher("WEB-INF/jsp/home.jsp").forward(request, response);
+                } else {
+                    request.setAttribute("erreur", "Le email ou le mot de passe est invalide");
+                    request.getRequestDispatcher("WEB-INF/jsp/login.jsp").forward(request, response);
+
                 }
             }
 
         } catch (NullPointerException e) {
-            request.setAttribute("erreur", "Le email ou le mot de passe est invalide");
+            //request.setAttribute("erreur", "Le email ou le mot de passe est invalide");
             request.getRequestDispatcher("WEB-INF/jsp/login.jsp").forward(request, response);
         }
     }

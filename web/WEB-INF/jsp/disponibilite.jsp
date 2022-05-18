@@ -21,6 +21,21 @@
     <body>
         <jsp:include page="menu.jsp"/>
         <div class="container mt-3 p-2">
+            <c:if test="${not empty requestScope.erreurDispo}">
+                <div class="alert alert-danger text-center" role="alert">
+                    <h4>${requestScope.erreurDispo}</h4>
+                </div>
+            </c:if> 
+            <c:if test="${not empty requestScope.deleted}">
+                <div class="alert alert-success text-center" role="alert">
+                    <h4>${requestScope.deleted}</h4>
+                </div>
+            </c:if> 
+            <c:if test="${not empty requestScope.DispoCreer}">
+                <div class="mt-3 alert alert-success text-center" role="alert">
+                    <h4>${requestScope.DispoCreer}</h4>
+                </div>
+            </c:if> 
             <div class="card p-3">
 
                 <!-- LISTE DES TABS -->
@@ -36,11 +51,7 @@
                 <div class="tab-content" id="myTabContent">
                     <!-- TAB Definir -->
                     <div class="tab-pane fade show active" id="Definir" role="tabpanel" aria-labelledby="Definir-tab">
-                        <c:if test="${not empty requestScope.DispoCreer}">
-                            <div class="mt-3 alert alert-success text-center" role="alert">
-                                <h4>${requestScope.DispoCreer}</h4>
-                            </div>
-                        </c:if> 
+
                         <form class="p-2" action="disponibilite" method="GET">
                             <label  class="p-1">Date</label>
                             <input class="form-control" type="date" name="date" name="id" placeholder="YYYY-MM-DD hh:mm:ss">
@@ -123,17 +134,12 @@
                                     <td>${rV.patient_id}</td>
                                     <td>${rV.raison}</td>
                                     <td>${rV.description}</td>
-                                    <td><a data-toggle="modal" data-target="#exampleModal" href="<c:url value='?modifId=${patient.id}'/>"/>Modification</a>
+                                    <td><a data-toggle="modal" data-target="#exampleModal" href="<c:url value='?modifId=${rV.id}'/>"/>Modification</a>
                                     </td>
-                                    <td><a href="<c:url value='?deletedId=${patient.id}'/>"/>Delete</td>
+                                    <td><a href="<c:url value='?deletedId=${rV.id}'/>"/>Delete</td>
                                 </tr>
                             </c:forEach>
                         </table>
-                        <c:if test="${not empty requestScope.erreurDispo}">
-                            <div class="alert alert-danger text-center" role="alert">
-                                <h4>${requestScope.erreurDispo}</h4>
-                            </div>
-                        </c:if> 
                     </div>
                 </div>
             </div>

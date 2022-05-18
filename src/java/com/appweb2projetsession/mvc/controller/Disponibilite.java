@@ -38,22 +38,33 @@ public class Disponibilite extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
         HttpSession session = request.getSession(true);
         Medecin m = (Medecin) session.getAttribute("Medecin");
 
         String date = request.getParameter("date");
         String time = request.getParameter("time");
         String s1 = date + " " + time;
-        
+
+        String deletedId = request.getParameter("deletedId");
+        String modifId = request.getParameter("modifId");
+
         boolean create = false;
-        
+
         if (date != null && time != null) {
             create = RendezVousAction.create(new RendezVous(s1, m.getId()));
         }
-        
+
+        if (deletedId != null) {
+            boolean verifDelete = RendezVousAction.delete(Integer.parseInt(deletedId));
+            if (verifDelete) {
+                request.setAttribute("deleted", "Cette disponibilité a été supprimer avec succès!");
+            }
+        }
+
         List<RendezVous> listeRendezVousMedecin = RendezVousAction.findByMedecinId(m.getId());
-        
+
+        //Messages
         if (create) {
             request.setAttribute("DispoCreer", "Votre disponibilité a été ajoutée avec succès");
         }
