@@ -12,35 +12,29 @@ import com.appweb2projetsession.mvc.model.Patient;
 import com.appweb2projetsession.mvc.model.Profil;
 import java.awt.Desktop;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpSession;
 
 /**
+ * Classe qui permet d'afficher la page des patients du medecin, de voir les
+ * fichiers qu'il a recu de son patient et aussi d'envoyer des emails (Espace
+ * Medecin-Patient)
  *
  * @author Shajaan
+ * @Groupe 02
+ * @Remis_a Dini Ahamada
+ * @Cours 420-G26-RO
+ * @Date_de_remise 26 mai 2022
  */
-public class EspacePatient extends HttpServlet {
+public class EspacePatient extends AbstractAction {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-
+    @Override
+    public String execute() {
         boolean verif = false;
         request.setAttribute("verif", verif);
         String patient = request.getParameter("patient");
@@ -65,60 +59,32 @@ public class EspacePatient extends HttpServlet {
             //LIRE LE FICHIER ENVOYER
             List<Profil> lstProfil = ProfilAction.afficherPatientMedecin(Integer.parseInt(patient), medecin.getId());
             request.setAttribute("lstProfil", lstProfil);
-            
+
             for (Profil profil : lstProfil) {
 
                 File file = new File(profil.getNomFichier());
-                FileOutputStream output = new FileOutputStream(file);
-                System.out.println("Writing to file " + file.getAbsolutePath());
-                byte[] buffer = new byte[1024];
+                try {
+                    FileOutputStream output = null;
+                    output = new FileOutputStream(file);
 
-                while (profil.getContenuFichier().read(buffer) > 0) {
-                    output.write(buffer);
+                    System.out.println("Writing to file " + file.getAbsolutePath());
+                    byte[] buffer = new byte[1024];
+
+                    while (profil.getContenuFichier().read(buffer) > 0) {
+                        output.write(buffer);
+                    }
+
+                    Desktop.getDesktop().open(new File(file.getAbsolutePath()));
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(EspacePatient.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(EspacePatient.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                Desktop.getDesktop().open(new File(file.getAbsolutePath()));
             }
+            return "espacePatient";
+
         }
-        request.getRequestDispatcher("WEB-INF/jsp/espacePatient.jsp").forward(request, response);
+
+        return "espacePatient";
     }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }

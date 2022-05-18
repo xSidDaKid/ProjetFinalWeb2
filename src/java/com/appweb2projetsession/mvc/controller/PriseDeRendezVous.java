@@ -10,33 +10,22 @@ import com.appweb2projetsession.action.RendezVousAction;
 import com.appweb2projetsession.mvc.model.Patient;
 import com.appweb2projetsession.mvc.model.Medecin;
 import com.appweb2projetsession.mvc.model.RendezVous;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
+ * Classe qui permet a un patient de prendre un rendez-vous avec son medecin
  *
  * @author Shajaan
+ * @Groupe 02
+ * @Remis_a Dini Ahamada
+ * @Cours 420-G26-RO
+ * @Date_de_remise 26 mai 2022
  */
-public class PriseDeRendezVous extends HttpServlet {
+public class PriseDeRendezVous extends AbstractAction {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+    @Override
+    public String execute() {
         HttpSession session = request.getSession(false);
 
         //INFO FORMULAIRE
@@ -67,7 +56,7 @@ public class PriseDeRendezVous extends HttpServlet {
 
             if (rvCreer) {
                 request.setAttribute("rvCreer", "Votre rendez-vous a été ajoutée avec succès!");
-                
+
                 //LISTE DES RENDEZ-VOUS DU PATIENT
                 List<RendezVous> mesRV = RendezVousAction.findByPatientId(idPatient);
                 if (mesRV.isEmpty()) {
@@ -75,54 +64,11 @@ public class PriseDeRendezVous extends HttpServlet {
                 } else {
                     request.setAttribute("mesRV", mesRV);
                 }
-                request.getRequestDispatcher("WEB-INF/jsp/priseDeRendezVous.jsp").include(request, response);
-
+                return "priseDeRendezVous";
             }
-
         } catch (NullPointerException e) {
-            request.getRequestDispatcher("WEB-INF/jsp/priseDeRendezVous.jsp").include(request, response);
-
+            return "priseDeRendezVous";
         }
-
+        return "priseDeRendezVous";
     }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }

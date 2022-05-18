@@ -56,21 +56,21 @@
             <!-- Clinique -->
             <div class="col" align="center">
                 <div class="col-3 text-center">
-                    <img src="<c:url value="images/Clinique.png"/>" style="width: 100px;">
+                    <img src="<c:url value="./static/images/Clinique.png"/>" style="width: 100px;">
                     <h2 class="text-white text-center"><span id="clinique"></span><br>CLINIQUES</h2>
                 </div>
             </div>
             <!-- Medecin -->
             <div class="col " align="center">
                 <div class="col-3 text-center align-content-center" align="center">
-                    <img src="<c:url value="images/Medecin.png"/>" style="width: 100px;">
+                    <img src="<c:url value="./static/images/Medecin.png"/>" style="width: 100px;">
                     <h2 class="text-white"><span id="medecin"></span><br>MÉDECINS</h2>
                 </div>
             </div>
             <!-- Patient -->
             <div class="col" align="center">
                 <div class="col-3 text-center">
-                    <img src="<c:url value="images/Patient.png"/>" style="width: 100px;">
+                    <img src="<c:url value="./static/images/Patient.png"/>" style="width: 100px;">
                     <h2 class="text-white"><span id="patient"></span><br>PATIENTS</h2>
                 </div>
             </div>

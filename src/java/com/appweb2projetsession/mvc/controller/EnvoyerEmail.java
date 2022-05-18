@@ -10,76 +10,64 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.MessagingException;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
 /**
+ * Classe qui permet de traiter l'email envoyer par le medecin a son patient
  *
  * @author Shajaan
+ * @Groupe 02
+ * @Remis_a Dini Ahamada
+ * @Cours 420-G26-RO
+ * @Date_de_remise 26 mai 2022
  */
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
         maxFileSize = 1024 * 1024 * 10, // 10MB
         maxRequestSize = 1024 * 1024 * 50)		// 50MB
-public class EnvoyerEmail extends HttpServlet {
+public class EnvoyerEmail extends AbstractAction {
 
-    private String host;
-    private String port;
-    //On pourrait également initialisé l'email et le password ici:
-    private String user;
-    private String pass;
+    private String host = "";
+    private String port = "";
+    private String user = "";
+    private String pass = "";
 
     @Override
-    public void init() {
-        // lit les paramètres du serveur SMTP à partir du fichier web.xml
-        ServletContext context = getServletContext();
-        host = context.getInitParameter("host");
-        port = context.getInitParameter("port");
-        user = context.getInitParameter("user");
-        pass = context.getInitParameter("pass");
-    }
+    public String execute() {
+//        host = "smtp.gmail.com";
+//        port = "587";
+//        user = "expediteur@gmail.com";
+//        pass = "motdepassegenere";
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-
-        List<File> uploadedFiles = saveUploadedFiles(request);
-        // lit les champs du formulaire
+        List<File> uploadedFiles = null;
         String destinataire = request.getParameter("destinataire");
         String objet = request.getParameter("objet");
         String contenu = request.getParameter("contenu");
         String resultMessage = "L'email a été envoyé avec succès";
-
         try {
-            EmailUtility.sendEmail(host, port, user, pass, destinataire, objet, contenu, uploadedFiles);
-        } catch (MessagingException ex) {
-            resultMessage = "Il y a une erreur : " + ex.getMessage();
-            Logger.getLogger(EnvoyerEmail.class.getName()).log(Level.SEVERE, null, ex);
+            uploadedFiles = saveUploadedFiles(request);
 
+            // lit les champs du formulaire
+            EmailUtility.sendEmail(host, port, user, pass, destinataire, objet, contenu, uploadedFiles);
+        } catch (IllegalStateException ex) {
+            Logger.getLogger(EnvoyerEmail.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(EnvoyerEmail.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ServletException ex) {
+            Logger.getLogger(EnvoyerEmail.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             deleteUploadFiles(uploadedFiles);
             request.setAttribute("Message", resultMessage);
-            request.getRequestDispatcher("WEB-INF/jsp/emailForm.jsp").forward(request, response);
+//            request.getRequestDispatcher("WEB-INF/jsp/emailForm.jsp").forward(request, response);
+            return "emailForm";
         }
     }
 
@@ -145,44 +133,4 @@ public class EnvoyerEmail extends HttpServlet {
             }
         }
     }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }

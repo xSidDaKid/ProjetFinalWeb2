@@ -16,8 +16,8 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
 
-<link rel="stylesheet" href="css/style.css">
-<script src="js/script"></script>
+<link rel="stylesheet" href="./static/css/style.css">
+<script src="./static/js/script"></script>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %> 
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>

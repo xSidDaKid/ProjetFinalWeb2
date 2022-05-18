@@ -13,33 +13,21 @@ import com.appweb2projetsession.mvc.model.Clinique;
 import com.appweb2projetsession.mvc.model.Medecin;
 import com.appweb2projetsession.mvc.model.Patient;
 import com.appweb2projetsession.mvc.model.Utilisateur;
-import java.io.IOException;
-import java.util.Enumeration;
-import java.util.List;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
+ * Classe qui permet d'afficher la page de profile pour les utilisateurs
  *
  * @author Shajaan
+ * @Groupe 02
+ * @Remis_a Dini Ahamada
+ * @Cours 420-G26-RO
+ * @Date_de_remise 26 mai 2022
  */
-public class Profile extends HttpServlet {
+public class Profile extends AbstractAction {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+    @Override
+    public String execute() {
         HttpSession session = request.getSession(false);
 
         //INFO FORMULAIRE
@@ -75,11 +63,6 @@ public class Profile extends HttpServlet {
         String telephone = request.getParameter("telephone");
         String services = request.getParameter("services");
 
-        Enumeration<String> attributes = request.getSession().getAttributeNames();
-        while (attributes.hasMoreElements()) {
-            String attribute = (String) attributes.nextElement();
-            System.out.println("Profile Attributes List: " + attribute + " : " + request.getSession().getAttribute(attribute));
-        }
         try {
 
             if (session != null) {
@@ -101,14 +84,14 @@ public class Profile extends HttpServlet {
                         boolean verifP = PatientAction.update(patient = new Patient(patient.getId(), nomPatient, prenomPatient, nam, Integer.parseInt(nbSequentiel), dateNaissance, sexe.charAt(0), patient.getId_clinique(), patient.getId_medecin(), user.getId()));
                         if (verifP) {
                             session.setAttribute("Patient", patient);
-                            request.getRequestDispatcher("WEB-INF/jsp/home.jsp").include(request, response);
+                            return "home";
                         }
 
                     } else if (medecin != null) {
                         boolean verifM = MedecinAction.update(medecin = new Medecin(medecin.getId(), nomMedecin, prenomMedecin, profession, nbProfessionnel, ententes, adresse, lieuProfession, medecin.getId_clinique(), user.getId()));
                         if (verifM) {
                             session.setAttribute("Medecin", medecin);
-                            request.getRequestDispatcher("WEB-INF/jsp/home.jsp").include(request, response);
+                            return "home";
                         }
 
                     } else if (clinique != null) {
@@ -116,10 +99,10 @@ public class Profile extends HttpServlet {
                         System.out.println(verifC);
                         if (verifC) {
                             session.setAttribute("Clinique", clinique);
-                            request.getRequestDispatcher("WEB-INF/jsp/home.jsp").include(request, response);
+                            return "home";
                         }
                     }
-                    request.getRequestDispatcher("WEB-INF/jsp/profile.jsp").forward(request, response);
+                    return "profile";
 
                 } //MODIF-DELETE ADMIN
                 else if (session.getAttribute("username").equals("admin")) {
@@ -149,53 +132,14 @@ public class Profile extends HttpServlet {
                     }
 
                     session.setAttribute("userModif", userModier);
-                    request.getRequestDispatcher("WEB-INF/jsp/home.jsp").forward(request, response);
+                    return "home";
 
                 }
 
             }
         } catch (NumberFormatException | NullPointerException e) {
-            request.getRequestDispatcher("WEB-INF/jsp/profile.jsp").include(request, response);
+            return "profile";
         }
+        return "profile";
     }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }
