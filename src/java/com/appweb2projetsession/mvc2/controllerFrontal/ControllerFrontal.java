@@ -19,30 +19,13 @@ import javax.servlet.http.HttpServletResponse;
  * Le contrôleur frontal est une servlet configurée pour recevoir toutes les
  * requêtes
  *
- * @author dahamada
- * @author Shajaan
+ * @author Shajaan, dahamada
  * @Groupe 02
  * @Remis_a Dini Ahamada
  * @Cours 420-G26-RO
  * @Date_de_remise 26 mai 2022
  */
 public class ControllerFrontal extends HttpServlet {
-
-    private String host;
-    private String port;
-    //On pourrait également initialisé l'email et le password ici:
-    private String user;
-    private String pass;
-
-    @Override
-    public void init() {
-        // lit les paramètres du serveur SMTP à partir du fichier web.xml
-        ServletContext context = getServletContext();
-        host = context.getInitParameter("host");
-        port = context.getInitParameter("port");
-        user = context.getInitParameter("user");
-        pass = context.getInitParameter("pass");
-    }
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

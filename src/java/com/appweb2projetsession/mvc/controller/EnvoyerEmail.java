@@ -35,17 +35,17 @@ import javax.servlet.http.Part;
         maxRequestSize = 1024 * 1024 * 50)		// 50MB
 public class EnvoyerEmail extends AbstractAction {
 
-    private String host = "";
-    private String port = "";
-    private String user = "";
-    private String pass = "";
+    private String host;
+    private String port;
+    private String user;
+    private String pass;
 
     @Override
     public String execute() {
-//        host = "smtp.gmail.com";
-//        port = "587";
-//        user = "expediteur@gmail.com";
-//        pass = "motdepassegenere";
+        host = "smtp.gmail.com";
+        port = "587";
+        user = "expediteur@gmail.com";
+        pass = "motdepassegenere";
 
         List<File> uploadedFiles = null;
         String destinataire = request.getParameter("destinataire");
@@ -66,7 +66,6 @@ public class EnvoyerEmail extends AbstractAction {
         } finally {
             deleteUploadFiles(uploadedFiles);
             request.setAttribute("Message", resultMessage);
-//            request.getRequestDispatcher("WEB-INF/jsp/emailForm.jsp").forward(request, response);
             return "emailForm";
         }
     }

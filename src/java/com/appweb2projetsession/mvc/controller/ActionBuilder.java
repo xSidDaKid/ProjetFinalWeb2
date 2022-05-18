@@ -65,7 +65,7 @@ public class ActionBuilder {
                 action = new Admin();
                 break;
             case "profile":
-                action = new Admin();
+                action = new Profile();
                 break;
             case "priseDeRendezVous":
                 action = new PriseDeRendezVous();
