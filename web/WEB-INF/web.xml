@@ -167,10 +167,10 @@
     </context-param>
     <context-param>
         <param-name>user</param-name>
-        <param-value>xsiddakid@gmail.com</param-value>
+        <param-value>expediteur@gmail.com</param-value>
     </context-param>
     <context-param>
         <param-name>pass</param-name>
-        <param-value>caswmjeeyerezvoq</param-value>
+        <param-value>motdepassegenere</param-value>
     </context-param>
 </web-app>
