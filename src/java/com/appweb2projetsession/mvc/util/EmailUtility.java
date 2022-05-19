@@ -31,7 +31,7 @@ public class EmailUtility {
 
     public static void sendEmail(String host, String port,
             final String userName, final String password, String toAddress,
-            String subject, String message, List<File> attachedFiles) throws AddressException,
+            String subject, String message) throws AddressException,
             MessagingException,
             IOException {
 
@@ -72,19 +72,19 @@ public class EmailUtility {
         multipart.addBodyPart(messageBodyPart);
 
         // ajoute des pièces jointes
-        if (attachedFiles != null && attachedFiles.size() > 0) {
-            for (File aFile : attachedFiles) {
-                MimeBodyPart attachPart = new MimeBodyPart();
-
-                try {
-                    attachPart.attachFile(aFile);
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
-
-                multipart.addBodyPart(attachPart);
-            }
-        }
+//        if (attachedFiles != null && attachedFiles.size() > 0) {
+//            for (File aFile : attachedFiles) {
+//                MimeBodyPart attachPart = new MimeBodyPart();
+//
+//                try {
+//                    attachPart.attachFile(aFile);
+//                } catch (IOException ex) {
+//                    ex.printStackTrace();
+//                }
+//
+//                multipart.addBodyPart(attachPart);
+//            }
+//        }
 
         // définit la multi-partie comme contenu de l'e-mail
         msg.setContent(multipart);

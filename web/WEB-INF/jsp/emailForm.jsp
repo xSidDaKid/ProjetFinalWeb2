@@ -28,9 +28,9 @@
                     <div class="card m-3">
                         <div class="card-header text-center">Nouveau message</div>
                         <div class="card-body">
-                            <form action="envoyerEmail" method="post" enctype="multipart/form-data" class="p-2">
+                            <form action="envoyerEmail" method="get" enctype="multipart/form-data" class="p-2">
                                 <label>Destinataire:</label>
-                                <input class="form-control" type="email" name="destinataire" size="50" value="${user.email}" disabled/>
+                                <input class="form-control" type="email" name="destinataire" size="50" value="${user.email}"/>
 
                                 <label>Objet:</label>
                                 <input class="form-control" type="text" name="objet" size="50" required/>

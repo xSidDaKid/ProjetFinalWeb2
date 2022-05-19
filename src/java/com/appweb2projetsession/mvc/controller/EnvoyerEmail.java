@@ -19,6 +19,7 @@ import javax.mail.MessagingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 /**
@@ -44,27 +45,26 @@ public class EnvoyerEmail extends AbstractAction {
     public String execute() {
         host = "smtp.gmail.com";
         port = "587";
-        user = "expediteur@gmail.com";
-        pass = "motdepassegenere";
+        user = "dummyEmailDev87@gmail.com";
+        pass = "pens87712981";
 
-        List<File> uploadedFiles = null;
+       // List<File> uploadedFiles = new ArrayList<>();
         String destinataire = request.getParameter("destinataire");
         String objet = request.getParameter("objet");
         String contenu = request.getParameter("contenu");
         String resultMessage = "L'email a été envoyé avec succès";
+        
         try {
-            uploadedFiles = saveUploadedFiles(request);
+            //uploadedFiles = saveUploadedFiles(request);
 
             // lit les champs du formulaire
-            EmailUtility.sendEmail(host, port, user, pass, destinataire, objet, contenu, uploadedFiles);
+            EmailUtility.sendEmail(host, port, user, pass, destinataire, objet, contenu);
         } catch (IllegalStateException ex) {
             Logger.getLogger(EnvoyerEmail.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(EnvoyerEmail.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ServletException ex) {
-            Logger.getLogger(EnvoyerEmail.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            deleteUploadFiles(uploadedFiles);
+            //deleteUploadFiles(uploadedFiles);
             request.setAttribute("Message", resultMessage);
             return "emailForm";
         }
