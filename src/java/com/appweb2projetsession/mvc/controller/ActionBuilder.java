@@ -5,7 +5,9 @@
  */
 package com.appweb2projetsession.mvc.controller;
 
+import java.util.Enumeration;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * Classe qui permet de faire les redirections vers les pages jsp
@@ -19,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 public class ActionBuilder {
 
     public static Action getAction(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
         Action action = null;
         String actionAFaire;
         String servletPath = request.getServletPath();
@@ -43,6 +46,7 @@ public class ActionBuilder {
             case "":
                 action = new HomeServlet();
                 break;
+            //AJAX
             case "user":
                 action = new User();
                 break;
@@ -55,21 +59,7 @@ public class ActionBuilder {
             case "patient":
                 action = new PatientNombre();
                 break;
-            case "login":
-                action = new Login();
-                break;
-            case "logout":
-                action = new Logout();
-                break;
-            case "admin":
-                action = new Admin();
-                break;
-            case "profile":
-                action = new Profile();
-                break;
-            case "priseDeRendezVous":
-                action = new PriseDeRendezVous();
-                break;
+            //INSCRIPTION
             case "inscriptionUser":
                 action = new InscriptionUser();
                 break;
@@ -82,21 +72,71 @@ public class ActionBuilder {
             case "inscriptionClinique":
                 action = new InscriptionPatientServlet();
                 break;
-            case "espacePatient":
-                action = new EspacePatient();
+            //LOGIN-LOGOUT-PROFILE
+            case "login":
+                action = new Login();
                 break;
-            case "envoyerEmail":
-                action = new EnvoyerEmail();
+            case "logout":
+                action = new Logout();
                 break;
-            case "afficherPageEmail":
-                action = new AfficherPageEmail();
+            case "admin":
+                if (session.getAttribute("username") != null) {
+                    action = new Admin();
+                } else {
+                    action = new Login();
+                }
+                break;
+            case "profile":
+                if (session.getAttribute("User") != null) {
+                    action = new Profile();
+                } else {
+                    action = new Login();
+                }
+                break;
+            //OPTION PATIENT    
+            case "priseDeRendezVous":
+                if (session.getAttribute("Patient") != null) {
+                    action = new PriseDeRendezVous();
+                } else {
+                    action = new Login();
+                }
                 break;
             case "envoieInfo":
-                action = new EnvoieInfo();
+                if (session.getAttribute("Patient") != null) {
+                    action = new EnvoieInfo();
+                } else {
+                    action = new Login();
+                }
+                break;
+            //OPTION MEDECIN
+            case "espacePatient":
+                if (session.getAttribute("Medecin") != null) {
+                    action = new EspacePatient();
+                } else {
+                    action = new Login();
+                }
+                break;
+            case "afficherPageEmail":
+                if (session.getAttribute("Medecin") != null) {
+                    action = new AfficherPageEmail();
+                } else {
+                    action = new Login();
+                }
+                break;
+            case "envoyerEmail":
+                if (session.getAttribute("Medecin") != null) {
+                    action = new EnvoyerEmail();
+                } else {
+                    action = new Login();
+                }
                 break;
             case "disponibilite":
-                action = new Disponibilite();
-                break;
+                if (session.getAttribute("Medecin") != null) {
+                    action = new Disponibilite();
+                    break;
+                } else {
+                    action = new Login();
+                }
         }
         return action;
     }

@@ -15,7 +15,7 @@
 
             <!-- Pages Common A Tous -->
             <li class="nav-item active">
-                <a class="nav-link" href="home">Home</a>
+                <a class="nav-link" href="/AppWeb2ProjetSession/">Home</a>
             </li>
 
             <!-- Pages Admin -->

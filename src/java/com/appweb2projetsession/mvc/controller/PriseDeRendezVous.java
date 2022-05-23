@@ -45,7 +45,11 @@ public class PriseDeRendezVous extends AbstractAction {
         //LES DISPONIBILITES DU MEDECIN DU PATIENT
         List<RendezVous> rV = RendezVousAction.findByAvaiableDate(idMedecin);
         request.setAttribute("listeRendezVous", rV);
-
+        
+        //LISTE DES RENDEZ-VOUS DU PATIENT
+        List<RendezVous> mesRV = RendezVousAction.findByPatientId(idPatient);
+        request.setAttribute("mesRV", mesRV);
+        
         //LE RENDEZ-VOUS CHOISI PAR LE PATIENT
         try {
 
@@ -56,14 +60,6 @@ public class PriseDeRendezVous extends AbstractAction {
 
             if (rvCreer) {
                 request.setAttribute("rvCreer", "Votre rendez-vous a été ajoutée avec succès!");
-
-                //LISTE DES RENDEZ-VOUS DU PATIENT
-                List<RendezVous> mesRV = RendezVousAction.findByPatientId(idPatient);
-                if (mesRV.isEmpty()) {
-                    request.setAttribute("erreurRV", "Aucun rendez-vous a été pris");
-                } else {
-                    request.setAttribute("mesRV", mesRV);
-                }
                 return "priseDeRendezVous";
             }
         } catch (NullPointerException e) {
