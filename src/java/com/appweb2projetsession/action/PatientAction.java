@@ -26,21 +26,31 @@ public class PatientAction {
         Patient patient = dao.findById(id);
         return patient;
     }
+
     public static Patient findByIdUser(int id) {
         PatientImpDAO dao = new PatientImpDAO();
         Patient patient = dao.findByUserId(id);
         return patient;
     }
+
     public static List<Patient> findByIdMedecin(int id) {
         PatientImpDAO dao = new PatientImpDAO();
         List<Patient> patient = dao.findByMedecinId(id);
         return patient;
     }
+
+    public static List<Patient> findByIdClinique(int id) {
+        PatientImpDAO dao = new PatientImpDAO();
+        List<Patient> patient = dao.findByCliniqueId(id);
+        return patient;
+    }
+
     public static Patient findByNAM(String nam) {
         PatientImpDAO dao = new PatientImpDAO();
         Patient patient = dao.findByNAM(nam);
         return patient;
     }
+
     public static Patient findByNB(int nb) {
         PatientImpDAO dao = new PatientImpDAO();
         Patient patient = dao.findByNbSequentiel(nb);

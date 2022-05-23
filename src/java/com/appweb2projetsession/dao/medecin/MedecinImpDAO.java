@@ -25,6 +25,7 @@ public class MedecinImpDAO implements MedecinDAO {
     private static final String SQL_SELECT = "SELECT * FROM medecin";
     private static final String SQL_SELECT_PAR_ID = "SELECT * FROM medecin where id = ?";
     private static final String SQL_SELECT_PAR_IDUSER = "SELECT * FROM medecin where utilisateur_id = ?";
+    private static final String SQL_SELECT_PAR_IDCLINIQUE = "SELECT * FROM medecin where clinique_id = ?";
     private static final String SQL_INSERT = "INSERT INTO medecin (nom,prenom,profession,nbProfessionnel,ententes,adresse,lieuProfession,clinique_id,utilisateur_id) value (?,?,?,?,?,?,?,?,?)";
     private static final String SQL_DELETE = "DELETE FROM medecin WHERE id = ?";
     private static final String SQL_UPDATE = "UPDATE medecin SET nom = ?, prenom = ?, profession = ?,  nbProfessionnel = ?,  ententes = ?,  adresse = ?, lieuProfession = ?, clinique_id = ?, utilisateur_id = ? WHERE id = ?";
@@ -120,6 +121,39 @@ public class MedecinImpDAO implements MedecinDAO {
         }
         ConnexionBD.closeConnection();
         return m1;
+    }
+
+    @Override
+    public List<Medecin> findByIdClinique(int id) {
+        List<Medecin> listeMedecin = null;
+
+        try {
+            PreparedStatement ps = ConnexionBD.getConnection().prepareStatement(SQL_SELECT_PAR_IDCLINIQUE);
+            ps.setInt(1, id);
+            ResultSet result = ps.executeQuery();
+            
+            listeMedecin = new ArrayList<>();
+            
+            while (result.next()) {
+                Medecin m1 = new Medecin();
+                m1.setId(result.getInt("id"));
+                m1.setNom(result.getString("nom"));
+                m1.setPrenom(result.getString("prenom"));
+                m1.setProfession(result.getString("profession"));
+                m1.setNbProfessionnel(result.getString("nbProfessionnel"));
+                m1.setEntentes(result.getString("ententes"));
+                m1.setAdresse(result.getString("adresse"));
+                m1.setLieuProfession(result.getString("lieuProfession"));
+                m1.setId_clinique(result.getInt("clinique_id"));
+                m1.setId_user(result.getInt("utilisateur_id"));
+                listeMedecin.add(m1);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(MedecinImpDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ConnexionBD.closeConnection();
+        return listeMedecin;
     }
 
     @Override

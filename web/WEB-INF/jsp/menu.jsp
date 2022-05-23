@@ -50,6 +50,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href=""></a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="infoClinique">Informations Clinique</a>
+                </li>
             </c:if>
         </ul>
     </div>

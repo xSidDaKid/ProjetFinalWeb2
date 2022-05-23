@@ -22,6 +22,8 @@ public interface PatientDAO {
 
     List<Patient> findByMedecinId(int id);
 
+    List<Patient> findByCliniqueId(int id);
+
     Patient findByNAM(String nam);
 
     Patient findByNbSequentiel(int nb);

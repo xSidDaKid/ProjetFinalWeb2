@@ -137,6 +137,14 @@ public class ActionBuilder {
                 } else {
                     action = new Login();
                 }
+            //OPTION CLINIQUE
+            case "infoClinique":
+                if (session.getAttribute("Clinique") != null) {
+                    action = new InfoClinique();
+                } else {
+                    action = new Login();
+                }
+                break;
         }
         return action;
     }

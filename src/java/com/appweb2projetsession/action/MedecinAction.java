@@ -33,6 +33,12 @@ public class MedecinAction {
         return medecin;
     }
 
+    public static List<Medecin> findByIdClinique(int id) {
+        MedecinImpDAO dao = new MedecinImpDAO();
+        List<Medecin> listeMedecin = dao.findByIdClinique(id);
+        return listeMedecin;
+    }
+
     public static boolean delete(int id) {
         MedecinImpDAO dao = new MedecinImpDAO();
         boolean verif = dao.delete(id);

@@ -20,6 +20,8 @@ public interface MedecinDAO {
 
     Medecin findByIdUser(int id);
 
+    List<Medecin> findByIdClinique(int id);
+
     boolean create(Medecin clinique);
 
     boolean delete(int id);

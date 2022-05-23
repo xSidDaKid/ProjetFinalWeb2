@@ -26,6 +26,7 @@ public class PatientImpDAO implements PatientDAO {
     private static final String SQL_SELECT_PAR_ID = "SELECT * FROM patient where id = ?";
     private static final String SQL_SELECT_PAR_USERID = "SELECT * FROM patient where utilisateur_id = ?";
     private static final String SQL_SELECT_PAR_MEDECINID = "SELECT * FROM patient where medecin_id = ?";
+    private static final String SQL_SELECT_PAR_CLINIQUEID = "SELECT * FROM patient where clinique_id = ?";
     private static final String SQL_SELECT_PAR_NAM = "SELECT * FROM patient where nam = ?";
     private static final String SQL_SELECT_PAR_NB = "SELECT * FROM patient where nbSequentiel = ?";
     private static final String SQL_INSERT = "INSERT INTO patient (nom, prenom, nam, nbSequentiel, dateNaissance, sexe, clinique_id, medecin_id, utilisateur_id) value (?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -237,6 +238,39 @@ public class PatientImpDAO implements PatientDAO {
 
         try {
             PreparedStatement ps = ConnexionBD.getConnection().prepareStatement(SQL_SELECT_PAR_MEDECINID);
+            ps.setInt(1, id);
+            ResultSet result = ps.executeQuery();
+
+            listePatient = new ArrayList<>();
+
+            while (result.next()) {
+                Patient p1 = new Patient();
+                p1.setId(result.getInt("id"));
+                p1.setNom(result.getString("nom"));
+                p1.setPrenom(result.getString("prenom"));
+                p1.setNam(result.getString("nam"));
+                p1.setNbSequentiel(result.getInt("nbSequentiel"));
+                p1.setDateNaissance(result.getString("dateNaissance"));
+                p1.setSexe(result.getString("sexe").charAt(0));
+                p1.setId_clinique(result.getInt("clinique_id"));
+                p1.setId_medecin(result.getInt("medecin_id"));
+                p1.setId_user(result.getInt("utilisateur_id"));
+                listePatient.add(p1);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PatientImpDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ConnexionBD.closeConnection();
+        return listePatient;
+    }
+
+    @Override
+    public List<Patient> findByCliniqueId(int id) {
+        List<Patient> listePatient = null;
+
+        try {
+            PreparedStatement ps = ConnexionBD.getConnection().prepareStatement(SQL_SELECT_PAR_CLINIQUEID);
             ps.setInt(1, id);
             ResultSet result = ps.executeQuery();
 
