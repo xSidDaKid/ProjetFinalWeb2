@@ -24,24 +24,26 @@ public class ActionBuilder {
         HttpSession session = request.getSession(false);
         Action action = null;
         String actionAFaire;
+
         String servletPath = request.getServletPath();
-        System.out.println("servletPath : " + servletPath);
         servletPath = servletPath.substring(1);//ignore le premier /
-        System.out.println("servletPath 1 : " + servletPath);
+
         //determiner le chemin
         int i = servletPath.indexOf("/");
+
         if (i == -1) {
             actionAFaire = servletPath;
         } else {
             actionAFaire = servletPath.substring(0, i);
         }
+
         //pour permettre que le nom de l'action soit suivie du
         // symbole point (.):
         i = actionAFaire.indexOf(".");
         if (i != -1) {
             actionAFaire = actionAFaire.substring(0, i);
         }
-        System.out.println("Action a faire = " + actionAFaire);
+       
         switch (actionAFaire) {
             case "":
                 action = new HomeServlet();
