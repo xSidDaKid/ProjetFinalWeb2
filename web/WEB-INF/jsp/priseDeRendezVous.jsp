@@ -15,6 +15,11 @@
     <body>
         <jsp:include page="menu.jsp"/>
         <div class="container mt-3 p-2">
+            <c:if test="${not empty requestScope.deletedDispo}">
+                <div class="alert alert-success text-center" role="alert">
+                    <h4>${requestScope.deletedDispo}</h4>
+                </div>
+            </c:if> 
             <div class="card p-3">
 
                 <!-- LISTE DES TABS -->
@@ -88,9 +93,9 @@
                                         <td>${rV.patient_id}</td>
                                         <td>${rV.raison}</td>
                                         <td>${rV.description}</td>
-                                        <td><a data-toggle="modal" data-target="#exampleModal" href="<c:url value='?modifId=${patient.id}'/>"/>Modification</a>
+                                        <td><a data-toggle="modal" data-target="#exampleModal" href="<c:url value='?modifRvId=${rV.id}'/>"/>Modification</a>
                                         </td>
-                                        <td><a href="<c:url value='?deletedId=${patient.id}'/>"/>Delete</td>
+                                        <td><a href="<c:url value='?deleteRvId=${rV.id}'/>"/>Delete</td>
                                     </tr>
                                 </c:forEach>
                             </tbody>

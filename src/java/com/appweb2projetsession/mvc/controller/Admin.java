@@ -79,7 +79,7 @@ public class Admin extends AbstractAction {
 
             //VERIFICATION DE LA FONCTION DELETE
             if (verifPatient) {
-                request.setAttribute("erreurDeleteSucces", "Cet element a ete supprime avec succes");
+                request.setAttribute("erreurDeleteSucces", "Cet élément a été supprimé avec succès");
             } else {
                 request.setAttribute("erreurDelete", "Cet element ne peut pas etre supprimer");
             }

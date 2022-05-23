@@ -33,6 +33,9 @@ public class PriseDeRendezVous extends AbstractAction {
         String description = request.getParameter("description");
         String date = request.getParameter("date");
 
+        String deleteRvId = request.getParameter("deleteRvId");
+        String modifRvId = request.getParameter("modifRvId");
+
         //LE PATIENT QUI VEUT UN RENDEZ-VOUS :)
         Patient patient = (Patient) session.getAttribute("Patient");
         int idPatient = patient.getId();
@@ -45,24 +48,52 @@ public class PriseDeRendezVous extends AbstractAction {
         //LES DISPONIBILITES DU MEDECIN DU PATIENT
         List<RendezVous> rV = RendezVousAction.findByAvaiableDate(idMedecin);
         request.setAttribute("listeRendezVous", rV);
-        
+
         //LISTE DES RENDEZ-VOUS DU PATIENT
         List<RendezVous> mesRV = RendezVousAction.findByPatientId(idPatient);
         request.setAttribute("mesRV", mesRV);
-        
-        //LE RENDEZ-VOUS CHOISI PAR LE PATIENT
-        try {
 
+        if (deleteRvId != null) {
+            boolean verifDelete = RendezVousAction.delete(Integer.parseInt(deleteRvId));
+            mesRV = RendezVousAction.findByPatientId(idPatient);
+            if (verifDelete) {
+                request.setAttribute("deletedDispo", "Cet élément a été supprimé avec succès");
+                request.setAttribute("mesRV", mesRV);
+                return "priseDeRendezVous";
+            }
+        }
+        try {
+            //LE RENDEZ-VOUS CHOISI PAR LE PATIENT
             RendezVous rVChoisi = RendezVousAction.findByDate(date);
             int idRvChoisi = rVChoisi.getId();
             RendezVous nouveau = new RendezVous(idRvChoisi, date, idMedecin, idPatient, raison, description);
             boolean rvCreer = RendezVousAction.update(nouveau);
 
             if (rvCreer) {
+                mesRV = RendezVousAction.findByPatientId(idPatient);
+                request.setAttribute("mesRV", mesRV);
                 request.setAttribute("rvCreer", "Votre rendez-vous a été ajoutée avec succès!");
                 return "priseDeRendezVous";
             }
-        } catch (NullPointerException e) {
+
+//            if (modifRvId != null) {
+//                RendezVous modif = RendezVousAction.findById(Integer.parseInt(modifRvId));
+//                request.setAttribute("modif", modif);
+//                System.out.println("TEST");
+//                boolean verifModif = RendezVousAction.update(new RendezVous(Integer.parseInt(modifRvId), date, idMedecin, idPatient, raison, description));
+//                RendezVousAction.delete(Integer.parseInt(modifRvId));
+//                System.out.println(verifModif);
+//                if (verifModif) {
+//                    mesRV = RendezVousAction.findByPatientId(idPatient);
+//                    request.setAttribute("rvCreer", "Votre rendez-vous a été ajoutée avec succès!");
+//                    request.setAttribute("mesRV", mesRV);
+//                    System.out.println("TEST");
+//                    return "priseDeRendezVous";
+//                }
+//            }
+        } catch (Exception e) {
+            rV = RendezVousAction.findByAvaiableDate(idMedecin);
+            request.setAttribute("listeRendezVous", rV);
             return "priseDeRendezVous";
         }
         return "priseDeRendezVous";
