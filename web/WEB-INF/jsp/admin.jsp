@@ -220,7 +220,7 @@
                                     <tr>
                                         <td>${user.id}</td>
                                         <td>${user.username}</td>
-                                        <td>${user.password}</td>
+                                        <td style="-webkit-text-security: disc;">${user.password}</td>
                                         <td>${user.email}</td>
                                         <td>${user.role}</td>
                                         <td>

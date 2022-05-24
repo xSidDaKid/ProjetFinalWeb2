@@ -39,7 +39,7 @@ public class Login extends AbstractAction {
             if (email.equals("admin") && password.equals("admin")) {
                 session.setAttribute("username", "admin");
                 session.setAttribute("role", "admin");
-                return "admin";
+                return "home";
             } else {
                 Utilisateur u = UtilisateurAction.connexion(email, password);
 
