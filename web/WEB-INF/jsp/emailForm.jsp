@@ -26,7 +26,7 @@
                         </div>
                     </c:if> 
                     <div class="card m-3">
-                        <div class="card-header text-center">Nouveau message</div>
+                        <div class="card-header text-center" style="font-size: 150%"><strong>Nouveau message</strong></div>
                         <div class="card-body">
                             <form action="envoyerEmail" method="get" enctype="multipart/form-data" class="p-2">
                                 <label>Destinataire:</label>
@@ -38,9 +38,9 @@
                                 <label>Contenu :</label>
                                 <textarea class="form-control" rows="10" cols="39" name="contenu" required>${lstRV}</textarea>
 
-                                <label>Attacher fichier </label>
+<!--                                <label>Attacher fichier </label>
                                 <input class="form-control" type="file" name="file" size="50"/>
-
+-->
                                 <input class="btn btn-primary p-2 mt-2" type="submit" value="Envoyer"/>
 
                             </form>

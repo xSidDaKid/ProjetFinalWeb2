@@ -19,8 +19,8 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-6 col-lg-5">
-                    <div class="card mt-3">
-                        <div class="card-header text-center">Inscription Clinique</div>
+                    <div class="card m-3">
+                        <div class="card-header text-center" style="font-size: 150%"><strong>Inscription Clinique</strong></div>
                         <div class="card-body">
                             <div>
                                 <c:if test="${not empty requestScope.existe}">
@@ -31,23 +31,23 @@
                             </div>
                             <form id="signupForm" method="get" class="form-horizontal p-2" action="inscriptionClinique">
                                 <div class="form-row">
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group col-md-6 p-1">
                                         <label for="nom">Nom:</label>
                                         <input type="text" class="form-control" name="nom" placeholder="Nom de la clinique" required>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group p-1">
                                         <label for="adresse">Address:</label>
                                         <input type="text" class="form-control" name="adresse" placeholder="1234 Main St" required>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group p-1">
                                         <label for="tel">Telephone:</label>
                                         <input type="tel" class="form-control" name="tel" placeholder="514-784-8542" required>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group p-1">
                                         <label for="services">Services:</label>
                                         <input type="text" class="form-control" name="services" placeholder="Tests diagnostiques" required>
                                     </div>
-                                    <button type="submit" class="btn btn-primary">Inscrire</button>
+                                    <button type="submit" class="btn btn-primary mt-2">Inscrire</button>
                                 </div>
                             </form>
                         </div>

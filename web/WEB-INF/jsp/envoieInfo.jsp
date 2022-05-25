@@ -18,7 +18,7 @@
             <div class="row">
                 <div class="col">
                     <div class="card">
-                        <div class="card-header">Envoie d'info</div>
+                        <div class="card-header text-center" style="font-size: 150%"><strong>Envoie d'info</strong></div>
                         <div class="card-body">
                             <form action="envoieInfo" method="POST" enctype="multipart/form-data">
                                 <div class="form-group">

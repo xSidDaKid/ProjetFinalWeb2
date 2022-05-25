@@ -25,14 +25,28 @@
         <jsp:include page="menu.jsp"/>
         <div class="container mt-3 p-2">
             <div class="card">
-                <div class="card-header text-center"><strong>Bienvenue au clinique ${sessionScope.Clinique.nom}</strong></div>
+                <div class="card-header text-center" style="font-size: 150%"><strong>Bienvenue au clinique ${sessionScope.Clinique.nom}</strong></div>
                 <div class="card-body">
-                    <div>
-                    Nom: ${sessionScope.Clinique.nom}<br>
-                    Adresse: ${sessionScope.Clinique.adresse}<br>
-                    Numéro de téléphone: ${sessionScope.Clinique.tel}<br>
-                    Services: ${sessionScope.Clinique.services}<br>
-                    </div>
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <th>Nom</th>    
+                                <td>${sessionScope.Clinique.nom}</td>
+                            </tr>
+                            <tr>
+                                <th>Adresse</th>    
+                                <td>${sessionScope.Clinique.adresse}</td>
+                            </tr>
+                            <tr>
+                                <th>Numéro de téléphone</th>    
+                                <td>${sessionScope.Clinique.tel}</td>
+                            </tr>
+                            <tr>
+                                <th>Services</th>    
+                                <td>${sessionScope.Clinique.services}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                     <hr>
                     <!-- LISTE DES TABS -->
                     <ul class="nav nav-tabs" id="myTab" role="tablist">

@@ -22,11 +22,11 @@
                         <c:when test="${verif == false}">
                             <!--CHOIX DU PATIENT-->
                             <div class="card">
-                                <div class="card-header">Liste de mes patients</div>
+                                <div class="card-header" style="font-size: 150%"><strong>Liste de mes patients</strong></div>
                                 <div class="card-body">
-                                    <ul>
+                                    <ul class="list-group">
                                         <c:forEach items="${listePatient}" var="patient">
-                                            <li>
+                                            <li class="list-group-item list-group-item-dark">
                                                 <a href="<c:url value='?patient=${patient.id}'/>">${patient.id} - ${patient.nom} ${patient.prenom}</a>
                                             </li>
                                         </c:forEach>
@@ -37,8 +37,9 @@
                         <c:otherwise>
                             <!-- INFO PATIENT -->
                             <div class="card">
-                                <div class="card-header">Patient #${infoPatient.id} - ${infoPatient.nom} ${infoPatient.prenom}</div>
+                                <div class="card-header" style="font-size: 150%"><strong>Patient #${infoPatient.id} - ${infoPatient.nom} ${infoPatient.prenom}</strong></div>
                                 <div class="card-body">
+                                    <button class="btn btn-primary mb-3"><a class="text-white" href="afficherPageEmail">Envoyer un email au patient</a></button>
                                     <table class="table table-bordered">
                                         <tbody>
                                             <tr>
@@ -59,7 +60,7 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                            <button class="btn btn-primary "><a class="text-white" href="afficherPageEmail">Envoyer un email</a></button>
+                                            
                                     <hr>
                                     <form method="GET" action="espacePatient">
                                         <table id="profil" class="table table-bordered">

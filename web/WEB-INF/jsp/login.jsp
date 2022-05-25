@@ -24,7 +24,7 @@
                             </div>
                         </c:if>
                         <div class="card">
-                            <div class="card-header text-center"><strong>Login</strong></div>
+                            <div class="card-header text-center" style="font-size: 150%"><strong>Login</strong></div>
                             <div class="card-body">
                                 <form action="login" method="POST">
                                     <div class="form-group p-2">

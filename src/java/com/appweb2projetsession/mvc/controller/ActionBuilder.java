@@ -69,10 +69,10 @@ public class ActionBuilder {
                 action = new InscriptionPatientServlet();
                 break;
             case "inscriptionMedecin":
-                action = new InscriptionPatientServlet();
+                action = new InscriptionMedecin();
                 break;
             case "inscriptionClinique":
-                action = new InscriptionPatientServlet();
+                action = new InscriptionCliniqueServlet();
                 break;
             //LOGIN-LOGOUT-PROFILE
             case "login":

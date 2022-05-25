@@ -49,6 +49,9 @@ public class Admin extends AbstractAction {
         List<Utilisateur> listeUtilisateur = UtilisateurAction.findAll();
 
         //Messages d'erreurs---
+        String erreurDeleteSucces = "Cet élément a été supprimé avec succès";
+        String erreurDelete = "Cet élément ne peut pas être supprimé";
+        
         if (listePatient.isEmpty()) {
             request.setAttribute("erreurP", "La liste est vide");
         } else {
@@ -79,9 +82,9 @@ public class Admin extends AbstractAction {
 
             //VERIFICATION DE LA FONCTION DELETE
             if (verifPatient) {
-                request.setAttribute("erreurDeleteSucces", "Cet élément a été supprimé avec succès");
+                request.setAttribute("erreurDeleteSucces", erreurDeleteSucces);
             } else {
-                request.setAttribute("erreurDelete", "Cet element ne peut pas etre supprimer");
+                request.setAttribute("erreurDelete", erreurDelete);
             }
 
             //AFFICHER APRES SUPPRESSION
@@ -105,9 +108,9 @@ public class Admin extends AbstractAction {
 
             //VERIFICATION DE LA FONCTION DELETE
             if (verifMedecin) {
-                request.setAttribute("erreurDeleteSucces", "Cet element a ete supprime avec succes");
+                request.setAttribute("erreurDeleteSucces", erreurDeleteSucces);
             } else {
-                request.setAttribute("erreurDelete", "Cet element ne peut pas etre supprimer");
+                request.setAttribute("erreurDelete", erreurDelete);
             }
 
             //AFFICHER APRES SUPPRESSION
@@ -131,9 +134,9 @@ public class Admin extends AbstractAction {
 
             //VERIFICATION DE LA FONCTION DELETE
             if (verifClinique) {
-                request.setAttribute("erreurDeleteSucces", "Cet element a ete supprime avec succes");
+                request.setAttribute("erreurDeleteSucces", erreurDeleteSucces);
             } else {
-                request.setAttribute("erreurDelete", "Cet element ne peut pas etre supprimer");
+                request.setAttribute("erreurDelete", erreurDelete);
             }
 
             //AFFICHER APRES SUPPRESSION
@@ -155,9 +158,9 @@ public class Admin extends AbstractAction {
 
             //VERIFICATION DE LA FONCTION DELETE
             if (verifUser) {
-                request.setAttribute("erreurDeleteSucces", "Cet element a ete supprime avec succes");
+                request.setAttribute("erreurDeleteSucces", erreurDeleteSucces);
             } else {
-                request.setAttribute("erreurDelete", "Cet element ne peut pas etre supprimer");
+                request.setAttribute("erreurDelete", erreurDelete);
             }
 
             //AFFICHER APRES SUPPRESSION

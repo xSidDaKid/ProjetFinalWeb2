@@ -15,13 +15,13 @@
     </head>
     <body>
         <jsp:include page="menu.jsp"/>
-        <div class="container-xl px-4 mt-4">
+        <div class="container-xl px-4 m-4">
             <div class="row">
                 <div class="col-xl-2">
                 </div>
                 <div class="col-xl-8">
                     <div class="card mb-4">
-                        <div class="card-header text-center">Bonjour ${sessionScope.Medecin.nom} ${sessionScope.Medecin.prenom} ${sessionScope.Clinique.nom} ${sessionScope.Patient.nom} ${sessionScope.Patient.prenom} ${sessionScope.username}!!</div>
+                        <div class="card-header text-center" style="font-size: 150%"><strong>Bonjour ${sessionScope.Medecin.nom} ${sessionScope.Medecin.prenom} ${sessionScope.Clinique.nom} ${sessionScope.Patient.nom} ${sessionScope.Patient.prenom} ${sessionScope.username}!!</strong></div>
                         <div class="card-body">
                             <form action="profile" method="GET">
                                 <!-- Form User -->
@@ -134,7 +134,7 @@
                                                 <label class="small mb-1">Lieu de profession</label>
                                                 <input class="form-control" type="text" value="${sessionScope.Medecin.lieuProfession}${medecinModif.lieuProfession}" name="lieuProfession">
                                             </div>
-                                             <div class="mb-3" hidden>
+                                            <div class="mb-3" hidden>
                                                 <label class="small mb-1">Id Clinique</label>
                                                 <input class="form-control" type="text" value="${sessionScope.medecinModif.id_clinique}" name="id_clinique_medecin" disabled>
                                             </div>
@@ -165,10 +165,11 @@
                                         </div>
                                     </c:when>
                                 </c:choose>
-                                            <button class="btn btn-primary" type="submit">Save changes</button>
+                                <button class="btn btn-primary" type="submit">Save changes</button>
                             </form>
                         </div>
                     </div>
+                                            <br>
                 </div>
             </div>
         </div>

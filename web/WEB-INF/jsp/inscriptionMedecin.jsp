@@ -25,7 +25,7 @@
             <div class="row justify-content-center">
                 <div class="col-md-6 col-lg-5">
                     <div class="card m-3">
-                        <div class="card-header text-center">Inscription Medecin</div>
+                        <div class="card-header text-center" style="font-size: 150%"><strong>Inscription Medecin</strong></div>
                         <div class="card-body">
                             <div>
                                 <c:if test="${not empty requestScope.existeNAM}">

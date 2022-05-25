@@ -62,12 +62,12 @@
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
             <c:choose>
                 <c:when test="${ not empty sessionScope.username }">
-                    ${sessionScope.User.username}
+                    
                     ${sessionScope.username }
                 </c:when>
                 <c:when test="${not empty sessionScope.User }">
                     ${sessionScope.User.username}
-                    ${sessionScope.username }
+                    
                 </c:when>
                 <c:otherwise>
                     Bonjour!
