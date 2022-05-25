@@ -19,7 +19,7 @@
             <div class="row justify-content-center">
                 <div class="col-md-6 col-lg-5">
                     <div class="card mt-3">
-                        <div class="card-header text-center" style="font-size: 150%"><strong>Inscription Utilisateur</strong></div>
+                        <div class="card-header text-center" style="font-size: 150%"><img src="<c:url value="./static/images/form.png"/>" style="width: 30px;"><strong> Inscription Utilisateur</strong></div>
                         <div class="card-body">
                             <div>
                                 <c:if test="${not empty requestScope.existe}">

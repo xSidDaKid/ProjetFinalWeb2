@@ -31,7 +31,7 @@
         </div>
         <!-- BIENVENUE -->
         <div class="container text-center mt-2">
-            <div class="row" style="background-color:#1f4071;">
+            <div class="row rounded" style="background-color:#1f4071;">
                 <h1 class="text-center text-white">Bienvenue!</h1>
                 <h3 class="text-center text-white">Des cliniques, des médecins et des patients peuvent s'inscrire pour pouvoir faire des rendez-vous très rapide et simple. Inscrivez-vous dès maintenant!</h3>
             </div>
@@ -50,7 +50,7 @@
             </div>
         </c:if>
         <!-- NOMBRE DE UTILISATEUR/CLINIQUE/MEDECIN/PATIENT -->
-        <div class="row m-1 p-2" style="background-color:#1f4071;">
+        <div class="row m-1 p-2 rounded" style="background-color:#1f4071;">
             <h2 class="text-center text-white p-2">Déjà <span id="user"></span> utilisateurs!</h2> 
             <br>
             <!-- Clinique -->
@@ -80,7 +80,7 @@
             <div class="row">
                 <div class="col-sm-6">
                     <div class="card">
-                        <div class="card-header text-center"><strong>Heure d'ouverture</strong></div>
+                        <div class="card-header text-center"><img src="<c:url value="./static/images/clock.png"/>" style="width: 30px;"><strong> Heure d'ouverture</strong></div>
                         <div class="card-body">
                             <table class="overview">
                                 <tbody>
@@ -119,7 +119,7 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="card">
-                        <div class="card-header text-center"><strong>Contact</strong></div>
+                        <div class="card-header text-center"><img src="<c:url value="./static/images/contact.png"/>" style="width: 30px;"><strong> Contact</strong></div>
                         <div class="card-body">
                             <section id="contacts" class="section">
 
