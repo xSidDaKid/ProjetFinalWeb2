@@ -31,7 +31,10 @@ public class Admin extends AbstractAction {
     @Override
     public String execute() {
         HttpSession session = request.getSession(false);
-
+        boolean langEN = false;
+        if (session.getAttribute("lang").equals("en")) {
+            langEN = true;
+        }
         String deletePatientId = request.getParameter("deletePatientId");
         String deleteMedecinId = request.getParameter("deleteMedecinId");
         String deleteCliniqueId = request.getParameter("deleteCliniqueId");
@@ -50,8 +53,10 @@ public class Admin extends AbstractAction {
 
         //Messages d'erreurs---
         String erreurDeleteSucces = "Cet élément a été supprimé avec succès";
+        String erreurDeleteSucces2 = "Deleted!";
         String erreurDelete = "Cet élément ne peut pas être supprimé";
-        
+        String erreurDelete2 = "Can't delete";
+
         if (listePatient.isEmpty()) {
             request.setAttribute("erreurP", "La liste est vide");
         } else {
@@ -82,9 +87,17 @@ public class Admin extends AbstractAction {
 
             //VERIFICATION DE LA FONCTION DELETE
             if (verifPatient) {
-                request.setAttribute("erreurDeleteSucces", erreurDeleteSucces);
+                if (langEN) {
+                    request.setAttribute("erreurDeleteSucces", erreurDeleteSucces2);
+                } else {
+                    request.setAttribute("erreurDeleteSucces", erreurDeleteSucces);
+                }
             } else {
-                request.setAttribute("erreurDelete", erreurDelete);
+                if (langEN) {
+                    request.setAttribute("erreurDelete", erreurDelete2);
+                } else {
+                    request.setAttribute("erreurDelete", erreurDelete);
+                }
             }
 
             //AFFICHER APRES SUPPRESSION
@@ -108,9 +121,17 @@ public class Admin extends AbstractAction {
 
             //VERIFICATION DE LA FONCTION DELETE
             if (verifMedecin) {
-                request.setAttribute("erreurDeleteSucces", erreurDeleteSucces);
+                if (langEN) {
+                    request.setAttribute("erreurDeleteSucces", erreurDeleteSucces2);
+                } else {
+                    request.setAttribute("erreurDeleteSucces", erreurDeleteSucces);
+                }
             } else {
-                request.setAttribute("erreurDelete", erreurDelete);
+                if (langEN) {
+                    request.setAttribute("erreurDelete", erreurDelete2);
+                } else {
+                    request.setAttribute("erreurDelete", erreurDelete);
+                }
             }
 
             //AFFICHER APRES SUPPRESSION
@@ -134,9 +155,17 @@ public class Admin extends AbstractAction {
 
             //VERIFICATION DE LA FONCTION DELETE
             if (verifClinique) {
-                request.setAttribute("erreurDeleteSucces", erreurDeleteSucces);
+                if (langEN) {
+                    request.setAttribute("erreurDeleteSucces", erreurDeleteSucces2);
+                } else {
+                    request.setAttribute("erreurDeleteSucces", erreurDeleteSucces);
+                }
             } else {
-                request.setAttribute("erreurDelete", erreurDelete);
+                if (langEN) {
+                    request.setAttribute("erreurDelete", erreurDelete2);
+                } else {
+                    request.setAttribute("erreurDelete", erreurDelete);
+                }
             }
 
             //AFFICHER APRES SUPPRESSION
@@ -158,9 +187,17 @@ public class Admin extends AbstractAction {
 
             //VERIFICATION DE LA FONCTION DELETE
             if (verifUser) {
-                request.setAttribute("erreurDeleteSucces", erreurDeleteSucces);
+                if (langEN) {
+                    request.setAttribute("erreurDeleteSucces", erreurDeleteSucces2);
+                } else {
+                    request.setAttribute("erreurDeleteSucces", erreurDeleteSucces);
+                }
             } else {
-                request.setAttribute("erreurDelete", erreurDelete);
+                if (langEN) {
+                    request.setAttribute("erreurDelete", erreurDelete2);
+                } else {
+                    request.setAttribute("erreurDelete", erreurDelete);
+                }
             }
 
             //AFFICHER APRES SUPPRESSION

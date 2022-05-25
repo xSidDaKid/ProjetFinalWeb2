@@ -54,7 +54,7 @@ public class MedecinImpDAO implements MedecinDAO {
                 m1.setId_user(result.getInt("utilisateur_id"));
                 listeMedecin.add(m1);
             }
-
+            result.close();
         } catch (SQLException ex) {
             Logger.getLogger(MedecinImpDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -131,9 +131,9 @@ public class MedecinImpDAO implements MedecinDAO {
             PreparedStatement ps = ConnexionBD.getConnection().prepareStatement(SQL_SELECT_PAR_IDCLINIQUE);
             ps.setInt(1, id);
             ResultSet result = ps.executeQuery();
-            
+
             listeMedecin = new ArrayList<>();
-            
+
             while (result.next()) {
                 Medecin m1 = new Medecin();
                 m1.setId(result.getInt("id"));

@@ -9,7 +9,8 @@
 <footer class="border-top footer text-white bg-secondary fixed-bottom p-3 text-center">
     <div class="container">
         &copy; 2022 - ProjetSessionAppWeb2 - Par B. Shajaan et B. Robydul
-        
+        <br>
+        ${sessionScope.lang}
     </div>
     
 </footer>

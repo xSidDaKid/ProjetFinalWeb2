@@ -58,7 +58,8 @@ public class PatientImpDAO implements PatientDAO {
                 p1.setId_user(result.getInt("utilisateur_id"));
                 listePatient.add(p1);
             }
-
+            result.close();
+            ps.close();
         } catch (SQLException ex) {
             Logger.getLogger(PatientImpDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

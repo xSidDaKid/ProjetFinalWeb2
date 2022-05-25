@@ -127,7 +127,8 @@ public class UtilisateurImpDAO implements UtilisateurDAO {
                 p1.setRole(result.getString("role"));
                 listeUtilisateur.add(p1);
             }
-
+            result.close();
+            ps.close();
         } catch (SQLException ex) {
             Logger.getLogger(UtilisateurImpDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

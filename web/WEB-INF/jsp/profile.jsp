@@ -20,9 +20,9 @@
         <jsp:include page="menu.jsp"/>
         <div class="container-xl px-4 m-4">
             <div class="row">
-                <div class="col-xl-2">
+                <div class="col-xl-5">
                 </div>
-                <div class="col-xl-8">
+                <div class="col-xl-7">
                     <div class="card mb-4">
                         <div class="card-header text-center" style="font-size: 150%"><strong>Bonjour ${sessionScope.Medecin.nom} ${sessionScope.Medecin.prenom} ${sessionScope.Clinique.nom} ${sessionScope.Patient.nom} ${sessionScope.Patient.prenom} ${sessionScope.username}!!</strong></div>
                         <div class="card-body">

@@ -33,6 +33,8 @@ public class User extends AbstractAction {
             out.close();
         } catch (IOException ex) {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NullPointerException ex) {
+            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
         }
         return "home";
     }

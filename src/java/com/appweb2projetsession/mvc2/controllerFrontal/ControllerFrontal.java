@@ -48,7 +48,6 @@ public class ControllerFrontal extends HttpServlet {
 
         //On demande à l'action-builder de nous fournir le bon contrôleur :
         action = ActionBuilder.getAction(request);
-        System.out.println(" action : " + action);
 
         //On injecte dans le contrôleur les objets request et response :
         action.setRequest(request);
@@ -56,11 +55,10 @@ public class ControllerFrontal extends HttpServlet {
 
         //On exécute l'action qui nous retourne la vue qui présentera la réponse au client :
         vue = action.execute();
-        System.out.println("vue : " + vue);
 
         //On transfert la requête à la vue :
-        request.getRequestDispatcher("/WEB-INF/jsp/" + vue + ".jsp").forward(request, response);
-    }
+            request.getRequestDispatcher("/WEB-INF/jsp/" + vue + ".jsp").forward(request, response);
+        }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
