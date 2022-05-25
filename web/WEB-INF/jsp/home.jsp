@@ -9,9 +9,14 @@
 <%@page import="com.appweb2projetsession.mvc.model.Utilisateur"%>
 <%@page import="com.appweb2projetsession.mvc.model.Patient"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${sessionScope.lang}"/>
+<fmt:setBundle basename="contenu"/>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="${sessionScope.lang}">
     <%
         /*if (request.getAttribute("nbPatient") == null) {
             getServletContext().getRequestDispatcher("/home").forward(request, response);
@@ -19,11 +24,14 @@
     %>
     <head>
         <jsp:include page="head.jsp"/>
-        <title>Home</title>
+        <title><fmt:message key="label.home" /></title>
     </head>
     <body>
 
         <jsp:include page="menu.jsp"/>
+        <p class="text-white"><fmt:message key="label.lg" /></p>
+        <button class="btn-primary" value="en"><a class="text-black" href="?langage=en">English</a></button>
+        <button class="btn-primary" value="fr"><a class="text-black" href="?langage=fr">Français</a></button>
         <div class="container">
             <div class="row">
                 <br>
@@ -32,8 +40,8 @@
         <!-- BIENVENUE -->
         <div class="container text-center mt-2">
             <div class="row rounded" style="background-color:#1f4071;">
-                <h1 class="text-center text-white">Bienvenue!</h1>
-                <h3 class="text-center text-white">Des cliniques, des médecins et des patients peuvent s'inscrire pour pouvoir faire des rendez-vous très rapide et simple. Inscrivez-vous dès maintenant!</h3>
+                <h1 class="text-center text-white"><fmt:message key="label.welcome" /></h1>
+                <h3 class="text-center text-white"><fmt:message key="label.intro" /></h3>
             </div>
         </div>
         <!-- LOGIN/INSCRIPTION -->
@@ -41,7 +49,7 @@
             <div class="container text-center my-3">
                 <div class="row">
                     <div class="col-6">
-                        <button class="p-3 btn-primary"><a class="text-white" href="inscriptionUser">Inscrire</a></button>
+                        <button class="p-3 btn-primary"><a class="text-white" href="inscriptionUser"><fmt:message key="label.inscrire" /></a></button>
                     </div>
                     <div class="col-6">
                         <button class="p-3 btn-primary"><a class="text-white" href="login">Login</a></button>
@@ -51,27 +59,27 @@
         </c:if>
         <!-- NOMBRE DE UTILISATEUR/CLINIQUE/MEDECIN/PATIENT -->
         <div class="row m-1 p-2 rounded" style="background-color:#1f4071;">
-            <h2 class="text-center text-white p-2">Déjà <span id="user"></span> utilisateurs!</h2> 
+            <h2 class="text-center text-white p-2"><fmt:message key="label.userNb" /></h2> 
             <br>
             <!-- Clinique -->
             <div class="col" align="center">
                 <div class="col-3 text-center">
                     <img src="<c:url value="./static/images/Clinique.png"/>" style="width: 100px;">
-                    <h2 class="text-white text-center"><span id="clinique"></span><br>CLINIQUES</h2>
-                    </div>
+                    <h2 class="text-white text-center"><span id="clinique"></span><br><fmt:message key="label.clinic" /></h2>
                 </div>
+            </div>
             <!-- Medecin -->
             <div class="col " align="center">
                 <div class="col-3 text-center align-content-center" align="center">
                     <img src="<c:url value="./static/images/Medecin.png"/>" style="width: 100px;">
-                    <h2 class="text-white"><span id="medecin"></span><br>MÉDECINS</h2>
+                    <h2 class="text-white"><span id="medecin"></span><br><fmt:message key="label.medecin" /></h2>
                 </div>
             </div>
             <!-- Patient -->
             <div class="col" align="center">
                 <div class="col-3 text-center">
                     <img src="<c:url value="./static/images/Patient.png"/>" style="width: 100px;">
-                    <h2 class="text-white"><span id="patient"></span><br>PATIENTS</h2>
+                    <h2 class="text-white"><span id="patient"></span><br><fmt:message key="label.patient" /></h2>
                 </div>
             </div>
         </div>
@@ -80,37 +88,37 @@
             <div class="row">
                 <div class="col-sm-6">
                     <div class="card">
-                        <div class="card-header text-center"><img src="<c:url value="./static/images/clock.png"/>" style="width: 30px;"><strong> Heure d'ouverture</strong></div>
+                        <div class="card-header text-center"><img src="<c:url value="./static/images/clock.png"/>" style="width: 30px;"><strong> <fmt:message key="label.heure" /></strong></div>
                         <div class="card-body">
                             <table class="overview">
                                 <tbody>
                                     <tr>
-                                        <td class="day">Lundi </td>
+                                        <td class="day"><fmt:message key="label.jour1" /> </td>
                                         <td class="time">08:00 - 16:00</td>
                                     </tr>
                                     <tr>
-                                        <td class="day">Mardi </td>
+                                        <td class="day"><fmt:message key="label.jour2" /> </td>
                                         <td class="time">08:00 - 16:00</td>
                                     </tr>
                                     <tr>
-                                        <td class="day">Mercredi </td>
+                                        <td class="day"><fmt:message key="label.jour3" />  </td>
                                         <td class="time">08:00 - 16:00</td>
                                     </tr>
                                     <tr>
-                                        <td class="day">Jeudi </td>
+                                        <td class="day"><fmt:message key="label.jour4" /> </td>
                                         <td class="time">08:00 - 16:00</td>
                                     </tr>
                                     <tr>
-                                        <td class="day">Vendredi </td>
+                                        <td class="day"><fmt:message key="label.jour5" /> </td>
                                         <td class="time">08:00 - 16:00</td>
                                     </tr>
                                     <tr>
-                                        <td class="day">Samedi </td>
-                                        <td class="time">Fermé</td>
+                                        <td class="day"><fmt:message key="label.jour6" /> </td>
+                                        <td class="time"><fmt:message key="label.ferme" /></td>
                                     </tr>
                                     <tr>
-                                        <td class="day">Dimanche  </td>
-                                        <td class="time day-off"> Fermé</td>
+                                        <td class="day"><fmt:message key="label.jour7" />  </td>
+                                        <td class="time day-off"> <fmt:message key="label.ferme" /></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -128,6 +136,19 @@
                                         <li>
 
                                             <div class="cls-info-name">
+                                                <fmt:message key="label.nom" />
+                                            </div>
+
+                                            <div class="icon">
+                                                <i class="fa fa-at" aria-hidden="true"></i>
+                                            </div>
+                                            <div class="links emails">
+                                                <a href="">Shajaan Balasingam</a>
+                                            </div>
+                                        </li>
+                                        <li>
+
+                                            <div class="cls-info-name">
                                                 Email
                                             </div>
 
@@ -141,7 +162,7 @@
                                         <li>
 
                                             <div class="cls-info-name">
-                                                Address
+                                                <fmt:message key="label.adresse" />
                                             </div>
 
                                             <div class="icon">
@@ -154,7 +175,7 @@
                                         <li>
 
                                             <div class="cls-info-name">
-                                                Website
+                                                <fmt:message key="label.site" />
                                             </div>
 
                                             <div class="icon">
@@ -174,6 +195,7 @@
                 </div>
             </div>
         </div>
+        <br><br><br><br><br>
         <jsp:include page="footer.jsp"/>
         <script type="text/javascript">
             $(document).ready(function () {

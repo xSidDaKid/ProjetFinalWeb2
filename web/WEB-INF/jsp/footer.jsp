@@ -4,7 +4,12 @@
     Author     : Shajaan
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <footer class="border-top footer text-white bg-secondary fixed-bottom p-3 text-center">
     <div class="container">
-        &copy; 2022 - ProjetSessionAppWeb2 - Par B. Shajaan et B. Robydul</div>
+        &copy; 2022 - ProjetSessionAppWeb2 - Par B. Shajaan et B. Robydul
+        
+    </div>
+    
 </footer>

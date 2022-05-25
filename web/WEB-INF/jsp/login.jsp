@@ -6,11 +6,15 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${sessionScope.lang}"/>
+<fmt:setBundle basename="contenu"/>
+
 <!DOCTYPE html>
-<html>
+<html lang="${sessionScope.lang}">
     <head>
         <jsp:include page="head.jsp"/>
-        <title>Home</title>
+        <title>Login</title>
     </head>
     <body>
         <jsp:include page="menu.jsp"/>
@@ -32,7 +36,7 @@
                                         <input  name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required>
                                     </div>
                                     <div class="form-group p-2">
-                                        <label>Password</label>
+                                        <label><fmt:message key="label.pass" /></label>
                                         <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required >
                                     </div>
                                     <div class="text-center">
@@ -41,8 +45,8 @@
                                 </form>
                                 <hr>
                                 <div class="text-center">
-                                <p class="text-center">Pas de compte? Inscrivez-vous dès maintenant!</p>
-                                <a class="link-primary" href="<c:url value="/inscriptionUser"/>">Inscrire</a>
+                                <p class="text-center"><fmt:message key="label.login" /></p>
+                                <a class="link-primary" href="<c:url value="/inscriptionUser"/>"><fmt:message key="label.inscrire" /></a>
                                 </div>
                             </div>
                         </div>

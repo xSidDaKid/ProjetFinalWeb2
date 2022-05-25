@@ -6,11 +6,15 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${sessionScope.lang}"/>
+<fmt:setBundle basename="contenu"/>
+
 <!DOCTYPE html>
-<html>
+<html lang="${sessionScope.lang}">
     <head>
         <jsp:include page="head.jsp"/>
-        <title>Home</title>
+        <title><fmt:message key="label.take" /></title>
     </head>
     <body>
         <jsp:include page="menu.jsp"/>
@@ -25,10 +29,10 @@
                 <!-- LISTE DES TABS -->
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link active" id="Definir-tab" data-bs-toggle="tab" data-bs-target="#Definir" type="button" >Prendre un rendez-vous</button>
+                        <button class="nav-link active" id="Definir-tab" data-bs-toggle="tab" data-bs-target="#Definir" type="button" ><fmt:message key="label.take" /></button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="Voir-tab" data-bs-toggle="tab" data-bs-target="#Voir" type="button" >Voir mes rendez-vous</button>
+                        <button class="nav-link" id="Voir-tab" data-bs-toggle="tab" data-bs-target="#Voir" type="button" ><fmt:message key="label.prise" /></button>
                     </li>
                 </ul>
 
@@ -41,32 +45,32 @@
                             </div>
                         </c:if> 
                         <form class="p-2" action="priseDeRendezVous" method="GET">
-                            <label  class="p-1">Raison</label>
+                            <label  class="p-1"><fmt:message key="label.reason" /></label>
                             <select class="form-select" name="raison" required>
-                                <option>Urgence mineure</option>
-                                <option>Consultation prioritaire</option>
-                                <option>Suivi périodique ou préventif</option>
-                                <option>Suivi régulier</option>
-                                <option>Suivi de grossesse</option>
-                                <option>Suivi d’un enfant de 0 à 5 ans</option>
-                                <option>Autre</option>
+                                <option><fmt:message key="label.urgent" /></option>
+                                <option><fmt:message key="label.consult" /></option>
+                                <option><fmt:message key="label.perio" /></option>
+                                <option><fmt:message key="label.regulier" /></option>
+                                <option><fmt:message key="label.gros" /></option>
+                                <option><fmt:message key="label.kid" /></option>
+                                <option><fmt:message key="label.autre" /></option>
                             </select>
 
                             <br>
 
                             <label  class="p-1">Description</label>
-                            <textarea cols="3" rows="3" name="description" class="form-control" placeholder="Donnez nous une courte description de votre condition" required></textarea>
+                            <textarea cols="3" rows="3" name="description" class="form-control" placeholder="<fmt:message key="label.desc" />" required></textarea>
 
                             <br>
 
-                            <label class="mb-1">Voici les disponiblité de ${medecinPatient.nom} ${medecinPatient.prenom}</label>
+                            <label class="mb-1"><fmt:message key="label.dispo3" /> ${medecinPatient.nom} ${medecinPatient.prenom}</label>
                             <select class="form-select" name="date" required>
                                 <c:forEach items="${listeRendezVous}" var="rV">
                                     <option>${rV.date}</option>
                                 </c:forEach>
                             </select>
                             <br>
-                            <button type="submit" class="btn btn-primary">Ajouter</button>
+                            <button type="submit" class="btn btn-primary"><fmt:message key="label.add2" /></button>
                         </form>
                     </div>
                     <!-- TAB Voir -->
@@ -76,11 +80,11 @@
                                 <tr>
                                     <th>Id</th>
                                     <th>Date</th>
-                                    <th>Medecin ID</th>
-                                    <th>Patient ID</th>
-                                    <th>Raison</th>
+                                    <th><fmt:message key="label.medicID" /></th>
+                                    <th><fmt:message key="label.patientID" /></th>
+                                    <th><fmt:message key="label.reason" /></th>
                                     <th>Description</th>
-                                    <th>Modifier</th>
+                                    <th><fmt:message key="label.modify" /></th>
                                     <th>Supprimer</th>
                                 </tr>
                             </thead>

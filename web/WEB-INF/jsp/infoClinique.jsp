@@ -6,12 +6,15 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${sessionScope.lang}"/>
+<fmt:setBundle basename="contenu"/>
 
 <!DOCTYPE html>
-<html>
+<html lang="${sessionScope.lang}">
     <head>
         <jsp:include page="head.jsp"/>
-        <title>Informations Clinique</title>
+        <title><fmt:message key="label.infoClinique" /></title>
     </head>
     <body>
         <script>
@@ -30,15 +33,15 @@
                     <table class="table table-bordered">
                         <tbody>
                             <tr>
-                                <th>Nom</th>    
+                                <th><fmt:message key="label.nom" /></th>    
                                 <td>${sessionScope.Clinique.nom}</td>
                             </tr>
                             <tr>
-                                <th>Adresse</th>    
+                                <th><fmt:message key="label.adresse" /></th>    
                                 <td>${sessionScope.Clinique.adresse}</td>
                             </tr>
                             <tr>
-                                <th>Numéro de téléphone</th>    
+                                <th><fmt:message key="label.tel" /></th>    
                                 <td>${sessionScope.Clinique.tel}</td>
                             </tr>
                             <tr>
@@ -51,10 +54,10 @@
                     <!-- LISTE DES TABS -->
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="Patient-tab" data-bs-toggle="tab" data-bs-target="#Patient" type="button" >Patient</button>
+                            <button class="nav-link active" id="Patient-tab" data-bs-toggle="tab" data-bs-target="#Patient" type="button" ><fmt:message key="label.patient2" /></button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="Medecin-tab" data-bs-toggle="tab" data-bs-target="#Medecin" type="button" >Medecin</button>
+                            <button class="nav-link" id="Medecin-tab" data-bs-toggle="tab" data-bs-target="#Medecin" type="button" ><fmt:message key="label.medecin2" /></button>
                         </li>
                     </ul>
                     <div class="tab-content" id="myTabContent">
@@ -66,14 +69,14 @@
                                 <thead class="thead-dark mt-2">
                                     <tr>
                                         <th>Id</th>
-                                        <th>Nom</th>
-                                        <th>Prenom</th>
-                                        <th>Numero D'assurance Maladie</th>
-                                        <th>Numero Sequentiel</th>
-                                        <th>Date de Naissance</th>
-                                        <th>Sexe</th>
-                                        <th>Clinique ID</th>
-                                        <th>Medecin ID</th>
+                                        <th><fmt:message key="label.nom2" /></th>
+                                        <th><fmt:message key="label.prenom" /></th>
+                                        <th><fmt:message key="label.nam" /></th>
+                                        <th><fmt:message key="label.nbSequentiel" /></th>
+                                        <th><fmt:message key="label.don" /></th>
+                                        <th><fmt:message key="label.sexe" /></th>
+                                        <th><fmt:message key="label.clinicID" /></th>
+                                        <th><fmt:message key="label.medicID" /></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -104,14 +107,14 @@
                                 <thead class="thead-dark">
                                     <tr>
                                         <th>Id</th>
-                                        <th>Nom</th>
-                                        <th>Prenom</th>
+                                        <th><fmt:message key="label.nom2" /></th>
+                                        <th><fmt:message key="label.prenom" /></th>
                                         <th>Profession</th>
-                                        <th>Numero professionnel</th>
-                                        <th>Ententes</th>
-                                        <th>Adresse</th>
-                                        <th>Lieu de profession</th>
-                                        <th>ID clinique</th>
+                                        <th><fmt:message key="label.nbPro" /></th>
+                                        <th><fmt:message key="label.entente" /></th>
+                                        <th><fmt:message key="label.adresse" /></th>
+                                        <th><fmt:message key="label.lieuPro" /></th>
+                                        <th><fmt:message key="label.clinicID" /></th>
                                     </tr>
                                 </thead>
                                 <tbody>

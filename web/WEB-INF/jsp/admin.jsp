@@ -13,6 +13,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <c:set var="view" value="/admin" scope="session" />
 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${sessionScope.lang}"/>
+<fmt:setBundle basename="contenu"/>
+
 <%
     ArrayList<Patient> listePatient = (ArrayList) request.getAttribute("listePatient");
     ArrayList<Medecin> listeMedecin = (ArrayList) request.getAttribute("listeMedecin");
@@ -21,7 +25,7 @@
     Patient patientModif = (Patient) request.getAttribute("patient");
 %>
 <!DOCTYPE html>
-<html>
+<html lang="${sessionScope.lang}">
     <head>
         <jsp:include page="head.jsp"/>
         <title>Admin</title>
@@ -57,16 +61,16 @@
                 <!-- LISTE DES TABS -->
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link active" id="Patient-tab" data-bs-toggle="tab" data-bs-target="#Patient" type="button" >Patient</button>
+                        <button class="nav-link active" id="Patient-tab" data-bs-toggle="tab" data-bs-target="#Patient" type="button" ><fmt:message key="label.patient2" /></button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="Medecin-tab" data-bs-toggle="tab" data-bs-target="#Medecin" type="button" >Medecin</button>
+                        <button class="nav-link" id="Medecin-tab" data-bs-toggle="tab" data-bs-target="#Medecin" type="button" ><fmt:message key="label.medecin2" /></button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="Clinique-tab" data-bs-toggle="tab" data-bs-target="#Clinique" type="button" >Clinique</button>
+                        <button class="nav-link" id="Clinique-tab" data-bs-toggle="tab" data-bs-target="#Clinique" type="button" ><fmt:message key="label.clinic2" /></button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="User-tab" data-bs-toggle="tab" data-bs-target="#User" type="button" >Utilisateur</button>
+                        <button class="nav-link" id="User-tab" data-bs-toggle="tab" data-bs-target="#User" type="button" ><fmt:message key="label.user2" /></button>
                     </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
@@ -78,16 +82,16 @@
                             <thead class="thead-dark mt-2">
                                 <tr>
                                     <th>Id</th>
-                                    <th>Nom</th>
-                                    <th>Prenom</th>
-                                    <th>Numero D'assurance Maladie</th>
-                                    <th>Numero Sequentiel</th>
-                                    <th>Date de Naissance</th>
-                                    <th>Sexe</th>
-                                    <th>Clinique ID</th>
-                                    <th>Medecin ID</th>
-                                    <th>User ID</th>
-                                    <th>Modifier</th>
+                                    <th><fmt:message key="label.nom2" /></th>
+                                    <th><fmt:message key="label.prenom" /></th>
+                                    <th><fmt:message key="label.nam" /></th>
+                                    <th><fmt:message key="label.nbSequentiel" /></th>
+                                    <th><fmt:message key="label.don" /></th>
+                                    <th><fmt:message key="label.sexe" /></th>
+                                    <th><fmt:message key="label.clinicID" /></th>
+                                    <th><fmt:message key="label.medicID" /></th>
+                                    <th><fmt:message key="label.userID" /></th>
+                                    <th><fmt:message key="label.modify" /></th>
                                     <th>Delete</th>
                                 </tr>
                             </thead>
@@ -123,16 +127,16 @@
                             <thead class="thead-dark">
                                 <tr>
                                     <th>Id</th>
-                                    <th>Nom</th>
-                                    <th>Prenom</th>
+                                    <th><fmt:message key="label.nom2" /></th>
+                                    <th><fmt:message key="label.prenom" /></th>
                                     <th>Profession</th>
-                                    <th>Numero professionnel</th>
-                                    <th>Ententes</th>
-                                    <th>Adresse</th>
-                                    <th>Lieu de profession</th>
-                                    <th>ID clinique</th>
-                                    <th>ID user</th>
-                                    <th>Modifier</th>
+                                    <th><fmt:message key="label.nbPro" /></th>
+                                    <th><fmt:message key="label.entente" /></th>
+                                    <th><fmt:message key="label.adresse" /></th>
+                                    <th><fmt:message key="label.lieuPro" /></th>
+                                    <th><fmt:message key="label.clinicID" /></th>
+                                    <th><fmt:message key="label.userID" /></th>
+                                    <th><fmt:message key="label.modify" /></th>
                                     <th>Delete</th>
                                 </tr>
                             </thead>
@@ -169,12 +173,12 @@
                             <thead class="thead-dark">
                                 <tr>
                                     <th>Id</th>
-                                    <th>Nom</th>
-                                    <th>Adresse</th>
-                                    <th>Numero de Telephone</th>
+                                    <th><fmt:message key="label.nom" /></th>
+                                    <th><fmt:message key="label.adresse" /></th>
+                                    <th><fmt:message key="label.tel" /></th>
                                     <th>Services</th>
-                                    <th>User ID</th>
-                                    <th>Modifier</th>
+                                    <th><fmt:message key="label.userID" /></th>
+                                    <th><fmt:message key="label.modify" /></th>
                                     <th>Delete</th>
                                 </tr>
                             </thead>
@@ -207,11 +211,11 @@
                             <thead class="thead-dark">
                                 <tr>
                                     <th>Id</th>
-                                    <th>Username</th>
-                                    <th>Password</th>
+                                    <th><fmt:message key="label.username" /></th>
+                                    <th><fmt:message key="label.pass" /></th>
                                     <th>Email</th>
-                                    <th>Role</th>
-                                    <th>Modifier</th>
+                                    <th><fmt:message key="label.role" /></th>
+                                    <th><fmt:message key="label.modify" /></th>
                                     <th>Delete</th>
                                 </tr>
                             </thead>
@@ -238,7 +242,7 @@
                         </c:if> 
                     </div>
                 </div>
-                <button class="btn-primary"><a class="text-white" href="inscriptionUser"><strong>Ajouter un utilisateur</strong></a></button>
+                <button class="btn-primary"><a class="text-white" href="inscriptionUser"><strong><fmt:message key="label.add" /></strong></a></button>
             </div>
         </div>
         <!-- Button trigger modal -->

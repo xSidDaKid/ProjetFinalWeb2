@@ -14,6 +14,7 @@ import com.appweb2projetsession.mvc.model.Medecin;
 import com.appweb2projetsession.mvc.model.Patient;
 import com.appweb2projetsession.mvc.model.Utilisateur;
 import java.util.List;
+import javax.servlet.http.HttpSession;
 
 /**
  * Classe qui permet d'afficher la page d'accueil
@@ -32,6 +33,20 @@ public class HomeServlet extends AbstractAction {
         List<Medecin> listeMedecin = MedecinAction.afficherTous();
         List<Patient> listePatient = PatientAction.afficherTous();
         List<Utilisateur> listeUtilisateur = UtilisateurAction.findAll();
+        
+        HttpSession session = request.getSession(true);
+        try {
+            session.setAttribute("lang", "fr");
+            String langage = request.getParameter("langage");
+            if (langage.equals("en")) {
+                session.setAttribute("lang", "en");
+            }
+            if (langage.equals("fr")) {
+                session.setAttribute("lang", "fr");
+            }
+        } catch (NullPointerException e) {
+            return "home";
+        }
 
         if (listeClinique.isEmpty()) {
             request.setAttribute("erreur", "La liste est vide");

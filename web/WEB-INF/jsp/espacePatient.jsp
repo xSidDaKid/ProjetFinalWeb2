@@ -6,12 +6,15 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${sessionScope.lang}"/>
+<fmt:setBundle basename="contenu"/>
 
 <!DOCTYPE html>
-<html>
+<html lang="${sessionScope.lang}">
     <head>
         <jsp:include page="head.jsp"/>
-        <title>Home</title>
+        <title><fmt:message key="label.espaceTitre" /></title>
     </head>
     <body>
         <jsp:include page="menu.jsp"/>
@@ -22,7 +25,7 @@
                         <c:when test="${verif == false}">
                             <!--CHOIX DU PATIENT-->
                             <div class="card">
-                                <div class="card-header" style="font-size: 150%"><strong>Liste de mes patients</strong></div>
+                                <div class="card-header" style="font-size: 150%"><strong><fmt:message key="label.lstPatient" /></strong></div>
                                 <div class="card-body">
                                     <ul class="list-group">
                                         <c:forEach items="${listePatient}" var="patient">
@@ -39,23 +42,23 @@
                             <div class="card">
                                 <div class="card-header" style="font-size: 150%"><strong>Patient #${infoPatient.id} - ${infoPatient.nom} ${infoPatient.prenom}</strong></div>
                                 <div class="card-body">
-                                    <button class="btn btn-primary mb-3"><a class="text-white" href="afficherPageEmail">Envoyer un email au patient</a></button>
+                                    <button class="btn btn-primary mb-3"><a class="text-white" href="afficherPageEmail"><fmt:message key="label.sendEmail" /></a></button>
                                     <table class="table table-bordered">
                                         <tbody>
                                             <tr>
-                                                <th>Nom</th>    
+                                                <th><fmt:message key="label.nom2" /></th>    
                                                 <td>${infoPatient.nom}</td>
                                             </tr>
                                             <tr>
-                                                <th>Prénom</th>    
+                                                <th><fmt:message key="label.prenom" /></th>    
                                                 <td>${infoPatient.prenom}</td>
                                             </tr>
                                             <tr>
-                                                <th>Numéro d'assurance social</th>    
+                                                <th><fmt:message key="label.nam" /></th>    
                                                 <td>${infoPatient.nam}</td>
                                             </tr>
                                             <tr>
-                                                <th>Date de naissance</th>    
+                                                <th><fmt:message key="label.don" /></th>    
                                                 <td>${infoPatient.dateNaissance}</td>
                                             </tr>
                                         </tbody>
@@ -66,7 +69,7 @@
                                         <table id="profil" class="table table-bordered">
                                             <thead>
                                                 <tr>
-                                                    <th>Fichier</th>
+                                                    <th><fmt:message key="label.file" /></th>
                                                     <th>Information</th>
                                                     <th>Date</th>
                                                     <!--<th></th>-->
