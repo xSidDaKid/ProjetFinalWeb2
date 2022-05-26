@@ -5,9 +5,11 @@
  */
 package com.appweb2projetsession.mvc.controller;
 
+import com.appweb2projetsession.action.MedecinAction;
 import com.appweb2projetsession.action.ProfilAction;
 import com.appweb2projetsession.mvc.model.Patient;
 import com.appweb2projetsession.mvc.model.Profil;
+import com.appweb2projetsession.mvc.model.Medecin;
 import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -42,6 +44,16 @@ public class EnvoieInfo extends AbstractAction {
         Patient patient = (Patient) session.getAttribute("Patient");
         int id_Patient = patient.getId();
         int id_Medecin = patient.getId_medecin();
+        Medecin m1 = MedecinAction.findById(id_Medecin);
+        request.setAttribute("m1", m1);
+        
+        boolean langEN = false;
+        try {
+            if (session.getAttribute("lang").equals("en")) {
+                langEN = true;
+            }
+        } catch (NullPointerException e) {
+        }
 
         //CREER UN INPUTSTREAM DU FICHIER ENVOYER
         InputStream inputStream = null;
@@ -53,6 +65,9 @@ public class EnvoieInfo extends AbstractAction {
                 nomFichier = filePart.getSubmittedFileName();
                 inputStream = filePart.getInputStream();
             }
+            if (nomFichier.length() > 45) {
+                nomFichier = "File";
+            }
         } catch (Exception e) {
             return "envoieInfo";
         }
@@ -61,6 +76,13 @@ public class EnvoieInfo extends AbstractAction {
         if (info != null) {
             Profil profil = new Profil(nomFichier, inputStream, info, date, id_Patient, id_Medecin);
             boolean verif = ProfilAction.create(profil);
+            if (verif) {
+                if (langEN) {
+                    request.setAttribute("sent", "Info Sent!");
+                } else {
+                    request.setAttribute("sent", "Information envoyée!");
+                }
+            }
         }
 
         return "envoieInfo";
