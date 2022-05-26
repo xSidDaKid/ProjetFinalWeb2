@@ -46,8 +46,11 @@ public class EnvoyerEmail extends AbstractAction {
         HttpSession session = request.getSession(true);
 
         boolean langEN = false;
-        if (session.getAttribute("lang").equals("en")) {
-            langEN = true;
+        try {
+            if (session.getAttribute("lang").equals("en")) {
+                langEN = true;
+            }
+        } catch (Exception e) {
         }
 
         host = "smtp.gmail.com";
