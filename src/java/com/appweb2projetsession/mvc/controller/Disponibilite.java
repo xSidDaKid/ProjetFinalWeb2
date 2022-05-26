@@ -26,6 +26,12 @@ public class Disponibilite extends AbstractAction {
     @Override
     public String execute() {
         HttpSession session = request.getSession(true);
+
+        boolean langEN = false;
+        if (session.getAttribute("lang").equals("en")) {
+            langEN = true;
+        }
+
         Medecin m = (Medecin) session.getAttribute("Medecin");
 
         String date = request.getParameter("date");
@@ -44,7 +50,11 @@ public class Disponibilite extends AbstractAction {
         if (deletedId != null) {
             boolean verifDelete = RendezVousAction.delete(Integer.parseInt(deletedId));
             if (verifDelete) {
-                request.setAttribute("deleted", "Cette disponibilité a été supprimer avec succès!");
+                if (langEN) {
+                    request.setAttribute("deleted", "Deleted");
+                } else {
+                    request.setAttribute("deleted", "Cette disponibilité a été supprimer avec succès!");
+                }
             }
         }
 
@@ -52,11 +62,19 @@ public class Disponibilite extends AbstractAction {
 
         //Messages
         if (create) {
-            request.setAttribute("DispoCreer", "Votre disponibilité a été ajoutée avec succès");
+            if (langEN) {
+                request.setAttribute("DispoCreer", "Created");
+            } else {
+                request.setAttribute("DispoCreer", "Votre disponibilité a été ajoutée avec succès");
+            }
         }
         //Messages d'erreurs---
         if (listeRendezVousMedecin.isEmpty()) {
-            request.setAttribute("erreurDispo", "Aucune disponibilité a été définie");
+            if (langEN) {
+                request.setAttribute("erreurDispo", "No Availabilities");
+            } else {
+                request.setAttribute("erreurDispo", "Aucune disponibilité a été définie");
+            }
         } else {
             request.setAttribute("listeRendezVousMedecin", listeRendezVousMedecin);
         }

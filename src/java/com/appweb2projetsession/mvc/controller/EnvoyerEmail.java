@@ -43,17 +43,25 @@ public class EnvoyerEmail extends AbstractAction {
 
     @Override
     public String execute() {
+        HttpSession session = request.getSession(true);
+
+        boolean langEN = false;
+        if (session.getAttribute("lang").equals("en")) {
+            langEN = true;
+        }
+
         host = "smtp.gmail.com";
         port = "587";
         user = "dummyEmailDev87@gmail.com";
         pass = "pens87712981";
 
-       // List<File> uploadedFiles = new ArrayList<>();
+        // List<File> uploadedFiles = new ArrayList<>();
         String destinataire = request.getParameter("destinataire");
         String objet = request.getParameter("objet");
         String contenu = request.getParameter("contenu");
         String resultMessage = "L'email a été envoyé avec succès";
-        
+        String resultMessage2 = "Email sent";
+
         try {
             //uploadedFiles = saveUploadedFiles(request);
 
@@ -65,7 +73,11 @@ public class EnvoyerEmail extends AbstractAction {
             Logger.getLogger(EnvoyerEmail.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             //deleteUploadFiles(uploadedFiles);
-            request.setAttribute("Message", resultMessage);
+            if (langEN) {
+                request.setAttribute("Message", resultMessage2);
+            } else {
+                request.setAttribute("Message", resultMessage);
+            }
             return "emailForm";
         }
     }

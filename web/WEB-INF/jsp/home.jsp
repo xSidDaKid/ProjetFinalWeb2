@@ -143,7 +143,7 @@
                                                 <i class="fa fa-at" aria-hidden="true"></i>
                                             </div>
                                             <div class="links emails">
-                                                <a href="">Shajaan Balasingam</a>
+                                                Shajaan Balasingam
                                             </div>
                                         </li>
                                         <li>

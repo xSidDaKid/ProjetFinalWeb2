@@ -34,6 +34,11 @@ public class Login extends AbstractAction {
         String password = request.getParameter("password");
         HttpSession session = request.getSession(true);
 
+        boolean langEN = false;
+        if (session.getAttribute("lang").equals("en")) {
+            langEN = true;
+        }
+
         try {
             //VERIFICATION ADMIN
             if (email.equals("admin") && password.equals("admin")) {
@@ -56,7 +61,11 @@ public class Login extends AbstractAction {
 
                     return "home";
                 } else {
-                    request.setAttribute("erreur", "Le email ou le mot de passe est invalide");
+                    if (langEN) {
+                        request.setAttribute("erreur", "Invalid email or password");
+                    } else {
+                        request.setAttribute("erreur", "Le email ou le mot de passe est invalide");
+                    }
                     return "login";
                 }
             }

@@ -28,6 +28,11 @@ public class PriseDeRendezVous extends AbstractAction {
     public String execute() {
         HttpSession session = request.getSession(false);
 
+        boolean langEN = false;
+        if (session.getAttribute("lang").equals("en")) {
+            langEN = true;
+        }
+
         //INFO FORMULAIRE
         String raison = request.getParameter("raison");
         String description = request.getParameter("description");
@@ -57,7 +62,11 @@ public class PriseDeRendezVous extends AbstractAction {
             boolean verifDelete = RendezVousAction.delete(Integer.parseInt(deleteRvId));
             mesRV = RendezVousAction.findByPatientId(idPatient);
             if (verifDelete) {
-                request.setAttribute("deletedDispo", "Cet élément a été supprimé avec succès");
+                if (langEN) {
+                    request.setAttribute("deletedDispo", "Deleted");
+                } else {
+                    request.setAttribute("deletedDispo", "Cet élément a été supprimé avec succès");
+                }
                 request.setAttribute("mesRV", mesRV);
                 return "priseDeRendezVous";
             }
@@ -72,7 +81,11 @@ public class PriseDeRendezVous extends AbstractAction {
             if (rvCreer) {
                 mesRV = RendezVousAction.findByPatientId(idPatient);
                 request.setAttribute("mesRV", mesRV);
-                request.setAttribute("rvCreer", "Votre rendez-vous a été ajoutée avec succès!");
+                if (langEN) {
+                    request.setAttribute("rvCreer", "Created!");
+                } else {
+                    request.setAttribute("rvCreer", "Votre rendez-vous a été ajoutée avec succès!");
+                }
                 return "priseDeRendezVous";
             }
 
