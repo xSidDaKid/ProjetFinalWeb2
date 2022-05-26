@@ -1,7 +1,7 @@
 # Projet Final Applications Web 2
 ## Prise de rendez-vous médical
 
-Le projet final avait pour but de créer un site web pour la prise de rendez-vous par des patients. Ce site a été créé avec **Java EE** qui utilise les JSPs et les Servlets. On a aussi utilisé une base de donée MySQL.
+Le projet final avait pour but de créer un site web pour la prise de rendez-vous par des patients. Ce site a été créé avec **Java EE** qui utilise les JSPs et les Servlets. On a aussi utilisé une base de donnée MySQL.
 
 Voici la liste des fonctionnalités se trouvant sur le site :
 - Page d’inscription pour un utilisateur, un patient, un médecin et une clinique
