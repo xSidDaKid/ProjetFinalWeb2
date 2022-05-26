@@ -32,8 +32,11 @@ public class Admin extends AbstractAction {
     public String execute() {
         HttpSession session = request.getSession(false);
         boolean langEN = false;
-        if (session.getAttribute("lang").equals("en")) {
-            langEN = true;
+        try {
+            if (session.getAttribute("lang").equals("en")) {
+                langEN = true;
+            }
+        } catch (Exception e) {
         }
         String deletePatientId = request.getParameter("deletePatientId");
         String deleteMedecinId = request.getParameter("deleteMedecinId");
