@@ -53,10 +53,10 @@ public class EnvoyerEmail extends AbstractAction {
         } catch (Exception e) {
         }
 
-        host = "smtp.gmail.com";
-        port = "587";
-        user = "dummyEmailDev87@gmail.com";
-        pass = "pens87712981";
+        host = "";
+        port = "";
+        user = "";
+        pass = "";
 
         // List<File> uploadedFiles = new ArrayList<>();
         String destinataire = request.getParameter("destinataire");
